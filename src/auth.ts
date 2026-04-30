@@ -1,9 +1,9 @@
 // Auth.js v5 server config (Node runtime).
 // Email + password admin sign-in via the Credentials provider.
-// Per-user bcryptjs hashes stored in users.password_hash.
-// ADMIN_PASSWORD env var still works as a transition fallback — used
-// when a user's password_hash is empty (i.e. they haven't been seeded
-// or migrated yet).
+//
+// Per-user bcryptjs hashes live in users.password_hash, accessed via raw SQL
+// (not Drizzle) so this still works on databases where migration 0003 has
+// not been applied yet. ADMIN_PASSWORD env-var is the universal fallback.
 
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
@@ -25,10 +25,26 @@ function getAuthDb() {
     max_lifetime: 60 * 30,
     max: 1,
   });
-  return drizzle(client, { schema });
+  return { db: drizzle(client, { schema }), sql: client };
 }
 
-const authDb = getAuthDb();
+const { db: authDb, sql: authSql } = getAuthDb();
+
+async function fetchPasswordHash(userId: string): Promise<string | null> {
+  try {
+    const rows = await authSql<
+      { password_hash: string | null }[]
+    >`SELECT password_hash FROM users WHERE id = ${userId} LIMIT 1`;
+    const value = rows[0]?.password_hash ?? "";
+    return value.trim() || null;
+  } catch (err) {
+    // password_hash column doesn't exist yet → migration 0003 not applied.
+    console.warn(
+      "[auth] password_hash column missing; falling back to ADMIN_PASSWORD env."
+    );
+    return null;
+  }
+}
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   ...authConfig,
@@ -51,11 +67,18 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           return null;
         }
 
+        // Select only legacy columns — safe regardless of migration state.
         const [user] = await authDb
-          .select()
+          .select({
+            id: schema.users.id,
+            email: schema.users.email,
+            firstName: schema.users.firstName,
+            role: schema.users.role,
+          })
           .from(schema.users)
           .where(eq(schema.users.email, email))
           .limit(1);
+
         if (!user) {
           console.log("[auth] no users row for allowlisted email:", email);
           return null;
@@ -65,8 +88,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           return null;
         }
 
-        // Per-user bcrypt hash takes precedence.
-        const hash = user.passwordHash?.trim() ?? "";
+        const hash = await fetchPasswordHash(user.id);
         let valid = false;
         if (hash) {
           try {
@@ -76,8 +98,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             valid = false;
           }
         } else {
-          // Transition fallback: env-var password until users.password_hash
-          // is seeded. Run scripts/seed-admin-passwords.mjs once on prod.
+          // Transition fallback: env-var password.
           const expected = process.env.ADMIN_PASSWORD;
           if (!expected) {
             console.error(

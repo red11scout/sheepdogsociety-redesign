@@ -100,9 +100,9 @@ export const users = pgTable(
     status: userStatusEnum("status").notNull().default("pending"),
     approvedBy: text("approved_by"),
     approvedAt: timestamp("approved_at"),
-    // Admin auth: bcryptjs hash. Empty string = no password set yet.
-    passwordHash: text("password_hash").notNull().default(""),
-    mustChangePassword: boolean("must_change_password").notNull().default(true),
+    // Admin auth columns (password_hash, must_change_password) live on this
+    // table per migration 0003 but are accessed via raw SQL in auth.ts so
+    // pages don't break before the migration is applied to a given DB.
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
