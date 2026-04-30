@@ -40,6 +40,11 @@ const PUBLIC_ROUTES = [
   /^\/blog(\/.*)?$/,
   /^\/acts-20-28$/,
   /^\/encouragements(\/.*)?$/,
+  // Phase D — new public surfaces (member signup + share + legal pages).
+  /^\/what-to-expect(\/.*)?$/,
+  /^\/privacy(\/.*)?$/,
+  /^\/sms-terms(\/.*)?$/,
+  /^\/join(\/.*)?$/,
   // Auth pages and API routes
   /^\/admin\/sign-in(\/.*)?$/,
   /^\/admin\/check-email(\/.*)?$/,
@@ -48,6 +53,8 @@ const PUBLIC_ROUTES = [
   /^\/pending(\/.*)?$/,
   /^\/api\/auth(\/.*)?$/,
   /^\/api\/public(\/.*)?$/,
+  /^\/api\/og(\/.*)?$/,           // Phase B/D — verse plate + covenant card
+  /^\/api\/members(\/.*)?$/,      // Phase D — public signup POST
   /^\/api\/webhooks(\/.*)?$/,
   /^\/api\/cron(\/.*)?$/,
   // SEO files
