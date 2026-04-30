@@ -1,12 +1,16 @@
 // Auth.js v5 server config (Node runtime).
-// Email + password admin sign-in via the Credentials provider. Simpler than
-// magic-link for 2-3 admin users — no email scanner / prefetcher edge cases.
+// Email + password admin sign-in via the Credentials provider.
+// Per-user bcryptjs hashes stored in users.password_hash.
+// ADMIN_PASSWORD env var still works as a transition fallback — used
+// when a user's password_hash is empty (i.e. they haven't been seeded
+// or migrated yet).
 
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
+import bcrypt from "bcryptjs";
 import * as schema from "@/db/schema";
 import { authConfig, isAdminEmail } from "@/auth.config";
 
@@ -28,10 +32,6 @@ const authDb = getAuthDb();
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   ...authConfig,
-  // No DrizzleAdapter — Credentials provider is JWT-only (no DB sessions),
-  // and we look up the user manually in authorize() below. The schema's
-  // accounts/sessions/verification_tokens tables become unused but stay
-  // in place; nothing reads or writes them.
   providers: [
     Credentials({
       name: "Sheepdog Admin",
@@ -50,16 +50,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           console.log("[auth] email not on ADMIN_EMAILS allowlist:", email);
           return null;
         }
-        const expected = process.env.ADMIN_PASSWORD;
-        if (!expected) {
-          console.error("[auth] ADMIN_PASSWORD env var is not set");
-          return null;
-        }
-        if (password !== expected) {
-          console.log("[auth] password mismatch for", email);
-          return null;
-        }
-        // Look up the user record so we can return id + role.
+
         const [user] = await authDb
           .select()
           .from(schema.users)
@@ -69,6 +60,39 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           console.log("[auth] no users row for allowlisted email:", email);
           return null;
         }
+        if (user.role !== "admin") {
+          console.log("[auth] user is not an admin:", email);
+          return null;
+        }
+
+        // Per-user bcrypt hash takes precedence.
+        const hash = user.passwordHash?.trim() ?? "";
+        let valid = false;
+        if (hash) {
+          try {
+            valid = await bcrypt.compare(password, hash);
+          } catch (err) {
+            console.error("[auth] bcrypt.compare error:", err);
+            valid = false;
+          }
+        } else {
+          // Transition fallback: env-var password until users.password_hash
+          // is seeded. Run scripts/seed-admin-passwords.mjs once on prod.
+          const expected = process.env.ADMIN_PASSWORD;
+          if (!expected) {
+            console.error(
+              "[auth] no password_hash for user and ADMIN_PASSWORD env not set"
+            );
+            return null;
+          }
+          valid = password === expected;
+        }
+
+        if (!valid) {
+          console.log("[auth] password mismatch for", email);
+          return null;
+        }
+
         return {
           id: user.id,
           email: user.email,

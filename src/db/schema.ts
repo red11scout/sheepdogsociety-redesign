@@ -100,6 +100,9 @@ export const users = pgTable(
     status: userStatusEnum("status").notNull().default("pending"),
     approvedBy: text("approved_by"),
     approvedAt: timestamp("approved_at"),
+    // Admin auth: bcryptjs hash. Empty string = no password set yet.
+    passwordHash: text("password_hash").notNull().default(""),
+    mustChangePassword: boolean("must_change_password").notNull().default(true),
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
