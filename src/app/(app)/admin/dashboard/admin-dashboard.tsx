@@ -2,26 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  Users,
-  MessageSquare,
-  HandHeart,
-  Calendar,
-  FileText,
-  Sparkles,
-  Hash,
-  UserCheck,
-  UserPlus,
-  TrendingUp,
-  Mail,
-  PenSquare,
-  Bot,
-  Send,
-  Inbox,
-  ArrowRight,
-} from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Icon, type IconName } from "@/components/icons/Icon";
+import { CountUp } from "@/components/motion/CountUp";
+import { Magnetic } from "@/components/motion/Magnetic";
+import { Spotlight } from "@/components/motion/Spotlight";
+import { HintTooltip } from "@/components/admin/HintTooltip";
+import { EmptyState } from "@/components/admin/EmptyState";
+import { cn } from "@/lib/utils";
 
 type DashboardStats = {
   totalUsers: number;
@@ -57,341 +44,411 @@ type DashboardData = {
   recentLetters: RecentLetter[];
 };
 
-export function AdminDashboard() {
-  const [data, setData] = useState<DashboardData>({ stats: null, recentLetters: [] });
+interface AdminDashboardProps {
+  greetingName?: string;
+}
+
+export function AdminDashboard({ greetingName = "brother" }: AdminDashboardProps) {
+  const [data, setData] = useState<DashboardData>({
+    stats: null,
+    recentLetters: [],
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("/api/admin/dashboard")
       .then((r) => r.json())
-      .then((d) => setData({ stats: d.stats ?? null, recentLetters: d.recentLetters ?? [] }))
+      .then((d) =>
+        setData({ stats: d.stats ?? null, recentLetters: d.recentLetters ?? [] })
+      )
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) {
+  if (loading || !data.stats) {
     return (
-      <div className="mx-auto max-w-6xl p-6">
-        <p className="text-muted-foreground">Loading dashboard...</p>
+      <div className="px-8 py-10 md:px-12">
+        <div className="h-8 w-64 animate-pulse bg-stone/10" />
+        <div className="mt-6 grid gap-4 md:grid-cols-12">
+          <div className="h-64 animate-pulse bg-stone/10 md:col-span-8" />
+          <div className="h-64 animate-pulse bg-stone/10 md:col-span-4" />
+        </div>
       </div>
     );
   }
 
   const stats = data.stats;
-  if (!stats) {
-    return (
-      <div className="mx-auto max-w-6xl p-6">
-        <p className="text-muted-foreground">Failed to load dashboard.</p>
-      </div>
-    );
-  }
+  const today = new Date();
+  const dayLabel = today.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
+
+  const inboxTotal =
+    stats.pendingTestimonies + stats.pendingUsers + (data.stats ? 0 : 0);
 
   return (
-    <div className="mx-auto max-w-6xl p-6 space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Welcome back. Here&apos;s what&apos;s happening across the ministry.
-        </p>
-      </div>
+    <div className="mx-auto max-w-[1400px] px-6 py-10 md:px-12 md:py-14">
+      {/* Greeting */}
+      <header>
+        <div className="flex items-center gap-4">
+          <span className="section-mark text-brass">§ {dayLabel}</span>
+          <div className="hairline flex-1" />
+        </div>
+        <h1 className="display-xl mt-6 text-4xl text-bone md:text-6xl">
+          Sit down, {greetingName}.
+          <br />
+          <span className="text-brass">Here is the watch.</span>
+        </h1>
+      </header>
 
-      {/* NEW: AI-powered Letter editor hero */}
-      <section className="rounded-lg border-2 border-primary/40 bg-gradient-to-br from-primary/10 via-card to-bronze/10 p-6">
-        <div className="flex items-start justify-between gap-6 flex-wrap">
-          <div className="flex-1 min-w-[280px]">
-            <Badge variant="secondary" className="mb-3">
-              <Sparkles className="h-3 w-3 mr-1" />
-              NEW
-            </Badge>
-            <h2 className="text-2xl font-bold mb-2">
-              Letter editor with Claude AI
-            </h2>
-            <p className="text-sm text-muted-foreground mb-4 max-w-prose">
-              Write weekly letters with AI assistance. Highlight any text and
-              ask Claude to rephrase, shorten, expand, or make it more pastoral.
-              Every keystroke auto-saves with full version history. When ready,
-              publish to the website and send to email subscribers in one click.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              <Link
-                href="/admin/letters/new"
-                className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-              >
-                <PenSquare className="h-4 w-4" />
-                Start a new letter
-              </Link>
-              <Link
-                href="/admin/letters"
-                className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-secondary"
-              >
-                Browse all letters
-                <ArrowRight className="h-3 w-3" />
-              </Link>
+      {/* Bento — top row */}
+      <section className="mt-12 grid gap-4 md:grid-cols-12">
+        {/* The Letter — main panel */}
+        <Spotlight
+          size={620}
+          color="var(--color-brass)"
+          className="border border-stone/15 bg-iron/40 md:col-span-8"
+        >
+          <div className="p-8 md:p-10">
+            <div className="flex items-start justify-between gap-6">
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-3">
+                  <span className="section-mark text-brass">§ The Letter</span>
+                  <HintTooltip hint="Your weekly editorial newsletter. Draft in the Tiptap editor with Claude as a co-writer. Publish to the website and broadcast to subscribers in one click." />
+                </div>
+                <h2 className="display-xl mt-4 text-2xl text-bone md:text-4xl">
+                  Write this week&rsquo;s
+                  <br />
+                  <span className="text-brass">word.</span>
+                </h2>
+                <p className="mt-4 max-w-md font-pullquote text-base italic leading-relaxed text-stone">
+                  Tiptap editor with Claude AI co-writing. Highlight any text
+                  and ask for a rephrase, scripture suggestion, or sharper
+                  hook. Autosaves with full version history.
+                </p>
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  <Magnetic>
+                    <Link
+                      href="/admin/letters/new"
+                      className="lift group inline-flex h-11 items-center gap-2 border border-bone bg-bone px-6 text-sm font-medium text-iron transition-colors hover:bg-stone"
+                    >
+                      <Icon name="pen" size={16} />
+                      Start a new Letter
+                      <Icon
+                        name="arrow-right"
+                        size={14}
+                        className="transition-transform group-hover:translate-x-1"
+                      />
+                    </Link>
+                  </Magnetic>
+                  <Link
+                    href="/admin/letters"
+                    className="inline-flex items-center gap-2 section-mark text-stone/70 transition-colors hover:text-brass"
+                  >
+                    Browse all
+                    <Icon name="arrow-right" size={12} />
+                  </Link>
+                </div>
+              </div>
+              <div className="hidden flex-col gap-1 border-l border-stone/15 pl-6 md:flex">
+                <MiniStat label="Drafts" value={stats.draftLetters} />
+                <MiniStat label="Published" value={stats.publishedLetters} />
+                <MiniStat label="Subscribers" value={stats.activeSubscribers} />
+              </div>
             </div>
           </div>
-          <div className="flex gap-3">
-            <MiniStat label="Drafts" value={stats.draftLetters} />
-            <MiniStat label="Published" value={stats.publishedLetters} />
-            <MiniStat
-              label="Subscribers"
-              value={stats.activeSubscribers}
-              icon={<Mail className="h-3 w-3" />}
-            />
+        </Spotlight>
+
+        {/* Inbox */}
+        <div className="border border-stone/15 bg-iron/40 md:col-span-4">
+          <div className="flex items-center justify-between border-b border-stone/15 px-6 py-4">
+            <div className="flex items-center gap-3">
+              <Icon name="inbox" size={18} className="text-brass" />
+              <span className="section-mark text-bone">§ Inbox</span>
+            </div>
+            <HintTooltip hint="Items waiting on you. Approve testimonies, review group plant requests, read contact submissions." />
           </div>
+          <ul className="divide-y divide-stone/10">
+            <InboxRow
+              icon="flame"
+              label="Pending testimonies"
+              count={stats.pendingTestimonies}
+              href="/admin/testimonies"
+            />
+            <InboxRow
+              icon="brothers"
+              label="Member approvals"
+              count={stats.pendingUsers}
+              href="/admin/users"
+            />
+            <InboxRow
+              icon="message"
+              label="Contact submissions"
+              count={0}
+              href="/admin/contacts"
+              hint="Open inbox"
+            />
+            <InboxRow
+              icon="plus"
+              label="Plant requests"
+              count={0}
+              href="/admin/location-requests"
+              hint="Group-start applications"
+            />
+          </ul>
         </div>
       </section>
 
-      {/* Recent letters list */}
-      {data.recentLetters.length > 0 ? (
-        <section>
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              Recent letters
-            </h2>
-            <Link href="/admin/letters" className="text-xs text-primary hover:underline">
-              See all →
-            </Link>
-          </div>
-          <div className="border border-border rounded-lg overflow-hidden">
-            <table className="w-full">
-              <tbody className="divide-y divide-border">
-                {data.recentLetters.map((letter) => (
-                  <tr key={letter.id} className="hover:bg-secondary/30">
-                    <td className="px-4 py-3 text-xs text-muted-foreground font-mono w-20">
-                      No. {letter.issueNumber}
-                    </td>
-                    <td className="px-4 py-3">
-                      <Link
-                        href={`/admin/letters/${letter.id}`}
-                        className="font-medium hover:text-primary"
-                      >
-                        {letter.title}
-                      </Link>
-                      {letter.themeWord ? (
-                        <span className="ml-2 text-xs uppercase tracking-wider text-muted-foreground">
-                          {letter.themeWord}
-                        </span>
-                      ) : null}
-                    </td>
-                    <td className="px-4 py-3">
-                      <StatusPill status={letter.status} />
-                    </td>
-                    <td className="px-4 py-3 text-xs text-muted-foreground text-right">
-                      {new Date(letter.updatedAt).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        hour: "numeric",
-                        minute: "2-digit",
-                      })}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      ) : null}
+      {/* Stats row */}
+      <section className="mt-4 grid gap-4 md:grid-cols-4">
+        <StatTile
+          icon="mail"
+          label="Subscribers"
+          value={stats.activeSubscribers}
+          href="/admin/newsletter"
+        />
+        <StatTile
+          icon="brothers"
+          label="Active members"
+          value={stats.activeUsers}
+          href="/admin/users"
+        />
+        <StatTile
+          icon="calendar"
+          label="Upcoming events"
+          value={stats.upcomingEvents}
+          href="/admin/events"
+        />
+        <StatTile
+          icon="sparkles"
+          label="AI uses · 7d"
+          value={stats.aiGenerationsThisWeek}
+        />
+      </section>
 
-      {/* AI tools section */}
-      <section>
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">
-          AI tools
-        </h2>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <AiToolCard
-            icon={<PenSquare className="h-5 w-5" />}
-            title="Letter editor"
-            body="Tiptap + Claude bubble menu. Rephrase, shorten, pastoralize."
-            href="/admin/letters"
+      {/* AI quick actions */}
+      <section className="mt-12">
+        <div className="flex items-center gap-4">
+          <span className="section-mark text-brass">§ Claude is here</span>
+          <div className="hairline flex-1" />
+          <span className="section-mark text-stone/40">⌘ J to summon</span>
+        </div>
+        <p className="mt-6 max-w-2xl font-pullquote text-lg italic leading-relaxed text-stone">
+          Ask Claude anything. Drafting, sharpening, brainstorming a scripture
+          for a man who is hurting. Press ⌘ K to jump anywhere. Press ⌘ J to
+          open the assistant.
+        </p>
+        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <AiActionCard
+            icon="pen"
+            title="Draft a Letter"
+            body="Open Letter editor with Tiptap + Claude bubble menu."
+            href="/admin/letters/new"
           />
-          <AiToolCard
-            icon={<FileText className="h-5 w-5" />}
-            title="Devotional drafts"
-            body="Generate scripture-anchored devotionals with one click."
-            href="/admin/devotionals"
-          />
-          <AiToolCard
-            icon={<Calendar className="h-5 w-5" />}
-            title="Reading plans"
-            body="Build a reading plan from a theme or book of the Bible."
-            href="/admin/reading-plans"
-          />
-          <AiToolCard
-            icon={<Sparkles className="h-5 w-5" />}
+          <AiActionCard
+            icon="lamp"
             title="Daily scripture"
-            body="Curated verse + reflection for daily-scripture page."
+            body="Curate today&rsquo;s verse, theme, and reflection."
             href="/admin/scripture"
           />
+          <AiActionCard
+            icon="scroll"
+            title="Devotional"
+            body="Generate a scripture-anchored devotional from a seed thought."
+            href="/admin/devotionals"
+          />
+          <AiActionCard
+            icon="compass"
+            title="Reading plan"
+            body="Build a multi-day plan from a theme or book of the Bible."
+            href="/admin/reading-plans"
+          />
         </div>
-        <p className="mt-2 text-xs text-muted-foreground">
-          {stats.aiGenerationsThisWeek} AI generations this week ·{" "}
-          {stats.aiGenerationsTotal} total
+      </section>
+
+      {/* Recent letters */}
+      <section className="mt-14">
+        <div className="flex items-center gap-4">
+          <span className="section-mark text-brass">§ Recent Letters</span>
+          <div className="hairline flex-1" />
+          <Link
+            href="/admin/letters"
+            className="section-mark text-stone/55 transition-colors hover:text-brass"
+          >
+            See all
+          </Link>
+        </div>
+        {data.recentLetters.length > 0 ? (
+          <div className="mt-6 border border-stone/15">
+            {data.recentLetters.map((letter, i) => (
+              <Link
+                key={letter.id}
+                href={`/admin/letters/${letter.id}`}
+                className={cn(
+                  "group/row grid grid-cols-[80px_1fr_120px_110px] items-center gap-4 px-6 py-4 transition-colors hover:bg-iron/60",
+                  i > 0 && "border-t border-stone/10"
+                )}
+              >
+                <span className="section-mark text-stone/45">
+                  No. {letter.issueNumber}
+                </span>
+                <div className="min-w-0">
+                  <p className="truncate display-xl text-base text-bone group-hover/row:text-brass md:text-lg">
+                    {letter.title || "Untitled"}
+                  </p>
+                  {letter.themeWord && (
+                    <p className="mt-1 section-mark text-stone/45">
+                      {letter.themeWord}
+                    </p>
+                  )}
+                </div>
+                <StatusPill status={letter.status} />
+                <span className="text-right text-xs text-stone/55">
+                  {new Date(letter.updatedAt).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </span>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="mt-6">
+            <EmptyState
+              icon="pen"
+              title="No Letters yet."
+              body="The Letter is your weekly word. Draft one with Claude, autosave, then publish + broadcast in one click. The first one gets the brotherhood paying attention."
+              primary={{
+                label: "Write the first Letter",
+                href: "/admin/letters/new",
+              }}
+            />
+          </div>
+        )}
+      </section>
+
+      {/* Hints */}
+      <section className="mt-14 grid gap-4 md:grid-cols-3">
+        <Hint
+          shortcut="⌘ K"
+          label="Command palette"
+          body="Jump to any page, run an action, or ask Claude. From anywhere in the cockpit."
+        />
+        <Hint
+          shortcut="⌘ J"
+          label="Ask Claude"
+          body="Open the AI assistant on the right. Knows what page you are on. Streams responses."
+        />
+        <Hint
+          shortcut="?"
+          label="Hover the dots"
+          body="Tiny help icons explain anything you do not recognize. We will keep adding them."
+        />
+      </section>
+
+      {/* Footer hint */}
+      <footer className="mt-16 flex items-center justify-between border-t border-stone/15 pt-6 text-xs text-stone/45">
+        <p>
+          Sheepdog Cockpit. {inboxTotal > 0 ? `${inboxTotal} items waiting.` : "Inbox is clear."}
         </p>
-      </section>
-
-      {/* Original stat cards (kept for completeness, secondary now) */}
-      <section>
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">
-          Community stats
-        </h2>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard
-            title="Active members"
-            value={stats.activeUsers}
-            icon={UserCheck}
-            href="/admin/users"
-          />
-          <StatCard
-            title="Pending approval"
-            value={stats.pendingUsers}
-            icon={UserPlus}
-            href="/admin/users"
-            alert={stats.pendingUsers > 0}
-          />
-          <StatCard
-            title="Total members"
-            value={stats.totalUsers}
-            icon={Users}
-            href="/members"
-          />
-          <StatCard
-            title="Groups"
-            value={stats.totalGroups}
-            icon={Users}
-            href="/groups"
-          />
-          <StatCard
-            title="Channels"
-            value={stats.totalChannels}
-            icon={Hash}
-            href="/channels"
-          />
-          <StatCard
-            title="Messages (7 days)"
-            value={stats.messagesThisWeek}
-            icon={TrendingUp}
-          />
-          <StatCard
-            title="Active prayers"
-            value={stats.activePrayers}
-            icon={HandHeart}
-            href="/prayer"
-          />
-          <StatCard
-            title="Upcoming events"
-            value={stats.upcomingEvents}
-            icon={Calendar}
-            href="/events"
-          />
-          <StatCard
-            title="Published posts"
-            value={stats.publishedPosts}
-            icon={FileText}
-            href="/blog"
-          />
-          <StatCard
-            title="Pending testimonies"
-            value={stats.pendingTestimonies}
-            icon={Sparkles}
-            href="/testimonies"
-            alert={stats.pendingTestimonies > 0}
-          />
-          <StatCard
-            title="Newsletter subscribers"
-            value={stats.activeSubscribers}
-            icon={Inbox}
-            href="/admin/newsletter"
-          />
-          <StatCard
-            title="Total messages"
-            value={stats.totalMessages}
-            icon={MessageSquare}
-          />
-        </div>
-      </section>
-
-      {/* Quick actions */}
-      <section>
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">
-          Quick actions
-        </h2>
-        <div className="flex flex-wrap gap-2">
-          <QuickAction href="/admin/letters/new" icon={<Sparkles className="h-3 w-3" />}>
-            ✨ New letter
-          </QuickAction>
-          <QuickAction href="/admin/users">Manage users</QuickAction>
-          <QuickAction href="/testimonies">Review testimonies</QuickAction>
-          <QuickAction href="/blog/new">Write blog post</QuickAction>
-          <QuickAction href="/admin/groups">Manage groups</QuickAction>
-          <QuickAction href="/admin/devotionals">Devotionals</QuickAction>
-          <QuickAction href="/admin/reading-plans">Reading plans</QuickAction>
-          <QuickAction href="/admin/newsletter">Newsletter list</QuickAction>
-        </div>
-      </section>
+        <p className="section-mark">Glory to God</p>
+      </footer>
     </div>
   );
 }
 
-function MiniStat({
-  label,
-  value,
+function MiniStat({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="px-3 py-1.5">
+      <div className="display-xl text-2xl text-brass">
+        <CountUp to={value} />
+      </div>
+      <div className="section-mark text-[0.625rem] text-stone/55">{label}</div>
+    </div>
+  );
+}
+
+function InboxRow({
   icon,
+  label,
+  count,
+  href,
+  hint,
 }: {
+  icon: IconName;
   label: string;
-  value: number;
-  icon?: React.ReactNode;
+  count: number;
+  href: string;
+  hint?: string;
 }) {
   return (
-    <div className="text-center min-w-[80px]">
-      <div className="text-2xl font-bold">{value}</div>
-      <div className="text-xs text-muted-foreground flex items-center justify-center gap-1 mt-0.5">
-        {icon}
-        {label}
-      </div>
-    </div>
+    <li>
+      <Link
+        href={href}
+        className="group/row flex items-center gap-3 px-6 py-4 transition-colors hover:bg-iron/60"
+      >
+        <Icon name={icon} size={16} className="text-stone/55 group-hover/row:text-brass" />
+        <span className="flex-1 truncate text-sm text-stone/85">{label}</span>
+        {count > 0 ? (
+          <span className="inline-flex h-6 min-w-[24px] items-center justify-center bg-brass px-2 text-[0.625rem] font-semibold text-iron">
+            {count}
+          </span>
+        ) : (
+          <span className="section-mark text-stone/35">
+            {hint ?? "0"}
+          </span>
+        )}
+        <Icon
+          name="arrow-right"
+          size={12}
+          className="text-stone/30 transition-all group-hover/row:translate-x-0.5 group-hover/row:text-brass"
+        />
+      </Link>
+    </li>
   );
 }
 
-function StatCard({
-  title,
+function StatTile({
+  icon,
+  label,
   value,
-  icon: Icon,
   href,
-  alert,
 }: {
-  title: string;
+  icon: IconName;
+  label: string;
   value: number;
-  icon: React.ComponentType<{ className?: string }>;
   href?: string;
-  alert?: boolean;
 }) {
   const inner = (
-    <Card
-      className={`transition-colors ${href ? "cursor-pointer hover:bg-secondary/50" : ""} ${
-        alert ? "ring-1 ring-yellow-500/50" : ""
-      }`}
-    >
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-xs font-medium text-muted-foreground">
-          {title}
-        </CardTitle>
-        <Icon className="h-3.5 w-3.5 text-muted-foreground" />
-      </CardHeader>
-      <CardContent>
-        <p className="text-2xl font-bold">{value}</p>
-      </CardContent>
-    </Card>
+    <div className="lift group/tile relative overflow-hidden border border-stone/15 bg-iron/40 p-6 transition-colors hover:border-brass/40">
+      <div className="flex items-center justify-between">
+        <Icon name={icon} size={18} className="text-brass" />
+        {href && (
+          <Icon
+            name="arrow-up-right"
+            size={14}
+            className="text-stone/30 transition-all group-hover/tile:translate-x-0.5 group-hover/tile:-translate-y-0.5 group-hover/tile:text-brass"
+          />
+        )}
+      </div>
+      <div className="display-xl mt-6 text-3xl text-bone md:text-4xl">
+        <CountUp to={value} />
+      </div>
+      <div className="mt-1 section-mark text-stone/55">{label}</div>
+    </div>
   );
   return href ? <Link href={href}>{inner}</Link> : <div>{inner}</div>;
 }
 
-function AiToolCard({
+function AiActionCard({
   icon,
   title,
   body,
   href,
 }: {
-  icon: React.ReactNode;
+  icon: IconName;
   title: string;
   body: string;
   href: string;
@@ -399,33 +456,18 @@ function AiToolCard({
   return (
     <Link
       href={href}
-      className="block rounded-lg border border-border bg-card p-4 hover:border-primary/40 hover:bg-secondary/30 transition-colors"
+      className="group/card lift block border border-stone/15 bg-iron/40 p-6 transition-colors hover:border-brass/40"
     >
-      <div className="flex items-center gap-2 mb-1.5">
-        <span className="text-primary">{icon}</span>
-        <span className="font-semibold text-sm">{title}</span>
+      <div className="flex items-center justify-between">
+        <Icon name={icon} size={20} className="text-brass" />
+        <Icon
+          name="arrow-up-right"
+          size={14}
+          className="text-stone/30 transition-all group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5 group-hover/card:text-brass"
+        />
       </div>
-      <p className="text-xs text-muted-foreground leading-relaxed">{body}</p>
-    </Link>
-  );
-}
-
-function QuickAction({
-  href,
-  icon,
-  children,
-}: {
-  href: string;
-  icon?: React.ReactNode;
-  children: React.ReactNode;
-}) {
-  return (
-    <Link
-      href={href}
-      className="inline-flex items-center gap-1.5 rounded-md bg-secondary px-4 py-2 text-sm hover:bg-secondary/80"
-    >
-      {icon}
-      {children}
+      <h3 className="display-xl mt-6 text-lg text-bone md:text-xl">{title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-stone/75">{body}</p>
     </Link>
   );
 }
@@ -433,17 +475,42 @@ function QuickAction({
 function StatusPill({ status }: { status: string }) {
   const tone =
     status === "published"
-      ? "bg-green-500/10 text-green-500 border-green-500/30"
+      ? "border-olive/40 text-olive bg-olive/10"
       : status === "scheduled"
-      ? "bg-yellow-500/10 text-yellow-500 border-yellow-500/30"
+      ? "border-brass/40 text-brass bg-brass/10"
       : status === "archived"
-      ? "bg-stone-500/10 text-stone-500 border-stone-500/30"
-      : "bg-muted text-muted-foreground border-border";
+      ? "border-stone/30 text-stone/60 bg-stone/5"
+      : "border-stone/30 text-stone/70 bg-stone/5";
   return (
     <span
-      className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider border ${tone}`}
+      className={cn(
+        "inline-flex items-center justify-center px-2.5 py-1 text-[0.625rem] font-medium uppercase tracking-[0.18em] border",
+        tone
+      )}
     >
       {status}
     </span>
+  );
+}
+
+function Hint({
+  shortcut,
+  label,
+  body,
+}: {
+  shortcut: string;
+  label: string;
+  body: string;
+}) {
+  return (
+    <div className="border border-dashed border-stone/15 bg-iron/20 p-5">
+      <div className="flex items-center gap-3">
+        <span className="border border-stone/25 bg-iron/60 px-2 py-1 text-[0.625rem] font-semibold tracking-wider text-bone">
+          {shortcut}
+        </span>
+        <span className="display-xl text-base text-bone">{label}</span>
+      </div>
+      <p className="mt-3 text-sm leading-relaxed text-stone/75">{body}</p>
+    </div>
   );
 }

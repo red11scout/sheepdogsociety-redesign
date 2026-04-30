@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Sidebar } from "./sidebar";
 import { MobileNav } from "./mobile-nav";
 import type { AppUser } from "@/lib/types";
@@ -13,6 +14,12 @@ export function AppShell({
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const pathname = usePathname();
+
+  // The /admin/** routes have their own AdminShell — render children only.
+  if (pathname?.startsWith("/admin")) {
+    return <>{children}</>;
+  }
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">

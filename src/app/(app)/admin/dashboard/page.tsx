@@ -13,5 +13,6 @@ export default async function AdminDashboardPage() {
 
   if (user?.role !== "admin") redirect("/");
 
-  return <AdminDashboard />;
+  const greetingName = user?.firstName?.trim() || "brother";
+  return <AdminDashboard greetingName={greetingName} />;
 }

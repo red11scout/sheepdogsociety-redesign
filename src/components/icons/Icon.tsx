@@ -37,7 +37,20 @@ export type IconName =
   | "key"
   | "clock"
   | "locate"
-  | "users-group";
+  | "users-group"
+  | "bell"
+  | "settings"
+  | "command"
+  | "eye"
+  | "image"
+  | "sparkles"
+  | "pen"
+  | "inbox"
+  | "clipboard"
+  | "target"
+  | "trash"
+  | "send"
+  | "logout";
 
 const STROKE_GROUP_PROPS = {
   fill: "none",
@@ -245,6 +258,105 @@ const PATHS: Record<IconName, React.ReactElement> = {
     <g fill={FILL}>
       <circle cx="12" cy="8" r="3.5" />
       <path d="M5 21V18.5C5 15.5 8.13 13 12 13C15.87 13 19 15.5 19 18.5V21H5Z" />
+    </g>
+  ),
+  bell: (
+    <path
+      fill={FILL}
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M12 2C9.79 2 8 3.79 8 6V8.5C8 11 6.5 13 5 14.5V17H19V14.5C17.5 13 16 11 16 8.5V6C16 3.79 14.21 2 12 2ZM10 19C10 20.1 10.9 21 12 21C13.1 21 14 20.1 14 19H10Z"
+    />
+  ),
+  settings: (
+    <path
+      fill={FILL}
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M12 8C9.79 8 8 9.79 8 12C8 14.21 9.79 16 12 16C14.21 16 16 14.21 16 12C16 9.79 14.21 8 12 8ZM10.5 1.5L9.8 4.4C9 4.7 8.3 5.1 7.6 5.5L4.8 4.5L3.3 7.1L5.6 9C5.5 9.5 5.5 10 5.5 10.5C5.5 11 5.5 11.5 5.6 12L3.3 13.9L4.8 16.5L7.6 15.5C8.3 15.9 9 16.3 9.8 16.6L10.5 19.5H13.5L14.2 16.6C15 16.3 15.7 15.9 16.4 15.5L19.2 16.5L20.7 13.9L18.4 12C18.5 11.5 18.5 11 18.5 10.5C18.5 10 18.5 9.5 18.4 9L20.7 7.1L19.2 4.5L16.4 5.5C15.7 5.1 15 4.7 14.2 4.4L13.5 1.5H10.5Z"
+    />
+  ),
+  command: (
+    <path
+      fill={FILL}
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M6 3C8.21 3 10 4.79 10 7V8H14V7C14 4.79 15.79 3 18 3C20.21 3 22 4.79 22 7C22 9.21 20.21 11 18 11H17V13H18C20.21 13 22 14.79 22 17C22 19.21 20.21 21 18 21C15.79 21 14 19.21 14 17V16H10V17C10 19.21 8.21 21 6 21C3.79 21 2 19.21 2 17C2 14.79 3.79 13 6 13H7V11H6C3.79 11 2 9.21 2 7C2 4.79 3.79 3 6 3ZM6 5C4.9 5 4 5.9 4 7C4 8.1 4.9 9 6 9H8V7C8 5.9 7.1 5 6 5ZM18 5C16.9 5 16 5.9 16 7V9H18C19.1 9 20 8.1 20 7C20 5.9 19.1 5 18 5ZM6 15C4.9 15 4 15.9 4 17C4 18.1 4.9 19 6 19C7.1 19 8 18.1 8 17V15H6ZM16 15V17C16 18.1 16.9 19 18 19C19.1 19 20 18.1 20 17C20 15.9 19.1 15 18 15H16ZM10 11V13H14V11H10Z"
+    />
+  ),
+  eye: (
+    <path
+      fill={FILL}
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M12 4.5C7 4.5 2.7 7.7 1 12C2.7 16.3 7 19.5 12 19.5C17 19.5 21.3 16.3 23 12C21.3 7.7 17 4.5 12 4.5ZM12 8C14.21 8 16 9.79 16 12C16 14.21 14.21 16 12 16C9.79 16 8 14.21 8 12C8 9.79 9.79 8 12 8Z"
+    />
+  ),
+  image: (
+    <path
+      fill={FILL}
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M3 4H21V20H3V4ZM5 18H19L14.5 11.5L11 16L8.5 13L5 18ZM7 9C7 7.9 7.9 7 9 7C10.1 7 11 7.9 11 9C11 10.1 10.1 11 9 11C7.9 11 7 10.1 7 9Z"
+    />
+  ),
+  sparkles: (
+    <path
+      fill={FILL}
+      d="M12 2L13.5 7L18.5 8.5L13.5 10L12 15L10.5 10L5.5 8.5L10.5 7L12 2ZM19 14L19.8 16.2L22 17L19.8 17.8L19 20L18.2 17.8L16 17L18.2 16.2L19 14ZM6 16L6.7 18L8.5 18.5L6.7 19L6 21L5.3 19L3.5 18.5L5.3 18L6 16Z"
+    />
+  ),
+  pen: (
+    <path
+      fill={FILL}
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M16 2L22 8L20 10L14 4L16 2ZM13 5L19 11L8 22H2V16L13 5Z"
+    />
+  ),
+  inbox: (
+    <path
+      fill={FILL}
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M4 4H20V14H15.5L13.5 16H10.5L8.5 14H4V4ZM2 16V20C2 21.1 2.9 22 4 22H20C21.1 22 22 21.1 22 20V16H14L12 18L10 16H2ZM7 7V9H17V7H7ZM7 11H17V12.5H7V11Z"
+    />
+  ),
+  clipboard: (
+    <path
+      fill={FILL}
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M9 2H15C15.55 2 16 2.45 16 3V4H19V21.5H5V4H8V3C8 2.45 8.45 2 9 2ZM10 4V5H14V4H10ZM7 8V10H17V8H7ZM7 12V13.5H17V12H7ZM7 16V17.5H13V16H7Z"
+    />
+  ),
+  target: (
+    <path
+      fill={FILL}
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M12 1.75C6.34 1.75 1.75 6.34 1.75 12C1.75 17.66 6.34 22.25 12 22.25C17.66 22.25 22.25 17.66 22.25 12C22.25 6.34 17.66 1.75 12 1.75ZM12 5.5C8.41 5.5 5.5 8.41 5.5 12C5.5 15.59 8.41 18.5 12 18.5C15.59 18.5 18.5 15.59 18.5 12C18.5 8.41 15.59 5.5 12 5.5ZM12 9C13.66 9 15 10.34 15 12C15 13.66 13.66 15 12 15C10.34 15 9 13.66 9 12C9 10.34 10.34 9 12 9Z"
+    />
+  ),
+  trash: (
+    <path
+      fill={FILL}
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M9 3V4H4V6H5V21H19V6H20V4H15V3H9ZM9 9V18H11V9H9ZM13 9V18H15V9H13Z"
+    />
+  ),
+  send: (
+    <path
+      fill={FILL}
+      d="M2 3L22 12L2 21L4.5 12L2 3ZM5.6 12L4.6 17.5L17.6 12L4.6 6.5L5.6 12Z"
+    />
+  ),
+  logout: (
+    <g {...STROKE_GROUP_PROPS}>
+      <path d="M9 4H5V20H9" />
+      <path d="M16 16L20 12L16 8" />
+      <path d="M20 12H10" />
     </g>
   ),
 
