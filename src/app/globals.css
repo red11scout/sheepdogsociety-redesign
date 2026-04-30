@@ -161,6 +161,25 @@
   @apply text-xs text-muted-foreground align-super font-sans mr-0.5;
 }
 
+/* Breath — slow scale pulse for brand-mark watermarks. */
+.breathe {
+  animation: breathe 7s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1) rotate(-2deg);
+  }
+  50% {
+    transform: scale(1.03) rotate(0deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .breathe {
+    animation: none;
+  }
+}
+
 /* Aurora — slow-pulsing radial wash. Add absolute-positioned inside dark sections. */
 .aurora {
   position: absolute;
