@@ -48,14 +48,12 @@ export const metadata: Metadata = {
   description: "Men of Faith Community",
   icons: {
     icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "32x32" },
-      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/logo.png", type: "image/png" },
       { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
     ],
-    apple: "/apple-touch-icon.png",
-    shortcut: "/favicon.svg",
+    apple: "/logo.png",
+    shortcut: "/logo.png",
   },
 };
 
