@@ -87,6 +87,29 @@
   --c-stone: #C7BFAE;
 }
 
+/* Admin chrome theme-aware override.
+   Public surfaces use iron/bone as constants (deep ink + parchment) — that's
+   the editorial design language. The admin shell, by contrast, should flip
+   with the theme toggle so a Saturday-morning admin in light mode actually
+   sees a light dashboard.
+
+   Inside `.admin-shell`:
+     - `bg-iron` becomes the theme-aware page background
+     - `text-bone` becomes the theme-aware page foreground
+     - `text-stone` becomes the muted-text color
+   This keeps the existing admin-side class names intact while making the
+   theme toggle do real work. */
+.admin-shell {
+  --color-iron: oklch(0.96 0.012 80);   /* light parchment background */
+  --color-bone: oklch(0.18 0.022 260);  /* deep iron-ink text */
+  --color-stone: oklch(0.45 0.025 60);  /* muted warm gray */
+}
+.dark .admin-shell {
+  --color-iron: #0E1624;
+  --color-bone: #F2EBDD;
+  --color-stone: #C7BFAE;
+}
+
 /* Light mode — bone-tinted parchment. shadcn semantic tokens reroute
    primary/ring/chart-1/sidebar-primary to brass. */
 :root {

@@ -55,7 +55,7 @@ export function AdminShell({
   }, []);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-iron text-bone">
+    <div className="admin-shell flex h-screen overflow-hidden bg-iron text-bone">
       {/* Desktop sidebar — always visible at lg+ */}
       <div className="hidden lg:flex">
         <AdminSidebar

@@ -13,6 +13,8 @@ export default async function AdminDashboardPage() {
 
   if (user?.role !== "admin") redirect("/");
 
-  const greetingName = user?.firstName?.trim() || "brother";
-  return <AdminDashboard greetingName={greetingName} />;
+  // Greeting is the brand persona, not the signed-in user — Jeremy is the
+  // content lead per the brand-voice doc. The topbar still shows who's
+  // actually signed in for accountability.
+  return <AdminDashboard greetingName="Jeremy" />;
 }
