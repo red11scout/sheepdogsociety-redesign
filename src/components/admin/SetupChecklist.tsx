@@ -127,7 +127,7 @@ export function SetupChecklist({ stats }: { stats: SetupStats }) {
                 className={cn(
                   "mt-0.5 flex size-6 shrink-0 items-center justify-center border",
                   step.done
-                    ? "border-brass bg-brass text-iron"
+                    ? "border-brass bg-brass text-ink"
                     : "border-stone/30 text-transparent"
                 )}
                 aria-hidden="true"

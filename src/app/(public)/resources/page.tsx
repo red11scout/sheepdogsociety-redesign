@@ -38,7 +38,7 @@ export default async function ResourcesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-bone text-iron">
+      <section className="relative overflow-hidden bg-bone text-ink">
         <div className="aurora aurora--soft" aria-hidden />
         <div className="dotted-grid absolute inset-0 opacity-50" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-12 md:py-32">
@@ -84,7 +84,7 @@ export default async function ResourcesPage() {
       )}
 
       {/* Sections */}
-      <section className="bg-bone text-iron">
+      <section className="bg-bone text-ink">
         <div className="mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-24">
           {sectionsWithItems.length === 0 ? (
             <div className="border border-dashed border-iron/15 p-16 text-center">
@@ -156,7 +156,7 @@ export default async function ResourcesPage() {
           </p>
           <Link
             href="/contact"
-            className="lift mt-10 inline-flex h-11 items-center gap-2 border border-bone bg-bone px-6 text-sm font-medium text-iron transition-colors hover:bg-stone"
+            className="lift mt-10 inline-flex h-11 items-center gap-2 border border-bone bg-bone px-6 text-sm font-medium text-ink transition-colors hover:bg-stone"
           >
             Contribute a resource
             <Icon name="arrow-right" size={14} />

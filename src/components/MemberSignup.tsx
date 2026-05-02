@@ -375,7 +375,7 @@ function Segment({
       aria-pressed={selected}
       className={`h-11 border px-4 text-sm transition-colors ${
         selected
-          ? "border-brass bg-brass text-iron"
+          ? "border-brass bg-brass text-ink"
           : "border-iron/15 bg-transparent text-iron hover:border-brass/60"
       }`}
     >
@@ -455,7 +455,7 @@ function CovenantSuccess({
         <a
           href={covenantUrl}
           download={`watch-card-${firstName.toLowerCase()}.png`}
-          className="lift inline-flex h-12 items-center gap-3 bg-brass px-6 text-sm font-medium uppercase tracking-[0.18em] text-iron transition-colors hover:bg-gold"
+          className="lift inline-flex h-12 items-center gap-3 bg-brass px-6 text-sm font-medium uppercase tracking-[0.18em] text-ink transition-colors hover:bg-gold"
         >
           Save image
           <Icon name="download" size={16} />

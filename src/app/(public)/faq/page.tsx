@@ -85,7 +85,7 @@ export default function FAQPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-bone text-iron">
+      <section className="relative overflow-hidden bg-bone text-ink">
         <div className="dotted-grid absolute inset-0 opacity-50" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-12 md:py-32">
           <div className="flex items-center gap-4">
@@ -101,7 +101,7 @@ export default function FAQPage() {
       </section>
 
       {/* Sections */}
-      <section className="bg-bone text-iron">
+      <section className="bg-bone text-ink">
         <div className="mx-auto max-w-5xl px-6 pb-28 md:px-12 md:pb-40">
           {sections.map((section) => (
             <div key={section.label} className="mt-16 first:mt-0 md:mt-24">
@@ -150,7 +150,7 @@ export default function FAQPage() {
           <div className="mt-12">
             <a
               href="/contact"
-              className="lift inline-flex h-12 items-center gap-2 border border-bone bg-bone px-8 text-base font-medium text-iron transition-colors hover:bg-stone"
+              className="lift inline-flex h-12 items-center gap-2 border border-bone bg-bone px-8 text-base font-medium text-ink transition-colors hover:bg-stone"
             >
               Contact us
               <Icon name="arrow-right" size={18} />

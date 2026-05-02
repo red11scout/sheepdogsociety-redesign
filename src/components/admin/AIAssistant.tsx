@@ -268,7 +268,7 @@ export function AIAssistant({ open, onClose, initialPrompt }: AIAssistantProps) 
             <button
               type="submit"
               disabled={!prompt.trim() || streaming}
-              className="lift inline-flex h-8 items-center gap-2 bg-brass px-3 text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-iron transition-colors hover:bg-gold disabled:cursor-not-allowed disabled:opacity-40"
+              className="lift inline-flex h-8 items-center gap-2 bg-brass px-3 text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-ink transition-colors hover:bg-gold disabled:cursor-not-allowed disabled:opacity-40"
             >
               {streaming ? "Thinking" : "Send"}
               {!streaming && <Icon name="send" size={12} />}

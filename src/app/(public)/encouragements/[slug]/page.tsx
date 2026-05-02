@@ -109,7 +109,7 @@ export default async function EncouragementPage({
 
       {/* Updates */}
       {updatesLines.length > 0 && (
-        <section className="bg-bone text-iron">
+        <section className="bg-bone text-ink">
           <div className="mx-auto max-w-3xl px-6 py-16 md:px-12 md:py-24">
             <div className="flex items-center gap-4">
               <span className="section-mark">§ This Week</span>
@@ -161,7 +161,7 @@ export default async function EncouragementPage({
 
       {/* Guidance */}
       {row.guidance && (
-        <section className="bg-bone text-iron">
+        <section className="bg-bone text-ink">
           <div className="mx-auto max-w-3xl px-6 py-16 md:px-12 md:py-24">
             <div className="flex items-center gap-4">
               <span className="section-mark">§ Guidance</span>
@@ -190,7 +190,7 @@ export default async function EncouragementPage({
       )}
 
       {/* Footer CTAs */}
-      <section className="bg-bone text-iron">
+      <section className="bg-bone text-ink">
         <div className="mx-auto max-w-3xl px-6 py-20 text-center md:px-12 md:py-28">
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link

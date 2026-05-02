@@ -162,7 +162,7 @@ export function AdminSidebar({
                       />
                       <span className="flex-1 truncate">{item.label}</span>
                       {item.badge != null && (
-                        <span className="inline-flex h-5 min-w-[20px] items-center justify-center bg-brass px-1.5 text-[0.625rem] font-semibold text-iron">
+                        <span className="inline-flex h-5 min-w-[20px] items-center justify-center bg-brass px-1.5 text-[0.625rem] font-semibold text-ink">
                           {item.badge}
                         </span>
                       )}

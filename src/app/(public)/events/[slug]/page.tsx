@@ -114,7 +114,7 @@ export default async function EventDetailPage({
               href={ev.registrationUrl}
               target="_blank"
               rel="noreferrer"
-              className="lift inline-flex h-12 items-center gap-3 bg-brass px-6 text-sm font-medium uppercase tracking-[0.18em] text-iron transition-colors hover:bg-gold"
+              className="lift inline-flex h-12 items-center gap-3 bg-brass px-6 text-sm font-medium uppercase tracking-[0.18em] text-ink transition-colors hover:bg-gold"
             >
               RSVP
               <Icon name="arrow-up-right" size={16} />

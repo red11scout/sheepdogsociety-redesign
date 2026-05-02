@@ -28,7 +28,7 @@ export default function VerseSharePage() {
           <Button
             asChild
             size="lg"
-            className="lift h-12 rounded-none border border-bone bg-bone px-8 text-base text-iron hover:bg-stone"
+            className="lift h-12 rounded-none border border-bone bg-bone px-8 text-base text-ink hover:bg-stone"
           >
             <Link href="/get-started">
               Join the brotherhood

@@ -272,7 +272,7 @@ export function ResourcesAdmin({
                     <button
                       type="button"
                       onClick={() => setShowNewResource(true)}
-                      className="lift inline-flex h-9 items-center gap-2 border border-bone bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-stone"
+                      className="lift inline-flex h-9 items-center gap-2 border border-bone bg-bone px-4 text-xs font-medium uppercase tracking-wider text-ink transition-colors hover:bg-stone"
                     >
                       <Icon name="plus" size={12} />
                       Add resource
@@ -410,7 +410,7 @@ function NewSectionForm({
           type="button"
           onClick={() => onSubmit(name, description, icon)}
           disabled={!name.trim()}
-          className="lift inline-flex h-8 items-center gap-1.5 bg-brass px-3 text-[0.625rem] font-medium uppercase tracking-wider text-iron transition-colors hover:bg-gold disabled:opacity-60"
+          className="lift inline-flex h-8 items-center gap-1.5 bg-brass px-3 text-[0.625rem] font-medium uppercase tracking-wider text-ink transition-colors hover:bg-gold disabled:opacity-60"
         >
           Create
         </button>
@@ -533,7 +533,7 @@ function NewResourceForm({
             })
           }
           disabled={!title.trim() || (!uploadedKey && !url.trim())}
-          className="lift inline-flex h-9 items-center gap-1.5 bg-brass px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-gold disabled:opacity-60"
+          className="lift inline-flex h-9 items-center gap-1.5 bg-brass px-4 text-xs font-medium uppercase tracking-wider text-ink transition-colors hover:bg-gold disabled:opacity-60"
         >
           Create resource
         </button>

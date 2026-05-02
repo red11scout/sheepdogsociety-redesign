@@ -48,7 +48,7 @@ export default function ContactPage() {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-bone text-iron">
+      <section className="relative overflow-hidden bg-bone text-ink">
         <div className="aurora aurora--soft" aria-hidden />
         <div className="dotted-grid absolute inset-0 opacity-50" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-12 md:py-32">
@@ -143,7 +143,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="lift inline-flex h-12 items-center gap-2 border border-bone bg-bone px-8 text-sm font-medium uppercase tracking-wider text-iron transition-colors hover:bg-stone disabled:cursor-not-allowed disabled:opacity-60"
+                  className="lift inline-flex h-12 items-center gap-2 border border-bone bg-bone px-8 text-sm font-medium uppercase tracking-wider text-ink transition-colors hover:bg-stone disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {submitting ? "Sending..." : "Send message"}
                   {!submitting && <Icon name="arrow-right" size={16} />}

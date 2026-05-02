@@ -57,7 +57,7 @@ export function NewsletterForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="lift flex h-11 items-center gap-2 bg-brass px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-stone disabled:cursor-not-allowed disabled:opacity-60"
+        className="lift flex h-11 items-center gap-2 bg-brass px-4 text-xs font-medium uppercase tracking-wider text-ink transition-colors hover:bg-stone disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "loading" ? "..." : "Join"}
         {status !== "loading" && <Icon name="arrow-right" size={14} />}

@@ -123,7 +123,7 @@ export default async function DailyScripturePage() {
 
       {/* Devotional */}
       {todayDevotional && (
-        <section className="bg-bone text-iron">
+        <section className="bg-bone text-ink">
           <div className="mx-auto max-w-5xl px-6 py-20 md:px-12 md:py-32">
             <div className="flex items-center gap-4">
               <span className="section-mark">§ Devotional</span>

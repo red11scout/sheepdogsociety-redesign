@@ -133,7 +133,7 @@ export function AdminDashboard({ greetingName = "brother" }: AdminDashboardProps
                   <Magnetic>
                     <Link
                       href="/admin/letters/new"
-                      className="lift group inline-flex h-11 items-center gap-2 border border-bone bg-bone px-6 text-sm font-medium text-iron transition-colors hover:bg-stone"
+                      className="lift group inline-flex h-11 items-center gap-2 border border-bone bg-bone px-6 text-sm font-medium text-ink transition-colors hover:bg-stone"
                     >
                       <Icon name="pen" size={16} />
                       Start a new Letter
@@ -403,7 +403,7 @@ function InboxRow({
         <Icon name={icon} size={16} className="text-stone/55 group-hover/row:text-brass" />
         <span className="flex-1 truncate text-sm text-stone/85">{label}</span>
         {count > 0 ? (
-          <span className="inline-flex h-6 min-w-[24px] items-center justify-center bg-brass px-2 text-[0.625rem] font-semibold text-iron">
+          <span className="inline-flex h-6 min-w-[24px] items-center justify-center bg-brass px-2 text-[0.625rem] font-semibold text-ink">
             {count}
           </span>
         ) : (

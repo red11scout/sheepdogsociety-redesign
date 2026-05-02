@@ -149,7 +149,7 @@ export default function LocationDetailPage() {
       </section>
 
       {/* Details */}
-      <section className="bg-bone text-iron">
+      <section className="bg-bone text-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-28">
           <div className="flex items-center gap-4">
             <span className="section-mark">§ Details</span>
@@ -279,7 +279,7 @@ export default function LocationDetailPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="lift inline-flex h-12 items-center gap-2 border border-bone bg-bone px-8 text-sm font-medium uppercase tracking-wider text-iron transition-colors hover:bg-stone disabled:cursor-not-allowed disabled:opacity-60"
+                  className="lift inline-flex h-12 items-center gap-2 border border-bone bg-bone px-8 text-sm font-medium uppercase tracking-wider text-ink transition-colors hover:bg-stone disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {submitting ? "Sending..." : "I'm interested"}
                   {!submitting && <Icon name="arrow-right" size={16} />}

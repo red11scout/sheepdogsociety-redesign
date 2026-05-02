@@ -72,7 +72,7 @@ export default function HowWeGatherPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-bone text-iron">
+      <section className="relative overflow-hidden bg-bone text-ink">
         <div className="dotted-grid absolute inset-0 opacity-50" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
           <div className="flex items-center gap-4">
@@ -143,7 +143,7 @@ export default function HowWeGatherPage() {
       </section>
 
       {/* Guidelines */}
-      <section className="bg-bone text-iron">
+      <section className="bg-bone text-ink">
         <div className="mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
           <div className="flex items-center gap-4">
             <span className="section-mark">§ Group size guidelines</span>
@@ -187,7 +187,7 @@ export default function HowWeGatherPage() {
             <Button
               asChild
               size="lg"
-              className="lift h-12 rounded-none border border-bone bg-bone px-8 text-base text-iron hover:bg-stone"
+              className="lift h-12 rounded-none border border-bone bg-bone px-8 text-base text-ink hover:bg-stone"
             >
               <Link href="/locations">
                 <Icon name="map-pin" size={18} className="mr-2" />

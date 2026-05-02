@@ -39,7 +39,7 @@ export default function GivingPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-bone text-iron">
+      <section className="relative overflow-hidden bg-bone text-ink">
         <div className="aurora aurora--soft" aria-hidden />
         <div className="dotted-grid absolute inset-0 opacity-50" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-12 md:py-32">
@@ -91,7 +91,7 @@ export default function GivingPage() {
       </section>
 
       {/* Ways to give */}
-      <section className="bg-bone text-iron">
+      <section className="bg-bone text-ink">
         <div className="mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
           <div className="flex items-center gap-4">
             <span className="section-mark">§ Ways to give</span>
@@ -154,7 +154,7 @@ export default function GivingPage() {
           <div className="mt-12">
             <Link
               href="/contact"
-              className="lift inline-flex h-12 items-center gap-2 border border-bone bg-bone px-8 text-base font-medium text-iron transition-colors hover:bg-stone"
+              className="lift inline-flex h-12 items-center gap-2 border border-bone bg-bone px-8 text-base font-medium text-ink transition-colors hover:bg-stone"
             >
               Become a partner
               <Icon name="arrow-right" size={18} />

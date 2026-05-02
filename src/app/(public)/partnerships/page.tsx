@@ -49,7 +49,7 @@ export default function PartnershipsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-bone text-iron">
+      <section className="relative overflow-hidden bg-bone text-ink">
         <div className="aurora aurora--soft" aria-hidden />
         <div className="dotted-grid absolute inset-0 opacity-50" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-12 md:py-32">
@@ -105,7 +105,7 @@ export default function PartnershipsPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-bone text-iron">
+      <section className="bg-bone text-ink">
         <div className="mx-auto max-w-5xl px-6 py-28 text-center md:px-12 md:py-40">
           <Icon
             name="hands"

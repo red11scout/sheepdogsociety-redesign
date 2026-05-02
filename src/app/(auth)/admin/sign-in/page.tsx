@@ -85,7 +85,7 @@ export default async function SignInPage({
 
           <button
             type="submit"
-            className="lift inline-flex h-12 w-full items-center justify-center gap-2 bg-brass text-sm font-semibold uppercase tracking-[0.18em] text-iron transition-colors hover:bg-gold"
+            className="lift inline-flex h-12 w-full items-center justify-center gap-2 bg-brass text-sm font-semibold uppercase tracking-[0.18em] text-ink transition-colors hover:bg-gold"
           >
             Sign in
             <Icon name="arrow-right" size={14} />

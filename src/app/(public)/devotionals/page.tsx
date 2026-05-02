@@ -62,7 +62,7 @@ export default async function DevotionalsPage() {
               </p>
               <Link
                 href={`/devotionals/${latest.date}`}
-                className="lift mt-10 inline-flex h-12 items-center gap-3 bg-brass px-6 text-sm font-medium uppercase tracking-[0.18em] text-iron transition-colors hover:bg-gold"
+                className="lift mt-10 inline-flex h-12 items-center gap-3 bg-brass px-6 text-sm font-medium uppercase tracking-[0.18em] text-ink transition-colors hover:bg-gold"
               >
                 Read today
                 <Icon name="arrow-right" size={16} />

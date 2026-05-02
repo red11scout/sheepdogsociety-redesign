@@ -31,7 +31,7 @@ export default async function StoriesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-bone text-iron">
+      <section className="relative overflow-hidden bg-bone text-ink">
         <div className="aurora aurora--soft" aria-hidden />
         <div className="dotted-grid absolute inset-0 opacity-50" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-12 md:py-32">
@@ -51,7 +51,7 @@ export default async function StoriesPage() {
       </section>
 
       {/* Stories grid */}
-      <section className="bg-bone text-iron">
+      <section className="bg-bone text-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-28">
           {stories.length > 0 ? (
             <div className="grid gap-px bg-iron/10 md:grid-cols-2">
@@ -122,7 +122,7 @@ export default async function StoriesPage() {
           <div className="mt-12">
             <Link
               href="/contact"
-              className="lift inline-flex h-12 items-center gap-2 border border-bone bg-bone px-8 text-base font-medium text-iron transition-colors hover:bg-stone"
+              className="lift inline-flex h-12 items-center gap-2 border border-bone bg-bone px-8 text-base font-medium text-ink transition-colors hover:bg-stone"
             >
               Share your story
               <Icon name="arrow-right" size={18} />

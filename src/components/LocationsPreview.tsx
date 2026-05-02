@@ -68,7 +68,7 @@ export function LocationsPreview() {
               <Magnetic>
                 <Link
                   href="/locations"
-                  className="lift group inline-flex h-12 items-center gap-2 border border-bone bg-bone px-7 text-base font-medium text-iron transition-colors hover:bg-stone"
+                  className="lift group inline-flex h-12 items-center gap-2 border border-bone bg-bone px-7 text-base font-medium text-ink transition-colors hover:bg-stone"
                 >
                   See every group
                   <Icon
