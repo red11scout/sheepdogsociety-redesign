@@ -3,22 +3,32 @@ import { db } from "@/db";
 import {
   users,
   groups,
-  messages,
-  prayerRequests,
   events,
-  blogPosts,
   testimonies,
-  channels,
   letters,
   aiGenerations,
   newsletterSubscribers,
 } from "@/db/schema";
-import { eq, sql, gte, desc, isNull, and } from "drizzle-orm";
+import { sql, gte, desc, isNull, and, eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
+/**
+ * Dashboard stats endpoint. Tightened in May 2026 from 18 queries down to 7
+ * by:
+ *   1. Dropping queries the UI doesn't render (messages, prayer requests,
+ *      channels, blog posts, total users, aiGenerationsTotal — all
+ *      member-area / unused-on-dashboard).
+ *   2. Combining same-table counts with `count(*) FILTER (WHERE ...)` so
+ *      three queries on `users` and three on `letters` become one each.
+ *
+ * The tradeoff: dropped fields disappear from the response. The dashboard
+ * component only reads the fields below; legacy callers (none currently)
+ * will see undefined for the dropped fields and should treat as zero.
+ */
 export async function GET() {
   const { userId } = await auth();
-  if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!userId)
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const [user] = await db.select().from(users).where(eq(users.id, userId));
   if (user?.role !== "admin") {
@@ -26,75 +36,51 @@ export async function GET() {
   }
 
   const now = new Date();
-  const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
   const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
 
-  // Run all queries in parallel
   const [
-    totalUsersResult,
-    activeUsersResult,
-    pendingUsersResult,
-    totalGroupsResult,
-    totalMessagesResult,
-    recentMessagesResult,
-    activePrayerResult,
-    answeredPrayerResult,
-    upcomingEventsResult,
-    publishedPostsResult,
-    pendingTestimoniesResult,
-    totalChannelsResult,
-    // NEW: Letters + AI + subscribers
-    draftLettersResult,
-    publishedLettersResult,
+    userStats,
+    groupStats,
+    upcomingEvents,
+    pendingTestimoniesRow,
+    letterStats,
     recentLettersList,
-    aiGenerationsThisWeekResult,
-    aiGenerationsTotalResult,
-    activeSubscribersResult,
+    aiThisWeekRow,
+    activeSubscribersRow,
   ] = await Promise.all([
-    db.select({ count: sql<number>`count(*)::int` }).from(users),
+    // 1: All user-status counts in one pass.
     db
-      .select({ count: sql<number>`count(*)::int` })
-      .from(users)
-      .where(eq(users.status, "active")),
-    db
-      .select({ count: sql<number>`count(*)::int` })
-      .from(users)
-      .where(eq(users.status, "pending")),
+      .select({
+        active: sql<number>`count(*) FILTER (WHERE status = 'active')::int`,
+        pending: sql<number>`count(*) FILTER (WHERE status = 'pending')::int`,
+      })
+      .from(users),
+
+    // 2: Groups total.
     db.select({ count: sql<number>`count(*)::int` }).from(groups),
-    db.select({ count: sql<number>`count(*)::int` }).from(messages),
-    db
-      .select({ count: sql<number>`count(*)::int` })
-      .from(messages)
-      .where(gte(messages.createdAt, sevenDaysAgo)),
-    db
-      .select({ count: sql<number>`count(*)::int` })
-      .from(prayerRequests)
-      .where(eq(prayerRequests.status, "active")),
-    db
-      .select({ count: sql<number>`count(*)::int` })
-      .from(prayerRequests)
-      .where(eq(prayerRequests.status, "answered")),
+
+    // 3: Upcoming events.
     db
       .select({ count: sql<number>`count(*)::int` })
       .from(events)
       .where(gte(events.startTime, now)),
-    db
-      .select({ count: sql<number>`count(*)::int` })
-      .from(blogPosts)
-      .where(eq(blogPosts.status, "published")),
+
+    // 4: Pending testimonies (Inbox panel).
     db
       .select({ count: sql<number>`count(*)::int` })
       .from(testimonies)
       .where(eq(testimonies.isApproved, false)),
-    db.select({ count: sql<number>`count(*)::int` }).from(channels),
+
+    // 5: Letter stats — drafts + published in one pass, soft-delete aware.
     db
-      .select({ count: sql<number>`count(*)::int` })
+      .select({
+        draft: sql<number>`count(*) FILTER (WHERE status = 'draft')::int`,
+        published: sql<number>`count(*) FILTER (WHERE status = 'published')::int`,
+      })
       .from(letters)
-      .where(and(eq(letters.status, "draft"), isNull(letters.deletedAt))),
-    db
-      .select({ count: sql<number>`count(*)::int` })
-      .from(letters)
-      .where(and(eq(letters.status, "published"), isNull(letters.deletedAt))),
+      .where(isNull(letters.deletedAt)),
+
+    // 6: Recent letters list for the bento bottom row.
     db
       .select({
         id: letters.id,
@@ -108,11 +94,14 @@ export async function GET() {
       .where(isNull(letters.deletedAt))
       .orderBy(desc(letters.updatedAt))
       .limit(5),
+
+    // 7: AI generations in last 7 days (single tile).
     db
       .select({ count: sql<number>`count(*)::int` })
       .from(aiGenerations)
       .where(gte(aiGenerations.createdAt, sevenDaysAgo)),
-    db.select({ count: sql<number>`count(*)::int` }).from(aiGenerations),
+
+    // 8: Active newsletter subscribers.
     db
       .select({ count: sql<number>`count(*)::int` })
       .from(newsletterSubscribers)
@@ -121,23 +110,15 @@ export async function GET() {
 
   return NextResponse.json({
     stats: {
-      totalUsers: totalUsersResult[0].count,
-      activeUsers: activeUsersResult[0].count,
-      pendingUsers: pendingUsersResult[0].count,
-      totalGroups: totalGroupsResult[0].count,
-      totalMessages: totalMessagesResult[0].count,
-      messagesThisWeek: recentMessagesResult[0].count,
-      activePrayers: activePrayerResult[0].count,
-      answeredPrayers: answeredPrayerResult[0].count,
-      upcomingEvents: upcomingEventsResult[0].count,
-      publishedPosts: publishedPostsResult[0].count,
-      pendingTestimonies: pendingTestimoniesResult[0].count,
-      totalChannels: totalChannelsResult[0].count,
-      draftLetters: draftLettersResult[0].count,
-      publishedLetters: publishedLettersResult[0].count,
-      activeSubscribers: activeSubscribersResult[0].count,
-      aiGenerationsThisWeek: aiGenerationsThisWeekResult[0].count,
-      aiGenerationsTotal: aiGenerationsTotalResult[0].count,
+      activeUsers: userStats[0].active,
+      pendingUsers: userStats[0].pending,
+      totalGroups: groupStats[0].count,
+      upcomingEvents: upcomingEvents[0].count,
+      pendingTestimonies: pendingTestimoniesRow[0].count,
+      draftLetters: letterStats[0].draft,
+      publishedLetters: letterStats[0].published,
+      activeSubscribers: activeSubscribersRow[0].count,
+      aiGenerationsThisWeek: aiThisWeekRow[0].count,
     },
     recentLetters: recentLettersList,
   });

@@ -11,7 +11,14 @@ function getDb() {
       throw new Error("DATABASE_URL is not set");
     }
     const client = postgres(connectionString, {
+      // Supabase transaction-mode pooler (port 6543) doesn't support
+      // prepared statements — must be off.
       prepare: false,
+      // Match Supabase pooler-side limits. Each Vercel serverless function
+      // runs in its own process; max=20 lets parallel page-load fan-out
+      // (e.g. dashboard's 8-query Promise.all + per-page layout queries)
+      // run without queueing on the client side.
+      max: 20,
       connect_timeout: 10,
       idle_timeout: 20,
       max_lifetime: 60 * 30,
