@@ -145,7 +145,7 @@ export default async function ResourcesPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-3xl px-6 py-20 text-center md:px-12 md:py-28">
           <h2 className="display-xl text-3xl md:text-5xl">
             Got something to share?

@@ -30,12 +30,12 @@ export default function AboutPage() {
       </section>
 
       {/* Mission */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-28 md:grid-cols-[2fr_3fr] md:gap-20 md:px-12 md:py-40">
           <div>
             <span className="section-mark">§ I &middot; Mission</span>
             <div className="hairline mt-3" />
-            <h2 className="display-xl mt-8 text-4xl text-bone md:text-5xl">
+            <h2 className="display-xl mt-8 text-4xl text-foreground md:text-5xl">
               Our mission.
             </h2>
           </div>
@@ -81,14 +81,14 @@ export default function AboutPage() {
       </section>
 
       {/* Leadership Model */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
           <div className="flex items-center gap-4">
             <span className="section-mark">§ III &middot; Leadership</span>
             <div className="hairline flex-1" />
           </div>
           <div className="mt-10 grid gap-12 md:grid-cols-[2fr_3fr] md:gap-20">
-            <h2 className="display-xl text-4xl text-bone md:text-6xl">
+            <h2 className="display-xl text-4xl text-foreground md:text-6xl">
               A starfish,
               <br />
               <span className="text-brass">not a spider.</span>
@@ -119,7 +119,7 @@ export default function AboutPage() {
           <h2 className="display-xl mt-10 max-w-3xl text-4xl md:text-6xl">
             Three convictions.
           </h2>
-          <div className="mt-16 grid gap-px bg-iron/10 md:grid-cols-3">
+          <div className="mt-16 grid gap-px bg-background/10 md:grid-cols-3">
             {[
               {
                 icon: "scroll" as const,
@@ -166,13 +166,13 @@ export default function AboutPage() {
       </section>
 
       {/* Culture */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
           <div className="flex items-center gap-4">
             <span className="section-mark">§ V &middot; Our Culture</span>
             <div className="hairline flex-1" />
           </div>
-          <h2 className="display-xl mt-10 max-w-3xl text-4xl text-bone md:text-6xl">
+          <h2 className="display-xl mt-10 max-w-3xl text-4xl text-foreground md:text-6xl">
             How we hold the line.
           </h2>
           <ol className="mt-16 divide-y divide-stone/15 border-y border-stone/15">
@@ -205,7 +205,7 @@ export default function AboutPage() {
                 <span className="section-mark text-brass md:pt-2">
                   § {item.roman}
                 </span>
-                <h3 className="display-xl col-span-1 text-2xl text-bone md:text-3xl">
+                <h3 className="display-xl col-span-1 text-2xl text-foreground md:text-3xl">
                   {item.heading}
                 </h3>
                 <p className="col-span-2 text-base leading-relaxed text-stone md:col-span-1 md:text-lg">

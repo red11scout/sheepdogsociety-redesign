@@ -56,7 +56,7 @@ export default async function EncouragementPage({
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-iron text-bone">
+      <section className="relative overflow-hidden bg-background text-foreground">
         <div className="aurora aurora--soft" aria-hidden />
         <div className="dotted-grid absolute inset-0 opacity-[0.04]" aria-hidden />
         <div className="relative mx-auto max-w-5xl px-6 py-20 md:px-12 md:py-28">
@@ -77,7 +77,7 @@ export default async function EncouragementPage({
               </span>
             )}
           </div>
-          <h1 className="display-xl mt-6 max-w-4xl text-[clamp(2.5rem,7vw,6rem)] text-bone">
+          <h1 className="display-xl mt-6 max-w-4xl text-[clamp(2.5rem,7vw,6rem)] text-foreground">
             {row.title}
           </h1>
           {row.intro && (
@@ -90,7 +90,7 @@ export default async function EncouragementPage({
 
       {/* Cover image */}
       {row.coverImageUrl && (
-        <section className="bg-iron">
+        <section className="bg-background">
           <div className="mx-auto max-w-5xl px-6 md:px-12">
             <div className="aspect-[16/9] overflow-hidden">
               <Image
@@ -135,7 +135,7 @@ export default async function EncouragementPage({
 
       {/* Scriptures */}
       {scriptures.length > 0 && (
-        <section className="bg-iron text-bone">
+        <section className="bg-background text-foreground">
           <div className="mx-auto max-w-3xl px-6 py-16 md:px-12 md:py-24">
             <div className="flex items-center gap-4">
               <span className="section-mark text-brass">§ Scriptures</span>
@@ -144,7 +144,7 @@ export default async function EncouragementPage({
             <ul className="mt-8 space-y-6">
               {scriptures.map((s, i) => (
                 <li key={i} className="border-l-2 border-brass pl-6">
-                  <div className="display-xl text-xl text-bone md:text-2xl">
+                  <div className="display-xl text-xl text-foreground md:text-2xl">
                     {s.ref}
                   </div>
                   {s.note && (
@@ -176,7 +176,7 @@ export default async function EncouragementPage({
 
       {/* Notes */}
       {row.notes && (
-        <section className="bg-iron text-bone">
+        <section className="bg-background text-foreground">
           <div className="mx-auto max-w-3xl px-6 py-16 md:px-12 md:py-24">
             <div className="flex items-center gap-4">
               <span className="section-mark text-brass">§ Notes from the Watch</span>
@@ -195,7 +195,7 @@ export default async function EncouragementPage({
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/encouragements"
-              className="lift inline-flex h-11 items-center gap-2 border border-iron bg-iron px-6 text-sm font-medium text-bone transition-colors hover:bg-iron/90"
+              className="lift inline-flex h-11 items-center gap-2 border border-iron bg-background px-6 text-sm font-medium text-foreground transition-colors hover:bg-background/90"
             >
               All encouragements
               <Icon name="arrow-right" size={14} />

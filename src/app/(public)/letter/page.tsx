@@ -45,7 +45,7 @@ export default async function LetterPage() {
   return (
     <>
       {/* Hero / latest */}
-      <section className="relative overflow-hidden bg-iron text-bone">
+      <section className="relative overflow-hidden bg-background text-foreground">
         <div className="aurora aurora--soft" aria-hidden />
         <div className="dotted-grid absolute inset-0 opacity-[0.04]" aria-hidden />
         <div className="relative mx-auto max-w-5xl px-6 py-24 md:px-12 md:py-32">
@@ -62,16 +62,16 @@ export default async function LetterPage() {
                     ? `Issue ${latest.issueNumber} · ${latest.themeWord}`
                     : `Issue ${latest.issueNumber}`}
                 </p>
-                <h1 className="display-xl mt-6 text-[clamp(2.25rem,6vw,5rem)] text-bone">
+                <h1 className="display-xl mt-6 text-[clamp(2.25rem,6vw,5rem)] text-foreground">
                   {latest.title}
                 </h1>
                 {latest.subtitle && (
-                  <p className="mt-6 max-w-2xl font-pullquote text-xl italic text-bone/80 md:text-2xl">
+                  <p className="mt-6 max-w-2xl font-pullquote text-xl italic text-foreground/80 md:text-2xl">
                     {latest.subtitle}
                   </p>
                 )}
                 {latest.excerpt && (
-                  <p className="mt-6 max-w-2xl text-lg leading-relaxed text-bone/75">
+                  <p className="mt-6 max-w-2xl text-lg leading-relaxed text-foreground/75">
                     {latest.excerpt}
                   </p>
                 )}
@@ -93,10 +93,10 @@ export default async function LetterPage() {
             </article>
           ) : (
             <div className="mt-16">
-              <h1 className="display-xl text-[clamp(2.25rem,6vw,5rem)] text-bone">
+              <h1 className="display-xl text-[clamp(2.25rem,6vw,5rem)] text-foreground">
                 The first letter is coming.
               </h1>
-              <p className="mt-6 max-w-2xl font-pullquote text-xl italic text-bone/80">
+              <p className="mt-6 max-w-2xl font-pullquote text-xl italic text-foreground/80">
                 One letter a week. A scripture. A practice. Sent before the day
                 starts. Sign up below and we will send the first one as soon as
                 it ships.
@@ -117,7 +117,7 @@ export default async function LetterPage() {
           </div>
           <Link
             href="/join"
-            className="lift inline-flex h-12 shrink-0 items-center gap-3 bg-iron px-6 text-sm font-medium uppercase tracking-[0.18em] text-bone transition-colors hover:bg-iron/90"
+            className="lift inline-flex h-12 shrink-0 items-center gap-3 bg-background px-6 text-sm font-medium uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-background/90"
           >
             Get the Letter
             <Icon name="arrow-right" size={16} />
@@ -139,7 +139,7 @@ export default async function LetterPage() {
                 <li key={letter.id}>
                   <Link
                     href={`/letter/${letter.slug}`}
-                    className="group grid gap-3 py-8 transition-colors hover:bg-iron/[0.02] md:grid-cols-[100px_1fr_auto] md:items-baseline md:gap-8"
+                    className="group grid gap-3 py-8 transition-colors hover:bg-background/[0.02] md:grid-cols-[100px_1fr_auto] md:items-baseline md:gap-8"
                   >
                     <span className="section-mark text-brass">
                       № {letter.issueNumber}

@@ -71,8 +71,8 @@ export default function LocationDetailPage() {
     return (
       <div className="bg-bone">
         <div className="mx-auto max-w-5xl px-6 py-32 md:px-12">
-          <div className="h-8 w-48 animate-pulse bg-iron/10" />
-          <div className="mt-6 h-72 animate-pulse bg-iron/10" />
+          <div className="h-8 w-48 animate-pulse bg-background/10" />
+          <div className="mt-6 h-72 animate-pulse bg-background/10" />
         </div>
       </div>
     );
@@ -119,7 +119,7 @@ export default function LocationDetailPage() {
       <title>{`${location.name} — Sheepdog Society`}</title>
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-iron text-bone">
+      <section className="relative overflow-hidden bg-background text-foreground">
         <div className="aurora" aria-hidden />
         <div className="dotted-grid absolute inset-0 opacity-[0.04]" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-12 md:py-32">
@@ -136,7 +136,7 @@ export default function LocationDetailPage() {
             </span>
             <div className="hairline flex-1" />
           </div>
-          <h1 className="display-xl mt-8 max-w-4xl text-[clamp(2.5rem,7vw,6rem)] text-bone">
+          <h1 className="display-xl mt-8 max-w-4xl text-[clamp(2.5rem,7vw,6rem)] text-foreground">
             {location.name}
           </h1>
           {meta && <p className="mt-8 section-mark text-brass">{meta}</p>}
@@ -155,7 +155,7 @@ export default function LocationDetailPage() {
             <span className="section-mark">§ Details</span>
             <div className="hairline flex-1" />
           </div>
-          <div className="mt-10 grid gap-px bg-iron/10 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-px bg-background/10 md:grid-cols-2 lg:grid-cols-4">
             <Detail
               icon="clock"
               label="When"
@@ -207,7 +207,7 @@ export default function LocationDetailPage() {
                   href={location.signalGroupUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="lift inline-flex h-11 items-center gap-2 border border-iron px-5 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-iron hover:text-bone"
+                  className="lift inline-flex h-11 items-center gap-2 border border-iron px-5 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-background hover:text-foreground"
                 >
                   Join Signal
                   <Icon name="arrow-up-right" size={14} />
@@ -219,20 +219,20 @@ export default function LocationDetailPage() {
       </section>
 
       {/* Interest form */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-3xl px-6 py-20 md:px-12 md:py-28">
           <div className="flex items-center gap-4">
             <span className="section-mark">§ Interested?</span>
             <div className="hairline flex-1" />
           </div>
-          <h2 className="display-xl mt-10 text-3xl text-bone md:text-5xl">
+          <h2 className="display-xl mt-10 text-3xl text-foreground md:text-5xl">
             Show up. We will be there.
           </h2>
 
           {submitted ? (
-            <div className="mt-10 flex items-start gap-4 border border-brass/40 bg-iron/40 p-6 md:p-8">
+            <div className="mt-10 flex items-start gap-4 border border-brass/40 bg-background/40 p-6 md:p-8">
               <Icon name="check" size={24} className="text-brass" />
-              <p className="font-pullquote text-lg italic leading-relaxed text-bone md:text-xl">
+              <p className="font-pullquote text-lg italic leading-relaxed text-foreground md:text-xl">
                 Thank you, brother. The group leader will be in touch.
               </p>
             </div>
@@ -272,7 +272,7 @@ export default function LocationDetailPage() {
                   onChange={(e) =>
                     setInterestForm((f) => ({ ...f, message: e.target.value }))
                   }
-                  className="mt-3 w-full border border-stone/25 bg-transparent px-4 py-3 text-base leading-relaxed text-bone placeholder:text-stone/40 focus:border-brass focus:outline-none"
+                  className="mt-3 w-full border border-stone/25 bg-transparent px-4 py-3 text-base leading-relaxed text-foreground placeholder:text-stone/40 focus:border-brass focus:outline-none"
                 />
               </div>
               <Magnetic strength={0.18}>
@@ -337,7 +337,7 @@ function DarkField({
         required={required}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-3 h-11 w-full border border-stone/25 bg-transparent px-4 text-base text-bone placeholder:text-stone/40 focus:border-brass focus:outline-none"
+        className="mt-3 h-11 w-full border border-stone/25 bg-transparent px-4 text-base text-foreground placeholder:text-stone/40 focus:border-brass focus:outline-none"
       />
     </div>
   );

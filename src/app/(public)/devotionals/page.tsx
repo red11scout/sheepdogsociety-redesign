@@ -40,7 +40,7 @@ export default async function DevotionalsPage() {
   return (
     <>
       {/* Hero / latest */}
-      <section className="relative overflow-hidden bg-iron text-bone">
+      <section className="relative overflow-hidden bg-background text-foreground">
         <div className="aurora aurora--soft" aria-hidden />
         <div className="dotted-grid absolute inset-0 opacity-[0.04]" aria-hidden />
         <div className="relative mx-auto max-w-4xl px-6 py-24 md:px-12 md:py-32">
@@ -54,10 +54,10 @@ export default async function DevotionalsPage() {
               <p className="section-mark text-brass">
                 {format(parseISO(latest.date), "EEEE, MMMM d, yyyy")}
               </p>
-              <h1 className="display-xl mt-6 text-[clamp(2.25rem,6vw,5rem)] text-bone">
+              <h1 className="display-xl mt-6 text-[clamp(2.25rem,6vw,5rem)] text-foreground">
                 {latest.title}
               </h1>
-              <p className="mt-6 font-pullquote text-xl italic text-bone/80 md:text-2xl">
+              <p className="mt-6 font-pullquote text-xl italic text-foreground/80 md:text-2xl">
                 {latest.scriptureReference}
               </p>
               <Link
@@ -70,12 +70,12 @@ export default async function DevotionalsPage() {
             </article>
           ) : (
             <div className="mt-12">
-              <h1 className="display-xl text-[clamp(2.25rem,6vw,5rem)] text-bone">
+              <h1 className="display-xl text-[clamp(2.25rem,6vw,5rem)] text-foreground">
                 Daily readings,
                 <br />
                 <span className="text-brass">in plain language.</span>
               </h1>
-              <p className="mt-6 max-w-2xl font-pullquote text-xl italic text-bone/80">
+              <p className="mt-6 max-w-2xl font-pullquote text-xl italic text-foreground/80">
                 The first devotionals are being prepared. Check back tomorrow.
               </p>
             </div>
@@ -97,7 +97,7 @@ export default async function DevotionalsPage() {
                 <li key={d.id}>
                   <Link
                     href={`/devotionals/${d.date}`}
-                    className="group grid gap-3 py-6 transition-colors hover:bg-iron/[0.02] md:grid-cols-[140px_1fr_auto] md:items-baseline md:gap-8"
+                    className="group grid gap-3 py-6 transition-colors hover:bg-background/[0.02] md:grid-cols-[140px_1fr_auto] md:items-baseline md:gap-8"
                   >
                     <span className="section-mark text-iron/50">
                       {format(parseISO(d.date), "MMM d, yyyy")}

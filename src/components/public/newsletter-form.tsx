@@ -52,7 +52,7 @@ export function NewsletterForm() {
         onChange={(e) => setEmail(e.target.value)}
         required
         aria-label="Email address"
-        className="h-11 flex-1 bg-transparent px-4 text-sm text-bone placeholder:text-stone/50 focus:outline-none"
+        className="h-11 flex-1 bg-transparent px-4 text-sm text-foreground placeholder:text-stone/50 focus:outline-none"
       />
       <button
         type="submit"

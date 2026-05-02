@@ -44,7 +44,7 @@ export default async function EventsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-iron text-bone">
+      <section className="relative overflow-hidden bg-background text-foreground">
         <div className="aurora aurora--soft" aria-hidden />
         <div className="dotted-grid absolute inset-0 opacity-[0.04]" aria-hidden />
         <div className="relative mx-auto max-w-5xl px-6 py-24 md:px-12 md:py-32">
@@ -52,12 +52,12 @@ export default async function EventsPage() {
             <span className="section-mark">§ Gatherings</span>
             <div className="hairline flex-1" />
           </div>
-          <h1 className="display-xl mt-10 text-[clamp(2.25rem,6vw,5rem)] text-bone">
+          <h1 className="display-xl mt-10 text-[clamp(2.25rem,6vw,5rem)] text-foreground">
             Bring a brother.
             <br />
             <span className="text-brass">Bring a friend.</span>
           </h1>
-          <p className="mt-8 max-w-2xl font-pullquote text-xl italic text-bone/80 md:text-2xl">
+          <p className="mt-8 max-w-2xl font-pullquote text-xl italic text-foreground/80 md:text-2xl">
             Weekly tables. Monthly breakfasts. Prayer nights. Camping. The
             calendar below is what is on the books.
           </p>
@@ -80,7 +80,7 @@ export default async function EventsPage() {
                   <li key={ev.id}>
                     <Link
                       href={`/events/${ev.id}`}
-                      className="group grid gap-4 py-8 transition-colors hover:bg-iron/[0.02] md:grid-cols-[140px_1fr_auto] md:items-start md:gap-8"
+                      className="group grid gap-4 py-8 transition-colors hover:bg-background/[0.02] md:grid-cols-[140px_1fr_auto] md:items-start md:gap-8"
                     >
                       <div className="flex items-baseline gap-3 md:flex-col md:items-start md:gap-1">
                         <span className="font-display text-3xl font-semibold text-brass">

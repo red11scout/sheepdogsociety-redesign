@@ -84,7 +84,7 @@ export default function GetStartedPage() {
             <Button
               asChild
               size="lg"
-              className="lift h-12 rounded-none border border-iron bg-iron px-8 text-base text-bone hover:bg-iron/90"
+              className="lift h-12 rounded-none border border-iron bg-background px-8 text-base text-foreground hover:bg-background/90"
             >
               <Link href="/locations">
                 <Icon name="map-pin" size={18} className="mr-2" />
@@ -95,7 +95,7 @@ export default function GetStartedPage() {
               asChild
               size="lg"
               variant="outline"
-              className="lift h-12 rounded-none border border-iron/30 bg-transparent px-8 text-base text-iron hover:border-iron hover:bg-iron/5"
+              className="lift h-12 rounded-none border border-iron/30 bg-transparent px-8 text-base text-iron hover:border-iron hover:bg-background/5"
             >
               <Link href="/locations/request">
                 Start a group
@@ -107,20 +107,20 @@ export default function GetStartedPage() {
       </section>
 
       {/* 5 Principles */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
           <div className="flex items-center gap-4">
             <span className="section-mark">§ Five core principles</span>
             <div className="hairline flex-1" />
           </div>
-          <h2 className="display-xl mt-10 max-w-3xl text-4xl text-bone md:text-6xl">
+          <h2 className="display-xl mt-10 max-w-3xl text-4xl text-foreground md:text-6xl">
             Five things to know.
           </h2>
           <div className="mt-16 grid gap-px bg-stone/10 md:grid-cols-3 lg:grid-cols-5">
             {principles.map((p) => (
               <article
                 key={p.title}
-                className="spotlight bg-iron p-8 md:p-10"
+                className="spotlight bg-background p-8 md:p-10"
               >
                 <div className="flex items-center justify-between">
                   <Icon
@@ -131,7 +131,7 @@ export default function GetStartedPage() {
                   />
                   <span className="section-mark text-brass">§ {p.roman}</span>
                 </div>
-                <h3 className="display-xl mt-10 text-xl text-bone md:text-2xl">
+                <h3 className="display-xl mt-10 text-xl text-foreground md:text-2xl">
                   {p.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-stone">
@@ -178,10 +178,10 @@ export default function GetStartedPage() {
       </section>
 
       {/* How to Join */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-5xl px-6 py-28 text-center md:px-12 md:py-40">
           <span className="section-mark text-brass">§ How to join</span>
-          <h2 className="display-xl mt-6 text-4xl text-bone md:text-6xl">
+          <h2 className="display-xl mt-6 text-4xl text-foreground md:text-6xl">
             No application.
             <br />
             <span className="text-brass">No interview.</span>
@@ -207,7 +207,7 @@ export default function GetStartedPage() {
               asChild
               size="lg"
               variant="outline"
-              className="lift h-12 rounded-none border border-bone/30 bg-transparent px-8 text-base text-bone hover:border-bone hover:bg-bone/5"
+              className="lift h-12 rounded-none border border-bone/30 bg-transparent px-8 text-base text-foreground hover:border-bone hover:bg-bone/5"
             >
               <Link href="/locations/request">
                 Start a group

@@ -103,7 +103,7 @@ export function AskTheWatch() {
     <div className="relative isolate w-full">
       <form onSubmit={handleAsk} className="relative">
         <div
-          className={`group relative border bg-iron/40 backdrop-blur transition-colors ${
+          className={`group relative border bg-background/40 backdrop-blur transition-colors ${
             status === "streaming"
               ? "border-brass shadow-[0_0_60px_-8px_rgba(212,160,42,0.45)]"
               : "border-stone/20 hover:border-stone/40 focus-within:border-brass"
@@ -122,7 +122,7 @@ export function AskTheWatch() {
             rows={3}
             maxLength={1200}
             disabled={status === "streaming"}
-            className="block w-full resize-none bg-transparent px-6 py-6 font-pullquote text-2xl italic leading-relaxed text-bone placeholder:text-stone/40 focus:outline-none disabled:opacity-50 md:px-8 md:py-7 md:text-3xl"
+            className="block w-full resize-none bg-transparent px-6 py-6 font-pullquote text-2xl italic leading-relaxed text-foreground placeholder:text-stone/40 focus:outline-none disabled:opacity-50 md:px-8 md:py-7 md:text-3xl"
           />
           <div className="flex items-center justify-between border-t border-stone/15 px-6 py-3 md:px-8">
             <span className="section-mark text-stone/50">
@@ -159,7 +159,7 @@ export function AskTheWatch() {
               key={s}
               type="button"
               onClick={() => applySuggestion(s)}
-              className="border border-stone/15 bg-iron/20 px-3 py-1.5 text-xs text-stone/70 transition-all hover:border-brass/60 hover:bg-iron/40 hover:text-bone"
+              className="border border-stone/15 bg-background/20 px-3 py-1.5 text-xs text-stone/70 transition-all hover:border-brass/60 hover:bg-background/40 hover:text-foreground"
             >
               {s}
             </button>
@@ -187,7 +187,7 @@ export function AskTheWatch() {
           </div>
           <div
             ref={responseRef}
-            className="mt-6 max-h-[420px] overflow-y-auto pr-2 font-pullquote text-xl leading-relaxed text-bone md:text-2xl"
+            className="mt-6 max-h-[420px] overflow-y-auto pr-2 font-pullquote text-xl leading-relaxed text-foreground md:text-2xl"
           >
             {errorMsg ? (
               <p className="italic text-stone">{errorMsg}</p>
@@ -219,7 +219,7 @@ export function AskTheWatch() {
               <Magnetic strength={0.18}>
                 <Link
                   href="/acts-20-28"
-                  className="lift inline-flex h-11 items-center gap-2 border border-stone/30 bg-transparent px-6 text-sm font-medium text-bone transition-colors hover:border-brass hover:text-brass"
+                  className="lift inline-flex h-11 items-center gap-2 border border-stone/30 bg-transparent px-6 text-sm font-medium text-foreground transition-colors hover:border-brass hover:text-brass"
                 >
                   Read Acts 20:28
                 </Link>

@@ -56,14 +56,14 @@ export default function GivingPage() {
       </section>
 
       {/* Why we give */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
           <div className="flex items-center gap-4">
             <span className="section-mark">§ Why we give</span>
             <div className="hairline flex-1" />
           </div>
           <div className="mt-10 grid gap-12 md:grid-cols-[2fr_3fr] md:gap-20">
-            <h2 className="display-xl text-4xl text-bone md:text-6xl">
+            <h2 className="display-xl text-4xl text-foreground md:text-6xl">
               Always free
               <br />
               <span className="text-brass">for every man.</span>
@@ -79,7 +79,7 @@ export default function GivingPage() {
                 in the spiritual growth of men across the country. Every dollar
                 goes to the mission.
               </p>
-              <blockquote className="border-l-2 border-brass pl-6 font-pullquote text-xl italic text-bone md:text-2xl">
+              <blockquote className="border-l-2 border-brass pl-6 font-pullquote text-xl italic text-foreground md:text-2xl">
                 Each of you should give what you have decided in your heart to
                 give, not reluctantly or under compulsion, for God loves a
                 cheerful giver.
@@ -100,7 +100,7 @@ export default function GivingPage() {
           <h2 className="display-xl mt-10 max-w-3xl text-4xl md:text-6xl">
             Three ways to invest.
           </h2>
-          <div className="mt-16 grid gap-px bg-iron/10 md:grid-cols-3">
+          <div className="mt-16 grid gap-px bg-background/10 md:grid-cols-3">
             {ways.map((w) => (
               <Spotlight
                 key={w.title}
@@ -139,10 +139,10 @@ export default function GivingPage() {
       </section>
 
       {/* Partners */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-5xl px-6 py-28 text-center md:px-12 md:py-40">
           <span className="section-mark text-brass">§ Sheepdog Partners</span>
-          <h2 className="display-xl mt-6 text-3xl text-bone md:text-5xl">
+          <h2 className="display-xl mt-6 text-3xl text-foreground md:text-5xl">
             Churches. Organizations.
             <br />
             <span className="text-brass">Brothers.</span>

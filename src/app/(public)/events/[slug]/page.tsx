@@ -55,23 +55,23 @@ export default async function EventDetailPage({
 
   return (
     <article className="bg-bone">
-      <header className="bg-iron text-bone">
+      <header className="bg-background text-foreground">
         <div className="mx-auto max-w-3xl px-6 py-20 md:px-12 md:py-28">
           <div className="flex items-center gap-4">
             <span className="section-mark">§ Gathering</span>
             <div className="hairline flex-1" />
           </div>
-          <h1 className="display-xl mt-10 text-[clamp(2.25rem,6vw,5rem)] text-bone">
+          <h1 className="display-xl mt-10 text-[clamp(2.25rem,6vw,5rem)] text-foreground">
             {ev.title}
           </h1>
 
           <dl className="mt-12 grid gap-6 border-t border-bone/15 pt-8 md:grid-cols-3">
             <div>
               <dt className="section-mark text-stone/60">When</dt>
-              <dd className="mt-2 font-display text-lg text-bone">
+              <dd className="mt-2 font-display text-lg text-foreground">
                 {format(start, "EEEE, MMMM d")}
                 <br />
-                <span className="text-bone/70">
+                <span className="text-foreground/70">
                   {format(start, "h:mm a")}
                   {end ? ` – ${format(end, "h:mm a")}` : ""}
                 </span>
@@ -80,7 +80,7 @@ export default async function EventDetailPage({
             {ev.location && (
               <div>
                 <dt className="section-mark text-stone/60">Where</dt>
-                <dd className="mt-2 font-display text-lg text-bone">
+                <dd className="mt-2 font-display text-lg text-foreground">
                   {ev.location}
                 </dd>
               </div>
@@ -88,7 +88,7 @@ export default async function EventDetailPage({
             {ev.eventType && (
               <div>
                 <dt className="section-mark text-stone/60">Type</dt>
-                <dd className="mt-2 font-display text-lg text-bone capitalize">
+                <dd className="mt-2 font-display text-lg text-foreground capitalize">
                   {ev.eventType}
                 </dd>
               </div>

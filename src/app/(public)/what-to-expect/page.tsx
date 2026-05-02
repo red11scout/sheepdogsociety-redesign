@@ -75,7 +75,7 @@ export default function WhatToExpectPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-iron text-bone">
+      <section className="relative overflow-hidden bg-background text-foreground">
         <div className="aurora aurora--soft" aria-hidden />
         <div className="dotted-grid absolute inset-0 opacity-[0.04]" aria-hidden />
         <div className="relative mx-auto max-w-5xl px-6 py-24 md:px-12 md:py-40">
@@ -83,12 +83,12 @@ export default function WhatToExpectPage() {
             <span className="section-mark">§ Before you come</span>
             <div className="hairline flex-1" />
           </div>
-          <h1 className="display-xl mt-10 text-[clamp(2.5rem,7vw,6rem)] text-bone">
+          <h1 className="display-xl mt-10 text-[clamp(2.5rem,7vw,6rem)] text-foreground">
             Come hungry.
             <br />
             <span className="text-brass">Bring nothing else.</span>
           </h1>
-          <p className="mt-10 max-w-2xl font-pullquote text-xl italic text-bone/80 md:text-2xl">
+          <p className="mt-10 max-w-2xl font-pullquote text-xl italic text-foreground/80 md:text-2xl">
             You do not need to have your life in order. You do not need to know
             what to say. Come sit down. Listen. Open the Word with us.
           </p>
@@ -136,13 +136,13 @@ export default function WhatToExpectPage() {
       </section>
 
       {/* Verse plate */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-4xl px-6 py-24 md:px-12 md:py-32">
           <div className="flex items-center gap-4">
             <span className="section-mark">§ The Charge</span>
             <div className="hairline flex-1" />
           </div>
-          <blockquote className="mt-12 border-l-2 border-brass pl-8 font-pullquote text-2xl italic leading-relaxed text-bone md:text-3xl">
+          <blockquote className="mt-12 border-l-2 border-brass pl-8 font-pullquote text-2xl italic leading-relaxed text-foreground md:text-3xl">
             Pay careful attention to yourselves and to all the flock, in which
             the Holy Spirit has made you overseers, to care for the church of
             God, which he obtained with his own blood.
@@ -180,13 +180,13 @@ export default function WhatToExpectPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-4xl px-6 py-24 md:px-12 md:py-32">
           <div className="flex items-center gap-4">
             <span className="section-mark">§ Next step</span>
             <div className="hairline flex-1" />
           </div>
-          <h2 className="display-xl mt-10 text-[clamp(2.25rem,6vw,4.5rem)] text-bone">
+          <h2 className="display-xl mt-10 text-[clamp(2.25rem,6vw,4.5rem)] text-foreground">
             There is a chair.
             <br />
             <span className="text-brass">Sit in it.</span>
@@ -201,7 +201,7 @@ export default function WhatToExpectPage() {
             </Link>
             <Link
               href="/locations/request"
-              className="lift inline-flex h-12 items-center gap-3 border border-bone/30 px-6 text-sm font-medium uppercase tracking-[0.18em] text-bone transition-colors hover:border-brass hover:text-brass"
+              className="lift inline-flex h-12 items-center gap-3 border border-bone/30 px-6 text-sm font-medium uppercase tracking-[0.18em] text-foreground transition-colors hover:border-brass hover:text-brass"
             >
               Plant a group
               <Icon name="arrow-up-right" size={16} />

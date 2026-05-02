@@ -24,7 +24,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero — one immersive canvas */}
-      <section className="relative isolate overflow-hidden bg-iron text-bone">
+      <section className="relative isolate overflow-hidden bg-background text-foreground">
         {/* Aurora wash */}
         <div className="aurora" aria-hidden />
         {/* Breathing shield watermark */}
@@ -51,7 +51,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <h1 className="display-xl mt-12 max-w-3xl text-[clamp(3rem,9vw,9rem)] text-bone">
+          <h1 className="display-xl mt-12 max-w-3xl text-[clamp(3rem,9vw,9rem)] text-foreground">
             Sit.
             <br />
             <span className="text-brass">Talk to a brother.</span>
@@ -90,7 +90,7 @@ export default function HomePage() {
       <LocationsPreview />
 
       {/* The Letter (newsletter) */}
-      <section className="relative overflow-hidden bg-iron text-bone">
+      <section className="relative overflow-hidden bg-background text-foreground">
         <div className="aurora aurora--soft" aria-hidden />
         <div className="relative mx-auto max-w-5xl px-6 py-28 md:px-12 md:py-40">
           <div className="flex items-center gap-4">
@@ -99,7 +99,7 @@ export default function HomePage() {
             </span>
             <div className="hairline flex-1" />
           </div>
-          <h2 className="display-xl mt-10 max-w-3xl text-[clamp(2.5rem,6vw,5rem)] text-bone">
+          <h2 className="display-xl mt-10 max-w-3xl text-[clamp(2.5rem,6vw,5rem)] text-foreground">
             Sunday morning,
             <br />
             <span className="text-brass">before the day starts.</span>
@@ -116,7 +116,7 @@ export default function HomePage() {
             <Magnetic strength={0.18}>
               <Link
                 href="/get-started"
-                className="lift inline-flex h-11 items-center gap-2 border border-stone/30 bg-transparent px-6 text-sm font-medium text-bone transition-colors hover:border-brass hover:text-brass"
+                className="lift inline-flex h-11 items-center gap-2 border border-stone/30 bg-transparent px-6 text-sm font-medium text-foreground transition-colors hover:border-brass hover:text-brass"
               >
                 What to expect
                 <Icon name="arrow-right" size={16} />

@@ -72,7 +72,7 @@ export default function LocationsPage() {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-iron text-bone">
+      <section className="relative overflow-hidden bg-background text-foreground">
         <div className="aurora" aria-hidden />
         <div className="dotted-grid absolute inset-0 opacity-[0.04]" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-12 md:py-32">
@@ -81,7 +81,7 @@ export default function LocationsPage() {
             <div className="hairline flex-1" />
           </div>
           <div className="mt-10 grid gap-12 md:grid-cols-[3fr_2fr] md:gap-20 md:items-end">
-            <h1 className="display-xl text-[clamp(2.5rem,7vw,6.5rem)] text-bone">
+            <h1 className="display-xl text-[clamp(2.5rem,7vw,6.5rem)] text-foreground">
               Find a group.
               <br />
               <span className="text-brass">Or plant one.</span>
@@ -143,7 +143,7 @@ export default function LocationsPage() {
             <Magnetic strength={0.18}>
               <Link
                 href="/locations/request"
-                className="lift inline-flex h-11 shrink-0 items-center gap-2 border border-iron bg-iron px-5 text-xs font-medium uppercase tracking-wider text-bone transition-colors hover:bg-iron/90"
+                className="lift inline-flex h-11 shrink-0 items-center gap-2 border border-iron bg-background px-5 text-xs font-medium uppercase tracking-wider text-foreground transition-colors hover:bg-background/90"
               >
                 <Icon name="plus" size={14} />
                 <span className="hidden sm:inline">Plant a group</span>

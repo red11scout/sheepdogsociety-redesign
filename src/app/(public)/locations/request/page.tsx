@@ -128,17 +128,17 @@ export default function RequestLocationPage() {
       </section>
 
       {/* Form */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-3xl px-6 py-20 md:px-12 md:py-32">
           {submitted ? (
-            <div className="border border-brass/40 bg-iron/40 p-12 text-center">
+            <div className="border border-brass/40 bg-background/40 p-12 text-center">
               <Icon
                 name="check"
                 size={48}
                 strokeWidth={2.25}
                 className="mx-auto text-brass"
               />
-              <h2 className="display-xl mt-8 text-3xl text-bone md:text-4xl">
+              <h2 className="display-xl mt-8 text-3xl text-foreground md:text-4xl">
                 Request received.
               </h2>
               <p className="mx-auto mt-4 max-w-md font-pullquote text-lg italic text-stone">
@@ -202,13 +202,13 @@ export default function RequestLocationPage() {
                     value={form.proposedState}
                     onChange={(e) => update("proposedState", e.target.value)}
                     required
-                    className="mt-3 h-11 w-full border border-stone/25 bg-transparent px-4 text-sm text-bone focus:border-brass focus:outline-none"
+                    className="mt-3 h-11 w-full border border-stone/25 bg-transparent px-4 text-sm text-foreground focus:border-brass focus:outline-none"
                   >
-                    <option value="" className="bg-iron text-bone">
+                    <option value="" className="bg-background text-foreground">
                       Select state
                     </option>
                     {US_STATES.map((s) => (
-                      <option key={s} value={s} className="bg-iron text-bone">
+                      <option key={s} value={s} className="bg-background text-foreground">
                         {s}
                       </option>
                     ))}
@@ -227,7 +227,7 @@ export default function RequestLocationPage() {
                   onChange={(e) =>
                     update("proposedMeetingDetails", e.target.value)
                   }
-                  className="mt-3 w-full border border-stone/25 bg-transparent px-4 py-3 text-base leading-relaxed text-bone placeholder:text-stone/40 focus:border-brass focus:outline-none"
+                  className="mt-3 w-full border border-stone/25 bg-transparent px-4 py-3 text-base leading-relaxed text-foreground placeholder:text-stone/40 focus:border-brass focus:outline-none"
                 />
               </div>
 
@@ -240,7 +240,7 @@ export default function RequestLocationPage() {
                   placeholder="Tell us about yourself and your vision."
                   value={form.reason}
                   onChange={(e) => update("reason", e.target.value)}
-                  className="mt-3 w-full border border-stone/25 bg-transparent px-4 py-3 text-base leading-relaxed text-bone placeholder:text-stone/40 focus:border-brass focus:outline-none"
+                  className="mt-3 w-full border border-stone/25 bg-transparent px-4 py-3 text-base leading-relaxed text-foreground placeholder:text-stone/40 focus:border-brass focus:outline-none"
                 />
               </div>
 
@@ -286,7 +286,7 @@ function DarkField({
         required={required}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-3 h-11 w-full border border-stone/25 bg-transparent px-4 text-base text-bone placeholder:text-stone/40 focus:border-brass focus:outline-none"
+        className="mt-3 h-11 w-full border border-stone/25 bg-transparent px-4 text-base text-foreground placeholder:text-stone/40 focus:border-brass focus:outline-none"
       />
     </div>
   );

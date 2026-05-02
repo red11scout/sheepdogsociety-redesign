@@ -49,7 +49,7 @@ export default async function DevotionalDetailPage({
 
   return (
     <article className="bg-bone">
-      <header className="bg-iron text-bone">
+      <header className="bg-background text-foreground">
         <div className="mx-auto max-w-3xl px-6 py-20 md:px-12 md:py-28">
           <div className="flex items-center gap-4">
             <span className="section-mark">
@@ -57,14 +57,14 @@ export default async function DevotionalDetailPage({
             </span>
             <div className="hairline flex-1" />
           </div>
-          <h1 className="display-xl mt-10 text-[clamp(2.25rem,6vw,5rem)] text-bone">
+          <h1 className="display-xl mt-10 text-[clamp(2.25rem,6vw,5rem)] text-foreground">
             {d.title}
           </h1>
-          <p className="mt-8 font-pullquote text-xl italic text-bone/80 md:text-2xl">
+          <p className="mt-8 font-pullquote text-xl italic text-foreground/80 md:text-2xl">
             {d.scriptureReference}
           </p>
           {d.scriptureText && (
-            <blockquote className="mt-8 border-l-2 border-brass pl-6 font-pullquote text-lg italic leading-relaxed text-bone/85">
+            <blockquote className="mt-8 border-l-2 border-brass pl-6 font-pullquote text-lg italic leading-relaxed text-foreground/85">
               {d.scriptureText}
             </blockquote>
           )}

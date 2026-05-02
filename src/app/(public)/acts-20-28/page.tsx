@@ -20,9 +20,9 @@ export const metadata = {
 
 export default function VerseSharePage() {
   return (
-    <div className="bg-iron">
+    <div className="bg-background">
       <VersePlate variant="full" />
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 px-6 py-20 text-center md:px-12">
           <span className="section-mark text-stone/60">Share</span>
           <Button

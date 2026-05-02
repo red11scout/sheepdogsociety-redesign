@@ -58,7 +58,7 @@ export default async function EncouragementsListPage() {
               </p>
             </div>
           ) : (
-            <ul className="grid gap-px bg-iron/10 md:grid-cols-2">
+            <ul className="grid gap-px bg-background/10 md:grid-cols-2">
               {rows.map((row) => (
                 <li key={row.id} className="bg-bone">
                   <Link

@@ -92,7 +92,7 @@ export default function HowWeGatherPage() {
       </section>
 
       {/* Rhythms */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
           <ol className="divide-y divide-stone/15 border-y border-stone/15">
             {rhythms.map((r) => (
@@ -109,7 +109,7 @@ export default function HowWeGatherPage() {
                   </div>
                   <div>
                     <span className="section-mark text-stone/60">{r.sub}</span>
-                    <h2 className="display-xl mt-3 text-3xl text-bone md:text-5xl">
+                    <h2 className="display-xl mt-3 text-3xl text-foreground md:text-5xl">
                       {r.title}
                     </h2>
                     <p className="mt-6 max-w-2xl text-base leading-relaxed text-stone md:text-lg">
@@ -172,7 +172,7 @@ export default function HowWeGatherPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-5xl px-6 py-28 text-center md:px-12 md:py-40">
           <Icon
             name="sheepdog-rest"
@@ -180,7 +180,7 @@ export default function HowWeGatherPage() {
             strokeWidth={2}
             className="mx-auto text-brass"
           />
-          <h2 className="display-xl mt-10 text-3xl text-bone md:text-5xl">
+          <h2 className="display-xl mt-10 text-3xl text-foreground md:text-5xl">
             Find a group, or plant one.
           </h2>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
@@ -198,7 +198,7 @@ export default function HowWeGatherPage() {
               asChild
               size="lg"
               variant="outline"
-              className="lift h-12 rounded-none border border-bone/30 bg-transparent px-8 text-base text-bone hover:border-bone hover:bg-bone/5"
+              className="lift h-12 rounded-none border border-bone/30 bg-transparent px-8 text-base text-foreground hover:border-bone hover:bg-bone/5"
             >
               <Link href="/locations/request">
                 Start a group

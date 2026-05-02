@@ -59,7 +59,7 @@ export default async function LetterDetailPage({
   return (
     <article className="bg-bone">
       {/* Letter header */}
-      <header className="bg-iron text-bone">
+      <header className="bg-background text-foreground">
         <div className="mx-auto max-w-3xl px-6 py-20 md:px-12 md:py-28">
           <div className="flex items-center gap-4">
             <span className="section-mark">
@@ -68,11 +68,11 @@ export default async function LetterDetailPage({
             </span>
             <div className="hairline flex-1" />
           </div>
-          <h1 className="display-xl mt-10 text-[clamp(2.25rem,6vw,5rem)] text-bone">
+          <h1 className="display-xl mt-10 text-[clamp(2.25rem,6vw,5rem)] text-foreground">
             {letter.title}
           </h1>
           {letter.subtitle && (
-            <p className="mt-6 font-pullquote text-xl italic text-bone/80 md:text-2xl">
+            <p className="mt-6 font-pullquote text-xl italic text-foreground/80 md:text-2xl">
               {letter.subtitle}
             </p>
           )}
@@ -110,7 +110,7 @@ export default async function LetterDetailPage({
             </Link>
             <Link
               href="/join"
-              className="lift inline-flex h-11 items-center gap-3 bg-iron px-5 text-xs font-medium uppercase tracking-[0.18em] text-bone transition-colors hover:bg-iron/90"
+              className="lift inline-flex h-11 items-center gap-3 bg-background px-5 text-xs font-medium uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-background/90"
             >
               Get the next one
               <Icon name="arrow-right" size={14} />

@@ -9,7 +9,7 @@ export function VersePlate({ variant = "hero", className }: VersePlateProps) {
   return (
     <section
       className={cn(
-        "relative isolate w-full overflow-hidden bg-iron text-bone",
+        "relative isolate w-full overflow-hidden bg-background text-foreground",
         variant === "full" ? "min-h-screen" : "py-28 md:py-40",
         className
       )}
@@ -21,7 +21,7 @@ export function VersePlate({ variant = "hero", className }: VersePlateProps) {
           <div className="hairline flex-1" />
         </div>
 
-        <h2 className="display-xl mt-10 text-[clamp(2.5rem,8vw,7.5rem)] text-bone">
+        <h2 className="display-xl mt-10 text-[clamp(2.5rem,8vw,7.5rem)] text-foreground">
           <span className="text-brass">Keep watch</span>
           <br />
           over yourselves

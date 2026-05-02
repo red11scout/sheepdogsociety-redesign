@@ -54,7 +54,7 @@ export default async function StoriesPage() {
       <section className="bg-bone text-ink">
         <div className="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-28">
           {stories.length > 0 ? (
-            <div className="grid gap-px bg-iron/10 md:grid-cols-2">
+            <div className="grid gap-px bg-background/10 md:grid-cols-2">
               {stories.map((story) => (
                 <article
                   key={story.id}
@@ -111,9 +111,9 @@ export default async function StoriesPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-5xl px-6 py-28 text-center md:px-12 md:py-40">
-          <h2 className="display-xl text-3xl text-bone md:text-5xl">
+          <h2 className="display-xl text-3xl text-foreground md:text-5xl">
             Have a story?
           </h2>
           <p className="mx-auto mt-6 max-w-xl font-pullquote text-xl italic leading-relaxed text-stone md:text-2xl">

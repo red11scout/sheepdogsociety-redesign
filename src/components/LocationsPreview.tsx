@@ -23,7 +23,7 @@ export function LocationsPreview() {
   const cities = new Set(locations.map((l) => `${l.city}-${l.state}`)).size;
 
   return (
-    <section className="relative overflow-hidden bg-iron text-bone">
+    <section className="relative overflow-hidden bg-background text-foreground">
       <div className="border-t border-stone/15">
         <div className="mx-auto max-w-7xl px-6 pt-24 md:px-12 md:pt-32">
           <div className="flex items-center gap-4">
@@ -31,7 +31,7 @@ export function LocationsPreview() {
             <div className="hairline flex-1" />
           </div>
           <div className="mt-10 grid gap-12 md:grid-cols-[3fr_2fr] md:items-end md:gap-20">
-            <h2 className="display-xl text-[clamp(2.5rem,7vw,6rem)] text-bone">
+            <h2 className="display-xl text-[clamp(2.5rem,7vw,6rem)] text-foreground">
               Where men are
               <br />
               <span className="text-brass">already gathering.</span>
@@ -81,7 +81,7 @@ export function LocationsPreview() {
               <Magnetic strength={0.18}>
                 <Link
                   href="/locations/request"
-                  className="lift inline-flex h-12 items-center gap-2 border border-stone/30 bg-transparent px-7 text-base font-medium text-bone transition-colors hover:border-brass hover:text-brass"
+                  className="lift inline-flex h-12 items-center gap-2 border border-stone/30 bg-transparent px-7 text-base font-medium text-foreground transition-colors hover:border-brass hover:text-brass"
                 >
                   Plant one
                   <Icon name="plus" size={16} />

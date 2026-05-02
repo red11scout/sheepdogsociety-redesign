@@ -66,7 +66,7 @@ export default function PartnershipsPage() {
       </section>
 
       {/* Partnership types */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
           <ol className="divide-y divide-stone/15 border-y border-stone/15">
             {partnerships.map((p) => (
@@ -84,7 +84,7 @@ export default function PartnershipsPage() {
                   className="text-brass md:mt-1"
                 />
                 <div className="md:max-w-2xl">
-                  <h2 className="display-xl text-2xl text-bone md:text-4xl">
+                  <h2 className="display-xl text-2xl text-foreground md:text-4xl">
                     {p.title}
                   </h2>
                   <p className="mt-4 text-base leading-relaxed text-stone md:text-lg">
@@ -121,7 +121,7 @@ export default function PartnershipsPage() {
           <div className="mt-12">
             <Link
               href="/contact"
-              className="lift inline-flex h-12 items-center gap-2 border border-iron bg-iron px-8 text-base font-medium text-bone transition-colors hover:bg-iron/90"
+              className="lift inline-flex h-12 items-center gap-2 border border-iron bg-background px-8 text-base font-medium text-foreground transition-colors hover:bg-background/90"
             >
               Start the conversation
               <Icon name="arrow-right" size={18} />

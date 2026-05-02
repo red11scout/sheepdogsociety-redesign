@@ -56,7 +56,7 @@ export default async function LetterArchivePage() {
               <li key={letter.id}>
                 <Link
                   href={`/letter/${letter.slug}`}
-                  className="group grid gap-3 py-8 transition-colors hover:bg-iron/[0.02] md:grid-cols-[80px_1fr_120px] md:items-baseline md:gap-8"
+                  className="group grid gap-3 py-8 transition-colors hover:bg-background/[0.02] md:grid-cols-[80px_1fr_120px] md:items-baseline md:gap-8"
                 >
                   <span className="section-mark text-brass">
                     № {letter.issueNumber}

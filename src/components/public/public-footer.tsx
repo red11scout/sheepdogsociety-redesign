@@ -6,7 +6,7 @@ import { ScriptureMarquee } from "@/components/motion/ScriptureMarquee";
 
 export function PublicFooter() {
   return (
-    <footer className="bg-iron text-bone">
+    <footer className="bg-background text-foreground">
       <ScriptureMarquee />
       <div className="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-28">
         <div className="grid gap-12 md:grid-cols-12">
@@ -24,7 +24,7 @@ export function PublicFooter() {
                 className="rounded-none"
               />
               <div className="leading-tight">
-                <div className="display-xl text-base text-bone">
+                <div className="display-xl text-base text-foreground">
                   Sheepdog Society
                 </div>
                 <div className="section-mark text-[0.625rem] text-brass">
@@ -55,7 +55,7 @@ export function PublicFooter() {
               <li>
                 <Link
                   href="/get-started"
-                  className="text-bone/80 transition-colors hover:text-brass"
+                  className="text-foreground/80 transition-colors hover:text-brass"
                 >
                   New here
                 </Link>
@@ -63,7 +63,7 @@ export function PublicFooter() {
               <li>
                 <Link
                   href="/locations"
-                  className="text-bone/80 transition-colors hover:text-brass"
+                  className="text-foreground/80 transition-colors hover:text-brass"
                 >
                   Find a group
                 </Link>
@@ -71,7 +71,7 @@ export function PublicFooter() {
               <li>
                 <Link
                   href="/locations/request"
-                  className="text-bone/80 transition-colors hover:text-brass"
+                  className="text-foreground/80 transition-colors hover:text-brass"
                 >
                   Start a group
                 </Link>
@@ -79,7 +79,7 @@ export function PublicFooter() {
               <li>
                 <Link
                   href="/giving"
-                  className="text-bone/80 transition-colors hover:text-brass"
+                  className="text-foreground/80 transition-colors hover:text-brass"
                 >
                   Give
                 </Link>
@@ -93,7 +93,7 @@ export function PublicFooter() {
               <li>
                 <Link
                   href="/about"
-                  className="text-bone/80 transition-colors hover:text-brass"
+                  className="text-foreground/80 transition-colors hover:text-brass"
                 >
                   About
                 </Link>
@@ -101,7 +101,7 @@ export function PublicFooter() {
               <li>
                 <Link
                   href="/how-we-gather"
-                  className="text-bone/80 transition-colors hover:text-brass"
+                  className="text-foreground/80 transition-colors hover:text-brass"
                 >
                   How we gather
                 </Link>
@@ -109,7 +109,7 @@ export function PublicFooter() {
               <li>
                 <Link
                   href="/stories"
-                  className="text-bone/80 transition-colors hover:text-brass"
+                  className="text-foreground/80 transition-colors hover:text-brass"
                 >
                   Stories
                 </Link>
@@ -117,7 +117,7 @@ export function PublicFooter() {
               <li>
                 <Link
                   href="/faq"
-                  className="text-bone/80 transition-colors hover:text-brass"
+                  className="text-foreground/80 transition-colors hover:text-brass"
                 >
                   FAQ
                 </Link>
@@ -125,7 +125,7 @@ export function PublicFooter() {
               <li>
                 <Link
                   href="/contact"
-                  className="text-bone/80 transition-colors hover:text-brass"
+                  className="text-foreground/80 transition-colors hover:text-brass"
                 >
                   Contact
                 </Link>

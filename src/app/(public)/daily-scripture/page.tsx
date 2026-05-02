@@ -37,7 +37,7 @@ export default async function DailyScripturePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-iron text-bone">
+      <section className="relative overflow-hidden bg-background text-foreground">
         <div className="aurora" aria-hidden />
         <div className="dotted-grid absolute inset-0 opacity-[0.04]" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-12 md:py-32">
@@ -47,14 +47,14 @@ export default async function DailyScripturePage() {
             </span>
             <div className="hairline flex-1" />
           </div>
-          <h1 className="display-xl mt-10 max-w-4xl text-[clamp(2.5rem,7vw,6rem)] text-bone">
+          <h1 className="display-xl mt-10 max-w-4xl text-[clamp(2.5rem,7vw,6rem)] text-foreground">
             Today&rsquo;s word.
           </h1>
         </div>
       </section>
 
       {/* Today's Scripture */}
-      <section className="bg-iron text-bone">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-5xl px-6 pb-20 md:px-12 md:pb-32">
           {todayScripture ? (
             <article className="border-y border-stone/15 py-16 md:py-24">
@@ -68,7 +68,7 @@ export default async function DailyScripturePage() {
               </div>
 
               {todayScripture.text && (
-                <blockquote className="mt-10 border-l-2 border-brass pl-8 font-pullquote text-2xl italic leading-relaxed text-bone md:text-4xl">
+                <blockquote className="mt-10 border-l-2 border-brass pl-8 font-pullquote text-2xl italic leading-relaxed text-foreground md:text-4xl">
                   {todayScripture.text}
                 </blockquote>
               )}
@@ -76,7 +76,7 @@ export default async function DailyScripturePage() {
               {todayScripture.theme && (
                 <div className="mt-12">
                   <span className="section-mark text-brass">§ Theme</span>
-                  <p className="mt-3 text-lg leading-relaxed text-bone">
+                  <p className="mt-3 text-lg leading-relaxed text-foreground">
                     {todayScripture.theme}
                   </p>
                 </div>
@@ -108,7 +108,7 @@ export default async function DailyScripturePage() {
                 strokeWidth={2}
                 className="mx-auto text-brass"
               />
-              <h2 className="display-xl mt-8 text-2xl text-bone md:text-3xl">
+              <h2 className="display-xl mt-8 text-2xl text-foreground md:text-3xl">
                 Today&rsquo;s scripture is being prepared.
               </h2>
               <p className="mx-auto mt-4 max-w-md font-pullquote text-lg italic text-stone">
@@ -179,7 +179,7 @@ export default async function DailyScripturePage() {
 
       {/* Recent */}
       {pastScriptures.length > 0 && (
-        <section className="bg-iron text-bone">
+        <section className="bg-background text-foreground">
           <div className="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-28">
             <div className="flex items-center gap-4">
               <span className="section-mark">§ Recent</span>
@@ -192,14 +192,14 @@ export default async function DailyScripturePage() {
                   <Link
                     key={s.id}
                     href={`/daily-scripture?date=${s.date}`}
-                    className="group/c lift bg-iron p-6 transition-colors hover:bg-iron/80 md:p-8"
+                    className="group/c lift bg-background p-6 transition-colors hover:bg-background/80 md:p-8"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <span className="section-mark text-stone/60">
                           {format(dateObj, "MMM d")}
                         </span>
-                        <p className="display-xl mt-3 text-xl text-bone md:text-2xl">
+                        <p className="display-xl mt-3 text-xl text-foreground md:text-2xl">
                           {s.reference}
                         </p>
                         {s.theme && (

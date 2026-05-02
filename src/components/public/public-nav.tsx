@@ -62,7 +62,7 @@ export function PublicNav() {
           <Button
             asChild
             size="sm"
-            className="lift h-10 rounded-none border border-iron bg-iron px-5 text-sm text-bone hover:bg-iron/90"
+            className="lift h-10 rounded-none border border-iron bg-background px-5 text-sm text-foreground hover:bg-background/90"
           >
             <Link href="/get-started">
               Join
@@ -101,7 +101,7 @@ export function PublicNav() {
             <Button
               asChild
               size="sm"
-              className="lift h-11 w-full rounded-none border border-iron bg-iron px-5 text-sm text-bone hover:bg-iron/90"
+              className="lift h-11 w-full rounded-none border border-iron bg-background px-5 text-sm text-foreground hover:bg-background/90"
             >
               <Link href="/get-started" onClick={() => setMobileOpen(false)}>
                 Join the brotherhood
