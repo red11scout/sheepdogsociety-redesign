@@ -33,7 +33,7 @@ export default async function SignInPage({
       : null;
 
   return (
-    <div className="relative isolate min-h-screen overflow-hidden bg-iron text-bone">
+    <div className="admin-shell relative isolate min-h-screen overflow-hidden bg-iron text-bone">
       <div className="aurora aurora--soft" aria-hidden />
       <div className="dotted-grid absolute inset-0 opacity-[0.04]" aria-hidden />
 
@@ -41,43 +41,20 @@ export default async function SignInPage({
         {/* Brand */}
         <div className="flex flex-col items-center gap-4 text-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/logo.png"
-            alt="Sheepdog Society"
-            className="h-20 w-20"
-          />
+          <img src="/logo.png" alt="Sheepdog Society" className="h-20 w-20" />
           <div>
-            <h1
-              className="display-xl text-3xl text-bone"
-              style={{ color: "#F4F0E6" }}
-            >
-              Sheepdog Society
-            </h1>
-            <p
-              className="mt-2 section-mark"
-              style={{ color: "#D4A02A" }}
-            >
-              § Admin sign-in
-            </p>
+            <h1 className="display-xl text-3xl text-bone">Sheepdog Society</h1>
+            <p className="mt-2 section-mark text-brass">§ Admin sign-in</p>
           </div>
         </div>
 
         {/* Form */}
         <form
           action={signInAction}
-          className="mt-12 space-y-5 border bg-iron/40 p-8 backdrop-blur"
-          style={{
-            borderColor: "rgba(199, 183, 154, 0.18)",
-            color: "#F4F0E6",
-          }}
+          className="mt-12 space-y-5 border border-stone/20 bg-iron/40 p-8 text-bone backdrop-blur"
         >
           <label className="block">
-            <span
-              className="block section-mark"
-              style={{ color: "#C7B79A" }}
-            >
-              Email
-            </span>
+            <span className="block section-mark text-stone">Email</span>
             <input
               type="email"
               name="email"
@@ -85,69 +62,41 @@ export default async function SignInPage({
               autoFocus
               autoComplete="email"
               placeholder="you@example.com"
-              className="mt-2 block h-11 w-full bg-transparent px-3 text-base focus:outline-none"
-              style={{
-                border: "1px solid rgba(199, 183, 154, 0.25)",
-                color: "#F4F0E6",
-              }}
+              className="mt-2 block h-11 w-full border border-stone/25 bg-transparent px-3 text-base text-bone placeholder:text-stone/50 focus:border-brass focus:outline-none"
             />
           </label>
           <label className="block">
-            <span
-              className="block section-mark"
-              style={{ color: "#C7B79A" }}
-            >
-              Password
-            </span>
+            <span className="block section-mark text-stone">Password</span>
             <input
               type="password"
               name="password"
               required
               autoComplete="current-password"
               placeholder="••••••••"
-              className="mt-2 block h-11 w-full bg-transparent px-3 text-base focus:outline-none"
-              style={{
-                border: "1px solid rgba(199, 183, 154, 0.25)",
-                color: "#F4F0E6",
-              }}
+              className="mt-2 block h-11 w-full border border-stone/25 bg-transparent px-3 text-base text-bone placeholder:text-stone/50 focus:border-brass focus:outline-none"
             />
           </label>
 
           {errorLabel ? (
-            <p
-              className="border px-3 py-2 text-sm"
-              style={{
-                borderColor: "rgba(124, 24, 24, 0.5)",
-                background: "rgba(124, 24, 24, 0.15)",
-                color: "#F4F0E6",
-              }}
-            >
+            <p className="border border-oxblood/50 bg-oxblood/15 px-3 py-2 text-sm text-bone">
               {errorLabel}
             </p>
           ) : null}
 
           <button
             type="submit"
-            className="lift inline-flex h-12 w-full items-center justify-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] transition-colors"
-            style={{
-              background: "#D4A02A",
-              color: "#0B1426",
-            }}
+            className="lift inline-flex h-12 w-full items-center justify-center gap-2 bg-brass text-sm font-semibold uppercase tracking-[0.18em] text-iron transition-colors hover:bg-gold"
           >
             Sign in
             <Icon name="arrow-right" size={14} />
           </button>
         </form>
 
-        <p
-          className="mt-10 text-center text-xs"
-          style={{ color: "rgba(199, 183, 154, 0.65)" }}
-        >
+        <p className="mt-10 text-center text-xs text-stone/65">
           Admin access only.{" "}
           <Link
             href="mailto:beargodwin@gmail.com?subject=Sheepdog%20Society%20sign-in%20help"
-            className="underline underline-offset-4 transition-colors"
-            style={{ color: "#D4A02A" }}
+            className="text-brass underline underline-offset-4 transition-colors hover:text-gold"
           >
             Email Drew
           </Link>{" "}
@@ -156,8 +105,7 @@ export default async function SignInPage({
 
         <Link
           href="/"
-          className="mt-8 inline-flex items-center justify-center gap-2 text-xs transition-colors hover:opacity-100"
-          style={{ color: "rgba(199, 183, 154, 0.55)" }}
+          className="mt-8 inline-flex items-center justify-center gap-2 text-xs text-stone/55 transition-colors hover:text-brass"
         >
           <Icon name="arrow-right" size={10} className="rotate-180" />
           Back to the public site
