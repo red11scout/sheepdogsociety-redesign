@@ -3,7 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { useTheme } from "next-themes";
 import { Icon } from "@/components/icons/Icon";
+
+const MAP_STYLE_DARK = "mapbox://styles/mapbox/dark-v11";
+const MAP_STYLE_LIGHT = "mapbox://styles/mapbox/light-v11";
 
 export type LocationPin = {
   id: string;
@@ -38,6 +42,8 @@ export function LocationMap({
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const styleForTheme = resolvedTheme === "light" ? MAP_STYLE_LIGHT : MAP_STYLE_DARK;
 
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
@@ -52,7 +58,7 @@ export function LocationMap({
 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: "mapbox://styles/mapbox/dark-v11",
+      style: styleForTheme,
       center: [-84.39, 33.75],
       zoom: 5,
       attributionControl: false,
@@ -75,7 +81,15 @@ export function LocationMap({
       map.current?.remove();
       map.current = null;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Hot-swap basemap when the theme toggle flips. Mapbox preserves
+  // the camera position; markers are re-added in the next effect below.
+  useEffect(() => {
+    if (!map.current) return;
+    map.current.setStyle(styleForTheme);
+  }, [styleForTheme]);
 
   useEffect(() => {
     if (!map.current || !mapLoaded) return;
