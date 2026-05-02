@@ -71,40 +71,49 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
-/* Pasture & Iron — semantic, theme-aware tokens.
-   Iron and bone are SURFACE roles, not fixed colors:
-     - iron = "primary surface" (page bg in dark; deep card in light)
-     - bone = "primary text"    (cream in dark; deep ink in light)
-   Both flip with the theme so light mode is actually light across the
-   whole site, not just the chrome. Brass / navy / olive / oxblood / stone
-   stay accent colors that warm at low candlelight in dark mode.
-   `--c-ink` is a non-flipping deep ink reserved for text on brass buttons
-   (where the amber accent is mid-luminance and needs dark text in both
-   modes for contrast). */
+/* Pasture & Iron — public site keeps iron/bone/cream/ink as CONSTANTS so
+   editorial cards stay editorial:
+     - bg-iron text-bone   = always-dark hero card (e.g. /letter hero)
+     - bg-bone text-iron   = always-light card with dark text (buttons, cards)
+     - bg-cream text-ink   = lightest paper with constant deep ink
+     - bg-brass text-ink   = brass amber CTA with constant ink (AA contrast)
+   The PAGE background still flips via shadcn's --background token below
+   (body bg + text-foreground), so light mode reads as a light page with
+   intentional dark editorial cards on it, dark mode reads as a deep ink
+   page with intentional light cards. Brass / navy / olive / oxblood /
+   stone are theme-aware to warm at low candlelight in dark mode. */
 :root {
-  /* Light mode: parchment surfaces, ink text. */
-  --c-iron: oklch(0.93 0.02 80);     /* warm-tinted parchment "card" */
-  --c-bone: #0E1624;                  /* deep ink text */
-  --c-cream: #FFFDF7;                 /* lightest paper */
-  --c-ink: #0E1624;                   /* constant deep ink for brass-button text */
-  --c-navy: #1A2438;
-  --c-brass: #B07F1F;                 /* slightly darker brass for AA contrast on light bg */
-  --c-gold: #C8932A;
-  --c-olive: #5A6B3E;
-  --c-oxblood: #7A1E1E;
-  --c-stone: #6B6555;                 /* warm dark gray */
-}
-.dark {
-  /* Dark mode: deep iron surfaces, parchment text. The original look. */
   --c-iron: #0E1624;
   --c-bone: #F2EBDD;
   --c-cream: #F8F2E2;
-  --c-ink: #0E1624;                   /* still deep ink for brass-button text */
+  --c-ink: #0E1624;
+  --c-navy: #1A2438;
+  --c-brass: #C8932A;
+  --c-gold: #DBAA48;
+  --c-olive: #5A6B3E;
+  --c-oxblood: #7A1E1E;
+  --c-stone: #8A8275;
+}
+.dark {
   --c-navy: #0B111C;
   --c-brass: #D9A53A;
   --c-gold: #E5B856;
   --c-olive: #7A8C56;
   --c-oxblood: #A33333;
+  --c-stone: #C7BFAE;
+}
+
+/* Admin chrome — inside .admin-shell, iron/bone/stone flip with the theme
+   toggle so a Saturday-morning admin in light mode actually sees a light
+   dashboard. Public surfaces keep their constants above. */
+.admin-shell {
+  --c-iron: oklch(0.96 0.012 80);    /* light parchment background */
+  --c-bone: oklch(0.18 0.022 260);   /* deep iron-ink text */
+  --c-stone: oklch(0.45 0.025 60);   /* muted warm gray */
+}
+.dark .admin-shell {
+  --c-iron: #0E1624;
+  --c-bone: #F2EBDD;
   --c-stone: #C7BFAE;
 }
 
