@@ -15,12 +15,14 @@
   --font-mark: var(--font-jetbrains-mono);
 
   /* Pasture & Iron — canonical brand palette. Hex values per Brief #2.
-     Iron + bone are constants across modes (deep ink + parchment).
-     Navy, brass, olive, oxblood, stone, gold are theme-aware so dark
-     mode reads warmer at low candlelight without losing identity. */
-  --color-iron: #0E1624;
-  --color-bone: #F2EBDD;
-  --color-cream: #F8F2E2;
+     Iron + bone default to constants on the public site (deep ink +
+     parchment). Inside .admin-shell they flip with the theme toggle so
+     a light-mode admin actually sees a light dashboard. All tokens are
+     `var(--c-*)` indirected so .admin-shell overrides reach them
+     (Tailwind v4 @theme inline would otherwise hard-bake the hex). */
+  --color-iron: var(--c-iron);
+  --color-bone: var(--c-bone);
+  --color-cream: var(--c-cream);
   --color-navy: var(--c-navy);
   --color-brass: var(--c-brass);
   --color-gold: var(--c-gold);
@@ -68,9 +70,15 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
-/* Pasture & Iron — theme-aware accents. Light = brief #2 light column,
-   dark = brief #2 dark column. Gold is the warm brass hover companion. */
+/* Pasture & Iron — public-site defaults.
+   Iron + bone + cream are CONSTANT on the public site so editorial dark
+   cards (e.g. /letter hero, /acts-20-28) stay dark regardless of theme.
+   Navy / brass / olive / oxblood / stone / gold are theme-aware so dark
+   mode reads warmer without losing identity. */
 :root {
+  --c-iron: #0E1624;
+  --c-bone: #F2EBDD;
+  --c-cream: #F8F2E2;
   --c-navy: #1A2438;
   --c-brass: #C8932A;
   --c-gold: #DBAA48;
@@ -87,27 +95,18 @@
   --c-stone: #C7BFAE;
 }
 
-/* Admin chrome theme-aware override.
-   Public surfaces use iron/bone as constants (deep ink + parchment) — that's
-   the editorial design language. The admin shell, by contrast, should flip
-   with the theme toggle so a Saturday-morning admin in light mode actually
-   sees a light dashboard.
-
-   Inside `.admin-shell`:
-     - `bg-iron` becomes the theme-aware page background
-     - `text-bone` becomes the theme-aware page foreground
-     - `text-stone` becomes the muted-text color
-   This keeps the existing admin-side class names intact while making the
-   theme toggle do real work. */
+/* Admin chrome — flip iron + bone + stone with theme so a Saturday-morning
+   admin in light mode actually sees a light dashboard. Public surfaces
+   keep their constants above. Brass, navy etc. inherit the global flip. */
 .admin-shell {
-  --color-iron: oklch(0.96 0.012 80);   /* light parchment background */
-  --color-bone: oklch(0.18 0.022 260);  /* deep iron-ink text */
-  --color-stone: oklch(0.45 0.025 60);  /* muted warm gray */
+  --c-iron: oklch(0.96 0.012 80);   /* light parchment background */
+  --c-bone: oklch(0.18 0.022 260);  /* deep iron-ink text */
+  --c-stone: oklch(0.45 0.025 60);  /* muted warm gray */
 }
 .dark .admin-shell {
-  --color-iron: #0E1624;
-  --color-bone: #F2EBDD;
-  --color-stone: #C7BFAE;
+  --c-iron: #0E1624;
+  --c-bone: #F2EBDD;
+  --c-stone: #C7BFAE;
 }
 
 /* Light mode — bone-tinted parchment. shadcn semantic tokens reroute
