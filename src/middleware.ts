@@ -42,6 +42,9 @@ const PUBLIC_ROUTES = [
   /^\/encouragements(\/.*)?$/,
   // Phase D — new public surfaces (member signup + share + legal pages).
   /^\/what-to-expect(\/.*)?$/,
+  // Five Rooms IA (2026-07) — merged explainer + support page.
+  /^\/new-here(\/.*)?$/,
+  /^\/support(\/.*)?$/,
   /^\/privacy(\/.*)?$/,
   /^\/sms-terms(\/.*)?$/,
   /^\/join(\/.*)?$/,
