@@ -16,6 +16,7 @@
 
 import "server-only";
 import twilio from "twilio";
+import { SANDBOX } from "../sandbox";
 
 export { SMS_OPT_IN_DISCLOSURE } from "./disclosure";
 
@@ -50,6 +51,10 @@ export interface SendSmsInput {
  * Callers MUST never throw on SMS failure — fall back to email or skip.
  */
 export async function sendSms(input: SendSmsInput): Promise<SmsResult> {
+  // Read-only sandbox: never reach the provider, regardless of any stray env.
+  if (SANDBOX) {
+    return { status: "not_configured", reason: "missing_provider_credentials" };
+  }
   if (!isSmsEnabled()) {
     return { status: "not_configured", reason: "missing_provider_credentials" };
   }
