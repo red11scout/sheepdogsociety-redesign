@@ -27,13 +27,21 @@ export async function GET() {
   }
 
   try {
-    // Guarded write attempt. In sandbox this throws before touching Postgres.
-    await db.execute(sql`create temp table _sandbox_probe (x int)`);
+    // Real 0-row write probe. Either the app guard throws SandboxWriteError
+    // before Postgres, or Postgres rejects it as a read-only transaction —
+    // both count as blocked. Affects no rows even in the impossible case it runs.
+    await db.execute(sql`update users set id = id where 1 = 0`);
     result.writeBlocked = false;
-    result.note += "WRITE NOT BLOCKED; ";
+    result.note += "WRITE NOT BLOCKED — investigate; ";
   } catch (e) {
-    result.writeBlocked = e instanceof SandboxWriteError;
-    result.note += result.writeBlocked ? "write blocked by guard; " : `write threw (non-guard): ${e instanceof Error ? e.message : String(e)}; `;
+    const msg = e instanceof Error ? e.message : String(e);
+    const dbReadOnly = /read-only transaction|cannot execute .* in a read-only/i.test(msg);
+    result.writeBlocked = e instanceof SandboxWriteError || dbReadOnly;
+    result.note += e instanceof SandboxWriteError
+      ? "write blocked by app guard; "
+      : dbReadOnly
+        ? "write blocked by Postgres read-only; "
+        : `write threw (unexpected): ${msg}; `;
   }
 
   return NextResponse.json(result, {
