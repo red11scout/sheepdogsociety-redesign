@@ -65,13 +65,10 @@ function getDb() {
       throw new Error("DATABASE_URL is not set");
     }
     const client = postgres(connectionString, {
-      // SANDBOX: ask Postgres to make every transaction read-only at the
-      // server. Enforced by Postgres itself regardless of the ORM path;
-      // pairs with the app-level unsafe() patch above. (If the pooler drops
-      // the startup option, the app-level guard still blocks writes.)
-      ...(SANDBOX
-        ? { connection: { options: "-c default_transaction_read_only=on" } }
-        : {}),
+      // NOTE: Neon's transaction-mode pooler rejects startup `options`, so we
+      // do NOT set default_transaction_read_only here (it drops the connection).
+      // Read-only is enforced by the app-level client.unsafe() patch in
+      // readOnlyGuard() below, plus cron removal and absent send keys.
       // Neon's pgbouncer-style pooler is transaction-mode; prepared
       // statements aren't supported, so prepare must be off.
       prepare: false,
