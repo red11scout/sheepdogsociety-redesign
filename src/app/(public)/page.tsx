@@ -1,7 +1,14 @@
 import Link from "next/link";
+import Image from "next/image";
+import { format } from "date-fns";
 import { Icon } from "@/components/icons/Icon";
 import { NewsletterForm } from "@/components/public/newsletter-form";
 import { LocationsPreview } from "@/components/LocationsPreview";
+import { LetterCover } from "@/components/letters/LetterCover";
+import { listPublishedEncouragements } from "@/server/encouragements";
+import { db } from "@/db";
+import { events, testimonies } from "@/db/schema";
+import { and, asc, desc, eq, gte } from "drizzle-orm";
 
 export const metadata = {
   title: "Sheepdog Society — Acts 20:28",
@@ -18,12 +25,57 @@ export const metadata = {
   },
 };
 
+async function getNextEvent() {
+  try {
+    const rows = await db
+      .select({
+        id: events.id,
+        title: events.title,
+        location: events.location,
+        startTime: events.startTime,
+      })
+      .from(events)
+      .where(and(gte(events.startTime, new Date()), eq(events.isPast, false)))
+      .orderBy(asc(events.startTime))
+      .limit(1);
+    return rows[0] ?? null;
+  } catch {
+    return null;
+  }
+}
+
+async function getLatestStory() {
+  try {
+    const rows = await db
+      .select({
+        id: testimonies.id,
+        title: testimonies.title,
+        content: testimonies.content,
+      })
+      .from(testimonies)
+      .where(eq(testimonies.isApproved, true))
+      .orderBy(desc(testimonies.createdAt))
+      .limit(1);
+    return rows[0] ?? null;
+  } catch {
+    return null;
+  }
+}
+
 /**
- * Ridge & Bone front page. The old dark aurora-poster homepage is retired;
- * this is a printed broadsheet: paper ground, Fraunces headline, Newsreader
- * deck, ruled columns, one ember band for the verse. Ink, not glow.
+ * Ridge & Bone front page — every scroll one hop from /join.
+ * Lead -> the verse -> the Letter (real teaser + subscribe) -> the groups
+ * map -> This week (event + story). Paper, ink, one ember band.
  */
-export default function HomePage() {
+export default async function HomePage() {
+  const [latestLetter, nextEvent, latestStory] = await Promise.all([
+    listPublishedEncouragements()
+      .then((r) => r[0] ?? null)
+      .catch(() => null),
+    getNextEvent(),
+    getLatestStory(),
+  ]);
+
   return (
     <>
       {/* ============ Front-page lead ============ */}
@@ -50,11 +102,10 @@ export default function HomePage() {
 
               <div className="mt-10 flex flex-wrap items-center gap-4">
                 <Link
-                  href="/locations"
+                  href="/join"
                   className="lift group inline-flex h-12 items-center gap-3 bg-foreground px-7 text-[0.95rem] font-medium text-background transition-colors hover:bg-foreground/90"
                 >
-                  <Icon name="map-pin" size={17} />
-                  Find a group near you
+                  Join the brotherhood
                   <Icon
                     name="arrow-right"
                     size={15}
@@ -62,7 +113,7 @@ export default function HomePage() {
                   />
                 </Link>
                 <Link
-                  href="/encouragements"
+                  href="/letter"
                   className="link-editorial inline-flex items-center gap-2 font-serif text-[1.05rem] text-foreground/80"
                 >
                   Read this week&rsquo;s Letter
@@ -98,10 +149,10 @@ export default function HomePage() {
                 </li>
               </ul>
               <Link
-                href="/how-we-gather"
+                href="/new-here"
                 className="link-editorial folio mt-7 inline-block !text-brass"
               >
-                How we gather
+                New here? What to expect
               </Link>
             </aside>
           </div>
@@ -124,14 +175,99 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ============ The Letter — teaser + subscription ============ */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
+          <div className="flex items-center gap-4">
+            <span className="section-mark">The Letter</span>
+            <div className="hairline flex-1 text-foreground" />
+            <Link href="/letter" className="link-editorial folio !text-brass">
+              Every letter
+            </Link>
+          </div>
+          <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-14">
+            <div className="lg:col-span-7">
+              <h2 className="display-xl text-[clamp(2.2rem,5vw,4.2rem)] text-foreground">
+                Sunday morning,
+                <br />
+                <em className="text-oxblood">before the day starts.</em>
+              </h2>
+              <p className="mt-7 max-w-xl font-serif text-lg leading-[1.75] text-foreground/85">
+                One letter a week. A scripture. A practice. Sent at sunrise,
+                read in five minutes, carried the rest of the week.
+              </p>
+
+              {latestLetter && (
+                <Link
+                  href={`/letter/${latestLetter.slug}`}
+                  className="paper-card mt-8 flex items-center gap-5 p-5"
+                >
+                  <div className="w-24 shrink-0 md:w-28">
+                    {latestLetter.coverImageUrl ? (
+                      <Image
+                        src={latestLetter.coverImageUrl}
+                        alt={latestLetter.coverImageAlt ?? ""}
+                        width={112}
+                        height={84}
+                        className="h-auto w-full border border-foreground/10 object-cover"
+                      />
+                    ) : (
+                      <LetterCover
+                        id={latestLetter.id}
+                        title={latestLetter.title}
+                        theme={latestLetter.theme}
+                      />
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="folio">
+                      Latest · No. {latestLetter.issueNumber}
+                      {latestLetter.publishDate
+                        ? ` · ${format(latestLetter.publishDate, "MMMM d, yyyy")}`
+                        : ""}
+                    </p>
+                    <h3 className="display-soft mt-1.5 truncate text-xl text-foreground">
+                      {latestLetter.title}
+                    </h3>
+                    {latestLetter.intro && (
+                      <p className="mt-1.5 line-clamp-2 font-serif text-[0.92rem] leading-relaxed text-muted-foreground">
+                        {latestLetter.intro}
+                      </p>
+                    )}
+                  </div>
+                </Link>
+              )}
+            </div>
+            <div className="flex flex-col justify-center border-t border-foreground/15 pt-8 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
+              <p className="folio">Subscribe · free, weekly, no noise</p>
+              <div className="mt-5">
+                <NewsletterForm />
+              </div>
+              <Link
+                href="/new-here"
+                className="link-editorial folio mt-6 inline-flex items-center gap-2 !text-brass"
+              >
+                What to expect
+                <Icon name="arrow-right" size={12} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ============ Where men are gathering (map) ============ */}
       <section className="bg-background text-foreground">
-        <div className="mx-auto max-w-7xl px-6 pt-16 md:px-10 md:pt-24">
-          <div className="flex items-center gap-4">
-            <span className="section-mark">The outposts</span>
+        <div className="mx-auto max-w-7xl px-6 pt-4 md:px-10 md:pt-6">
+          <div className="rule-double text-foreground/70" />
+          <div className="mt-10 flex items-center gap-4">
+            <span className="section-mark">The groups</span>
             <div className="hairline flex-1 text-foreground" />
-            <Link href="/locations" className="link-editorial folio !text-brass">
+            <Link href="/groups" className="link-editorial folio !text-brass">
               See every group
+            </Link>
+            <span className="folio text-foreground/30">·</span>
+            <Link href="/join?intent=start" className="link-editorial folio !text-brass">
+              Start one
             </Link>
           </div>
           <h2 className="display-xl mt-8 max-w-3xl text-[clamp(2.2rem,5vw,4rem)] text-foreground">
@@ -145,40 +281,54 @@ export default function HomePage() {
         <LocationsPreview />
       </section>
 
-      {/* ============ The Letter — subscription notice ============ */}
-      <section className="bg-background text-foreground">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
-          <div className="rule-double text-foreground/70" />
-          <div className="grid gap-10 pt-12 lg:grid-cols-12 lg:gap-14">
-            <div className="lg:col-span-7">
-              <p className="section-mark">The Letter</p>
-              <h2 className="display-xl mt-6 text-[clamp(2.2rem,5vw,4.2rem)] text-foreground">
-                Sunday morning,
-                <br />
-                <em className="text-oxblood">before the day starts.</em>
-              </h2>
-              <p className="mt-7 max-w-xl font-serif text-lg leading-[1.75] text-foreground/85">
-                One letter a week. A scripture. A practice. Sent at sunrise,
-                read in five minutes, carried the rest of the week. No fluff,
-                no funnel — six hundred words to steady your week.
-              </p>
+      {/* ============ This week — the site stops dead-ending here ============ */}
+      {(nextEvent || latestStory) && (
+        <section className="bg-background text-foreground">
+          <div className="mx-auto max-w-7xl px-6 pb-16 pt-12 md:px-10 md:pb-24">
+            <div className="flex items-center gap-4">
+              <span className="section-mark">This week</span>
+              <div className="hairline flex-1 text-foreground" />
             </div>
-            <div className="flex flex-col justify-center border-t border-foreground/15 pt-8 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
-              <p className="folio">Subscribe · free, weekly, no noise</p>
-              <div className="mt-5">
-                <NewsletterForm />
-              </div>
-              <Link
-                href="/get-started"
-                className="link-editorial folio mt-6 inline-flex items-center gap-2 !text-brass"
-              >
-                What to expect
-                <Icon name="arrow-right" size={12} />
-              </Link>
+            <div className="mt-8 grid gap-px border border-foreground/15 bg-foreground/15 md:grid-cols-2">
+              {nextEvent && (
+                <Link
+                  href={`/events/${nextEvent.id}`}
+                  className="bg-background p-7 transition-colors hover:bg-foreground/5"
+                >
+                  <p className="folio">
+                    Next gathering
+                    {nextEvent.startTime
+                      ? ` · ${format(nextEvent.startTime, "EEE, MMM d")}`
+                      : ""}
+                  </p>
+                  <h3 className="display-soft mt-3 text-xl text-foreground">
+                    {nextEvent.title}
+                  </h3>
+                  {nextEvent.location && (
+                    <p className="mt-2 font-serif text-[0.95rem] text-muted-foreground">
+                      {nextEvent.location}
+                    </p>
+                  )}
+                </Link>
+              )}
+              {latestStory && (
+                <Link
+                  href="/about#stories"
+                  className="bg-background p-7 transition-colors hover:bg-foreground/5"
+                >
+                  <p className="folio">Latest story</p>
+                  <h3 className="display-soft mt-3 text-xl text-foreground">
+                    {latestStory.title}
+                  </h3>
+                  <p className="mt-2 line-clamp-2 font-serif text-[0.95rem] text-muted-foreground">
+                    {latestStory.content}
+                  </p>
+                </Link>
+              )}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   );
 }
