@@ -47,7 +47,7 @@ export function LocationsPreview() {
         </p>
         <div className="flex flex-wrap gap-4">
           <Link
-            href="/locations"
+            href="/groups"
             className="lift group inline-flex h-12 items-center gap-3 bg-foreground px-7 text-[0.95rem] font-medium text-background transition-colors hover:bg-foreground/90"
           >
             See every group
@@ -58,7 +58,7 @@ export function LocationsPreview() {
             />
           </Link>
           <Link
-            href="/locations/request"
+            href="/join?intent=start"
             className="lift inline-flex h-12 items-center gap-2 border border-foreground/70 px-7 text-xs font-medium uppercase tracking-[0.14em] text-foreground transition-colors hover:border-brass hover:text-brass"
           >
             Plant one

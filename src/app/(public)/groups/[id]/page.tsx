@@ -96,7 +96,7 @@ export default function LocationDetailPage() {
             This group may no longer be active.
           </p>
           <Link
-            href="/locations"
+            href="/groups"
             className="link-editorial folio mt-10 inline-flex items-center gap-2 !text-brass"
           >
             <Icon name="arrow-right" size={12} className="rotate-180" />
@@ -123,7 +123,7 @@ export default function LocationDetailPage() {
       <section className="bg-background text-foreground">
         <div className="mx-auto max-w-7xl px-6 pb-14 pt-12 md:px-10 md:pb-20 md:pt-20">
           <Link
-            href="/locations"
+            href="/groups"
             className="link-editorial folio inline-flex items-center gap-2"
           >
             <Icon name="arrow-right" size={12} className="rotate-180" />
@@ -145,6 +145,16 @@ export default function LocationDetailPage() {
               {location.description}
             </p>
           )}
+          <div className="mt-9 flex flex-wrap items-center gap-4">
+            <Link
+              href={`/join?intent=join&group=${location.id}`}
+              className="lift inline-flex h-12 items-center gap-3 bg-foreground px-7 text-[0.95rem] font-medium text-background transition-colors hover:bg-foreground/90"
+            >
+              Take a seat at this table
+              <Icon name="arrow-right" size={15} />
+            </Link>
+            <span className="folio">No sign-up fee. No performance. Just show up.</span>
+          </div>
         </div>
       </section>
 

@@ -21,6 +21,12 @@ const nextConfig: NextConfig = {
       { source: "/encouragements", destination: "/letter", permanent: true },
       { source: "/encouragements/:slug", destination: "/letter/:slug", permanent: true },
       { source: "/letter/archive", destination: "/letter", permanent: true },
+      // Groups (was /locations); the separate plant-a-group form folds into Join.
+      // /locations/request MUST precede /locations/:id so the static segment wins.
+      { source: "/locations", destination: "/groups", permanent: true },
+      { source: "/locations/request", destination: "/join?intent=start", permanent: true },
+      { source: "/locations/:id", destination: "/groups/:id", permanent: true },
+      { source: "/groups/start", destination: "/join?intent=start", permanent: true },
     ];
   },
 };
