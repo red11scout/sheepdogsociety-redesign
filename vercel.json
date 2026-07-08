@@ -1,8 +1,3 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "functions": {
-    "src/app/api/ai/**/route.ts": { "maxDuration": 60 },
-    "src/app/api/admin/encouragements/**/route.ts": { "maxDuration": 120 },
-    "src/app/api/cron/publish-scheduled-letters/route.ts": { "maxDuration": 120 }
-  }
+  "$schema": "https://openapi.vercel.sh/vercel.json"
 }
