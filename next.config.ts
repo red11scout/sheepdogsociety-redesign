@@ -32,6 +32,9 @@ const nextConfig: NextConfig = {
       { source: "/what-to-expect", destination: "/new-here", permanent: true },
       { source: "/how-we-gather", destination: "/new-here", permanent: true },
       { source: "/faq", destination: "/new-here#faq", permanent: true },
+      // Support absorbs giving + partnerships (both were orphaned duplicates)
+      { source: "/giving", destination: "/support", permanent: true },
+      { source: "/partnerships", destination: "/support", permanent: true },
     ];
   },
 };
