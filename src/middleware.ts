@@ -57,6 +57,7 @@ const PUBLIC_ROUTES = [
   /^\/api\/members(\/.*)?$/,      // Phase D — public signup POST
   /^\/api\/webhooks(\/.*)?$/,
   /^\/api\/cron(\/.*)?$/,
+  /^\/api\/sandbox-status$/, // read-only sandbox self-test (safe: booleans only)
   // SEO files
   /^\/sitemap\.xml$/,
   /^\/robots\.txt$/,
