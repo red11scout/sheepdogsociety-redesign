@@ -40,10 +40,17 @@ export function MemberDirectory({
   }, [members, search]);
 
   return (
-    <div className="mx-auto max-w-3xl p-6">
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Members ({members.length})</h1>
-      </div>
+    <div className="mx-auto max-w-3xl bg-background p-6 text-foreground">
+      <header className="mb-6">
+        <div className="flex items-center gap-4">
+          <span className="section-mark">The roll</span>
+          <div className="hairline flex-1 text-foreground" />
+          <span className="folio">
+            {members.length} {members.length === 1 ? "brother" : "brothers"}
+          </span>
+        </div>
+        <h1 className="display-soft mt-3 text-3xl text-foreground">Members</h1>
+      </header>
 
       <div className="relative mb-4">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -59,7 +66,9 @@ export function MemberDirectory({
         <Card>
           <CardContent className="flex flex-col items-center gap-4 p-8 text-center">
             <User className="h-12 w-12 text-muted-foreground" />
-            <p className="text-muted-foreground">No members found.</p>
+            <p className="font-serif text-base leading-relaxed text-muted-foreground">
+              No members found.
+            </p>
           </CardContent>
         </Card>
       ) : (
@@ -78,10 +87,10 @@ export function MemberDirectory({
                   </Avatar>
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <p className="font-medium">
+                      <p className="display-soft text-lg text-foreground">
                         {m.firstName} {m.lastName}
                         {isMe && (
-                          <span className="ml-1 text-xs text-muted-foreground">
+                          <span className="ml-1.5 font-sans text-xs text-muted-foreground">
                             (you)
                           </span>
                         )}
@@ -91,11 +100,11 @@ export function MemberDirectory({
                       </Badge>
                     </div>
                     {m.bio && (
-                      <p className="text-sm text-muted-foreground line-clamp-1">
+                      <p className="line-clamp-1 font-serif text-base text-muted-foreground">
                         {m.bio}
                       </p>
                     )}
-                    <p className="text-xs text-muted-foreground">
+                    <p className="folio mt-0.5">
                       Member since {format(new Date(m.createdAt), "MMM yyyy")}
                     </p>
                   </div>

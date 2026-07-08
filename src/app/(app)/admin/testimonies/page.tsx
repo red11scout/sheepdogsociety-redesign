@@ -88,7 +88,7 @@ export default function AdminTestimoniesPage() {
   const filtered = getFiltered();
 
   return (
-    <div className="space-y-6">
+    <div className="mx-auto max-w-5xl space-y-6 p-6">
       <AdminPageHeader
         title="Testimonies Moderation"
         description="Review and approve member testimonies"
@@ -120,11 +120,11 @@ export default function AdminTestimoniesPage() {
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-base">{t.title}</CardTitle>
                       <Badge
-                        variant={t.isApproved ? "default" : "secondary"}
+                        variant="outline"
                         className={
                           t.isApproved
-                            ? "bg-green-600 hover:bg-green-700"
-                            : "bg-yellow-600 hover:bg-yellow-700"
+                            ? "border-olive/40 bg-olive/10 text-olive"
+                            : "border-brass/40 bg-brass/10 text-brass"
                         }
                       >
                         {t.isApproved ? "Approved" : "Pending"}
@@ -148,7 +148,7 @@ export default function AdminTestimoniesPage() {
                           <Button
                             variant="outline"
                             size="sm"
-                            className="text-green-600 border-green-600 hover:bg-green-600 hover:text-white"
+                            className="text-olive border-olive/60 hover:bg-olive hover:text-background"
                             onClick={() => handleApprove(t.id)}
                           >
                             <Check className="mr-1 h-4 w-4" />
@@ -158,7 +158,7 @@ export default function AdminTestimoniesPage() {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="text-destructive border-destructive hover:bg-destructive hover:text-white"
+                          className="text-destructive border-destructive hover:bg-destructive hover:text-destructive-foreground"
                           onClick={() => setDeleteId(t.id)}
                         >
                           <X className="mr-1 h-4 w-4" />

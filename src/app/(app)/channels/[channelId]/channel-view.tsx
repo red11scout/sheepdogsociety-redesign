@@ -66,13 +66,13 @@ export function ChannelView({
   return (
     <div className="flex h-full flex-col">
       {/* Channel Header */}
-      <div className="flex items-center gap-2 border-b border-border px-4 py-3">
+      <div className="flex items-center gap-2 border-b border-foreground/15 bg-background px-4 py-3">
         {channelType === "leaders" ? (
-          <Lock className="h-5 w-5 text-muted-foreground" />
+          <Lock className="h-4 w-4 text-brass" />
         ) : (
-          <Hash className="h-5 w-5 text-muted-foreground" />
+          <Hash className="h-4 w-4 text-brass" />
         )}
-        <h2 className="text-lg font-semibold">{channelName}</h2>
+        <h2 className="display-soft text-xl text-foreground">{channelName}</h2>
       </div>
 
       {/* Messages */}

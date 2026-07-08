@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect, type FormEvent } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/icons/Icon";
-import { Magnetic } from "@/components/motion/Magnetic";
 
 const SUGGESTIONS = [
   "I am drifting from my wife.",
@@ -100,13 +99,13 @@ export function AskTheWatch() {
   const showResponse = status !== "idle" && (response || errorMsg);
 
   return (
-    <div className="relative isolate w-full">
+    <div className="relative w-full">
       <form onSubmit={handleAsk} className="relative">
         <div
-          className={`group relative border bg-background/40 backdrop-blur transition-colors ${
+          className={`group relative border bg-card transition-colors ${
             status === "streaming"
-              ? "border-brass shadow-[0_0_60px_-8px_rgba(212,160,42,0.45)]"
-              : "border-stone/20 hover:border-stone/40 focus-within:border-brass"
+              ? "border-brass"
+              : "border-foreground/20 hover:border-foreground/40 focus-within:border-brass"
           }`}
         >
           <textarea
@@ -122,31 +121,27 @@ export function AskTheWatch() {
             rows={3}
             maxLength={1200}
             disabled={status === "streaming"}
-            className="block w-full resize-none bg-transparent px-6 py-6 font-pullquote text-2xl italic leading-relaxed text-foreground placeholder:text-stone/40 focus:outline-none disabled:opacity-50 md:px-8 md:py-7 md:text-3xl"
+            className="block w-full resize-none bg-transparent px-6 py-5 font-serif text-lg leading-relaxed text-foreground placeholder:text-muted-foreground/70 focus:outline-none disabled:opacity-50 md:px-8 md:py-6 md:text-xl"
           />
-          <div className="flex items-center justify-between border-t border-stone/15 px-6 py-3 md:px-8">
-            <span className="section-mark text-stone/50">
+          <div className="flex items-center justify-between border-t border-foreground/10 px-6 py-3 md:px-8">
+            <span className="folio">
               {status === "streaming" ? (
                 <span className="inline-flex items-center gap-2">
                   <span className="inline-block h-1.5 w-1.5 animate-pulse bg-brass" />
                   Watching
                 </span>
               ) : (
-                <span>⌘ + Enter to send</span>
+                <span>&#8984; + Enter to send</span>
               )}
             </span>
-            <Magnetic strength={0.18}>
-              <button
-                type="submit"
-                disabled={!prompt.trim() || status === "streaming"}
-                className="lift inline-flex h-10 items-center gap-2 bg-brass px-5 text-xs font-medium uppercase tracking-[0.18em] text-ink transition-colors hover:bg-gold disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                {status === "streaming" ? "Listening" : "Ask"}
-                {status !== "streaming" && (
-                  <Icon name="arrow-right" size={14} />
-                )}
-              </button>
-            </Magnetic>
+            <button
+              type="submit"
+              disabled={!prompt.trim() || status === "streaming"}
+              className="lift inline-flex h-11 items-center gap-2 bg-foreground px-6 text-xs font-medium uppercase tracking-[0.18em] text-background transition-colors hover:bg-foreground/90 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {status === "streaming" ? "Listening" : "Ask"}
+              {status !== "streaming" && <Icon name="arrow-right" size={14} />}
+            </button>
           </div>
         </div>
       </form>
@@ -159,7 +154,7 @@ export function AskTheWatch() {
               key={s}
               type="button"
               onClick={() => applySuggestion(s)}
-              className="border border-stone/15 bg-background/20 px-3 py-1.5 text-xs text-stone/70 transition-all hover:border-brass/60 hover:bg-background/40 hover:text-foreground"
+              className="min-h-[44px] border border-foreground/15 px-4 py-2 font-serif text-[0.95rem] text-muted-foreground transition-colors hover:border-brass/60 hover:text-foreground"
             >
               {s}
             </button>
@@ -171,15 +166,13 @@ export function AskTheWatch() {
       {showResponse && (
         <div className="mt-10 reveal is-visible">
           <div className="flex items-center gap-4">
-            <span className="section-mark text-brass">
-              § A Brother Replies
-            </span>
-            <div className="hairline flex-1" />
+            <span className="section-mark">A Brother Replies</span>
+            <div className="hairline flex-1 text-foreground" />
             {status === "done" || status === "error" || status === "rate-limited" ? (
               <button
                 type="button"
                 onClick={reset}
-                className="section-mark text-stone/60 transition-colors hover:text-brass"
+                className="folio inline-flex min-h-[44px] items-center transition-colors hover:text-brass"
               >
                 Ask again
               </button>
@@ -187,12 +180,14 @@ export function AskTheWatch() {
           </div>
           <div
             ref={responseRef}
-            className="mt-6 max-h-[420px] overflow-y-auto pr-2 font-pullquote text-xl leading-relaxed text-foreground md:text-2xl"
+            className="mt-6 max-h-[420px] max-w-[68ch] overflow-y-auto pr-2 font-serif text-lg leading-[1.8] text-foreground/85 md:text-xl"
           >
             {errorMsg ? (
-              <p className="italic text-stone">{errorMsg}</p>
+              <p className="font-serif italic text-muted-foreground">
+                {errorMsg}
+              </p>
             ) : (
-              <div className="space-y-5 whitespace-pre-wrap italic">
+              <div className="space-y-5 whitespace-pre-wrap">
                 {response}
                 {status === "streaming" && (
                   <span className="inline-block h-5 w-[3px] translate-y-1 animate-pulse bg-brass" />
@@ -203,27 +198,23 @@ export function AskTheWatch() {
 
           {status === "done" && (
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Magnetic>
-                <Link
-                  href="/locations"
-                  className="lift group inline-flex h-11 items-center gap-2 border border-bone bg-bone px-6 text-sm font-medium text-ink transition-colors hover:bg-stone"
-                >
-                  Find a brother near you
-                  <Icon
-                    name="arrow-right"
-                    size={16}
-                    className="transition-transform group-hover:translate-x-1"
-                  />
-                </Link>
-              </Magnetic>
-              <Magnetic strength={0.18}>
-                <Link
-                  href="/acts-20-28"
-                  className="lift inline-flex h-11 items-center gap-2 border border-stone/30 bg-transparent px-6 text-sm font-medium text-foreground transition-colors hover:border-brass hover:text-brass"
-                >
-                  Read Acts 20:28
-                </Link>
-              </Magnetic>
+              <Link
+                href="/locations"
+                className="lift group inline-flex h-12 items-center gap-2 bg-foreground px-6 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+              >
+                Find a brother near you
+                <Icon
+                  name="arrow-right"
+                  size={16}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </Link>
+              <Link
+                href="/acts-20-28"
+                className="lift inline-flex h-12 items-center gap-2 border border-foreground/70 px-6 text-sm font-medium text-foreground transition-colors hover:border-foreground"
+              >
+                Read Acts 20:28
+              </Link>
             </div>
           )}
         </div>

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Icon, type IconName } from "@/components/icons/Icon";
 
 export const metadata = {
@@ -62,79 +61,82 @@ const expectations = [
 export default function GetStartedPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-bone text-ink">
-        <div className="dotted-grid absolute inset-0 opacity-50" aria-hidden />
-        <div className="relative mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
+      {/* ============ Lead ============ */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 pb-16 pt-12 md:px-10 md:pb-20 md:pt-20">
           <div className="flex items-center gap-4">
-            <span className="section-mark">§ Get Started</span>
-            <div className="hairline flex-1" />
+            <span className="folio">Get started</span>
+            <div className="hairline flex-1 text-foreground" />
+            <span className="folio">No application · no interview</span>
           </div>
-          <h1 className="display-xl mt-10 max-w-4xl text-[clamp(2.5rem,7vw,6.5rem)]">
+          <h1 className="display-xl mt-8 max-w-4xl text-[clamp(2.2rem,6vw,4.5rem)] text-foreground">
             New here?
             <br />
-            <span className="text-brass">Welcome, brother.</span>
+            <em className="text-oxblood">Welcome, brother.</em>
           </h1>
-          <p className="mt-10 max-w-2xl font-pullquote text-xl italic leading-relaxed text-iron/70 md:text-2xl">
+          <p className="dropcap mt-8 max-w-2xl font-serif text-lg leading-[1.75] text-foreground/85 md:text-xl">
             Sheepdog Society is a brotherhood of men gathering weekly in small
             groups. We study Scripture. We sharpen each other. We live out our
             calling as protectors of the faith.
           </p>
-          <div className="mt-12 flex flex-wrap items-center gap-4">
-            <Button
-              asChild
-              size="lg"
-              className="lift h-12 rounded-none border border-iron bg-background px-8 text-base text-foreground hover:bg-background/90"
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <Link
+              href="/locations"
+              className="lift group inline-flex h-12 items-center gap-3 bg-foreground px-7 text-[0.95rem] font-medium text-background transition-colors hover:bg-foreground/90"
             >
-              <Link href="/locations">
-                <Icon name="map-pin" size={18} className="mr-2" />
-                Find a group
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="lift h-12 rounded-none border border-iron/30 bg-transparent px-8 text-base text-iron hover:border-iron hover:bg-background/5"
+              <Icon name="map-pin" size={17} />
+              Find a group
+              <Icon
+                name="arrow-right"
+                size={15}
+                className="transition-transform group-hover:translate-x-1"
+              />
+            </Link>
+            <Link
+              href="/locations/request"
+              className="link-editorial inline-flex items-center gap-2 font-serif text-[1.05rem] text-foreground/80"
             >
-              <Link href="/locations/request">
-                Start a group
-                <Icon name="arrow-right" size={18} className="ml-2" />
-              </Link>
-            </Button>
+              Start a group where you live
+              <Icon name="arrow-right" size={13} />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* 5 Principles */}
+      {/* ============ Five core principles ============ */}
       <section className="bg-background text-foreground">
-        <div className="mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
-          <div className="flex items-center gap-4">
-            <span className="section-mark">§ Five core principles</span>
-            <div className="hairline flex-1" />
+        <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
+          <div className="rule-double text-foreground/70" />
+          <div className="mt-10 flex items-center gap-4">
+            <span className="section-mark">Five core principles</span>
+            <div className="hairline flex-1 text-foreground" />
           </div>
-          <h2 className="display-xl mt-10 max-w-3xl text-4xl text-foreground md:text-6xl">
+          <h2 className="display-xl mt-8 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)] text-foreground">
             Five things to know.
           </h2>
-          <div className="mt-16 grid gap-px bg-stone/10 md:grid-cols-3 lg:grid-cols-5">
-            {principles.map((p) => (
+          <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8 lg:grid-cols-5">
+            {principles.map((p, i) => (
               <article
                 key={p.title}
-                className="spotlight bg-background p-8 md:p-10"
+                className={`border-t border-foreground/15 pt-6 md:border-t-0 md:pt-0 ${
+                  i > 0 ? "md:border-l md:border-foreground/15 md:pl-8" : ""
+                }`}
               >
                 <div className="flex items-center justify-between">
                   <Icon
                     name={p.icon}
-                    size={36}
+                    size={30}
                     strokeWidth={2}
                     className="text-brass"
                   />
-                  <span className="section-mark text-brass">§ {p.roman}</span>
+                  <span className="display-soft text-2xl leading-none text-brass">
+                    {p.roman}.
+                  </span>
                 </div>
-                <h3 className="display-xl mt-10 text-xl text-foreground md:text-2xl">
+                <h3 className="display-soft mt-6 text-xl text-foreground">
                   {p.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-stone">
+                <p className="mt-3 font-serif text-[0.95rem] leading-relaxed text-foreground/75">
                   {p.copy}
                 </p>
               </article>
@@ -143,30 +145,33 @@ export default function GetStartedPage() {
         </div>
       </section>
 
-      {/* What to Expect */}
-      <section className="bg-bone text-ink">
-        <div className="mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
+      {/* ============ What to expect ============ */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
           <div className="flex items-center gap-4">
-            <span className="section-mark">§ What to expect</span>
-            <div className="hairline flex-1" />
+            <span className="section-mark">What to expect</span>
+            <div className="hairline flex-1 text-foreground" />
+            <Link href="/what-to-expect" className="link-editorial folio !text-brass">
+              The full rhythm
+            </Link>
           </div>
-          <div className="mt-10 grid gap-12 md:grid-cols-[2fr_3fr] md:gap-20">
-            <h2 className="display-xl text-4xl md:text-6xl">
+          <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-14">
+            <h2 className="display-xl text-[clamp(2rem,4.5vw,3.5rem)] text-foreground lg:col-span-5">
               Three rhythms,
               <br />
-              <span className="text-brass">every week.</span>
+              <em className="text-oxblood">every week.</em>
             </h2>
-            <ol className="space-y-10">
+            <ol className="space-y-8 border-t-2 border-foreground/60 pt-6 lg:col-span-7 lg:border-l lg:border-t-0 lg:border-foreground/15 lg:pl-12 lg:pt-0">
               {expectations.map((e) => (
-                <li key={e.title} className="flex gap-6 md:gap-8">
-                  <span className="display-xl shrink-0 text-2xl text-brass md:text-4xl">
-                    § {e.roman}
+                <li key={e.title} className="flex gap-5 md:gap-7">
+                  <span className="display-soft shrink-0 text-2xl leading-none text-brass md:text-3xl">
+                    {e.roman}.
                   </span>
                   <div>
-                    <h3 className="display-xl text-xl text-iron md:text-2xl">
+                    <h3 className="display-soft text-xl text-foreground md:text-2xl">
                       {e.title}
                     </h3>
-                    <p className="mt-3 text-base leading-relaxed text-iron/70 md:text-lg">
+                    <p className="mt-3 font-serif text-base leading-relaxed text-foreground/80 md:text-lg">
                       {e.copy}
                     </p>
                   </div>
@@ -177,43 +182,37 @@ export default function GetStartedPage() {
         </div>
       </section>
 
-      {/* How to Join */}
-      <section className="bg-background text-foreground">
-        <div className="mx-auto max-w-5xl px-6 py-28 text-center md:px-12 md:py-40">
-          <span className="section-mark text-brass">§ How to join</span>
-          <h2 className="display-xl mt-6 text-4xl text-foreground md:text-6xl">
+      {/* ============ Ember band — the charge to show up ============ */}
+      <section className="ember-band">
+        <div className="mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
+          <p className="section-mark">How to join</p>
+          <h2 className="display-xl mt-8 text-[clamp(2.2rem,5vw,4rem)]">
             No application.
             <br />
-            <span className="text-brass">No interview.</span>
+            No interview.
             <br />
             Just show up.
           </h2>
-          <p className="mx-auto mt-8 max-w-xl font-pullquote text-xl italic leading-relaxed text-stone md:text-2xl">
+          <p className="mx-auto mt-8 max-w-xl font-pullquote text-xl italic leading-relaxed md:text-2xl">
             Find a group near you. Come as you are. Be honest. Be real. This is
             a safe place for men.
           </p>
-          <div className="mt-14 flex flex-wrap items-center justify-center gap-4">
-            <Button
-              asChild
-              size="lg"
-              className="lift h-12 rounded-none border border-bone bg-bone px-8 text-base text-ink hover:bg-stone"
+          <div className="mx-auto mt-10 h-px w-24 bg-[#c9834a]/60" />
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/locations"
+              className="lift inline-flex h-12 items-center gap-3 bg-bone px-7 text-[0.95rem] font-medium text-iron transition-colors hover:bg-bone/90"
             >
-              <Link href="/locations">
-                <Icon name="map-pin" size={18} className="mr-2" />
-                Find a group
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="lift h-12 rounded-none border border-bone/30 bg-transparent px-8 text-base text-foreground hover:border-bone hover:bg-bone/5"
+              <Icon name="map-pin" size={17} />
+              Find a group
+            </Link>
+            <Link
+              href="/locations/request"
+              className="lift inline-flex h-12 items-center gap-3 border border-[#efe7d5]/40 px-7 text-[0.95rem] font-medium text-[#efe7d5] transition-colors hover:border-[#efe7d5]"
             >
-              <Link href="/locations/request">
-                Start a group
-                <Icon name="arrow-right" size={18} className="ml-2" />
-              </Link>
-            </Button>
+              Start a group
+              <Icon name="arrow-right" size={15} />
+            </Link>
           </div>
         </div>
       </section>

@@ -46,8 +46,8 @@ const CLUSTER_THEMES: Array<{ keywords: string[]; theme: CoverTheme }> = [
     theme: {
       bg: "#5A4030", // warm sepia
       bgEnd: "#3A2A20",
-      accent: "#DBAA48",
-      ink: "#F2EBDD",
+      accent: "#c9a25a",
+      ink: "#f4edde",
       icon: "heart",
       alt: "Heart — marriage and family",
     },
@@ -55,10 +55,10 @@ const CLUSTER_THEMES: Array<{ keywords: string[]; theme: CoverTheme }> = [
   {
     keywords: ["character", "growth", "discipline", "personal"],
     theme: {
-      bg: "#1A2438", // navy
-      bgEnd: "#0E1624",
-      accent: "#C8932A",
-      ink: "#F2EBDD",
+      bg: "#3d2f1d", // warm umber
+      bgEnd: "#241b10",
+      accent: "#c9a25a",
+      ink: "#f4edde",
       icon: "mountain",
       alt: "Mountain peak — character and growth",
     },
@@ -68,8 +68,8 @@ const CLUSTER_THEMES: Array<{ keywords: string[]; theme: CoverTheme }> = [
     theme: {
       bg: "#2C3D33", // deep olive
       bgEnd: "#1B2922",
-      accent: "#DBAA48",
-      ink: "#F2EBDD",
+      accent: "#c9a25a",
+      ink: "#f4edde",
       icon: "anchor",
       alt: "Anchor — faith and trust in God",
     },
@@ -77,10 +77,10 @@ const CLUSTER_THEMES: Array<{ keywords: string[]; theme: CoverTheme }> = [
   {
     keywords: ["protection", "discernment", "guard", "vigilance", "wolf", "wolves"],
     theme: {
-      bg: "#0E1624", // iron
-      bgEnd: "#050810",
-      accent: "#C8932A",
-      ink: "#F2EBDD",
+      bg: "#211a11", // warm ink
+      bgEnd: "#0f0a05",
+      accent: "#c9a25a",
+      ink: "#f4edde",
       icon: "watchtower",
       alt: "Watchtower — protection and spiritual discernment",
     },
@@ -88,10 +88,10 @@ const CLUSTER_THEMES: Array<{ keywords: string[]; theme: CoverTheme }> = [
   {
     keywords: ["generosity", "service", "serving", "giving"],
     theme: {
-      bg: "#5A6B3E", // olive
-      bgEnd: "#3F4A2C",
-      accent: "#F2EBDD",
-      ink: "#F2EBDD",
+      bg: "#5f6b44", // brand olive
+      bgEnd: "#3c4429",
+      accent: "#f4edde",
+      ink: "#f4edde",
       icon: "hands",
       alt: "Open hands — generosity and service",
     },
@@ -99,10 +99,10 @@ const CLUSTER_THEMES: Array<{ keywords: string[]; theme: CoverTheme }> = [
   {
     keywords: ["doctrine", "teaching", "gifts", "spiritual gifts", "scripture"],
     theme: {
-      bg: "#7A1E1E", // oxblood
-      bgEnd: "#4A1212",
-      accent: "#DBAA48",
-      ink: "#F2EBDD",
+      bg: "#7c2a20", // brand oxblood
+      bgEnd: "#471712",
+      accent: "#ddba70",
+      ink: "#f4edde",
       icon: "scroll",
       alt: "Scroll — doctrine and teaching",
     },
@@ -110,10 +110,10 @@ const CLUSTER_THEMES: Array<{ keywords: string[]; theme: CoverTheme }> = [
   {
     keywords: ["leadership", "leading"],
     theme: {
-      bg: "#1A2438",
-      bgEnd: "#0E1624",
-      accent: "#DBAA48",
-      ink: "#F2EBDD",
+      bg: "#22303f", // brand navy
+      bgEnd: "#141e28",
+      accent: "#ddba70",
+      ink: "#f4edde",
       icon: "compass",
       alt: "Compass — leadership",
     },
@@ -123,8 +123,8 @@ const CLUSTER_THEMES: Array<{ keywords: string[]; theme: CoverTheme }> = [
     theme: {
       bg: "#3D2C1F",
       bgEnd: "#241A12",
-      accent: "#DBAA48",
-      ink: "#F2EBDD",
+      accent: "#c9a25a",
+      ink: "#f4edde",
       icon: "oak",
       alt: "Oak — identity and calling",
     },
@@ -134,10 +134,10 @@ const CLUSTER_THEMES: Array<{ keywords: string[]; theme: CoverTheme }> = [
 // Fallback theme for resources whose cluster doesn't match any
 // keyword (or that don't have a cluster set yet).
 const DEFAULT_THEME: CoverTheme = {
-  bg: "#1A2438",
-  bgEnd: "#0E1624",
-  accent: "#C8932A",
-  ink: "#F2EBDD",
+  bg: "#211a11",
+  bgEnd: "#140f08",
+  accent: "#c9a25a",
+  ink: "#f4edde",
   icon: "scroll",
   alt: "Scroll — resource",
 };

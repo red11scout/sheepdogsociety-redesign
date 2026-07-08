@@ -136,7 +136,7 @@ export default function AdminContactsPage() {
                       <Badge variant="outline">{contact.topic}</Badge>
                     )}
                     {!contact.isRead && (
-                      <span className="h-2 w-2 rounded-full bg-blue-500" />
+                      <span className="h-2 w-2 rounded-full bg-brass" />
                     )}
                   </div>
                   <p className="mt-1 truncate text-sm text-muted-foreground">

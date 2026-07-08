@@ -9,9 +9,9 @@ import { NewsletterForm } from "./newsletter-form";
  */
 export function PublicFooter() {
   return (
-    <footer className="border-t-2 border-ink/60 bg-background text-foreground">
+    <footer className="border-t-2 border-foreground/60 bg-background text-foreground">
       {/* The verse, set like a colophon epigraph */}
-      <div className="border-b border-ink/10">
+      <div className="border-b border-foreground/10">
         <div className="mx-auto max-w-3xl px-6 py-14 text-center md:py-20">
           <Image
             src="/logo.png"
@@ -110,7 +110,7 @@ export function PublicFooter() {
           </div>
         </div>
 
-        <div className="rule-double mt-16 text-ink/70" />
+        <div className="rule-double mt-16 text-foreground/70" />
         <div className="mt-6 flex flex-col-reverse items-start gap-3 md:flex-row md:items-center md:justify-between">
           <p className="folio">
             &copy; {new Date().getFullYear()} Sheepdog Society · All rights reserved

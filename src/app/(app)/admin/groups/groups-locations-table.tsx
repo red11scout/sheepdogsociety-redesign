@@ -239,7 +239,7 @@ export function GroupsLocationsTable({ initialRows, dbError }: Props) {
     return (
       <div className="mx-auto max-w-3xl px-6 py-10">
         <div className="border border-oxblood/40 bg-oxblood/15 p-6 text-sm text-bone">
-          <p className="display-xl text-base">Groups table can&rsquo;t load.</p>
+          <p className="display-soft text-base">Groups table can&rsquo;t load.</p>
           <p className="mt-2 text-stone/85">{dbError}</p>
           <p className="mt-3 text-xs text-stone/60">
             Likely cause: migration 0009 hasn&rsquo;t been applied. Apply it via the GHA migration runner or paste into the Neon SQL editor.
@@ -318,7 +318,7 @@ export function GroupsLocationsTable({ initialRows, dbError }: Props) {
         <button
           type="button"
           onClick={() => setEditing("_new")}
-          className="lift inline-flex h-9 items-center gap-1.5 border border-bone bg-bone px-3 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-stone"
+          className="lift inline-flex h-9 items-center gap-1.5 bg-bone px-3 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85"
         >
           <Icon name="plus" size={12} />
           New group
@@ -409,7 +409,7 @@ export function GroupsLocationsTable({ initialRows, dbError }: Props) {
       {/* Table */}
       <div className="overflow-x-auto border border-stone/15">
         <table className="w-full text-xs">
-          <thead className="border-b border-stone/15 bg-iron/40 text-stone/65">
+          <thead className="section-mark border-b border-stone/15 bg-iron/40">
             <tr>
               <th className="w-10 px-3 py-2 text-left">
                 <input
@@ -543,7 +543,7 @@ function GroupRow({
           className="h-3.5 w-3.5 accent-brass"
         />
       </td>
-      <td className="px-3 py-2 font-mono text-[0.6875rem] text-stone/55">{row.shortGroupId}</td>
+      <td className="px-3 py-2 text-[0.6875rem] tracking-wide text-stone/55">{row.shortGroupId}</td>
       <td className="px-3 py-2">
         <select
           value={row.approvalStatus}
@@ -608,7 +608,7 @@ function GroupRow({
           <span className="text-stone/35">—</span>
         )}
       </td>
-      <td className="px-3 py-2 font-mono text-[0.6875rem] text-stone/65">
+      <td className="px-3 py-2 text-[0.6875rem] tracking-wide text-stone/65">
         {row.latitude && row.longitude
           ? `${Number(row.latitude).toFixed(2)}, ${Number(row.longitude).toFixed(2)}`
           : "—"}
@@ -804,14 +804,14 @@ function EditForm({
           <input
             value={latitude}
             onChange={(e) => setLatitude(e.target.value)}
-            className="h-8 w-full border border-stone/20 bg-transparent px-2 font-mono text-sm text-bone focus:border-brass focus:outline-none"
+            className="h-8 w-full border border-stone/20 bg-transparent px-2 text-sm tracking-wide text-bone focus:border-brass focus:outline-none"
           />
         </Field>
         <Field label="Longitude">
           <input
             value={longitude}
             onChange={(e) => setLongitude(e.target.value)}
-            className="h-8 w-full border border-stone/20 bg-transparent px-2 font-mono text-sm text-bone focus:border-brass focus:outline-none"
+            className="h-8 w-full border border-stone/20 bg-transparent px-2 text-sm tracking-wide text-bone focus:border-brass focus:outline-none"
           />
         </Field>
         <div className="md:col-span-3">
@@ -932,7 +932,7 @@ function EditForm({
             })
           }
           disabled={!canSave}
-          className="lift inline-flex h-8 items-center gap-1.5 bg-brass px-4 text-[0.6875rem] font-medium uppercase tracking-wider text-iron transition-colors hover:bg-gold disabled:opacity-60"
+          className="lift inline-flex h-8 items-center gap-1.5 bg-bone px-4 text-[0.6875rem] font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85 disabled:opacity-60"
         >
           {initial ? "Save changes" : "Create"}
         </button>

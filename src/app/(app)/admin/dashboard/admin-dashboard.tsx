@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/icons/Icon";
 import { CountUp } from "@/components/motion/CountUp";
-import { Magnetic } from "@/components/motion/Magnetic";
-import { Spotlight } from "@/components/motion/Spotlight";
 import { HintTooltip } from "@/components/admin/HintTooltip";
 import { EmptyState } from "@/components/admin/EmptyState";
 import { SetupChecklist } from "@/components/admin/SetupChecklist";
@@ -116,21 +114,17 @@ export function AdminDashboard({ greetingName = "brother" }: AdminDashboardProps
           <span className="section-mark text-brass">§ {dayLabel}</span>
           <div className="hairline flex-1" />
         </div>
-        <h1 className="display-xl mt-6 text-4xl text-bone md:text-6xl">
+        <h1 className="display-soft mt-6 text-[clamp(2rem,4.5vw,3.4rem)] text-bone">
           Sit down, {greetingName}.
           <br />
-          <span className="text-brass">Here is the watch.</span>
+          <em className="not-italic text-oxblood">Here is the watch.</em>
         </h1>
       </header>
 
       {/* Bento — top row */}
       <section className="mt-12 grid gap-4 md:grid-cols-12">
         {/* This week — main panel */}
-        <Spotlight
-          size={620}
-          color="var(--color-brass)"
-          className="border border-stone/15 bg-iron/40 md:col-span-8"
-        >
+        <div className="paper-card md:col-span-8">
           <div className="p-8 md:p-10">
             <ThisWeekHero
               thisWeek={data.thisWeek}
@@ -139,10 +133,10 @@ export function AdminDashboard({ greetingName = "brother" }: AdminDashboardProps
               activeSubscribers={stats.activeSubscribers}
             />
           </div>
-        </Spotlight>
+        </div>
 
         {/* Inbox */}
-        <div className="border border-stone/15 bg-iron/40 md:col-span-4">
+        <div className="paper-card md:col-span-4">
           <div className="flex items-center justify-between border-b border-stone/15 px-6 py-4">
             <div className="flex items-center gap-3">
               <Icon name="inbox" size={18} className="text-brass" />
@@ -279,7 +273,7 @@ export function AdminDashboard({ greetingName = "brother" }: AdminDashboardProps
                   No. {letter.issueNumber}
                 </span>
                 <div className="min-w-0">
-                  <p className="truncate display-xl text-base text-bone group-hover/row:text-brass md:text-lg">
+                  <p className="truncate display-soft text-base text-bone group-hover/row:text-brass md:text-lg">
                     {letter.title || "Untitled"}
                   </p>
                   {letter.themeWord && (
@@ -396,7 +390,7 @@ function ThisWeekHero({
           <span className="section-mark text-brass">§ This week</span>
           <HintTooltip hint="Your weekly word to the brotherhood. Pick a theme, a cover image, and a voice. Claude drafts intro, scriptures, guidance, and notes. You publish." />
         </div>
-        <h2 className="display-xl mt-4 text-2xl text-bone md:text-4xl">
+        <h2 className="display-soft mt-4 text-2xl text-bone md:text-4xl">
           {kicker}
           <br />
           <span className="text-brass">{tail}</span>
@@ -419,20 +413,18 @@ function ThisWeekHero({
           </p>
         )}
         <div className="mt-8 flex flex-wrap items-center gap-3">
-          <Magnetic>
-            <Link
-              href={ctaHref}
-              className="lift group inline-flex h-11 items-center gap-2 border border-bone bg-bone px-6 text-sm font-medium text-iron transition-colors hover:bg-stone"
-            >
-              <Icon name="sparkles" size={16} />
-              {ctaLabel}
-              <Icon
-                name="arrow-right"
-                size={14}
-                className="transition-transform group-hover:translate-x-1"
-              />
-            </Link>
-          </Magnetic>
+          <Link
+            href={ctaHref}
+            className="lift group inline-flex h-11 items-center gap-2 bg-bone px-6 text-sm font-medium text-iron transition-colors hover:bg-bone/85"
+          >
+            <Icon name="sparkles" size={16} />
+            {ctaLabel}
+            <Icon
+              name="arrow-right"
+              size={14}
+              className="transition-transform group-hover:translate-x-1"
+            />
+          </Link>
           <Link
             href="/admin/encouragements"
             className="inline-flex items-center gap-2 section-mark text-stone/70 transition-colors hover:text-brass"
@@ -454,7 +446,7 @@ function ThisWeekHero({
 function MiniStat({ label, value }: { label: string; value: number }) {
   return (
     <div className="px-3 py-1.5">
-      <div className="display-xl text-2xl text-brass">
+      <div className="display-soft text-2xl text-brass">
         <CountUp to={value} />
       </div>
       <div className="section-mark text-[0.625rem] text-stone/55">{label}</div>
@@ -514,7 +506,7 @@ function StatTile({
   href?: string;
 }) {
   const inner = (
-    <div className="lift group/tile relative overflow-hidden border border-stone/15 bg-iron/40 p-6 transition-colors hover:border-brass/40">
+    <div className="paper-card lift group/tile relative overflow-hidden p-6">
       <div className="flex items-center justify-between">
         <Icon name={icon} size={18} className="text-brass" />
         {href && (
@@ -525,7 +517,7 @@ function StatTile({
           />
         )}
       </div>
-      <div className="display-xl mt-6 text-3xl text-bone md:text-4xl">
+      <div className="display-soft mt-6 text-3xl text-bone md:text-4xl">
         <CountUp to={value} />
       </div>
       <div className="mt-1 section-mark text-stone/55">{label}</div>
@@ -548,7 +540,7 @@ function AiActionCard({
   return (
     <Link
       href={href}
-      className="group/card lift block border border-stone/15 bg-iron/40 p-6 transition-colors hover:border-brass/40"
+      className="paper-card group/card lift block p-6"
     >
       <div className="flex items-center justify-between">
         <Icon name={icon} size={20} className="text-brass" />
@@ -558,7 +550,7 @@ function AiActionCard({
           className="text-stone/30 transition-all group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5 group-hover/card:text-brass"
         />
       </div>
-      <h3 className="display-xl mt-6 text-lg text-bone md:text-xl">{title}</h3>
+      <h3 className="display-soft mt-6 text-lg text-bone md:text-xl">{title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-stone/75">{body}</p>
     </Link>
   );

@@ -159,7 +159,7 @@ export function AdminHelp() {
           type="button"
           aria-label="Close help"
           onClick={() => setOpen(false)}
-          className="absolute inset-0 bg-iron/60 backdrop-blur-sm"
+          className="absolute inset-0 bg-iron/60"
         />
         <aside
           role="dialog"
@@ -204,7 +204,7 @@ export function AdminHelp() {
                 <ul className="mt-4 space-y-5">
                   {group.items.map((t) => (
                     <li key={t.title}>
-                      <h3 className="font-display text-base font-semibold text-bone">
+                      <h3 className="display-soft text-base text-bone">
                         {t.title}
                       </h3>
                       <p className="mt-1 text-sm leading-relaxed text-stone">
@@ -231,7 +231,7 @@ export function AdminHelp() {
                 Need something not covered here? Email{" "}
                 <a
                   href="mailto:hello@acts2028sheepdogsociety.com"
-                  className="text-brass underline decoration-brass/40 underline-offset-4 hover:text-gold"
+                  className="link-editorial text-brass"
                 >
                   hello@acts2028sheepdogsociety.com
                 </a>

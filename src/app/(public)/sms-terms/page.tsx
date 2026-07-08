@@ -73,32 +73,32 @@ const SECTIONS = [
 
 export default function SmsTermsPage() {
   return (
-    <section className="bg-bone">
-      <div className="mx-auto max-w-3xl px-6 py-24 md:px-12 md:py-32">
+    <section className="bg-background text-foreground">
+      <div className="mx-auto max-w-3xl px-6 py-16 md:py-24">
         <div className="flex items-center gap-4">
-          <span className="section-mark text-brass">§ SMS Terms</span>
-          <div className="hairline flex-1 text-iron/40" />
+          <span className="section-mark">SMS Terms</span>
+          <div className="hairline flex-1 text-foreground" />
         </div>
-        <h1 className="display-xl mt-10 text-[clamp(2.25rem,5vw,4rem)] text-iron">
+        <h1 className="display-xl mt-8 text-[clamp(2.2rem,5vw,4rem)] text-foreground">
           What we will text.
           <br />
-          <span className="text-brass">How to stop.</span>
+          <em className="text-oxblood">How to stop.</em>
         </h1>
-        <p className="mt-8 font-pullquote text-xl italic text-iron/70">
+        <p className="mt-7 font-serif text-lg leading-relaxed text-foreground/80 md:text-xl">
           Federal law requires we be specific. We will be.
         </p>
 
-        <div className="mt-16 space-y-12">
+        <div className="mt-14 space-y-12">
           {SECTIONS.map((s) => (
-            <section key={s.heading}>
-              <h2 className="font-display text-2xl font-semibold text-iron md:text-3xl">
+            <section key={s.heading} className="border-t border-foreground/15 pt-8">
+              <h2 className="display-soft text-2xl text-foreground md:text-3xl">
                 {s.heading}
               </h2>
               <div className="mt-4 space-y-4">
                 {s.body.map((p, i) => (
                   <p
                     key={i}
-                    className="text-lg leading-relaxed text-iron/75"
+                    className="font-serif text-lg leading-relaxed text-foreground/80"
                   >
                     {p}
                     {"link" in s && s.link && i === s.body.length - 1 && (
@@ -106,7 +106,7 @@ export default function SmsTermsPage() {
                         {" "}
                         <Link
                           href={s.link.href}
-                          className="underline decoration-brass underline-offset-4 hover:text-brass"
+                          className="link-editorial text-foreground/80"
                         >
                           {s.link.label}
                         </Link>
@@ -120,15 +120,14 @@ export default function SmsTermsPage() {
           ))}
         </div>
 
-        <div className="mt-20 border-t border-iron/15 pt-8">
-          <p className="section-mark text-iron/50">
-            Last revised · April 2026
-          </p>
-          <p className="mt-3 text-sm text-iron/60">
-            Reply <span className="font-mono text-iron">STOP</span> to opt out
-            ·{" "}
-            <span className="font-mono text-iron">HELP</span> for help · Msg &
-            data rates may apply.
+        <div className="rule-double mt-16 text-foreground/70" />
+        <div className="pt-6">
+          <p className="folio">Last revised &middot; April 2026</p>
+          <p className="mt-3 font-serif text-base text-muted-foreground">
+            Reply <span className="font-medium tracking-wide text-foreground">STOP</span>{" "}
+            to opt out &middot;{" "}
+            <span className="font-medium tracking-wide text-foreground">HELP</span> for
+            help &middot; Msg &amp; data rates may apply.
           </p>
         </div>
       </div>

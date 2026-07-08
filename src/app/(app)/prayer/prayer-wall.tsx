@@ -130,10 +130,12 @@ export function PrayerWall({
   }
 
   return (
-    <div className="mx-auto max-w-3xl p-6">
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Prayer Wall</h1>
-        <div className="flex items-center gap-2">
+    <div className="mx-auto max-w-3xl bg-background p-6 text-foreground">
+      <header className="mb-6">
+        <p className="section-mark">Bear one another&rsquo;s burdens</p>
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
+          <h1 className="display-soft text-3xl text-foreground">Prayer Wall</h1>
+          <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm">
@@ -248,16 +250,20 @@ export function PrayerWall({
               </div>
             </DialogContent>
           </Dialog>
+          </div>
         </div>
-      </div>
+        <div className="hairline mt-4 text-foreground" />
+      </header>
 
       {loading ? (
-        <p className="text-muted-foreground">Loading...</p>
+        <p className="font-serif text-base italic text-muted-foreground">
+          Loading...
+        </p>
       ) : requests.length === 0 ? (
         <Card>
           <CardContent className="flex flex-col items-center gap-4 p-8 text-center">
-            <HandHeart className="h-12 w-12 text-bronze" />
-            <p className="text-muted-foreground">
+            <HandHeart className="h-12 w-12 text-brass" />
+            <p className="font-serif text-base leading-relaxed text-muted-foreground">
               {statusFilter === "active"
                 ? "No active prayer requests. Bear one another's burdens."
                 : `No ${statusFilter} prayer requests.`}
@@ -283,24 +289,26 @@ export function PrayerWall({
                     </Avatar>
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <p className="font-medium">{r.title}</p>
+                        <p className="display-soft text-lg text-foreground">
+                          {r.title}
+                        </p>
                         {r.privacyLevel !== "public" && (
                           <Badge variant="secondary" className="text-xs capitalize">
                             {r.privacyLevel}
                           </Badge>
                         )}
                         {r.status === "answered" && (
-                          <Badge className="bg-green-600 text-xs">
+                          <Badge className="bg-olive text-xs text-bone">
                             Answered
                           </Badge>
                         )}
                       </div>
-                      <p className="mt-1 text-sm text-muted-foreground">
+                      <p className="folio mt-1">
                         {r.authorFirstName} {r.authorLastName}
                         {" · "}
                         {format(new Date(r.createdAt), "MMM d, yyyy")}
                       </p>
-                      <p className="mt-2 text-sm whitespace-pre-wrap">
+                      <p className="mt-2 whitespace-pre-wrap font-serif text-base leading-relaxed text-foreground/90">
                         {r.content}
                       </p>
                       <div className="mt-3 flex items-center gap-3">

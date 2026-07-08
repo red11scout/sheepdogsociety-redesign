@@ -67,33 +67,33 @@ const SECTIONS = [
 
 export default function PrivacyPage() {
   return (
-    <section className="bg-bone">
-      <div className="mx-auto max-w-3xl px-6 py-24 md:px-12 md:py-32">
+    <section className="bg-background text-foreground">
+      <div className="mx-auto max-w-3xl px-6 py-16 md:py-24">
         <div className="flex items-center gap-4">
-          <span className="section-mark text-brass">§ Privacy</span>
-          <div className="hairline flex-1 text-iron/40" />
+          <span className="section-mark">Privacy</span>
+          <div className="hairline flex-1 text-foreground" />
         </div>
-        <h1 className="display-xl mt-10 text-[clamp(2.25rem,5vw,4rem)] text-iron">
+        <h1 className="display-xl mt-8 text-[clamp(2.2rem,5vw,4rem)] text-foreground">
           What we keep.
           <br />
-          <span className="text-brass">What we will not do.</span>
+          <em className="text-oxblood">What we will not do.</em>
         </h1>
-        <p className="mt-8 font-pullquote text-xl italic text-iron/70">
+        <p className="mt-7 font-serif text-lg leading-relaxed text-foreground/80 md:text-xl">
           Plain English, not lawyer English. If something here seems unclear,
           email us and we will fix it.
         </p>
 
-        <div className="mt-16 space-y-12">
+        <div className="mt-14 space-y-12">
           {SECTIONS.map((s) => (
-            <section key={s.heading}>
-              <h2 className="font-display text-2xl font-semibold text-iron md:text-3xl">
+            <section key={s.heading} className="border-t border-foreground/15 pt-8">
+              <h2 className="display-soft text-2xl text-foreground md:text-3xl">
                 {s.heading}
               </h2>
               <div className="mt-4 space-y-4">
                 {s.body.map((p, i) => (
                   <p
                     key={i}
-                    className="text-lg leading-relaxed text-iron/75"
+                    className="font-serif text-lg leading-relaxed text-foreground/80"
                   >
                     {p}
                   </p>
@@ -103,16 +103,12 @@ export default function PrivacyPage() {
           ))}
         </div>
 
-        <div className="mt-20 border-t border-iron/15 pt-8">
-          <p className="section-mark text-iron/50">
-            Last revised · April 2026
-          </p>
-          <p className="mt-3 text-sm text-iron/60">
+        <div className="rule-double mt-16 text-foreground/70" />
+        <div className="pt-6">
+          <p className="folio">Last revised &middot; April 2026</p>
+          <p className="mt-3 font-serif text-base text-muted-foreground">
             See also the{" "}
-            <Link
-              href="/sms-terms"
-              className="underline decoration-brass underline-offset-4 hover:text-brass"
-            >
+            <Link href="/sms-terms" className="link-editorial text-foreground/80">
               SMS Terms
             </Link>
             .

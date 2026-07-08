@@ -210,7 +210,7 @@ export function AddLinkPanel({
                   type="button"
                   onClick={handleEnrichPrimary}
                   disabled={!primaryUrl.trim() || enriching}
-                  className="lift inline-flex h-10 items-center gap-2 bg-brass px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-gold disabled:opacity-60"
+                  className="lift inline-flex h-10 items-center gap-2 bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85 disabled:opacity-60"
                 >
                   {enriching ? "Reading..." : "Fetch"}
                   {!enriching && <Icon name="sparkles" size={12} />}
@@ -431,7 +431,7 @@ export function AddLinkPanel({
                   type="button"
                   onClick={handleSave}
                   disabled={!title.trim() || saving}
-                  className="lift inline-flex h-9 items-center gap-2 bg-brass px-5 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-gold disabled:opacity-60"
+                  className="lift inline-flex h-9 items-center gap-2 bg-bone px-5 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85 disabled:opacity-60"
                 >
                   {saving ? "Saving..." : mode === "book" ? "Save book + study" : "Save sermon"}
                   {!saving && <Icon name="check" size={12} />}

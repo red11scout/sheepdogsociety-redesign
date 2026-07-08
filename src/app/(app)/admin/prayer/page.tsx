@@ -32,16 +32,16 @@ type Prayer = {
 };
 
 const privacyColors: Record<string, string> = {
-  public: "bg-blue-600 text-white",
-  group: "bg-yellow-600 text-white",
-  private: "bg-red-600 text-white",
-  anonymous: "bg-gray-600 text-white",
+  public: "border-brass/40 bg-brass/10 text-brass",
+  group: "border-olive/40 bg-olive/10 text-olive",
+  private: "border-oxblood/40 bg-oxblood/10 text-oxblood",
+  anonymous: "border-stone/40 bg-stone/10 text-stone",
 };
 
 const statusColors: Record<string, string> = {
-  active: "bg-green-600 text-white",
-  answered: "bg-blue-600 text-white",
-  archived: "bg-gray-500 text-white",
+  active: "border-olive/40 bg-olive/10 text-olive",
+  answered: "border-brass/40 bg-brass/10 text-brass",
+  archived: "border-stone/40 bg-stone/10 text-stone",
 };
 
 export default function AdminPrayerPage() {
@@ -147,10 +147,10 @@ export default function AdminPrayerPage() {
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="font-semibold">{prayer.title}</span>
-                      <Badge className={privacyColors[prayer.privacyLevel] ?? ""}>
+                      <Badge variant="outline" className={privacyColors[prayer.privacyLevel] ?? ""}>
                         {prayer.privacyLevel}
                       </Badge>
-                      <Badge className={statusColors[prayer.status] ?? ""}>
+                      <Badge variant="outline" className={statusColors[prayer.status] ?? ""}>
                         {prayer.status}
                       </Badge>
                     </div>
@@ -171,7 +171,7 @@ export default function AdminPrayerPage() {
                         title="Mark Answered"
                         onClick={() => updateStatus(prayer, "answered")}
                       >
-                        <CheckCircle className="h-4 w-4 text-blue-500" />
+                        <CheckCircle className="h-4 w-4 text-olive" />
                       </Button>
                     )}
                     {prayer.status !== "archived" && (
@@ -181,7 +181,7 @@ export default function AdminPrayerPage() {
                         title="Archive"
                         onClick={() => updateStatus(prayer, "archived")}
                       >
-                        <Archive className="h-4 w-4 text-gray-500" />
+                        <Archive className="h-4 w-4 text-muted-foreground" />
                       </Button>
                     )}
                     <Button

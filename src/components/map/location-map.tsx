@@ -30,9 +30,12 @@ type LocationMapProps = {
   className?: string;
 };
 
-const BRASS = "#A6803A";
-const IRON = "#1F2A2E";
-const BONE = "#F2EBDD";
+/* Ridge & Bone constants for map-injected DOM (outside the Tailwind tree).
+   The popup is a constant warm-ink surface, same family as .ember-band. */
+const BRASS = "#96702a"; // --c-brass (light)
+const EMBER_BRASS = "#c9834a"; // ember accent — reads on the dark popup
+const INK = "#1c1610"; // ember-band ground (warm ink, never blue)
+const BONE = "#f4edde"; // --c-bone
 
 export function LocationMap({
   locations,
@@ -111,16 +114,16 @@ export function LocationMap({
         border: 2px solid ${BONE};
         border-radius: 0;
         cursor: pointer;
-        box-shadow: 0 0 0 4px rgba(166, 128, 58, 0.18);
+        box-shadow: 0 0 0 4px rgba(150, 112, 42, 0.18);
         transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s;
       `;
       el.onmouseenter = () => {
         el.style.transform = "rotate(45deg) scale(1.15)";
-        el.style.boxShadow = `0 0 0 6px rgba(166, 128, 58, 0.28)`;
+        el.style.boxShadow = `0 0 0 6px rgba(150, 112, 42, 0.28)`;
       };
       el.onmouseleave = () => {
         el.style.transform = "rotate(45deg) scale(1)";
-        el.style.boxShadow = `0 0 0 4px rgba(166, 128, 58, 0.18)`;
+        el.style.boxShadow = `0 0 0 4px rgba(150, 112, 42, 0.18)`;
       };
       el.style.transform = "rotate(45deg)";
 
@@ -138,12 +141,12 @@ export function LocationMap({
         maxWidth: "300px",
         className: "sheepdog-popup",
       }).setHTML(`
-        <div style="font-family: var(--font-inter), system-ui, sans-serif; padding: 14px 16px; background: ${IRON}; color: ${BONE}; min-width: 220px;">
-          <div style="font-family: var(--font-jetbrains-mono), monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: ${BRASS};">${loc.city}, ${loc.state}</div>
-          <h3 style="font-family: var(--font-barlow-condensed), 'Helvetica Neue', Arial, sans-serif; font-weight: 800; font-size: 20px; line-height: 1; margin: 8px 0 0; letter-spacing: -0.01em;">${loc.name}</h3>
-          ${meta ? `<div style="font-family: var(--font-jetbrains-mono), monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: ${BRASS}; margin-top: 12px;">${meta}</div>` : ""}
-          ${loc.meetingPlace ? `<p style="font-size: 13px; opacity: 0.7; margin: 8px 0 0; line-height: 1.5;">${loc.meetingPlace}</p>` : ""}
-          <a href="/locations/${loc.id}" style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-jetbrains-mono), monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: ${BRASS}; text-decoration: none; margin-top: 14px; border-top: 1px solid rgba(199, 183, 154, 0.15); padding-top: 14px;">
+        <div style="font-family: var(--font-inter), system-ui, sans-serif; padding: 14px 16px; background: ${INK}; color: ${BONE}; min-width: 220px;">
+          <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: ${EMBER_BRASS};">${loc.city}, ${loc.state}</div>
+          <h3 style="font-family: var(--font-fraunces), 'Iowan Old Style', Georgia, serif; font-weight: 560; font-size: 20px; line-height: 1.05; margin: 8px 0 0; letter-spacing: -0.012em;">${loc.name}</h3>
+          ${meta ? `<div style="font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: ${EMBER_BRASS}; margin-top: 12px;">${meta}</div>` : ""}
+          ${loc.meetingPlace ? `<p style="font-family: var(--font-newsreader), Georgia, serif; font-size: 13px; opacity: 0.75; margin: 8px 0 0; line-height: 1.5;">${loc.meetingPlace}</p>` : ""}
+          <a href="/locations/${loc.id}" style="display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: ${EMBER_BRASS}; text-decoration: underline; text-underline-offset: 3px; margin-top: 14px; border-top: 1px solid rgba(244, 237, 222, 0.16); padding-top: 14px;">
             View details →
           </a>
         </div>
@@ -191,7 +194,7 @@ export function LocationMap({
       <button
         type="button"
         onClick={handleLocateMe}
-        className="lift absolute bottom-4 left-4 z-10 inline-flex items-center gap-2 border border-bone/30 bg-iron px-4 py-2 text-xs font-medium uppercase tracking-wider text-bone transition-colors hover:border-brass hover:text-brass"
+        className="lift absolute bottom-4 left-4 z-10 inline-flex h-11 items-center gap-2 border border-bone/30 bg-iron px-4 text-xs font-medium uppercase tracking-[0.14em] text-bone transition-colors hover:border-brass hover:text-brass"
       >
         <Icon name="locate" size={14} />
         Near me

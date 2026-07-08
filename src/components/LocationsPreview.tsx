@@ -5,8 +5,12 @@ import Link from "next/link";
 import { LocationMap, type LocationPin } from "@/components/map/location-map";
 import { Icon } from "@/components/icons/Icon";
 import { CountUp } from "@/components/motion/CountUp";
-import { Magnetic } from "@/components/motion/Magnetic";
 
+/**
+ * Homepage map section internals. The front page renders the section-mark,
+ * headline, and deck above this component; this supplies the census row,
+ * the Mapbox map, and the ruled caption/CTA line beneath it.
+ */
 export function LocationsPreview() {
   const [locations, setLocations] = useState<LocationPin[]>([]);
   const [loading, setLoading] = useState(true);
@@ -23,75 +27,46 @@ export function LocationsPreview() {
   const cities = new Set(locations.map((l) => `${l.city}-${l.state}`)).size;
 
   return (
-    <section className="relative overflow-hidden bg-background text-foreground">
-      <div className="border-t border-stone/15">
-        <div className="mx-auto max-w-7xl px-6 pt-24 md:px-12 md:pt-32">
-          <div className="flex items-center gap-4">
-            <span className="section-mark text-brass">§ The Outposts</span>
-            <div className="hairline flex-1" />
-          </div>
-          <div className="mt-10 grid gap-12 md:grid-cols-[3fr_2fr] md:items-end md:gap-20">
-            <h2 className="display-xl text-[clamp(2.5rem,7vw,6rem)] text-foreground">
-              Where men are
-              <br />
-              <span className="text-brass">already gathering.</span>
-            </h2>
-            <div className="grid grid-cols-3 gap-6">
-              <Stat label="Cities" value={cities} loading={loading} />
-              <Stat label="Groups" value={locations.length} loading={loading} />
-              <Stat label="Men" value={totalMen} loading={loading} />
-            </div>
-          </div>
-        </div>
+    <div className="mx-auto max-w-7xl px-6 pb-16 pt-10 md:px-10 md:pb-24 md:pt-12">
+      {/* The census — set like a broadsheet stat line */}
+      <div className="grid max-w-md grid-cols-3 gap-6">
+        <Stat label="Cities" value={cities} loading={loading} />
+        <Stat label="Groups" value={locations.length} loading={loading} />
+        <Stat label="Men" value={totalMen} loading={loading} />
+      </div>
 
-        <div className="relative mx-auto mt-14 max-w-7xl px-6 md:px-12">
-          <div className="relative h-[460px] border border-stone/15 md:h-[600px]">
-            <LocationMap locations={locations} className="h-full" />
-            <div
-              className="pointer-events-none absolute inset-0"
-              aria-hidden
-              style={{
-                background:
-                  "linear-gradient(to bottom, transparent 70%, color-mix(in oklab, var(--color-iron) 100%, transparent) 100%)",
-              }}
+      <div className="mt-10 h-[420px] border border-foreground/15 md:h-[560px]">
+        <LocationMap locations={locations} className="h-full" />
+      </div>
+
+      {/* Caption / CTA row — a ruled cutline under the plate */}
+      <div className="mt-8 flex flex-wrap items-center justify-between gap-6 border-t border-foreground/15 pt-6">
+        <p className="max-w-md font-serif text-base italic leading-relaxed text-muted-foreground md:text-lg">
+          We meet in diners, coffee shops, gyms, garages. Wherever two or
+          more can sit with the Word.
+        </p>
+        <div className="flex flex-wrap gap-4">
+          <Link
+            href="/locations"
+            className="lift group inline-flex h-12 items-center gap-3 bg-foreground px-7 text-[0.95rem] font-medium text-background transition-colors hover:bg-foreground/90"
+          >
+            See every group
+            <Icon
+              name="arrow-right"
+              size={15}
+              className="transition-transform group-hover:translate-x-1"
             />
-          </div>
-        </div>
-
-        <div className="mx-auto max-w-7xl px-6 pb-28 pt-10 md:px-12 md:pb-40 md:pt-14">
-          <div className="flex flex-wrap items-center justify-between gap-6">
-            <p className="max-w-md font-pullquote text-xl italic leading-relaxed text-stone">
-              We meet in diners, coffee shops, gyms, garages. Wherever two or
-              more can sit with the Word.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Magnetic>
-                <Link
-                  href="/locations"
-                  className="lift group inline-flex h-12 items-center gap-2 border border-bone bg-bone px-7 text-base font-medium text-ink transition-colors hover:bg-stone"
-                >
-                  See every group
-                  <Icon
-                    name="arrow-right"
-                    size={18}
-                    className="transition-transform group-hover:translate-x-1"
-                  />
-                </Link>
-              </Magnetic>
-              <Magnetic strength={0.18}>
-                <Link
-                  href="/locations/request"
-                  className="lift inline-flex h-12 items-center gap-2 border border-stone/30 bg-transparent px-7 text-base font-medium text-foreground transition-colors hover:border-brass hover:text-brass"
-                >
-                  Plant one
-                  <Icon name="plus" size={16} />
-                </Link>
-              </Magnetic>
-            </div>
-          </div>
+          </Link>
+          <Link
+            href="/locations/request"
+            className="lift inline-flex h-12 items-center gap-2 border border-foreground/70 px-7 text-xs font-medium uppercase tracking-[0.14em] text-foreground transition-colors hover:border-brass hover:text-brass"
+          >
+            Plant one
+            <Icon name="plus" size={14} />
+          </Link>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -105,11 +80,11 @@ function Stat({
   loading: boolean;
 }) {
   return (
-    <div>
-      <div className="display-xl text-3xl text-brass md:text-5xl">
-        {loading ? "..." : <CountUp to={value} />}
+    <div className="border-t-2 border-foreground/60 pt-3">
+      <div className="display-soft text-3xl text-foreground md:text-4xl">
+        {loading ? "…" : <CountUp to={value} />}
       </div>
-      <div className="mt-2 section-mark text-stone/55">{label}</div>
+      <div className="folio mt-1">{label}</div>
     </div>
   );
 }

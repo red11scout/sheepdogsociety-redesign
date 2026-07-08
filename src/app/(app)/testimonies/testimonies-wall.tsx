@@ -84,10 +84,12 @@ export function TestimoniesWall({ currentUser }: { currentUser: AppUser }) {
   }
 
   return (
-    <div className="mx-auto max-w-3xl p-6">
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Testimonies</h1>
-        <div className="flex items-center gap-2">
+    <div className="mx-auto max-w-3xl bg-background p-6 text-foreground">
+      <header className="mb-6">
+        <p className="section-mark">What God has done</p>
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
+          <h1 className="display-soft text-3xl text-foreground">Testimonies</h1>
+          <div className="flex items-center gap-2">
           {isAdmin && (
             <Button
               variant={showPending ? "secondary" : "outline"}
@@ -142,16 +144,20 @@ export function TestimoniesWall({ currentUser }: { currentUser: AppUser }) {
               </div>
             </DialogContent>
           </Dialog>
+          </div>
         </div>
-      </div>
+        <div className="hairline mt-4 text-foreground" />
+      </header>
 
       {loading ? (
-        <p className="text-muted-foreground">Loading...</p>
+        <p className="font-serif text-base italic text-muted-foreground">
+          Loading...
+        </p>
       ) : testimonies.length === 0 ? (
         <Card>
           <CardContent className="flex flex-col items-center gap-4 p-8 text-center">
-            <Sparkles className="h-12 w-12 text-bronze" />
-            <p className="text-muted-foreground">
+            <Sparkles className="h-12 w-12 text-brass" />
+            <p className="font-serif text-base leading-relaxed text-muted-foreground">
               No testimonies yet. Share what God has done.
             </p>
           </CardContent>
@@ -172,18 +178,20 @@ export function TestimoniesWall({ currentUser }: { currentUser: AppUser }) {
                     </Avatar>
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <h3 className="font-semibold">{t.title}</h3>
+                        <h3 className="display-soft text-lg text-foreground">
+                          {t.title}
+                        </h3>
                         {!t.isApproved && (
                           <Badge variant="secondary" className="text-xs">
                             Pending
                           </Badge>
                         )}
                       </div>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="folio mt-1">
                         {t.authorFirstName} {t.authorLastName} ·{" "}
                         {format(new Date(t.createdAt), "MMM d, yyyy")}
                       </p>
-                      <p className="mt-3 text-sm whitespace-pre-wrap leading-relaxed">
+                      <p className="mt-3 whitespace-pre-wrap font-serif text-base leading-relaxed text-foreground/90">
                         {t.content}
                       </p>
                       {isAdmin && !t.isApproved && (

@@ -68,7 +68,7 @@ export function AdminShell({
       {/* Mobile drawer overlay */}
       {mobileNavOpen && (
         <div
-          className="fixed inset-0 z-40 bg-iron/85 backdrop-blur-md lg:hidden"
+          className="fixed inset-0 z-40 bg-iron/80 lg:hidden"
           onClick={() => setMobileNavOpen(false)}
         >
           <div

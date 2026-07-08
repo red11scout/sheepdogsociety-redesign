@@ -220,7 +220,7 @@ export function LetterEditor({ letterId, initial }: LetterEditorProps) {
             placeholder="Untitled letter"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="block w-full font-display text-4xl md:text-5xl font-semibold tracking-tight bg-transparent border-0 focus:outline-none mb-4 placeholder:text-muted-foreground/40"
+            className="display-soft block w-full text-4xl md:text-5xl bg-transparent border-0 focus:outline-none mb-4 placeholder:text-muted-foreground/40"
           />
           <input
             type="text"
@@ -233,7 +233,7 @@ export function LetterEditor({ letterId, initial }: LetterEditorProps) {
           {editor ? (
             <BubbleMenu
               editor={editor}
-              className="flex gap-1 bg-foreground rounded-md shadow-lg p-1"
+              className="flex gap-1 bg-foreground shadow-lg p-1"
             >
               <BubbleAction onClick={() => improveSelection("rephrase")} disabled={aiBusy}>
                 ✦ Match voice
@@ -259,15 +259,15 @@ export function LetterEditor({ letterId, initial }: LetterEditorProps) {
           <EditorContent editor={editor} />
 
           {editor && editor.getText().trim().length === 0 ? (
-            <div className="mt-12 border border-dashed border-border rounded p-6 text-center">
-              <p className="font-body text-sm text-muted-foreground mb-3">
+            <div className="mt-12 border border-dashed border-border p-6 text-center">
+              <p className="text-sm text-muted-foreground mb-3">
                 Empty page. Start typing, or:
               </p>
               <button
                 type="button"
                 onClick={draftWithClaude}
                 disabled={aiBusy}
-                className="rounded-full bg-primary px-5 py-2 font-body text-sm text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
+                className="lift inline-flex h-11 items-center bg-foreground px-5 text-sm font-medium text-background transition-colors hover:bg-foreground/90 disabled:opacity-50"
               >
                 {aiBusy ? "Drafting…" : "✦ Draft with Claude"}
               </button>
@@ -302,7 +302,7 @@ function Topbar({
   issueNumber: number;
 }) {
   return (
-    <header className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b border-border px-6 py-3 flex items-center justify-between">
+    <header className="sticky top-0 z-40 bg-background border-b border-border px-6 py-3 flex items-center justify-between">
       <div className="flex items-center gap-4">
         <a href="/admin/letters" className="font-body text-sm text-muted-foreground hover:text-foreground">
           ← Letters
@@ -316,7 +316,7 @@ function Topbar({
         <button
           type="button"
           onClick={onPublish}
-          className="rounded-full bg-primary px-5 py-2 font-body text-sm font-semibold text-primary-foreground hover:bg-primary/90"
+          className="lift inline-flex h-10 items-center bg-foreground px-5 text-sm font-semibold text-background transition-colors hover:bg-foreground/90"
         >
           Publish ▾
         </button>
@@ -367,7 +367,7 @@ function BubbleAction({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="px-3 py-1.5 font-body text-xs text-background hover:bg-foreground/10 rounded disabled:opacity-50"
+      className="px-3 py-1.5 text-xs text-background hover:bg-background/15 disabled:opacity-50"
     >
       {children}
     </button>
@@ -427,8 +427,8 @@ function PublishPanel({
 
   return (
     <div className="fixed inset-0 z-50 bg-foreground/40 flex items-center justify-center p-4">
-      <div className="bg-background border border-border rounded-lg shadow-xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto">
-        <h2 className="font-display text-2xl font-semibold mb-2">
+      <div className="bg-background border border-border shadow-xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto">
+        <h2 className="display-soft text-2xl mb-2">
           Publish this letter?
         </h2>
         <p className="font-body text-sm text-muted-foreground mb-6">
@@ -436,11 +436,11 @@ function PublishPanel({
           audience.
         </p>
 
-        <div className="border border-border rounded p-4 mb-6">
-          <p className="font-body text-xs uppercase tracking-[0.18em] text-muted-foreground mb-1">
+        <div className="border border-border p-4 mb-6">
+          <p className="section-mark mb-1">
             Going live
           </p>
-          <p className="font-display text-lg">{title || "Untitled letter"}</p>
+          <p className="display-soft text-lg">{title || "Untitled letter"}</p>
           {themeWord ? (
             <p className="font-body text-xs uppercase tracking-[0.18em] text-muted-foreground mt-1">
               {themeWord}
@@ -458,7 +458,7 @@ function PublishPanel({
               value={emailSubject}
               onChange={(e) => setEmailSubject(e.target.value)}
               placeholder={title}
-              className="w-full px-3 py-2 border border-border rounded font-body text-sm bg-background"
+              className="w-full px-3 py-2 border border-border text-sm bg-background"
             />
           </label>
           <label className="block">
@@ -471,7 +471,7 @@ function PublishPanel({
               value={emailPreview}
               onChange={(e) => setEmailPreview(e.target.value)}
               placeholder="Shows next to the subject in inboxes"
-              className="w-full px-3 py-2 border border-border rounded font-body text-sm bg-background"
+              className="w-full px-3 py-2 border border-border text-sm bg-background"
             />
           </label>
 
@@ -505,7 +505,7 @@ function PublishPanel({
                 onClick={onClose}
                 disabled={pending}
                 autoFocus
-                className="px-4 py-2 rounded-full border border-border font-body text-sm hover:bg-muted"
+                className="px-4 py-2 border border-border text-sm hover:bg-muted"
               >
                 Cancel
               </button>
@@ -513,9 +513,9 @@ function PublishPanel({
                 type="button"
                 onClick={startPublishCountdown}
                 disabled={pending || (!publishWeb && !sendBroadcast)}
-                className="px-5 py-2 rounded-full bg-primary text-primary-foreground font-body font-semibold text-sm disabled:opacity-50"
+                className="lift px-5 py-2 bg-foreground text-background font-semibold text-sm transition-colors hover:bg-foreground/90 disabled:opacity-50"
               >
-                🚀 Send & publish
+                Send & publish
               </button>
             </>
           ) : (
@@ -523,7 +523,7 @@ function PublishPanel({
               <button
                 type="button"
                 onClick={cancelCountdown}
-                className="px-4 py-2 rounded-full bg-destructive text-destructive-foreground font-body font-semibold text-sm"
+                className="px-4 py-2 bg-destructive text-destructive-foreground font-semibold text-sm"
               >
                 Cancel
               </button>

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { Icon } from "@/components/icons/Icon";
-import { Magnetic } from "@/components/motion/Magnetic";
 
 type LocationDetail = {
   id: string;
@@ -71,10 +70,10 @@ export default function LocationDetailPage() {
 
   if (loading) {
     return (
-      <div className="bg-bone">
-        <div className="mx-auto max-w-5xl px-6 py-32 md:px-12">
-          <div className="h-8 w-48 animate-pulse bg-background/10" />
-          <div className="mt-6 h-72 animate-pulse bg-background/10" />
+      <div className="bg-background">
+        <div className="mx-auto max-w-5xl px-6 py-32 md:px-10">
+          <div className="h-8 w-48 animate-pulse bg-foreground/10" />
+          <div className="mt-6 h-72 animate-pulse bg-foreground/10" />
         </div>
       </div>
     );
@@ -82,25 +81,25 @@ export default function LocationDetailPage() {
 
   if (!location) {
     return (
-      <div className="bg-bone">
-        <div className="mx-auto max-w-3xl px-6 py-32 text-center md:px-12">
+      <div className="bg-background text-foreground">
+        <div className="mx-auto max-w-3xl px-6 py-32 text-center md:px-10">
           <Icon
             name="map-pin"
             size={48}
             strokeWidth={2}
-            className="mx-auto text-iron/30"
+            className="mx-auto text-stone/60"
           />
-          <h1 className="display-xl mt-8 text-3xl text-iron md:text-4xl">
+          <h1 className="display-xl mt-8 text-3xl text-foreground md:text-4xl">
             Group not found.
           </h1>
-          <p className="mx-auto mt-4 max-w-md font-pullquote text-lg italic text-iron/60">
+          <p className="mx-auto mt-4 max-w-md font-serif text-lg italic text-muted-foreground">
             This group may no longer be active.
           </p>
           <Link
             href="/locations"
-            className="mt-10 inline-flex items-center gap-2 section-mark text-brass hover:opacity-70"
+            className="link-editorial folio mt-10 inline-flex items-center gap-2 !text-brass"
           >
-            <Icon name="arrow-right" size={14} className="rotate-180" />
+            <Icon name="arrow-right" size={12} className="rotate-180" />
             All groups
           </Link>
         </div>
@@ -120,30 +119,29 @@ export default function LocationDetailPage() {
     <>
       <title>{`${location.name} — Sheepdog Society`}</title>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-background text-foreground">
-        <div className="aurora" aria-hidden />
-        <div className="dotted-grid absolute inset-0 opacity-[0.04]" aria-hidden />
-        <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-12 md:py-32">
+      {/* Dispatch head — the group, set like a filed report */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 pb-14 pt-12 md:px-10 md:pb-20 md:pt-20">
           <Link
             href="/locations"
-            className="inline-flex items-center gap-2 section-mark text-stone/60 hover:text-brass"
+            className="link-editorial folio inline-flex items-center gap-2"
           >
             <Icon name="arrow-right" size={12} className="rotate-180" />
             All groups
           </Link>
           <div className="mt-10 flex items-center gap-4">
             <span className="section-mark">
-              § {location.city}, {location.state}
+              {location.city}, {location.state}
             </span>
-            <div className="hairline flex-1" />
+            <div className="hairline flex-1 text-foreground" />
+            {meta && <span className="folio hidden sm:inline">{meta}</span>}
           </div>
-          <h1 className="display-xl mt-8 max-w-4xl text-[clamp(2.5rem,7vw,6rem)] text-foreground">
+          <h1 className="display-xl mt-8 max-w-4xl text-[clamp(2.2rem,6vw,4.5rem)] text-foreground">
             {location.name}
           </h1>
-          {meta && <p className="mt-8 section-mark text-brass">{meta}</p>}
+          {meta && <p className="folio mt-6 sm:hidden">{meta}</p>}
           {location.description && (
-            <p className="mt-8 max-w-2xl font-pullquote text-xl italic leading-relaxed text-stone md:text-2xl">
+            <p className="mt-7 max-w-2xl font-serif text-lg leading-[1.75] text-foreground/85 md:text-xl">
               {location.description}
             </p>
           )}
@@ -151,13 +149,10 @@ export default function LocationDetailPage() {
       </section>
 
       {/* Details */}
-      <section className="bg-bone text-ink">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-28">
-          <div className="flex items-center gap-4">
-            <span className="section-mark">§ Details</span>
-            <div className="hairline flex-1" />
-          </div>
-          <div className="mt-10 grid gap-px bg-background/10 md:grid-cols-2 lg:grid-cols-4">
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 pb-16 md:px-10 md:pb-24">
+          <div className="rule-double text-foreground/70" />
+          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <Detail
               icon="clock"
               label="When"
@@ -187,7 +182,7 @@ export default function LocationDetailPage() {
           </div>
 
           {location.signalGroupUrl && (
-            <div className="mt-10 flex items-center justify-between border border-iron/10 bg-bone p-6 md:p-8">
+            <div className="paper-card mt-10 flex flex-wrap items-center justify-between gap-6 p-6 md:p-8">
               <div className="flex items-center gap-4">
                 <Icon
                   name="message"
@@ -196,25 +191,23 @@ export default function LocationDetailPage() {
                   className="text-brass"
                 />
                 <div>
-                  <p className="display-xl text-lg text-iron md:text-xl">
+                  <p className="display-soft text-lg text-foreground md:text-xl">
                     Signal group
                   </p>
-                  <p className="text-sm text-iron/60">
+                  <p className="mt-1 font-serif text-sm text-muted-foreground">
                     Join for between-meeting comms.
                   </p>
                 </div>
               </div>
-              <Magnetic strength={0.18}>
-                <a
-                  href={location.signalGroupUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="lift inline-flex h-11 items-center gap-2 border border-iron px-5 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-background hover:text-foreground"
-                >
-                  Join Signal
-                  <Icon name="arrow-up-right" size={14} />
-                </a>
-              </Magnetic>
+              <a
+                href={location.signalGroupUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="lift inline-flex h-11 items-center gap-2 border border-foreground/70 px-5 text-xs font-medium uppercase tracking-[0.14em] text-foreground transition-colors hover:border-brass hover:text-brass"
+              >
+                Join Signal
+                <Icon name="arrow-up-right" size={14} />
+              </a>
             </div>
           )}
         </div>
@@ -222,73 +215,75 @@ export default function LocationDetailPage() {
 
       {/* Interest form */}
       <section className="bg-background text-foreground">
-        <div className="mx-auto max-w-3xl px-6 py-20 md:px-12 md:py-28">
-          <div className="flex items-center gap-4">
-            <span className="section-mark">§ Interested?</span>
-            <div className="hairline flex-1" />
-          </div>
-          <h2 className="display-xl mt-10 text-3xl text-foreground md:text-5xl">
-            Show up. We will be there.
-          </h2>
-
-          {submitted ? (
-            <div className="mt-10 flex items-start gap-4 border border-brass/40 bg-background/40 p-6 md:p-8">
-              <Icon name="check" size={24} className="text-brass" />
-              <p className="font-pullquote text-lg italic leading-relaxed text-foreground md:text-xl">
-                Thank you, brother. The group leader will be in touch.
-              </p>
+        <div className="mx-auto max-w-7xl px-6 pb-20 md:px-10 md:pb-28">
+          <div className="mx-auto max-w-3xl border-t-2 border-foreground/60 pt-10">
+            <div className="flex items-center gap-4">
+              <span className="section-mark">Interested?</span>
+              <div className="hairline flex-1 text-foreground" />
             </div>
-          ) : (
-            <form onSubmit={handleInterest} className="mt-10 grid gap-6">
-              <DarkField
-                label="Name"
-                required
-                value={interestForm.name}
-                onChange={(v) =>
-                  setInterestForm((f) => ({ ...f, name: v }))
-                }
-              />
-              <DarkField
-                label="Email"
-                type="email"
-                required
-                value={interestForm.email}
-                onChange={(v) =>
-                  setInterestForm((f) => ({ ...f, email: v }))
-                }
-              />
-              <DarkField
-                label="Phone (optional)"
-                value={interestForm.phone}
-                onChange={(v) =>
-                  setInterestForm((f) => ({ ...f, phone: v }))
-                }
-              />
-              <div>
-                <label className="section-mark text-stone/60">
-                  Anything you want the leader to know
-                </label>
-                <textarea
-                  rows={4}
-                  value={interestForm.message}
-                  onChange={(e) =>
-                    setInterestForm((f) => ({ ...f, message: e.target.value }))
-                  }
-                  className="mt-3 w-full border border-stone/25 bg-transparent px-4 py-3 text-base leading-relaxed text-foreground placeholder:text-stone/40 focus:border-brass focus:outline-none"
-                />
+            <h2 className="display-xl mt-8 text-3xl text-foreground md:text-5xl">
+              Show up. We will <em className="text-oxblood">be there.</em>
+            </h2>
+
+            {submitted ? (
+              <div className="mt-10 flex items-start gap-4 border border-brass/40 bg-card p-6 md:p-8">
+                <Icon name="check" size={24} className="text-brass" />
+                <p className="font-serif text-lg italic leading-relaxed text-foreground md:text-xl">
+                  Thank you, brother. The group leader will be in touch.
+                </p>
               </div>
-              <Magnetic strength={0.18}>
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="lift inline-flex h-12 items-center gap-2 border border-bone bg-bone px-8 text-sm font-medium uppercase tracking-wider text-ink transition-colors hover:bg-stone disabled:cursor-not-allowed disabled:opacity-60"
-                >
-                  {submitting ? "Sending..." : "I'm interested"}
-                  {!submitting && <Icon name="arrow-right" size={16} />}
-                </button>
-              </Magnetic>
-            </form>
-          )}
+            ) : (
+              <form onSubmit={handleInterest} className="mt-10 grid gap-6">
+                <Field
+                  label="Name"
+                  required
+                  value={interestForm.name}
+                  onChange={(v) =>
+                    setInterestForm((f) => ({ ...f, name: v }))
+                  }
+                />
+                <Field
+                  label="Email"
+                  type="email"
+                  required
+                  value={interestForm.email}
+                  onChange={(v) =>
+                    setInterestForm((f) => ({ ...f, email: v }))
+                  }
+                />
+                <Field
+                  label="Phone (optional)"
+                  value={interestForm.phone}
+                  onChange={(v) =>
+                    setInterestForm((f) => ({ ...f, phone: v }))
+                  }
+                />
+                <div>
+                  <label className="folio">
+                    Anything you want the leader to know
+                  </label>
+                  <textarea
+                    rows={4}
+                    value={interestForm.message}
+                    onChange={(e) =>
+                      setInterestForm((f) => ({ ...f, message: e.target.value }))
+                    }
+                    className="mt-3 w-full border border-foreground/25 bg-transparent px-4 py-3 text-base leading-relaxed text-foreground placeholder:text-muted-foreground focus:border-brass focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="lift inline-flex h-12 items-center gap-3 bg-foreground px-8 text-[0.95rem] font-medium text-background transition-colors hover:bg-foreground/90 disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    {submitting ? "Sending..." : "I'm interested"}
+                    {!submitting && <Icon name="arrow-right" size={16} />}
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
         </div>
       </section>
     </>
@@ -305,17 +300,19 @@ function Detail({
   value: string;
 }) {
   return (
-    <div className="bg-bone p-8">
+    <div className="border-t-2 border-foreground/60 pt-5">
       <div className="flex items-center gap-3">
-        <Icon name={icon} size={20} className="text-brass" />
-        <span className="section-mark">{label}</span>
+        <Icon name={icon} size={18} className="text-brass" />
+        <span className="section-mark !text-foreground/60">{label}</span>
       </div>
-      <p className="display-xl mt-6 text-lg text-iron md:text-xl">{value}</p>
+      <p className="display-soft mt-4 text-lg text-foreground md:text-xl">
+        {value}
+      </p>
     </div>
   );
 }
 
-function DarkField({
+function Field({
   label,
   required,
   type = "text",
@@ -330,7 +327,7 @@ function DarkField({
 }) {
   return (
     <div>
-      <label className="section-mark text-stone/60">
+      <label className="folio">
         {label}
         {required && <span className="ml-1 text-brass">*</span>}
       </label>
@@ -339,7 +336,7 @@ function DarkField({
         required={required}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-3 h-11 w-full border border-stone/25 bg-transparent px-4 text-base text-foreground placeholder:text-stone/40 focus:border-brass focus:outline-none"
+        className="mt-3 h-11 w-full border border-foreground/25 bg-transparent px-4 text-base text-foreground placeholder:text-muted-foreground focus:border-brass focus:outline-none"
       />
     </div>
   );

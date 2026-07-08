@@ -12,7 +12,7 @@ interface AdminPageIntroProps {
 
 /**
  * Brand-styled page header for admin pages that don't use the shadcn
- * AdminPageHeader. Section-mark kicker + display-xl title + plain-English
+ * AdminPageHeader. Section-mark kicker + display-soft title + plain-English
  * description + optional HintTooltip + optional primary CTA. Consistent
  * with encouragements, members, dashboard.
  */
@@ -32,7 +32,7 @@ export function AdminPageIntro({
       <div className="mt-6 flex flex-wrap items-end justify-between gap-6">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-3">
-            <h1 className="display-xl text-3xl text-bone md:text-4xl">{title}</h1>
+            <h1 className="display-soft text-3xl text-bone md:text-4xl">{title}</h1>
             {hint && <HintTooltip hint={hint} />}
           </div>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-stone/80">
@@ -42,7 +42,7 @@ export function AdminPageIntro({
         {primary && (
           <Link
             href={primary.href}
-            className="lift group inline-flex h-11 items-center gap-2 border border-bone bg-bone px-5 text-sm font-medium text-iron transition-colors hover:bg-stone"
+            className="lift group inline-flex h-11 items-center gap-2 bg-bone px-5 text-sm font-medium text-iron transition-colors hover:bg-bone/85"
           >
             {primary.icon && <Icon name={primary.icon} size={14} />}
             {primary.label}

@@ -34,12 +34,15 @@ export default function SetupPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4">
+    <div className="flex min-h-screen items-center justify-center bg-background p-4 text-foreground">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <Shield className="mx-auto h-12 w-12 text-bronze" />
-          <CardTitle className="mt-4 text-2xl">Sheepdog Setup</CardTitle>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <Shield className="mx-auto h-12 w-12 text-brass" />
+          <p className="section-mark mt-4">First watch</p>
+          <CardTitle className="display-soft mt-2 text-3xl text-foreground">
+            Sheepdog Setup
+          </CardTitle>
+          <p className="mt-3 font-serif text-base leading-relaxed text-muted-foreground">
             Welcome, brother. This page makes you the first admin of the
             Sheepdog Society. Once you claim this role, this page is permanently
             disabled.
@@ -47,14 +50,14 @@ export default function SetupPage() {
         </CardHeader>
         <CardContent>
           {done ? (
-            <div className="flex flex-col items-center gap-2 text-green-500">
+            <div className="flex flex-col items-center gap-2 text-olive">
               <Check className="h-8 w-8" />
               <p className="font-medium">You are now admin. Redirecting...</p>
             </div>
           ) : (
             <>
               {error && (
-                <p className="mb-4 rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+                <p className="mb-4 border-l-2 border-destructive/60 bg-destructive/10 p-3 text-sm text-destructive">
                   {error}
                 </p>
               )}

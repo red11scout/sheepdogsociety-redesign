@@ -30,33 +30,35 @@ export default async function HomePage() {
     .where(eq(devotionals.date, today));
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6 p-6">
-      <div>
-        <h1 className="text-3xl font-bold">
+    <div className="mx-auto max-w-4xl space-y-6 bg-background p-6 text-foreground">
+      <header>
+        <div className="flex items-center gap-4">
+          <span className="folio">The day&rsquo;s watch</span>
+          <div className="hairline flex-1 text-foreground" />
+          <span className="folio">{format(new Date(), "EEEE, MMMM d, yyyy")}</span>
+        </div>
+        <h1 className="display-soft mt-5 text-[clamp(1.9rem,4.5vw,2.6rem)] text-foreground">
           Welcome back, {currentUser.firstName || "brother"}.
         </h1>
-        <p className="mt-1 text-muted-foreground">
-          {format(new Date(), "EEEE, MMMM d, yyyy")}
-        </p>
-      </div>
+      </header>
 
       {todayScripture && (
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <BookOpen className="h-5 w-5 text-bronze" />
+            <CardTitle className="section-mark flex items-center gap-2">
+              <BookOpen className="h-4 w-4 text-brass" />
               Scripture of the Day
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="font-scripture text-lg italic">
-              {todayScripture.text}
+            <p className="font-pullquote text-xl italic leading-snug text-foreground md:text-2xl">
+              &ldquo;{todayScripture.text}&rdquo;
             </p>
-            <p className="mt-2 text-sm font-medium text-bronze">
+            <p className="folio mt-3 !text-brass">
               — {todayScripture.reference} ({todayScripture.translation})
             </p>
             {todayScripture.reflection && (
-              <p className="mt-3 text-muted-foreground">
+              <p className="mt-4 border-l border-foreground/15 pl-4 font-serif text-base leading-relaxed text-muted-foreground">
                 {todayScripture.reflection}
               </p>
             )}
@@ -67,17 +69,22 @@ export default async function HomePage() {
       {todayDevotional && (
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Heart className="h-5 w-5 text-bronze" />
+            <p className="section-mark flex items-center gap-2">
+              <Heart className="h-4 w-4 text-brass" />
+              The devotional
+            </p>
+            <CardTitle className="display-soft mt-2 text-2xl text-foreground">
               {todayDevotional.title}
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="whitespace-pre-line">{todayDevotional.content}</p>
+            <p className="whitespace-pre-line font-serif text-base leading-relaxed text-foreground/90">
+              {todayDevotional.content}
+            </p>
             {todayDevotional.prayerPrompt && (
-              <div className="mt-4 rounded-lg bg-muted p-4">
-                <p className="text-sm font-medium">Prayer</p>
-                <p className="mt-1 text-sm text-muted-foreground">
+              <div className="mt-5 border-l-2 border-brass/60 pl-4">
+                <p className="section-mark">Prayer</p>
+                <p className="mt-2 font-serif text-base leading-relaxed text-muted-foreground">
                   {todayDevotional.prayerPrompt}
                 </p>
               </div>
@@ -89,9 +96,11 @@ export default async function HomePage() {
       {!todayScripture && !todayDevotional && (
         <Card>
           <CardContent className="flex flex-col items-center gap-4 p-8 text-center">
-            <Shield className="h-12 w-12 text-primary" />
-            <h2 className="text-xl font-bold">Sheepdog Society</h2>
-            <p className="text-muted-foreground">
+            <Shield className="h-12 w-12 text-brass" />
+            <h2 className="display-soft text-2xl text-foreground">
+              Sheepdog Society
+            </h2>
+            <p className="font-serif text-base leading-relaxed text-muted-foreground">
               Iron sharpens iron. Stand guard. Walk in faith.
             </p>
           </CardContent>

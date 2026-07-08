@@ -23,53 +23,72 @@ export default async function EncouragementsListPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-bone text-ink">
-        <div className="aurora aurora--soft" aria-hidden />
-        <div className="dotted-grid absolute inset-0 opacity-50" aria-hidden />
-        <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-12 md:py-32">
+      {/* ============ Front matter ============ */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 pt-12 md:px-10 md:pt-20">
           <div className="flex items-center gap-4">
-            <span className="section-mark">§ The Letter</span>
-            <div className="hairline flex-1" />
+            <span className="folio">The Letter</span>
+            <div className="hairline flex-1 text-foreground" />
+            <span className="folio">Published Sunday morning</span>
           </div>
-          <h1 className="display-xl mt-10 max-w-4xl text-[clamp(2.5rem,7vw,6rem)]">
-            One letter
-            <br />
-            <span className="text-brass">a week.</span>
-          </h1>
-          <p className="mt-10 max-w-2xl font-pullquote text-xl italic leading-relaxed text-iron/70 md:text-2xl">
-            Scripture, guidance, a word from the Watch. Read it before the day starts. Save it, carry it, hand it to a brother.
-          </p>
+
+          <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-14">
+            <div className="lg:col-span-8">
+              <h1 className="display-xl text-[clamp(2.2rem,6vw,4.5rem)] text-foreground">
+                One letter <em className="text-oxblood">a week.</em>
+              </h1>
+              <p className="mt-7 max-w-2xl font-serif text-lg leading-[1.75] text-foreground/85 md:text-xl">
+                Scripture, guidance, a word from the Watch. Read it before the
+                day starts. Save it, carry it, hand it to a brother.
+              </p>
+            </div>
+
+            <aside className="border-t-2 border-foreground/60 pt-6 lg:col-span-4 lg:border-l lg:border-t-0 lg:border-foreground/15 lg:pl-10 lg:pt-2">
+              <p className="section-mark">How it reads</p>
+              <p className="mt-5 font-serif text-[0.95rem] leading-relaxed text-foreground/80">
+                Five minutes on Sunday morning. A scripture, a practice,
+                carried the rest of the week. No fluff, no funnel.
+              </p>
+              <Link
+                href="/get-started"
+                className="link-editorial folio mt-6 inline-block !text-brass"
+              >
+                Get it by email
+              </Link>
+            </aside>
+          </div>
         </div>
       </section>
 
-      {/* List */}
-      <section className="bg-bone text-ink">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-28">
+      {/* ============ The archive ============ */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 py-14 md:px-10 md:py-20">
+          <div className="rule-double text-foreground/70" />
+
           {rows.length === 0 ? (
-            <div className="border border-dashed border-iron/15 p-16 text-center">
-              <Icon name="sparkles" size={48} className="mx-auto text-brass" />
-              <h2 className="display-xl mt-8 text-2xl text-iron md:text-3xl">
-                The first encouragement is on the way.
+            <div className="mt-12 border border-dashed border-foreground/25 p-12 text-center md:p-16">
+              <Icon name="sparkles" size={40} className="mx-auto text-brass" />
+              <h2 className="display-soft mt-6 text-2xl text-foreground md:text-3xl">
+                The first letter is on the way.
               </h2>
-              <p className="mx-auto mt-4 max-w-md font-pullquote text-lg italic text-iron/60">
-                Brothers are writing it. Sign up below to get it the moment it
+              <p className="mx-auto mt-4 max-w-md font-serif text-base leading-relaxed text-muted-foreground">
+                Brothers are writing it. Sign up to get it the moment it
                 lands.
               </p>
             </div>
           ) : (
-            <ul className="grid gap-px bg-background/10 md:grid-cols-2">
+            <ul className="grid md:grid-cols-2 md:gap-x-14">
               {rows.map((row) => (
-                <li key={row.id} className="bg-bone">
+                <li key={row.id} className="border-b border-foreground/15">
                   <Link
                     href={`/encouragements/${row.slug}`}
-                    className="lift group/card block p-8 transition-colors hover:bg-bone/60 md:p-12"
+                    className="group/card block py-10 md:py-12"
                   >
                     {/* Always render a cover. Real uploaded image wins;
                      *  otherwise fall back to a deterministic SVG keyed
                      *  by the letter's theme so the archive feels like
                      *  a designed series, not a list of titles. */}
-                    <div className="-mx-8 -mt-8 mb-8 aspect-[16/9] overflow-hidden md:-mx-12 md:-mt-12 md:mb-10">
+                    <div className="aspect-[16/9] overflow-hidden border border-foreground/15">
                       {row.coverImageUrl ? (
                         <Image
                           src={row.coverImageUrl}
@@ -89,32 +108,32 @@ export default async function EncouragementsListPage() {
                       )}
                     </div>
 
-                    <div className="flex items-center gap-3">
-                      <span className="section-mark text-brass">
+                    <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-1">
+                      <span className="folio !text-brass">
                         No. {row.issueNumber}
                       </span>
                       {row.publishDate && (
-                        <span className="section-mark text-iron/40">
+                        <span className="folio">
                           {format(new Date(row.publishDate), "MMM d, yyyy")}
                         </span>
                       )}
                     </div>
-                    <h3 className="display-xl mt-6 text-2xl text-iron md:text-3xl">
+                    <h3 className="display-soft mt-4 text-2xl text-foreground md:text-[1.7rem]">
                       {row.title}
                     </h3>
                     {row.intro && (
-                      <p className="mt-4 line-clamp-3 text-base leading-relaxed text-iron/70">
+                      <p className="mt-3 line-clamp-3 font-serif text-base leading-relaxed text-muted-foreground">
                         {row.intro}
                       </p>
                     )}
-                    <div className="mt-8 inline-flex items-center gap-2 section-mark text-brass">
-                      Read this week&rsquo;s
+                    <span className="link-editorial mt-5 inline-flex items-center gap-2 font-serif text-[0.95rem] text-foreground/80">
+                      Read the letter
                       <Icon
                         name="arrow-right"
-                        size={14}
+                        size={13}
                         className="transition-transform group-hover/card:translate-x-1"
                       />
-                    </div>
+                    </span>
                   </Link>
                 </li>
               ))}

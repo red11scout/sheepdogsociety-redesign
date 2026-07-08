@@ -42,26 +42,27 @@ export default async function AdminLettersPage({
 
   return (
     <div className="px-6 py-10 max-w-6xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <p className="font-body text-xs uppercase tracking-[0.18em] text-muted-foreground">
-            Admin
-          </p>
-          <h1 className="font-display text-4xl font-semibold tracking-tight">
+      <div className="mb-8">
+        <div className="flex items-center gap-4">
+          <span className="section-mark">§ Admin</span>
+          <div className="hairline flex-1" />
+        </div>
+        <div className="mt-5 flex flex-wrap items-end justify-between gap-4">
+          <h1 className="display-soft text-3xl text-foreground md:text-4xl">
             Letters
           </h1>
+          <form action={createLetter}>
+            <button
+              type="submit"
+              className="lift inline-flex h-11 items-center gap-2 bg-foreground px-5 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+            >
+              Start a new letter
+            </button>
+          </form>
         </div>
-        <form action={createLetter}>
-          <button
-            type="submit"
-            className="rounded-full bg-primary px-5 py-3 font-body font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
-          >
-            ✦ Start a new letter
-          </button>
-        </form>
       </div>
 
-      <nav className="flex gap-1 mb-6 text-sm">
+      <nav className="flex flex-wrap gap-1 mb-6 text-sm">
         {[
           { v: "all", label: "All" },
           { v: "draft", label: "Drafts" },
@@ -72,7 +73,7 @@ export default async function AdminLettersPage({
           <Link
             key={opt.v}
             href={`/admin/letters?status=${opt.v}`}
-            className={`px-3 py-1.5 rounded-full font-body ${
+            className={`px-3 py-1.5 text-xs uppercase tracking-[0.14em] transition-colors ${
               filter === opt.v
                 ? "bg-foreground text-background"
                 : "text-muted-foreground hover:text-foreground"
@@ -84,14 +85,14 @@ export default async function AdminLettersPage({
       </nav>
 
       {rows.length === 0 ? (
-        <div className="border border-dashed border-border rounded p-12 text-center">
-          <p className="font-display text-2xl mb-2">No letters yet.</p>
-          <p className="font-body text-muted-foreground">
+        <div className="border border-dashed border-border p-12 text-center">
+          <p className="display-soft text-2xl mb-2">No letters yet.</p>
+          <p className="font-serif text-muted-foreground">
             Click <strong>Start a new letter</strong> above. We&apos;ll walk you through it.
           </p>
         </div>
       ) : (
-        <div className="border border-border rounded overflow-hidden">
+        <div className="border border-border overflow-hidden">
           <table className="w-full">
             <thead className="bg-muted/40">
               <tr className="text-left">
@@ -106,14 +107,14 @@ export default async function AdminLettersPage({
               {rows.map((row) => (
                 <tr key={row.id}>
                   <Td>
-                    <span className="font-mono text-xs text-muted-foreground">
+                    <span className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
                       No. {row.issueNumber}
                     </span>
                   </Td>
                   <Td>
                     <Link
                       href={`/admin/letters/${row.id}`}
-                      className="font-display text-base hover:text-primary"
+                      className="display-soft text-base hover:text-primary"
                     >
                       {row.title}
                     </Link>
@@ -160,7 +161,7 @@ export default async function AdminLettersPage({
 
       <div className="mt-12 pt-6 border-t border-border text-center">
         <p className="font-body text-sm text-muted-foreground">
-          Need help? <a href="mailto:beargodwin@gmail.com" className="underline underline-offset-4">Email Drew</a>
+          Need help? <a href="mailto:beargodwin@gmail.com" className="link-editorial">Email Drew</a>
         </p>
       </div>
     </div>
@@ -169,7 +170,7 @@ export default async function AdminLettersPage({
 
 function Th({ children }: { children: React.ReactNode }) {
   return (
-    <th className="px-4 py-3 font-body text-xs uppercase tracking-[0.18em] text-muted-foreground">
+    <th className="section-mark px-4 py-3 text-left">
       {children}
     </th>
   );
@@ -180,15 +181,15 @@ function Td({ children }: { children: React.ReactNode }) {
 function StatusPill({ status }: { status: string }) {
   const tone =
     status === "published"
-      ? "bg-emerald-100 text-emerald-900 dark:bg-emerald-950 dark:text-emerald-200"
+      ? "border-olive/40 bg-olive/10 text-olive"
       : status === "scheduled"
-      ? "bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-200"
+      ? "border-brass/40 bg-brass/10 text-brass"
       : status === "archived"
-      ? "bg-stone-200 text-stone-700 dark:bg-stone-900 dark:text-stone-200"
-      : "bg-muted text-muted-foreground";
+      ? "border-stone/40 bg-stone/10 text-stone"
+      : "border-border bg-muted text-muted-foreground";
   return (
     <span
-      className={`inline-block px-2 py-0.5 rounded-full text-xs font-body uppercase tracking-wider ${tone}`}
+      className={`inline-block border px-2 py-0.5 text-xs uppercase tracking-wider ${tone}`}
     >
       {status}
     </span>

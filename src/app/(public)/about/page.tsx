@@ -9,20 +9,17 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-bone text-ink">
-        <div className="dotted-grid absolute inset-0 opacity-50" aria-hidden />
-        <div className="relative mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
+      {/* Lead */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 pb-14 pt-12 md:px-10 md:pb-20 md:pt-20">
           <div className="flex items-center gap-4">
-            <span className="section-mark">§ About &middot; The Watch</span>
-            <div className="hairline flex-1" />
+            <span className="section-mark">About &middot; The watch</span>
+            <div className="hairline flex-1 text-foreground" />
           </div>
-          <h1 className="display-xl mt-10 max-w-4xl text-[clamp(2.5rem,7vw,6.5rem)]">
-            A brotherhood,
-            <br />
-            <span className="text-brass">rooted and ready.</span>
+          <h1 className="display-xl mt-8 max-w-4xl text-[clamp(2.2rem,6vw,4.5rem)] text-foreground">
+            A brotherhood, <em className="text-oxblood">rooted and ready.</em>
           </h1>
-          <p className="mt-10 max-w-2xl font-pullquote text-xl italic leading-relaxed text-iron/70 md:text-2xl">
+          <p className="dropcap mt-8 max-w-2xl font-serif text-lg leading-[1.75] text-foreground/85 md:text-xl">
             Men of faith, honorable values, prepared in every aspect of life. We
             protect our families. We sharpen each other. We follow Christ.
           </p>
@@ -31,69 +28,58 @@ export default function AboutPage() {
 
       {/* Mission */}
       <section className="bg-background text-foreground">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 py-28 md:grid-cols-[2fr_3fr] md:gap-20 md:px-12 md:py-40">
-          <div>
-            <span className="section-mark">§ I &middot; Mission</span>
-            <div className="hairline mt-3" />
-            <h2 className="display-xl mt-8 text-4xl text-foreground md:text-5xl">
-              Our mission.
-            </h2>
-          </div>
-          <p className="font-pullquote text-xl leading-relaxed text-stone md:text-2xl">
-            We are a brotherhood of like-minded men, rooted in honorable
-            Christian values, driven to be prepared in every aspect of life. We
-            protect our faith, our families, ourselves, and anyone in need. We
-            educate, communicate, and demonstrate faith through leadership and
-            fellowship, with boldness, authority, strength, and grace.
-          </p>
-        </div>
-      </section>
-
-      {/* Foundation */}
-      <section className="bg-bone text-ink">
-        <div className="mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
-          <div className="flex items-center gap-4">
-            <span className="section-mark">§ II &middot; Foundation</span>
-            <div className="hairline flex-1" />
-          </div>
-          <div className="mt-10 grid gap-12 md:grid-cols-[2fr_3fr] md:gap-20">
-            <h2 className="display-xl text-4xl md:text-6xl">
-              Acts 20:28.
-              <br />
-              <span className="text-brass">The verse we live by.</span>
-            </h2>
-            <div className="space-y-6">
-              <blockquote className="border-l-2 border-brass pl-6 font-pullquote text-2xl italic leading-relaxed text-iron md:text-3xl">
-                Keep watch over yourselves and all the flock. Be shepherds of
-                the church of God, which he bought with his own blood.
-              </blockquote>
-              <p className="section-mark text-brass">Acts 20:28 &middot; ESV</p>
-              <p className="text-base leading-relaxed text-iron/70 md:text-lg">
-                A call for every man to keep watch, shepherd, train, and be
-                ready. We are called by Christ to be the shepherds over our
-                flock, our church, our families, our wives, our kids. This is
-                not a passive calling. It demands vigilance, courage, and
-                faithfulness.
+        <div className="mx-auto max-w-7xl px-6 py-14 md:px-10 md:py-20">
+          <div className="rule-double text-foreground/70" />
+          <div className="grid gap-10 pt-12 lg:grid-cols-12 lg:gap-14">
+            <div className="lg:col-span-4">
+              <p className="section-mark">I &middot; Mission</p>
+              <h2 className="display-xl mt-6 text-[clamp(1.9rem,4vw,3rem)] text-foreground">
+                Our mission.
+              </h2>
+            </div>
+            <div className="border-t border-foreground/15 pt-8 lg:col-span-8 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
+              <p className="font-serif text-lg leading-[1.75] text-foreground/85 md:text-xl">
+                We are a brotherhood of like-minded men, rooted in honorable
+                Christian values, driven to be prepared in every aspect of life.
+                We protect our faith, our families, ourselves, and anyone in
+                need. We educate, communicate, and demonstrate faith through
+                leadership and fellowship, with boldness, authority, strength,
+                and grace.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Leadership Model */}
+      {/* Foundation — the verse, the one ember moment */}
+      <section className="ember-band">
+        <div className="mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
+          <p className="section-mark">II &middot; Foundation &middot; Acts 20:28</p>
+          <p className="mt-8 font-pullquote text-2xl italic leading-snug md:text-4xl">
+            &ldquo;Keep watch over yourselves and all the flock. Be shepherds of
+            the church of God, which he bought with his own blood.&rdquo;
+          </p>
+          <div className="mx-auto mt-10 h-px w-24 bg-[#c9834a]/60" />
+          <p className="folio mt-6 !text-[#b7a68b]">
+            A call for every man to keep watch, shepherd, train, and be ready.
+            Not a passive calling — it demands vigilance, courage, and
+            faithfulness.
+          </p>
+        </div>
+      </section>
+
+      {/* Leadership model */}
       <section className="bg-background text-foreground">
-        <div className="mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
+        <div className="mx-auto max-w-7xl px-6 py-14 md:px-10 md:py-20">
           <div className="flex items-center gap-4">
-            <span className="section-mark">§ III &middot; Leadership</span>
-            <div className="hairline flex-1" />
+            <span className="section-mark">III &middot; Leadership</span>
+            <div className="hairline flex-1 text-foreground" />
           </div>
-          <div className="mt-10 grid gap-12 md:grid-cols-[2fr_3fr] md:gap-20">
-            <h2 className="display-xl text-4xl text-foreground md:text-6xl">
-              A starfish,
-              <br />
-              <span className="text-brass">not a spider.</span>
+          <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-14">
+            <h2 className="display-xl text-[clamp(1.9rem,4.5vw,3.4rem)] text-foreground lg:col-span-5">
+              A starfish, <em className="text-oxblood">not a spider.</em>
             </h2>
-            <div className="space-y-6 text-base leading-relaxed text-stone md:text-lg">
+            <div className="space-y-6 border-t border-foreground/15 pt-8 font-serif text-base leading-relaxed text-foreground/80 md:text-lg lg:col-span-7 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
               <p>
                 Our leadership revolves around no single man. It revolves around
                 Jesus Christ. We follow a decentralized model where every man is
@@ -109,17 +95,18 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* What We Believe */}
-      <section className="bg-bone text-ink">
-        <div className="mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
-          <div className="flex items-center gap-4">
-            <span className="section-mark">§ IV &middot; What We Believe</span>
-            <div className="hairline flex-1" />
+      {/* What we believe */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 py-14 md:px-10 md:py-20">
+          <div className="rule-double text-foreground/70" />
+          <div className="flex items-center gap-4 pt-12">
+            <span className="section-mark">IV &middot; What we believe</span>
+            <div className="hairline flex-1 text-foreground" />
           </div>
-          <h2 className="display-xl mt-10 max-w-3xl text-4xl md:text-6xl">
+          <h2 className="display-xl mt-8 max-w-3xl text-[clamp(1.9rem,4.5vw,3.4rem)] text-foreground">
             Three convictions.
           </h2>
-          <div className="mt-16 grid gap-px bg-background/10 md:grid-cols-3">
+          <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-12">
             {[
               {
                 icon: "scroll" as const,
@@ -140,23 +127,22 @@ export default function AboutPage() {
                 copy: "Iron sharpens iron. We are stronger together, carrying burdens, challenging complacency, building each other up.",
               },
             ].map((item) => (
-              <article
-                key={item.title}
-                className="spotlight lift bg-bone p-10 md:p-12"
-              >
+              <article key={item.title} className="border-t-2 border-foreground/60 pt-6">
                 <div className="flex items-center justify-between">
+                  <span className="display-soft text-2xl leading-none text-brass">
+                    {item.roman}.
+                  </span>
                   <Icon
                     name={item.icon}
-                    size={44}
+                    size={26}
                     strokeWidth={2}
                     className="text-brass"
                   />
-                  <span className="section-mark">§ {item.roman}</span>
                 </div>
-                <h3 className="display-xl mt-12 text-2xl md:text-3xl">
+                <h3 className="display-soft mt-6 text-xl text-foreground md:text-2xl">
                   {item.title}
                 </h3>
-                <p className="mt-4 max-w-xs text-base leading-relaxed text-iron/70">
+                <p className="mt-3 font-serif text-base leading-relaxed text-foreground/80">
                   {item.copy}
                 </p>
               </article>
@@ -167,15 +153,15 @@ export default function AboutPage() {
 
       {/* Culture */}
       <section className="bg-background text-foreground">
-        <div className="mx-auto max-w-7xl px-6 py-28 md:px-12 md:py-40">
+        <div className="mx-auto max-w-7xl px-6 py-14 md:px-10 md:py-20">
           <div className="flex items-center gap-4">
-            <span className="section-mark">§ V &middot; Our Culture</span>
-            <div className="hairline flex-1" />
+            <span className="section-mark">V &middot; Our culture</span>
+            <div className="hairline flex-1 text-foreground" />
           </div>
-          <h2 className="display-xl mt-10 max-w-3xl text-4xl text-foreground md:text-6xl">
+          <h2 className="display-xl mt-8 max-w-3xl text-[clamp(1.9rem,4.5vw,3.4rem)] text-foreground">
             How we hold the line.
           </h2>
-          <ol className="mt-16 divide-y divide-stone/15 border-y border-stone/15">
+          <ol className="mt-12 divide-y divide-foreground/15 border-y border-foreground/15">
             {[
               {
                 roman: "I",
@@ -200,15 +186,15 @@ export default function AboutPage() {
             ].map((item) => (
               <li
                 key={item.heading}
-                className="grid grid-cols-[60px_1fr] gap-6 py-10 md:grid-cols-[80px_280px_1fr] md:gap-12 md:py-14"
+                className="grid grid-cols-[48px_1fr] gap-6 py-8 md:grid-cols-[80px_280px_1fr] md:gap-12 md:py-12"
               >
-                <span className="section-mark text-brass md:pt-2">
-                  § {item.roman}
+                <span className="display-soft text-2xl leading-none text-brass md:pt-1">
+                  {item.roman}.
                 </span>
-                <h3 className="display-xl col-span-1 text-2xl text-foreground md:text-3xl">
+                <h3 className="display-soft col-span-1 text-xl text-foreground md:text-2xl">
                   {item.heading}
                 </h3>
-                <p className="col-span-2 text-base leading-relaxed text-stone md:col-span-1 md:text-lg">
+                <p className="col-span-2 font-serif text-base leading-relaxed text-foreground/80 md:col-span-1 md:text-lg">
                   {item.copy}
                 </p>
               </li>

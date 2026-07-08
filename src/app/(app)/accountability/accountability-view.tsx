@@ -134,10 +134,14 @@ export function AccountabilityView({
   const moods = ["Great", "Good", "Okay", "Struggling", "Need Help"];
 
   return (
-    <div className="mx-auto max-w-3xl p-6">
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Accountability</h1>
-        <Dialog open={pairDialogOpen} onOpenChange={setPairDialogOpen}>
+    <div className="mx-auto max-w-3xl bg-background p-6 text-foreground">
+      <header className="mb-6">
+        <p className="section-mark">Iron sharpens iron</p>
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
+          <h1 className="display-soft text-3xl text-foreground">
+            Accountability
+          </h1>
+          <Dialog open={pairDialogOpen} onOpenChange={setPairDialogOpen}>
           <DialogTrigger asChild>
             <Button size="sm">
               <UserPlus className="mr-1 h-4 w-4" />
@@ -183,8 +187,10 @@ export function AccountabilityView({
               {submitting ? "Creating..." : "Create Partnership"}
             </Button>
           </DialogContent>
-        </Dialog>
-      </div>
+          </Dialog>
+        </div>
+        <div className="hairline mt-4 text-foreground" />
+      </header>
 
       {/* Check-in dialog */}
       <Dialog open={checkinDialogOpen} onOpenChange={setCheckinDialogOpen}>
@@ -247,12 +253,14 @@ export function AccountabilityView({
       </Dialog>
 
       {loading ? (
-        <p className="text-muted-foreground">Loading...</p>
+        <p className="font-serif text-base italic text-muted-foreground">
+          Loading...
+        </p>
       ) : pairs.length === 0 ? (
         <Card>
           <CardContent className="flex flex-col items-center gap-4 p-8 text-center">
-            <Shield className="h-12 w-12 text-bronze" />
-            <p className="text-muted-foreground">
+            <Shield className="h-12 w-12 text-brass" />
+            <p className="font-serif text-base leading-relaxed text-muted-foreground">
               No accountability partners yet. Iron sharpens iron.
             </p>
           </CardContent>
@@ -276,10 +284,10 @@ export function AccountabilityView({
                         <AvatarFallback>{initials || "?"}</AvatarFallback>
                       </Avatar>
                       <div>
-                        <CardTitle className="text-base">
+                        <CardTitle className="display-soft text-lg text-foreground">
                           {pair.partner.firstName} {pair.partner.lastName}
                         </CardTitle>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="folio mt-0.5">
                           Partners since{" "}
                           {format(new Date(pair.startedAt), "MMM d, yyyy")}
                         </p>
@@ -305,16 +313,14 @@ export function AccountabilityView({
                 </CardHeader>
                 {pair.recentCheckins.length > 0 && (
                   <CardContent>
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      Recent Check-Ins
-                    </p>
-                    <div className="space-y-2">
+                    <p className="section-mark mb-3">Recent Check-Ins</p>
+                    <div className="space-y-3">
                       {pair.recentCheckins.slice(0, 3).map((ci) => (
                         <div
                           key={ci.id}
-                          className="rounded-md bg-secondary/50 p-3 text-sm"
+                          className="border-l border-foreground/15 pl-4 text-sm"
                         >
-                          <div className="flex items-center justify-between text-xs text-muted-foreground">
+                          <div className="folio flex items-center justify-between">
                             <span>
                               {ci.userId === currentUser.id
                                 ? "You"
@@ -325,12 +331,12 @@ export function AccountabilityView({
                             </span>
                           </div>
                           {ci.mood && (
-                            <Badge variant="outline" className="mt-1 text-xs">
+                            <Badge variant="outline" className="mt-1.5 text-xs">
                               {ci.mood}
                             </Badge>
                           )}
                           {ci.highlights && (
-                            <p className="mt-1 text-muted-foreground">
+                            <p className="mt-1.5 font-serif text-base leading-relaxed text-muted-foreground">
                               {ci.highlights}
                             </p>
                           )}

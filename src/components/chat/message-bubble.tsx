@@ -64,7 +64,7 @@ export function MessageBubble({
           </div>
         )}
 
-        <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">
+        <p className="whitespace-pre-wrap break-words font-serif text-base leading-relaxed text-foreground/90">
           {message.content}
         </p>
 
@@ -75,10 +75,10 @@ export function MessageBubble({
               <button
                 key={r.emoji}
                 onClick={() => onReact(message.id, r.emoji)}
-                className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs transition-colors ${
+                className={`inline-flex items-center gap-1 border px-2 py-0.5 text-xs transition-colors ${
                   r.userReacted
-                    ? "border-primary/50 bg-primary/10 text-primary"
-                    : "border-border hover:bg-secondary"
+                    ? "border-brass/60 bg-brass/10 text-foreground"
+                    : "border-ink/15 hover:bg-secondary"
                 }`}
               >
                 <span>{r.emoji}</span>
@@ -92,7 +92,7 @@ export function MessageBubble({
         {message.replyCount != null && message.replyCount > 0 && (
           <button
             onClick={() => onReply(message.id)}
-            className="mt-1 flex items-center gap-1 text-xs text-primary hover:underline"
+            className="link-editorial mt-1 flex items-center gap-1 text-xs text-foreground/80"
           >
             <MessageCircle className="h-3 w-3" />
             {message.replyCount} {message.replyCount === 1 ? "reply" : "replies"}
@@ -101,7 +101,7 @@ export function MessageBubble({
       </div>
 
       {/* Hover actions */}
-      <div className="absolute right-2 top-0 hidden items-center gap-0.5 rounded-md border bg-card px-1 py-0.5 shadow-sm group-hover:flex">
+      <div className="absolute right-2 top-0 hidden items-center gap-0.5 border border-foreground/15 bg-card px-1 py-0.5 group-hover:flex">
         {QUICK_REACTIONS.map((emoji) => (
           <button
             key={emoji}

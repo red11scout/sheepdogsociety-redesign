@@ -8,10 +8,12 @@ export const runtime = "nodejs";
 // Vertical 1080×1920 — iMessage preview ratio + Instagram Story.
 const SIZE = { width: 1080, height: 1920 };
 
-const IRON = "#0E1624";
-const BONE = "#F2EBDD";
-const BRASS = "#C8932A";
-const STONE = "#8A8275";
+// Ridge & Bone constants — warm ink ground, bone text, brass accent.
+// Mirrors the --c-* brand tokens in globals.css (OG images can't read CSS vars).
+const IRON = "#211a11";
+const BONE = "#f4edde";
+const BRASS = "#c9a25a";
+const STONE = "#c4b9a4";
 
 export async function GET(
   _req: Request,

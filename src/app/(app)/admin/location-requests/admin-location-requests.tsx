@@ -51,7 +51,7 @@ export function AdminLocationRequests({
     <div className="space-y-6">
       {pending.length > 0 && (
         <div>
-          <h2 className="mb-3 text-lg font-semibold">
+          <h2 className="display-soft mb-3 text-lg text-foreground">
             Pending ({pending.length})
           </h2>
           <div className="space-y-3">
@@ -124,7 +124,7 @@ export function AdminLocationRequests({
 
       {reviewed.length > 0 && (
         <div>
-          <h2 className="mb-3 text-lg font-semibold">
+          <h2 className="display-soft mb-3 text-lg text-foreground">
             Reviewed ({reviewed.length})
           </h2>
           <div className="space-y-2">

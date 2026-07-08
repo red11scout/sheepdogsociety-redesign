@@ -228,7 +228,7 @@ export function MembersTable({ initialRows, groupOptions, dbError }: Props) {
     return (
       <div className="mx-auto max-w-3xl px-6 py-10">
         <div className="border border-oxblood/40 bg-oxblood/15 p-6 text-sm text-bone">
-          <p className="display-xl text-base">Members table can&rsquo;t load.</p>
+          <p className="display-soft text-base">Members table can&rsquo;t load.</p>
           <p className="mt-2 text-stone/85">{dbError}</p>
           <p className="mt-3 text-xs text-stone/60">
             Likely cause: migration 0009 hasn&rsquo;t been applied. Run it via the GHA migration runner or paste the SQL into the Neon SQL editor.
@@ -374,7 +374,7 @@ export function MembersTable({ initialRows, groupOptions, dbError }: Props) {
       {/* Table */}
       <div className="overflow-x-auto border border-stone/15">
         <table className="w-full text-xs">
-          <thead className="border-b border-stone/15 bg-iron/40 text-stone/65">
+          <thead className="section-mark border-b border-stone/15 bg-iron/40">
             <tr>
               <th className="w-10 px-3 py-2 text-left">
                 <input
@@ -503,7 +503,7 @@ function MemberRow({
           className="h-3.5 w-3.5 accent-brass"
         />
       </td>
-      <td className="px-3 py-2 font-mono text-[0.6875rem] text-stone/55">
+      <td className="px-3 py-2 text-[0.6875rem] tracking-wide text-stone/55">
         {row.shortId}
       </td>
       <td className="px-3 py-2">

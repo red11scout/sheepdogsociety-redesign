@@ -104,7 +104,7 @@ export default function AdminNewsletterPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">{totalCount}</p>
+            <p className="display-soft text-2xl">{totalCount}</p>
           </CardContent>
         </Card>
         <Card>
@@ -114,7 +114,7 @@ export default function AdminNewsletterPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold text-green-500">{activeCount}</p>
+            <p className="display-soft text-2xl text-olive">{activeCount}</p>
           </CardContent>
         </Card>
       </div>
@@ -139,7 +139,7 @@ export default function AdminNewsletterPage() {
                       </span>
                     )}
                     {subscriber.isActive ? (
-                      <Badge className="bg-green-600 text-white">Active</Badge>
+                      <Badge variant="outline" className="border-olive/40 bg-olive/10 text-olive">Active</Badge>
                     ) : (
                       <Badge variant="secondary">Inactive</Badge>
                     )}
@@ -157,9 +157,9 @@ export default function AdminNewsletterPage() {
                     onClick={() => toggleActive(subscriber)}
                   >
                     {subscriber.isActive ? (
-                      <ToggleRight className="h-4 w-4 text-green-500" />
+                      <ToggleRight className="h-4 w-4 text-olive" />
                     ) : (
-                      <ToggleLeft className="h-4 w-4 text-gray-400" />
+                      <ToggleLeft className="h-4 w-4 text-muted-foreground" />
                     )}
                   </Button>
                   <Button

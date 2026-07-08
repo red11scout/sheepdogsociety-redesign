@@ -17,9 +17,9 @@ export function EmptyState({
   secondary,
 }: EmptyStateProps) {
   return (
-    <div className="border border-dashed border-stone/20 bg-iron/30 p-10 text-center md:p-16">
+    <div className="border border-dashed border-stone/25 bg-transparent p-10 text-center md:p-16">
       <Icon name={icon} size={40} className="mx-auto text-brass" />
-      <h3 className="display-xl mt-6 text-2xl text-bone md:text-3xl">{title}</h3>
+      <h3 className="display-soft mt-6 text-2xl text-bone md:text-3xl">{title}</h3>
       <p className="mx-auto mt-3 max-w-md font-pullquote text-base italic leading-relaxed text-stone">
         {body}
       </p>
@@ -28,7 +28,7 @@ export function EmptyState({
           {primary && (
             <Link
               href={primary.href}
-              className="lift inline-flex h-11 items-center gap-2 border border-bone bg-bone px-6 text-sm font-medium text-iron transition-colors hover:bg-stone"
+              className="lift inline-flex h-11 items-center gap-2 bg-bone px-6 text-sm font-medium text-iron transition-colors hover:bg-bone/85"
             >
               {primary.label}
               <Icon name="arrow-right" size={14} />

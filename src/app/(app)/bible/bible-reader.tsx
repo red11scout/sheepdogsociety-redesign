@@ -90,7 +90,7 @@ export function BibleReader() {
     <div className="flex h-full flex-col">
       {/* Navigation Bar */}
       <div className="flex flex-wrap items-center gap-2 border-b border-border px-4 py-3">
-        <BookOpen className="h-5 w-5 text-bronze" />
+        <BookOpen className="h-5 w-5 text-brass" />
 
         {/* Book/Chapter selector */}
         <Button
@@ -169,9 +169,7 @@ export function BibleReader() {
       {/* All Translations Dropdown */}
       {showAllTranslations && (
         <div className="border-b border-border bg-card p-4">
-          <div className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
-            All Translations
-          </div>
+          <div className="section-mark mb-2">All Translations</div>
           <div className="grid grid-cols-2 gap-1 sm:grid-cols-3 md:grid-cols-4">
             {AVAILABLE_TRANSLATIONS.map((t) => (
               <button
@@ -199,9 +197,7 @@ export function BibleReader() {
       {/* Book Picker Overlay */}
       {showBookPicker && (
         <div className="border-b border-border bg-card p-4">
-          <div className="mb-3 text-xs font-semibold uppercase text-muted-foreground">
-            Old Testament
-          </div>
+          <div className="section-mark mb-3">Old Testament</div>
           <div className="mb-4 flex flex-wrap gap-1">
             {BIBLE_BOOKS.slice(0, 39).map((b) => (
               <button
@@ -221,9 +217,7 @@ export function BibleReader() {
               </button>
             ))}
           </div>
-          <div className="mb-3 text-xs font-semibold uppercase text-muted-foreground">
-            New Testament
-          </div>
+          <div className="section-mark mb-3">New Testament</div>
           <div className="mb-4 flex flex-wrap gap-1">
             {BIBLE_BOOKS.slice(39).map((b) => (
               <button
@@ -244,9 +238,7 @@ export function BibleReader() {
             ))}
           </div>
           {/* Chapter grid */}
-          <div className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
-            Chapter
-          </div>
+          <div className="section-mark mb-2">Chapter</div>
           <div className="flex flex-wrap gap-1">
             {Array.from({ length: maxChapters }, (_, i) => i + 1).map((ch) => (
               <button
@@ -271,12 +263,10 @@ export function BibleReader() {
       {/* Scripture Content */}
       <div className="flex-1 overflow-y-auto px-4 py-6 md:px-8 lg:px-16">
         <div className="mx-auto max-w-2xl">
-          <h2 className="mb-1 text-2xl font-bold">
+          <h2 className="display-soft mb-1 text-3xl text-foreground">
             {book} {chapter}
           </h2>
-          <p className="mb-4 text-sm text-muted-foreground">
-            {currentTranslationName}
-          </p>
+          <p className="folio mb-5">{currentTranslationName}</p>
 
           {loading ? (
             <div className="space-y-3">

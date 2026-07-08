@@ -149,7 +149,7 @@ export function GalleryManager({ initial }: ManagerProps) {
         </div>
         <div className="mt-6 flex flex-wrap items-end justify-between gap-6">
           <div>
-            <h1 className="display-xl text-3xl text-bone md:text-5xl">
+            <h1 className="display-soft text-3xl text-bone md:text-4xl">
               Every photo. Every gathering.
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-stone/80">
@@ -159,7 +159,7 @@ export function GalleryManager({ initial }: ManagerProps) {
                 href="/gallery"
                 target="_blank"
                 rel="noreferrer"
-                className="text-brass hover:underline"
+                className="link-editorial text-brass"
               >
                 /gallery
               </a>
@@ -194,7 +194,7 @@ export function GalleryManager({ initial }: ManagerProps) {
         <button
           type="button"
           onClick={() => setCreating((v) => !v)}
-          className="lift inline-flex h-10 items-center gap-2 border border-bone bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-stone"
+          className="lift inline-flex h-10 items-center gap-2 bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85"
         >
           <Icon name="plus" size={12} />
           {creating ? "Cancel" : "New event"}
@@ -247,7 +247,7 @@ export function GalleryManager({ initial }: ManagerProps) {
                     <Icon name="image" size={16} />
                   </span>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate display-xl text-base text-bone md:text-lg">
+                    <p className="truncate display-soft text-base text-bone md:text-lg">
                       {ev.title}
                     </p>
                     <p className="mt-1 flex flex-wrap items-center gap-2 text-[0.6875rem] text-stone/55">
@@ -309,7 +309,7 @@ export function GalleryManager({ initial }: ManagerProps) {
 function Stat({ label, value }: { label: string; value: number }) {
   return (
     <div>
-      <p className="display-xl text-3xl text-brass md:text-4xl">{value}</p>
+      <p className="display-soft text-3xl text-brass md:text-4xl">{value}</p>
       <p className="section-mark text-stone/55">{label}</p>
     </div>
   );
@@ -437,7 +437,7 @@ function NewEventForm({
           type="button"
           onClick={submit}
           disabled={busy || !title.trim() || !startTime}
-          className="lift inline-flex h-9 items-center gap-1.5 bg-brass px-4 text-[0.6875rem] font-medium uppercase tracking-wider text-iron transition-colors hover:bg-gold disabled:opacity-60"
+          className="lift inline-flex h-9 items-center gap-1.5 bg-bone px-4 text-[0.6875rem] font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85 disabled:opacity-60"
         >
           {busy ? "Creating..." : "Create event"}
         </button>
@@ -820,7 +820,7 @@ function EventEditor({
                   />
                   {/* Position chip + reorder buttons */}
                   <div className="absolute inset-x-2 top-2 flex items-center justify-between gap-2">
-                    <span className="inline-flex h-5 items-center bg-iron/85 px-1.5 text-[0.5625rem] font-mono text-bone backdrop-blur-sm">
+                    <span className="inline-flex h-5 items-center bg-iron px-1.5 text-[0.5625rem] font-medium text-bone">
                       {i + 1}
                     </span>
                     <div className="flex gap-1 opacity-0 transition-opacity group-hover/photo:opacity-100">
@@ -828,7 +828,7 @@ function EventEditor({
                         <button
                           type="button"
                           onClick={() => movePhoto(i, -1)}
-                          className="inline-flex h-5 w-5 items-center justify-center bg-iron/85 text-bone backdrop-blur-sm hover:bg-brass hover:text-iron"
+                          className="inline-flex h-5 w-5 items-center justify-center bg-iron text-bone hover:bg-brass hover:text-iron"
                           aria-label="Move left"
                           title="Move earlier"
                         >
@@ -839,7 +839,7 @@ function EventEditor({
                         <button
                           type="button"
                           onClick={() => movePhoto(i, 1)}
-                          className="inline-flex h-5 w-5 items-center justify-center bg-iron/85 text-bone backdrop-blur-sm hover:bg-brass hover:text-iron"
+                          className="inline-flex h-5 w-5 items-center justify-center bg-iron text-bone hover:bg-brass hover:text-iron"
                           aria-label="Move right"
                           title="Move later"
                         >
@@ -852,7 +852,7 @@ function EventEditor({
                   <button
                     type="button"
                     onClick={() => removePhoto(i)}
-                    className="absolute bottom-2 right-2 inline-flex h-7 w-7 items-center justify-center bg-iron/85 text-bone opacity-0 backdrop-blur-sm transition-opacity hover:bg-oxblood group-hover/photo:opacity-100"
+                    className="absolute bottom-2 right-2 inline-flex h-7 w-7 items-center justify-center bg-iron text-bone opacity-0 transition-opacity hover:bg-oxblood group-hover/photo:opacity-100"
                     aria-label="Remove photo"
                     title="Remove photo"
                   >

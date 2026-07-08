@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState, useTransition } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/icons/Icon";
-import { Magnetic } from "@/components/motion/Magnetic";
 import { ImageField } from "@/components/admin/ImageField";
 import { HintTooltip } from "@/components/admin/HintTooltip";
 import {
@@ -227,7 +226,7 @@ export function EncouragementEditor({ id, initial }: EncouragementEditorProps) {
   return (
     <div className="mx-auto max-w-5xl px-6 py-10 md:px-12 md:py-14">
       {/* Toolbar */}
-      <div className="sticky top-0 z-20 -mx-6 mb-10 flex flex-wrap items-center gap-3 border-b border-stone/15 bg-iron/85 px-6 py-3 backdrop-blur md:-mx-12 md:px-12">
+      <div className="sticky top-0 z-20 -mx-6 mb-10 flex flex-wrap items-center gap-3 border-b border-stone/15 bg-iron px-6 py-3 md:-mx-12 md:px-12">
         <Link
           href="/admin/encouragements"
           className="inline-flex items-center gap-1.5 text-xs text-stone/65 transition-colors hover:text-brass"
@@ -285,17 +284,15 @@ export function EncouragementEditor({ id, initial }: EncouragementEditorProps) {
             Unpublish
           </button>
         ) : (
-          <Magnetic strength={0.18}>
-            <button
-              type="button"
-              onClick={publishNow}
-              disabled={pending}
-              className="lift inline-flex h-9 items-center gap-2 bg-brass px-4 text-xs font-medium uppercase tracking-wider text-ink transition-colors hover:bg-gold disabled:opacity-60"
-            >
-              {pending ? "Publishing..." : "Publish now"}
-              <Icon name="send" size={12} />
-            </button>
-          </Magnetic>
+          <button
+            type="button"
+            onClick={publishNow}
+            disabled={pending}
+            className="lift inline-flex h-9 items-center gap-2 bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85 disabled:opacity-60"
+          >
+            {pending ? "Publishing..." : "Publish now"}
+            <Icon name="send" size={12} />
+          </button>
         )}
       </div>
 
@@ -311,8 +308,7 @@ export function EncouragementEditor({ id, initial }: EncouragementEditorProps) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="A title men remember on Wednesday"
-          className="block w-full bg-transparent text-4xl font-medium leading-tight tracking-[-0.03em] text-bone placeholder:text-stone/30 focus:outline-none md:text-6xl"
-          style={{ fontFamily: "var(--font-display)" }}
+          className="display-soft block w-full bg-transparent text-4xl leading-tight text-bone placeholder:text-stone/30 focus:outline-none md:text-5xl"
         />
         <div className="mt-4 flex flex-wrap items-center gap-4">
           <label className="flex items-center gap-2 text-xs text-stone/65">
@@ -416,8 +412,7 @@ export function EncouragementEditor({ id, initial }: EncouragementEditorProps) {
                 value={s.ref}
                 onChange={(e) => updateScripture(i, { ref: e.target.value })}
                 placeholder="Romans 5:3-4"
-                className="bg-transparent px-2 py-1 text-sm font-medium text-bone focus:outline-none"
-                style={{ fontFamily: "var(--font-jetbrains-mono)" }}
+                className="bg-transparent px-2 py-1 font-serif text-sm font-medium text-bone focus:outline-none"
               />
               <input
                 value={s.note ?? ""}

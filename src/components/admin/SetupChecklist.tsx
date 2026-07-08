@@ -86,7 +86,7 @@ export function SetupChecklist({ stats }: { stats: SetupStats }) {
   const pct = Math.round((done / total) * 100);
 
   return (
-    <section className="mt-8 border border-stone/15 bg-iron/40">
+    <section className="paper-card mt-8">
       <header className="flex items-center justify-between border-b border-stone/15 px-6 py-4">
         <div className="flex items-center gap-3">
           <Icon name="check" size={18} className="text-brass" />
@@ -137,7 +137,7 @@ export function SetupChecklist({ stats }: { stats: SetupStats }) {
               <div className="min-w-0 flex-1">
                 <p
                   className={cn(
-                    "font-display text-base text-bone group-hover:text-brass md:text-lg",
+                    "display-soft text-base text-bone group-hover:text-brass md:text-lg",
                     step.done && "line-through decoration-stone/40"
                   )}
                 >

@@ -102,7 +102,7 @@ export default async function SettingsPage() {
           <span className="section-mark text-brass">§ Settings</span>
           <div className="hairline flex-1" />
         </div>
-        <h1 className="display-xl mt-6 text-3xl text-bone md:text-5xl">
+        <h1 className="display-soft mt-6 text-3xl text-bone md:text-4xl">
           The control panel.
         </h1>
         <p className="mt-4 max-w-2xl font-pullquote text-base italic leading-relaxed text-stone">
@@ -112,7 +112,7 @@ export default async function SettingsPage() {
       </header>
 
       {/* Brand voice */}
-      <section className="mt-12 border border-stone/15 bg-iron/40">
+      <section className="paper-card mt-12">
         <div className="flex items-center justify-between border-b border-stone/15 px-6 py-4">
           <div className="flex items-center gap-3">
             <Icon name="pen" size={18} className="text-brass" />
@@ -137,7 +137,7 @@ export default async function SettingsPage() {
       </section>
 
       {/* Integrations */}
-      <section className="mt-8 border border-stone/15 bg-iron/40">
+      <section className="paper-card mt-8">
         <div className="flex items-center justify-between border-b border-stone/15 px-6 py-4">
           <div className="flex items-center gap-3">
             <Icon name="anchor" size={18} className="text-brass" />
@@ -151,7 +151,7 @@ export default async function SettingsPage() {
             return (
               <li key={i.envKey} className="grid gap-3 px-6 py-4 md:grid-cols-[180px_1fr_auto] md:items-center md:gap-6">
                 <div>
-                  <p className="font-display text-base text-bone">{i.name}</p>
+                  <p className="display-soft text-base text-bone">{i.name}</p>
                   <p className="mt-1 text-xs text-stone/50">
                     <code>{i.envKey}</code>
                   </p>
@@ -178,7 +178,7 @@ export default async function SettingsPage() {
       </section>
 
       {/* Account */}
-      <section className="mt-8 border border-stone/15 bg-iron/40">
+      <section className="paper-card mt-8">
         <div className="flex items-center justify-between border-b border-stone/15 px-6 py-4">
           <div className="flex items-center gap-3">
             <Icon name="brothers" size={18} className="text-brass" />

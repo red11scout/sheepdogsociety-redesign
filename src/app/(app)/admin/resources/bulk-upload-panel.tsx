@@ -172,7 +172,7 @@ export function BulkUploadPanel({
             <button
               type="button"
               onClick={() => fileInput.current?.click()}
-              className="lift mt-4 inline-flex h-9 items-center gap-2 border border-bone bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-stone"
+              className="lift mt-4 inline-flex h-9 items-center gap-2 bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85"
             >
               <Icon name="plus" size={12} />
               Pick files
@@ -271,7 +271,7 @@ export function BulkUploadPanel({
               type="button"
               onClick={processAll}
               disabled={busy || queuedCount === 0}
-              className="lift inline-flex h-8 items-center gap-2 bg-brass px-4 text-[0.6875rem] font-medium uppercase tracking-wider text-ink transition-colors hover:bg-gold disabled:cursor-not-allowed disabled:bg-stone/30 disabled:text-stone/55"
+              className="lift inline-flex h-8 items-center gap-2 bg-bone px-4 text-[0.6875rem] font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85 disabled:cursor-not-allowed disabled:bg-stone/30 disabled:text-stone/55"
             >
               {busy ? "Processing..." : `Upload ${queuedCount}`}
               {!busy && <Icon name="arrow-right" size={11} />}

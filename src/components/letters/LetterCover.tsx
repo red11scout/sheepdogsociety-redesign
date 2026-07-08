@@ -4,7 +4,8 @@ import { Icon, type IconName } from "@/components/icons/Icon";
  * Deterministic SVG cover for The Letter (weekly encouragement).
  *
  * Same approach as ResourceCover: cluster-themed palette + per-id
- * geometric pattern. AI photo gen produced near-identical bearded-men
+ * geometric pattern, rendered as a Ridge & Bone printed plate — warm
+ * ink grounds with brass accents. AI photo gen produced near-identical bearded-men
  * scenes for every letter, which made the archive look like a stock
  * photo catalog. SVG covers give us:
  *   - Visual consistency across the archive (same brand, same shape)
@@ -36,14 +37,17 @@ interface CoverTheme {
 
 // Letter-theme → palette mapping. Substring-matched against the theme
 // string (case-insensitive). Order matters — more-specific keys first.
+// Ridge & Bone: every ground is a WARM ink (brown-hued, occasionally the
+// warm brand navy) with brass/bone accents — printed plates, not the old
+// blue-iron aurora grounds.
 const THEME_PALETTES: Array<{ keywords: string[]; theme: CoverTheme }> = [
   {
     keywords: ["endurance", "perseverance", "long", "watch"],
     theme: {
-      bg: "#1A2438",
-      bgEnd: "#0E1624",
-      accent: "#DBAA48",
-      ink: "#F2EBDD",
+      bg: "#22303f",
+      bgEnd: "#141d27",
+      accent: "#c9a25a",
+      ink: "#f4edde",
       icon: "watchtower",
       alt: "Watchtower — endurance",
     },
@@ -51,10 +55,10 @@ const THEME_PALETTES: Array<{ keywords: string[]; theme: CoverTheme }> = [
   {
     keywords: ["marriage", "family", "wife", "fatherhood", "household"],
     theme: {
-      bg: "#5A4030",
-      bgEnd: "#3A2A20",
-      accent: "#DBAA48",
-      ink: "#F2EBDD",
+      bg: "#4a3524",
+      bgEnd: "#2b1e12",
+      accent: "#c9a25a",
+      ink: "#f4edde",
       icon: "heart",
       alt: "Heart — marriage and family",
     },
@@ -62,10 +66,10 @@ const THEME_PALETTES: Array<{ keywords: string[]; theme: CoverTheme }> = [
   {
     keywords: ["faith", "trust", "surrender", "prayer", "good news", "gospel"],
     theme: {
-      bg: "#2C3D33",
-      bgEnd: "#1B2922",
-      accent: "#DBAA48",
-      ink: "#F2EBDD",
+      bg: "#38412c",
+      bgEnd: "#20261a",
+      accent: "#c9a25a",
+      ink: "#f4edde",
       icon: "anchor",
       alt: "Anchor — faith and trust",
     },
@@ -73,10 +77,10 @@ const THEME_PALETTES: Array<{ keywords: string[]; theme: CoverTheme }> = [
   {
     keywords: ["protection", "discernment", "guard", "wolf", "wolves", "watch"],
     theme: {
-      bg: "#0E1624",
-      bgEnd: "#050810",
-      accent: "#C8932A",
-      ink: "#F2EBDD",
+      bg: "#211a11",
+      bgEnd: "#120d07",
+      accent: "#c9a25a",
+      ink: "#f4edde",
       icon: "shield",
       alt: "Shield — protection",
     },
@@ -84,10 +88,10 @@ const THEME_PALETTES: Array<{ keywords: string[]; theme: CoverTheme }> = [
   {
     keywords: ["spirit", "holy spirit", "filled", "fire", "flame"],
     theme: {
-      bg: "#7A1E1E",
-      bgEnd: "#4A1212",
-      accent: "#DBAA48",
-      ink: "#F2EBDD",
+      bg: "#6e2419",
+      bgEnd: "#3d1410",
+      accent: "#ddba70",
+      ink: "#f4edde",
       icon: "flame",
       alt: "Flame — Spirit",
     },
@@ -95,10 +99,10 @@ const THEME_PALETTES: Array<{ keywords: string[]; theme: CoverTheme }> = [
   {
     keywords: ["leadership", "leading", "lead", "shepherd"],
     theme: {
-      bg: "#1A2438",
-      bgEnd: "#0E1624",
-      accent: "#DBAA48",
-      ink: "#F2EBDD",
+      bg: "#44372a",
+      bgEnd: "#282016",
+      accent: "#c9a25a",
+      ink: "#f4edde",
       icon: "compass",
       alt: "Compass — leadership",
     },
@@ -106,10 +110,10 @@ const THEME_PALETTES: Array<{ keywords: string[]; theme: CoverTheme }> = [
   {
     keywords: ["service", "serving", "generosity", "giving"],
     theme: {
-      bg: "#5A6B3E",
-      bgEnd: "#3F4A2C",
-      accent: "#F2EBDD",
-      ink: "#F2EBDD",
+      bg: "#5f6b44",
+      bgEnd: "#3a442b",
+      accent: "#f4edde",
+      ink: "#f4edde",
       icon: "hands",
       alt: "Open hands — service",
     },
@@ -117,10 +121,10 @@ const THEME_PALETTES: Array<{ keywords: string[]; theme: CoverTheme }> = [
   {
     keywords: ["doctrine", "teaching", "scripture", "word", "bible"],
     theme: {
-      bg: "#7A1E1E",
-      bgEnd: "#4A1212",
-      accent: "#DBAA48",
-      ink: "#F2EBDD",
+      bg: "#7c2a20",
+      bgEnd: "#471712",
+      accent: "#c9a25a",
+      ink: "#f4edde",
       icon: "scroll",
       alt: "Scroll — the word",
     },
@@ -128,10 +132,10 @@ const THEME_PALETTES: Array<{ keywords: string[]; theme: CoverTheme }> = [
   {
     keywords: ["identity", "calling", "purpose", "manhood", "called"],
     theme: {
-      bg: "#3D2C1F",
-      bgEnd: "#241A12",
-      accent: "#DBAA48",
-      ink: "#F2EBDD",
+      bg: "#3d2c1f",
+      bgEnd: "#241a12",
+      accent: "#c9a25a",
+      ink: "#f4edde",
       icon: "oak",
       alt: "Oak — identity",
     },
@@ -139,10 +143,10 @@ const THEME_PALETTES: Array<{ keywords: string[]; theme: CoverTheme }> = [
   {
     keywords: ["mountain", "growth", "strength", "character"],
     theme: {
-      bg: "#1A2438",
-      bgEnd: "#0E1624",
-      accent: "#C8932A",
-      ink: "#F2EBDD",
+      bg: "#1d2936",
+      bgEnd: "#10161e",
+      accent: "#b8913e",
+      ink: "#f4edde",
       icon: "mountain",
       alt: "Mountain — character",
     },
@@ -150,10 +154,10 @@ const THEME_PALETTES: Array<{ keywords: string[]; theme: CoverTheme }> = [
 ];
 
 const DEFAULT_THEME: CoverTheme = {
-  bg: "#1A2438",
-  bgEnd: "#0E1624",
-  accent: "#DBAA48",
-  ink: "#F2EBDD",
+  bg: "#211a11",
+  bgEnd: "#120d07",
+  accent: "#c9a25a",
+  ink: "#f4edde",
   icon: "watchtower",
   alt: "The Letter from the Watch",
 };

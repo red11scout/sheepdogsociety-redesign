@@ -5,37 +5,44 @@ interface VersePlateProps {
   className?: string;
 }
 
+/**
+ * The verse plate — Ridge & Bone edition. A ruled broadsheet opening for
+ * Acts 20:28: section-mark + hairline above, Fraunces display headline
+ * with the emphatic words in oxblood, Cormorant deck, folio attribution
+ * under a closing rule. Paper ground; no dark hero, no grid wash.
+ */
 export function VersePlate({ variant = "hero", className }: VersePlateProps) {
   return (
     <section
       className={cn(
-        "relative isolate w-full overflow-hidden bg-background text-foreground",
-        variant === "full" ? "min-h-screen" : "py-28 md:py-40",
+        "w-full bg-background text-foreground",
+        variant === "full" ? "py-20 md:py-32" : "py-16 md:py-24",
         className
       )}
     >
-      <div className="dotted-grid absolute inset-0 opacity-[0.04]" aria-hidden />
-      <div className="relative mx-auto flex h-full max-w-6xl flex-col justify-center px-6 md:px-12">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
         <div className="flex items-center gap-4">
-          <span className="section-mark">§ I &middot; The Watch</span>
-          <div className="hairline flex-1" />
+          <span className="section-mark">The Watch</span>
+          <div className="hairline flex-1 text-foreground" />
+          <span className="folio">The charge</span>
         </div>
 
-        <h2 className="display-xl mt-10 text-[clamp(2.5rem,8vw,7.5rem)] text-foreground">
-          <span className="text-brass">Keep watch</span>
+        <h2 className="display-xl mt-10 max-w-4xl text-[clamp(2.2rem,6vw,4.5rem)] text-foreground">
+          <em className="text-oxblood">Keep watch</em>
           <br />
           over yourselves
           <br />
           and all the flock.
         </h2>
 
-        <p className="mt-10 max-w-2xl font-pullquote text-xl italic leading-relaxed text-stone md:text-2xl">
-          Be shepherds of the church of God, which he bought with his own blood.
+        <p className="mt-8 max-w-2xl font-pullquote text-xl italic leading-relaxed text-muted-foreground md:text-2xl">
+          Be shepherds of the church of God, which he bought with his own
+          blood.
         </p>
 
-        <div className="mt-14 flex items-center gap-4">
-          <div className="hairline flex-1" />
-          <span className="section-mark text-brass">Acts 20:28 &middot; NIV</span>
+        <div className="mt-12 flex items-center gap-4">
+          <div className="hairline flex-1 text-foreground" />
+          <span className="section-mark">Acts 20:28 &middot; NIV</span>
         </div>
       </div>
     </section>

@@ -50,11 +50,11 @@ type EventItem = {
 const EVENT_TYPES = ["weekly", "monthly", "quarterly", "annual", "conference"];
 
 const typeColors: Record<string, string> = {
-  weekly: "bg-blue-600 hover:bg-blue-700",
-  monthly: "bg-purple-600 hover:bg-purple-700",
-  quarterly: "bg-orange-600 hover:bg-orange-700",
-  annual: "bg-green-600 hover:bg-green-700",
-  conference: "bg-red-600 hover:bg-red-700",
+  weekly: "border-brass/40 bg-brass/10 text-brass",
+  monthly: "border-olive/40 bg-olive/10 text-olive",
+  quarterly: "border-stone/40 bg-stone/10 text-stone",
+  annual: "border-gold/40 bg-gold/10 text-gold",
+  conference: "border-oxblood/40 bg-oxblood/10 text-oxblood",
 };
 
 export default function AdminEventsPage() {
@@ -172,7 +172,7 @@ export default function AdminEventsPage() {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="mx-auto max-w-5xl space-y-6 p-6">
       <AdminPageHeader
         title="Events Management"
         description="Create and manage events"
@@ -210,7 +210,8 @@ export default function AdminEventsPage() {
                   <div className="flex items-center gap-2">
                     <h3 className="font-medium truncate">{ev.title}</h3>
                     <Badge
-                      className={typeColors[ev.eventType ?? "weekly"] ?? "bg-gray-600"}
+                      variant="outline"
+                      className={typeColors[ev.eventType ?? "weekly"] ?? "border-stone/40 bg-stone/10 text-stone"}
                     >
                       {ev.eventType ?? "weekly"}
                     </Badge>

@@ -65,11 +65,11 @@ export default async function ResourceDetailPage({
   return (
     <>
       {/* Action bar — hidden in print */}
-      <section className="bg-bone text-ink no-print">
-        <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-4 px-6 pb-2 pt-8 md:px-12">
+      <section className="bg-background text-foreground no-print">
+        <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-4 px-6 pb-2 pt-8 md:px-10">
           <Link
             href="/resources"
-            className="inline-flex items-center gap-2 section-mark text-iron/55 hover:text-brass"
+            className="section-mark inline-flex min-h-[44px] items-center gap-2 !text-foreground/60 transition-colors hover:!text-brass"
           >
             <Icon name="arrow-right" size={12} className="rotate-180" />
             All resources
@@ -83,7 +83,7 @@ export default async function ResourceDetailPage({
                 href={row.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="lift inline-flex h-9 items-center gap-2 border border-iron/20 bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:border-brass hover:text-brass"
+                className="lift inline-flex h-11 items-center gap-2 border border-foreground/70 bg-transparent px-4 text-xs font-medium uppercase tracking-wider text-foreground transition-colors hover:border-brass hover:text-brass"
               >
                 <Icon name="arrow-up-right" size={12} />
                 Watch on YouTube
@@ -94,7 +94,7 @@ export default async function ResourceDetailPage({
                 href={row.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="lift inline-flex h-9 items-center gap-2 border border-iron/20 bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:border-brass hover:text-brass"
+                className="lift inline-flex h-11 items-center gap-2 border border-foreground/70 bg-transparent px-4 text-xs font-medium uppercase tracking-wider text-foreground transition-colors hover:border-brass hover:text-brass"
               >
                 <Icon name="arrow-up-right" size={12} />
                 Buy on Amazon
@@ -105,7 +105,7 @@ export default async function ResourceDetailPage({
                 href={row.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="lift inline-flex h-9 items-center gap-2 border border-iron/20 bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:border-brass hover:text-brass"
+                className="lift inline-flex h-11 items-center gap-2 border border-foreground/70 bg-transparent px-4 text-xs font-medium uppercase tracking-wider text-foreground transition-colors hover:border-brass hover:text-brass"
               >
                 <Icon name="arrow-up-right" size={12} />
                 Open link
@@ -129,7 +129,7 @@ export default async function ResourceDetailPage({
               <a
                 href={downloadUrl}
                 download={row.sourceFilename ?? undefined}
-                className="lift inline-flex h-9 items-center gap-2 border border-iron/20 bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:border-brass hover:text-brass"
+                className="lift inline-flex h-11 items-center gap-2 border border-foreground/70 bg-transparent px-4 text-xs font-medium uppercase tracking-wider text-foreground transition-colors hover:border-brass hover:text-brass"
               >
                 <Icon name="download" size={12} />
                 Download {isPdf ? "PDF" : isDocx ? ".docx" : "file"}
@@ -142,7 +142,7 @@ export default async function ResourceDetailPage({
               <a
                 href={downloadUrl}
                 download={row.sourceFilename ?? undefined}
-                className="text-[0.6875rem] uppercase tracking-wider text-iron/55 hover:text-brass"
+                className="inline-flex min-h-[44px] items-center text-[0.6875rem] uppercase tracking-wider text-muted-foreground hover:text-brass"
                 title={`Download the original ${isPdf ? "PDF" : isDocx ? ".docx" : "file"} as uploaded`}
               >
                 Original {isPdf ? "PDF" : isDocx ? ".docx" : "file"} ↓
@@ -153,8 +153,8 @@ export default async function ResourceDetailPage({
       </section>
 
       {/* Letterhead — visible on screen and in print */}
-      <article className="resource-doc bg-bone text-ink">
-        <header className="mx-auto max-w-4xl px-6 pb-10 pt-6 md:px-12 md:pb-14 md:pt-10">
+      <article className="resource-doc bg-background text-foreground">
+        <header className="mx-auto max-w-4xl px-6 pb-10 pt-6 md:px-10 md:pb-14 md:pt-10">
           {/* Print-only branded letterhead. Hidden on screen, revealed by
            *  the @media print rule. Uses the actual brand logo + section
            *  rules so the printed PDF reads like a real Sheepdog Society
@@ -187,28 +187,28 @@ export default async function ResourceDetailPage({
           {/* Section-mark + book pills */}
           <div className="mt-6 flex flex-wrap items-center gap-3">
             {row.section && (
-              <span className="section-mark text-brass">
-                § {row.section.name}
+              <span className="section-mark">
+                {row.section.name}
               </span>
             )}
             {row.estimatedMinutes != null && (
-              <span className="section-mark text-iron/45">
+              <span className="folio">
                 {row.estimatedMinutes} min read
               </span>
             )}
             {row.audience && row.audience !== "all" && (
-              <span className="section-mark text-iron/45">
+              <span className="folio">
                 · For {row.audience === "leader" ? "leaders" : "newcomers"}
               </span>
             )}
           </div>
 
-          <h1 className="display-xl mt-6 text-[clamp(2rem,5vw,4rem)] text-iron">
+          <h1 className="display-xl mt-6 text-[clamp(2rem,5vw,4rem)] text-foreground">
             {row.title}
           </h1>
 
           {row.summary && (
-            <p className="mt-6 max-w-3xl font-pullquote text-lg italic leading-relaxed text-iron/70 md:text-xl">
+            <p className="mt-6 max-w-3xl font-serif text-lg leading-relaxed text-foreground/80 md:text-xl">
               {row.summary}
             </p>
           )}
@@ -218,7 +218,7 @@ export default async function ResourceDetailPage({
               {(row.booksOfBible ?? []).map((b) => (
                 <span
                   key={`b-${b}`}
-                  className="inline-flex h-6 items-center border border-brass/40 bg-brass/10 px-2 text-[0.625rem] uppercase tracking-wider text-brass"
+                  className="inline-flex h-6 items-center border border-olive/50 bg-olive/10 px-2 text-[0.625rem] uppercase tracking-wider text-olive"
                 >
                   {b}
                 </span>
@@ -226,7 +226,7 @@ export default async function ResourceDetailPage({
               {(row.topics ?? []).map((t) => (
                 <span
                   key={`t-${t}`}
-                  className="inline-flex h-6 items-center border border-iron/15 bg-bone px-2 text-[0.625rem] text-iron/70"
+                  className="inline-flex h-6 items-center border border-olive/30 px-2 text-[0.625rem] uppercase tracking-wider text-olive/80"
                 >
                   {t}
                 </span>
@@ -234,7 +234,7 @@ export default async function ResourceDetailPage({
               {(row.themes ?? []).map((th) => (
                 <span
                   key={`th-${th}`}
-                  className="inline-flex h-6 items-center border border-iron/15 bg-bone px-2 text-[0.625rem] italic text-iron/55"
+                  className="inline-flex h-6 items-center border border-foreground/15 px-2 text-[0.625rem] italic text-muted-foreground"
                 >
                   {th}
                 </span>
@@ -244,8 +244,8 @@ export default async function ResourceDetailPage({
         </header>
 
         {/* Body */}
-        <div className="mx-auto max-w-3xl px-6 pb-24 md:px-12 md:pb-32">
-          <div className="hairline mb-10" />
+        <div className="mx-auto max-w-3xl px-6 pb-24 md:px-10 md:pb-32">
+          <div className="hairline mb-10 text-foreground" />
 
           {/* Render body OR provider-shaped card. Order matters:
            *   1. YouTube → embedded player (most engaging)
@@ -259,8 +259,8 @@ export default async function ResourceDetailPage({
             <div className="space-y-6">
               <Embed html={row.embedHtml ?? ""} />
               {row.author && (
-                <p className="text-xs text-iron/60">
-                  From <span className="text-iron">{row.author}</span> on YouTube
+                <p className="font-serif text-sm text-muted-foreground">
+                  From <span className="text-foreground">{row.author}</span> on YouTube
                 </p>
               )}
             </div>
@@ -282,34 +282,34 @@ export default async function ResourceDetailPage({
           ) : row.bodyHtml ? (
             <ResourceBody html={row.bodyHtml} />
           ) : downloadUrl ? (
-            <div className="border border-dashed border-iron/15 bg-bone p-10 text-center">
+            <div className="border border-dashed border-foreground/15 p-10 text-center">
               <Icon name="download" size={36} className="mx-auto text-brass" />
-              <p className="mx-auto mt-6 max-w-md font-pullquote text-base italic text-iron/70">
+              <p className="mx-auto mt-6 max-w-md font-serif text-base italic text-foreground/75">
                 This resource is provided as a {isPdf ? "PDF" : "file"}. Tap below to download or open.
               </p>
               <a
                 href={downloadUrl}
                 download={row.sourceFilename ?? undefined}
-                className="lift mt-8 inline-flex h-11 items-center gap-2 bg-brass px-6 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-gold"
+                className="lift mt-8 inline-flex h-12 items-center gap-2 bg-foreground px-7 text-xs font-medium uppercase tracking-wider text-background transition-colors hover:bg-foreground/90"
               >
                 <Icon name="download" size={14} />
                 Download
               </a>
             </div>
           ) : (
-            <p className="font-pullquote text-base italic text-iron/55">
+            <p className="font-serif text-base italic text-muted-foreground">
               The text of this resource is being prepared. Check back soon.
             </p>
           )}
 
           {/* Companion study (Book Studies). Only renders when present. */}
           {hasCompanion && (
-            <section className="mt-12 border-t border-iron/15 pt-8">
+            <section className="mt-12 border-t border-foreground/15 pt-8">
               <div className="flex items-center gap-3">
-                <span className="section-mark text-brass">
-                  § {row.companionLabel || "Study guide"}
+                <span className="section-mark">
+                  {row.companionLabel || "Study guide"}
                 </span>
-                <div className="hairline flex-1" />
+                <div className="hairline flex-1 text-foreground" />
               </div>
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 {row.companionUrl && (
@@ -317,30 +317,26 @@ export default async function ResourceDetailPage({
                     href={row.companionUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="lift group/c flex items-center gap-3 border border-iron/15 bg-bone p-4 text-sm transition-colors hover:border-brass"
+                    className="paper-card group/c flex min-h-[44px] items-center gap-3 p-4 text-sm"
                   >
                     <Icon name="arrow-up-right" size={18} className="text-brass" />
-                    <span className="flex-1 truncate text-iron group-hover/c:text-brass">
+                    <span className="flex-1 truncate font-serif text-foreground group-hover/c:text-brass">
                       Open {row.companionLabel || "the study"}
                     </span>
-                    <span className="text-[0.625rem] uppercase tracking-wider text-iron/45">
-                      Link
-                    </span>
+                    <span className="folio">Link</span>
                   </a>
                 )}
                 {row.companionFileKey && (
                   <a
                     href={row.companionFileKey}
                     download
-                    className="lift group/c flex items-center gap-3 border border-iron/15 bg-bone p-4 text-sm transition-colors hover:border-brass"
+                    className="paper-card group/c flex min-h-[44px] items-center gap-3 p-4 text-sm"
                   >
                     <Icon name="download" size={18} className="text-brass" />
-                    <span className="flex-1 truncate text-iron group-hover/c:text-brass">
+                    <span className="flex-1 truncate font-serif text-foreground group-hover/c:text-brass">
                       Download {row.companionLabel || "the study"}
                     </span>
-                    <span className="text-[0.625rem] uppercase tracking-wider text-iron/45">
-                      File
-                    </span>
+                    <span className="folio">File</span>
                   </a>
                 )}
               </div>
@@ -398,8 +394,8 @@ function BookCard({
   summary: string | null;
 }) {
   return (
-    <div className="grid gap-6 border border-iron/15 bg-bone p-6 sm:grid-cols-[180px_1fr] md:p-8">
-      <div className="relative aspect-[2/3] w-full overflow-hidden border border-iron/10 bg-iron/5">
+    <div className="paper-card grid gap-6 p-6 sm:grid-cols-[180px_1fr] md:p-8">
+      <div className="relative aspect-[2/3] w-full overflow-hidden border border-foreground/10 bg-foreground/5">
         {thumbnailUrl ? (
           <Image
             src={thumbnailUrl}
@@ -410,21 +406,21 @@ function BookCard({
             unoptimized
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-iron/30">
+          <div className="flex h-full items-center justify-center text-foreground/30">
             <Icon name="scroll" size={36} />
           </div>
         )}
       </div>
       <div className="flex flex-col">
-        <span className="section-mark text-iron/50">§ The Book</span>
-        <h2 className="display-xl mt-3 text-2xl text-iron md:text-3xl">{title}</h2>
+        <span className="section-mark">The book</span>
+        <h2 className="display-soft mt-3 text-2xl text-foreground md:text-3xl">{title}</h2>
         {author && (
-          <p className="mt-2 font-pullquote text-base italic text-iron/65">
+          <p className="mt-2 font-serif text-base italic text-muted-foreground">
             by {author}
           </p>
         )}
         {summary && (
-          <p className="mt-4 text-sm leading-relaxed text-iron/75">{summary}</p>
+          <p className="mt-4 font-serif text-sm leading-relaxed text-foreground/80">{summary}</p>
         )}
         {buyUrl && (
           <div className="mt-auto pt-6">
@@ -432,7 +428,7 @@ function BookCard({
               href={buyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="lift inline-flex h-11 items-center gap-2 border border-bone bg-iron px-5 text-xs font-medium uppercase tracking-wider text-bone transition-colors hover:bg-iron/85"
+              className="lift inline-flex h-12 items-center gap-2 bg-foreground px-6 text-xs font-medium uppercase tracking-wider text-background transition-colors hover:bg-foreground/90"
             >
               <Icon name="arrow-up-right" size={14} />
               Buy on Amazon
@@ -460,10 +456,10 @@ function LinkCard({
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="lift block border border-iron/15 bg-bone transition-colors hover:border-brass"
+      className="paper-card block"
     >
       {thumbnailUrl && (
-        <div className="relative aspect-[16/9] w-full overflow-hidden bg-iron/5">
+        <div className="relative aspect-[16/9] w-full overflow-hidden bg-foreground/5">
           <Image
             src={thumbnailUrl}
             alt=""
@@ -476,8 +472,8 @@ function LinkCard({
       )}
       <div className="flex items-center gap-4 p-6">
         <div className="flex-1">
-          <p className="section-mark text-iron/50">{host || "External link"}</p>
-          <p className="mt-2 text-base text-iron">{title}</p>
+          <p className="folio">{host || "External link"}</p>
+          <p className="mt-2 font-serif text-base text-foreground">{title}</p>
         </div>
         <Icon name="arrow-up-right" size={20} className="text-brass" />
       </div>

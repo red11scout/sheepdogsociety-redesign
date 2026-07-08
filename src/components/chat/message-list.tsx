@@ -76,7 +76,7 @@ export function MessageList({
 
       {/* Messages */}
       {messages.length === 0 ? (
-        <div className="flex flex-1 items-center justify-center text-muted-foreground">
+        <div className="flex flex-1 items-center justify-center px-6 text-center font-serif text-base italic text-muted-foreground">
           No messages yet. Start the conversation.
         </div>
       ) : (
@@ -95,7 +95,7 @@ export function MessageList({
 
       {/* Typing indicator */}
       {typingUsers.length > 0 && (
-        <div className="px-4 py-1 text-xs text-muted-foreground">
+        <div className="folio px-4 py-1 normal-case tracking-normal">
           {typingUsers.join(", ")}{" "}
           {typingUsers.length === 1 ? "is" : "are"} typing...
         </div>

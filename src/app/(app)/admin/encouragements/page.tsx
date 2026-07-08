@@ -2,7 +2,6 @@ import Link from "next/link";
 import { listEncouragements } from "@/server/encouragements";
 import { Icon } from "@/components/icons/Icon";
 import { EmptyState } from "@/components/admin/EmptyState";
-import { Magnetic } from "@/components/motion/Magnetic";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
@@ -28,10 +27,10 @@ export default async function EncouragementsAdminPage() {
           <div className="hairline flex-1" />
         </div>
         <div className="mt-6 flex flex-wrap items-end justify-between gap-6">
-          <h1 className="display-xl text-3xl text-bone md:text-5xl">
+          <h1 className="display-soft text-3xl text-bone md:text-4xl">
             One letter
             <br />
-            <span className="text-brass">a week.</span>
+            <em className="not-italic text-oxblood">a week.</em>
           </h1>
           <div className="flex flex-wrap items-center gap-3">
             <Link
@@ -41,20 +40,18 @@ export default async function EncouragementsAdminPage() {
               <Icon name="calendar" size={14} />
               Schedule a series
             </Link>
-            <Magnetic>
-              <Link
-                href="/admin/encouragements/new"
-                className="lift group inline-flex h-11 items-center gap-2 border border-bone bg-bone px-6 text-sm font-medium text-iron transition-colors hover:bg-stone"
-              >
-                <Icon name="sparkles" size={14} />
-                Compose this week&rsquo;s letter
-                <Icon
-                  name="arrow-right"
-                  size={14}
-                  className="transition-transform group-hover:translate-x-1"
-                />
-              </Link>
-            </Magnetic>
+            <Link
+              href="/admin/encouragements/new"
+              className="lift group inline-flex h-11 items-center gap-2 bg-bone px-6 text-sm font-medium text-iron transition-colors hover:bg-bone/85"
+            >
+              <Icon name="sparkles" size={14} />
+              Compose this week&rsquo;s letter
+              <Icon
+                name="arrow-right"
+                size={14}
+                className="transition-transform group-hover:translate-x-1"
+              />
+            </Link>
           </div>
         </div>
         <p className="mt-6 max-w-2xl font-pullquote text-base italic leading-relaxed text-stone/80">
@@ -65,7 +62,7 @@ export default async function EncouragementsAdminPage() {
       <section className="mt-12">
         {dbError ? (
           <div className="border border-oxblood/40 bg-oxblood/15 p-6 text-sm text-bone">
-            <p className="display-xl text-base">Database not ready.</p>
+            <p className="display-soft text-base">Database not ready.</p>
             <p className="mt-2 text-stone/80">{dbError}</p>
             <p className="mt-3 text-xs text-stone/60">
               Run:{" "}
@@ -104,7 +101,7 @@ export default async function EncouragementsAdminPage() {
                   )}
                 </span>
                 <div className="min-w-0">
-                  <p className="truncate display-xl text-base text-bone group-hover/row:text-brass md:text-lg">
+                  <p className="truncate display-soft text-base text-bone group-hover/row:text-brass md:text-lg">
                     {row.title || "Untitled"}
                   </p>
                   {(row as { theme?: string | null }).theme ? (

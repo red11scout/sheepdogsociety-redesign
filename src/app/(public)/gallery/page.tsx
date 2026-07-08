@@ -18,56 +18,57 @@ export default async function GalleryPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-iron text-bone">
-        <div className="aurora aurora--soft" aria-hidden />
-        <div className="dotted-grid absolute inset-0 opacity-[0.06]" aria-hidden />
-        <div className="relative mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-32">
+      {/* ============ Page lead ============ */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 pb-14 pt-12 md:px-10 md:pb-20 md:pt-20">
           <div className="flex items-center gap-4">
-            <span className="section-mark text-brass">§ Gallery</span>
-            <div className="hairline flex-1" />
+            <span className="folio">The gallery</span>
+            <div className="hairline flex-1 text-foreground" />
+            <span className="folio">The record, kept honest</span>
           </div>
-          <h1 className="display-xl mt-10 max-w-4xl text-[clamp(2.5rem,7vw,6rem)] text-bone">
-            The brothers
-            <br />
-            <span className="text-brass">who showed up.</span>
+          <h1 className="display-xl mt-10 max-w-3xl text-[clamp(2.2rem,6vw,4.5rem)] text-foreground">
+            The brothers <em className="text-oxblood">who showed up.</em>
           </h1>
-          <p className="mt-10 max-w-2xl font-pullquote text-xl italic leading-relaxed text-bone/70 md:text-2xl">
+          <p className="mt-7 max-w-2xl font-serif text-lg leading-relaxed text-foreground/80 md:text-xl">
             Breakfast tables. Prayer nights. Long retreats. The photos that
             keep the memory honest.
           </p>
         </div>
       </section>
 
-      {/* Event grid */}
-      <section className="bg-bone text-ink">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-24">
+      {/* ============ Event grid ============ */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 pb-20 md:px-10 md:pb-28">
+          <div className="flex items-center gap-4">
+            <span className="section-mark">The evenings on record</span>
+            <div className="hairline flex-1 text-foreground" />
+          </div>
+
           {eventsWithPhotos.length === 0 ? (
-            <div className="border border-dashed border-iron/15 p-16 text-center">
+            <div className="mt-10 border border-dashed border-foreground/15 p-16 text-center">
               <Icon name="image" size={48} className="mx-auto text-brass" />
-              <h2 className="display-xl mt-6 text-2xl text-iron md:text-3xl">
+              <h2 className="display-soft mt-6 text-2xl text-foreground md:text-3xl">
                 The first photos are coming.
               </h2>
-              <p className="mx-auto mt-3 max-w-md font-pullquote text-base italic text-iron/60">
+              <p className="mx-auto mt-3 max-w-md font-serif text-base italic text-muted-foreground">
                 Once a gathering wraps and someone posts the photos, the
                 gallery fills in here.
               </p>
             </div>
           ) : (
-            <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {eventsWithPhotos.map((ev) => {
                 const cover = ev.photos[0];
-                const extra = ev.photos.length - 1;
                 return (
                   <li key={ev.id}>
                     <Link
                       href={`/gallery/${ev.id}`}
-                      className="lift group/event block overflow-hidden border border-iron/10 bg-bone transition-colors hover:border-brass"
+                      className="paper-card lift group/event block overflow-hidden"
                     >
                       {/* Cover photo. aspect-[4/5] gives a magazine
                        *  feel that frames most uploads cleanly without
                        *  the tile-grid look we get from aspect-square. */}
-                      <div className="relative aspect-[4/5] w-full overflow-hidden bg-iron/5">
+                      <div className="relative aspect-[4/5] w-full overflow-hidden bg-foreground/5">
                         {cover && (
                           <Image
                             src={cover.url}
@@ -79,40 +80,28 @@ export default async function GalleryPage() {
                             unoptimized
                           />
                         )}
-                        <div
-                          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-iron/85 via-iron/15 to-transparent"
-                          aria-hidden
-                        />
-
-                        {/* Card chrome — date pill top-left, count top-right. */}
-                        <div className="pointer-events-none absolute inset-x-4 top-4 flex items-start justify-between">
-                          <span className="inline-flex items-baseline gap-2 border border-bone/30 bg-iron/70 px-2 py-1 text-[0.625rem] uppercase tracking-[0.18em] text-bone backdrop-blur-sm">
-                            {format(ev.startTime, "MMM d, yyyy")}
+                        {ev.photos.length > 1 && (
+                          <span className="pointer-events-none absolute right-3 top-3 inline-flex h-6 items-center gap-1.5 bg-foreground/85 px-2 text-[0.625rem] font-medium uppercase tracking-[0.14em] text-background">
+                            <Icon name="image" size={10} />
+                            {ev.photos.length}
                           </span>
-                          {ev.photos.length > 1 && (
-                            <span className="inline-flex items-center gap-1 border border-brass/40 bg-iron/70 px-2 py-1 text-[0.625rem] uppercase tracking-[0.18em] text-brass backdrop-blur-sm">
-                              <Icon name="image" size={10} />
-                              {extra > 0 ? `+${extra}` : ev.photos.length}
-                            </span>
-                          )}
-                        </div>
+                        )}
+                      </div>
 
-                        {/* Title block on the gradient. */}
-                        <div className="absolute inset-x-0 bottom-0 p-5 text-bone">
-                          {ev.eventType && (
-                            <span className="section-mark text-brass">
-                              § {ev.eventType}
-                            </span>
-                          )}
-                          <h3 className="display-xl mt-2 text-2xl text-bone md:text-3xl">
-                            {ev.title}
-                          </h3>
-                          {ev.location && (
-                            <p className="mt-2 text-xs uppercase tracking-[0.18em] text-bone/70">
-                              {ev.location}
-                            </p>
-                          )}
-                        </div>
+                      {/* Caption block — ruled off under the plate. */}
+                      <div className="p-5">
+                        <p className="folio">
+                          {format(ev.startTime, "MMM d, yyyy")}
+                          {ev.eventType && <> · {ev.eventType}</>}
+                        </p>
+                        <h3 className="display-soft mt-2 text-xl text-foreground transition-colors group-hover/event:text-brass md:text-2xl">
+                          {ev.title}
+                        </h3>
+                        {ev.location && (
+                          <p className="mt-2 font-serif text-sm text-muted-foreground">
+                            {ev.location}
+                          </p>
+                        )}
                       </div>
                     </Link>
                   </li>

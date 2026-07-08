@@ -24,15 +24,21 @@ export function NotesView() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-3xl p-6">
-      <h1 className="mb-6 text-2xl font-bold">My Notes</h1>
+    <div className="mx-auto max-w-3xl bg-background p-6 text-foreground">
+      <header className="mb-6">
+        <p className="section-mark">In the margins</p>
+        <h1 className="display-soft mt-2 text-3xl text-foreground">My Notes</h1>
+        <div className="hairline mt-4 text-foreground" />
+      </header>
       {loading ? (
-        <p className="text-muted-foreground">Loading...</p>
+        <p className="font-serif text-base italic text-muted-foreground">
+          Loading...
+        </p>
       ) : notes.length === 0 ? (
         <Card>
           <CardContent className="flex flex-col items-center gap-4 p-8 text-center">
             <FileText className="h-12 w-12 text-muted-foreground" />
-            <p className="text-muted-foreground">
+            <p className="font-serif text-base leading-relaxed text-muted-foreground">
               No notes yet. Add notes from the Bible reader.
             </p>
           </CardContent>
@@ -42,12 +48,12 @@ export function NotesView() {
           {notes.map((note) => (
             <Card key={note.id}>
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-bronze">
-                  {note.reference}
-                </CardTitle>
+                <CardTitle className="section-mark">{note.reference}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm whitespace-pre-wrap">{note.content}</p>
+                <p className="whitespace-pre-wrap font-serif text-base leading-relaxed text-foreground/90">
+                  {note.content}
+                </p>
               </CardContent>
             </Card>
           ))}

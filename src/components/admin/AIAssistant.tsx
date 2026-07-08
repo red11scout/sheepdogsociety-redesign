@@ -156,7 +156,7 @@ export function AIAssistant({ open, onClose, initialPrompt }: AIAssistantProps) 
         <div className="flex items-center gap-3">
           <Icon name="sparkles" size={20} className="text-brass" />
           <div className="flex flex-col leading-tight">
-            <span className="display-xl text-base text-bone">Ask Claude</span>
+            <span className="display-soft text-base text-bone">Ask Claude</span>
             <span className="section-mark text-[0.625rem] text-stone/55">
               On this page · {pathname}
             </span>
@@ -188,7 +188,7 @@ export function AIAssistant({ open, onClose, initialPrompt }: AIAssistantProps) 
         {messages.length === 0 ? (
           <div className="space-y-6">
             <div>
-              <h3 className="display-xl text-2xl text-bone md:text-3xl">
+              <h3 className="display-soft text-2xl text-bone md:text-3xl">
                 Sit down, brother.
               </h3>
               <p className="mt-3 font-pullquote text-base italic leading-relaxed text-stone">
@@ -268,7 +268,7 @@ export function AIAssistant({ open, onClose, initialPrompt }: AIAssistantProps) 
             <button
               type="submit"
               disabled={!prompt.trim() || streaming}
-              className="lift inline-flex h-8 items-center gap-2 bg-brass px-3 text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-ink transition-colors hover:bg-gold disabled:cursor-not-allowed disabled:opacity-40"
+              className="lift inline-flex h-8 items-center gap-2 bg-bone px-3 text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-iron transition-colors hover:bg-bone/85 disabled:cursor-not-allowed disabled:opacity-40"
             >
               {streaming ? "Thinking" : "Send"}
               {!streaming && <Icon name="send" size={12} />}

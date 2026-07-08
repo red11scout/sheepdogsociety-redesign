@@ -159,10 +159,10 @@ export function Composer({ voices }: ComposerProps) {
           <span className="section-mark text-brass">§ Compose this week&rsquo;s word</span>
           <div className="hairline flex-1" />
         </div>
-        <h1 className="display-xl mt-6 text-3xl text-bone md:text-5xl">
+        <h1 className="display-soft mt-6 text-3xl text-bone md:text-4xl">
           Theme. Image. Voice.
           <br />
-          <span className="text-brass">Then a draft, ready to read.</span>
+          <em className="not-italic text-oxblood">Then a draft, ready to read.</em>
         </h1>
         <p className="mt-4 max-w-2xl font-pullquote text-base italic leading-relaxed text-stone/80">
           Four short steps. Claude drafts the intro, scripture anchors, guidance, and closing. You read, tweak, and publish.
@@ -222,8 +222,7 @@ export function Composer({ voices }: ComposerProps) {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="When the watch is long"
-              className="block w-full border border-stone/15 bg-transparent px-4 py-3 text-2xl text-bone placeholder:text-stone/35 focus:border-brass focus:outline-none"
-              style={{ fontFamily: "var(--font-display)" }}
+              className="display-soft block w-full border border-stone/15 bg-transparent px-4 py-3 text-2xl text-bone placeholder:text-stone/35 focus:border-brass focus:outline-none"
             />
           </Field>
 
@@ -316,7 +315,7 @@ export function Composer({ voices }: ComposerProps) {
                       <div className="flex items-center justify-between">
                         <h3
                           className={cn(
-                            "display-xl text-base md:text-lg",
+                            "display-soft text-base md:text-lg",
                             active ? "text-bone" : "text-bone"
                           )}
                         >
@@ -384,7 +383,7 @@ export function Composer({ voices }: ComposerProps) {
           {!draft && !drafting && !draftError && (
             <div className="border border-dashed border-stone/20 bg-iron/30 p-10 text-center">
               <Icon name="sparkles" size={36} className="mx-auto text-brass" />
-              <h2 className="display-xl mt-6 text-xl text-bone md:text-2xl">
+              <h2 className="display-soft mt-6 text-xl text-bone md:text-2xl">
                 Ready to draft.
               </h2>
               <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-stone/75">
@@ -393,7 +392,7 @@ export function Composer({ voices }: ComposerProps) {
               <button
                 type="button"
                 onClick={runDraft}
-                className="lift mt-8 inline-flex h-11 items-center gap-2 bg-brass px-6 text-xs font-medium uppercase tracking-wider text-ink transition-colors hover:bg-gold"
+                className="lift mt-8 inline-flex h-11 items-center gap-2 bg-bone px-6 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85"
               >
                 <Icon name="sparkles" size={14} />
                 Draft this encouragement
@@ -414,7 +413,7 @@ export function Composer({ voices }: ComposerProps) {
 
           {draftError && (
             <div className="border border-oxblood/40 bg-oxblood/15 p-5">
-              <p className="display-xl text-base text-bone">Draft failed.</p>
+              <p className="display-soft text-base text-bone">Draft failed.</p>
               <p className="mt-2 text-sm text-stone/85">{draftError}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <button
@@ -445,10 +444,7 @@ export function Composer({ voices }: ComposerProps) {
                   <ul className="space-y-2">
                     {draft.scriptures.map((s, i) => (
                       <li key={i} className="border-l-2 border-brass/40 pl-3">
-                        <p
-                          className="text-sm font-medium text-bone"
-                          style={{ fontFamily: "var(--font-jetbrains-mono)" }}
-                        >
+                        <p className="font-serif text-sm font-medium text-bone">
                           {s.ref}
                         </p>
                         <p className="mt-1 text-xs text-stone/75">{s.note}</p>
@@ -473,7 +469,7 @@ export function Composer({ voices }: ComposerProps) {
                   type="button"
                   onClick={commit}
                   disabled={saving}
-                  className="lift inline-flex h-10 items-center gap-2 bg-brass px-5 text-xs font-medium uppercase tracking-wider text-ink transition-colors hover:bg-gold disabled:opacity-60"
+                  className="lift inline-flex h-10 items-center gap-2 bg-bone px-5 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85 disabled:opacity-60"
                 >
                   {saving ? "Saving..." : "Use this draft"}
                   <Icon name="arrow-right" size={12} />
@@ -565,7 +561,7 @@ function FooterNav({
           type="button"
           onClick={onNext}
           disabled={nextDisabled}
-          className="lift inline-flex h-10 items-center gap-2 bg-brass px-5 text-xs font-medium uppercase tracking-wider text-ink transition-colors hover:bg-gold disabled:cursor-not-allowed disabled:bg-stone/30 disabled:text-stone/55"
+          className="lift inline-flex h-10 items-center gap-2 bg-bone px-5 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85 disabled:cursor-not-allowed disabled:bg-stone/30 disabled:text-stone/55"
         >
           {nextLabel}
           <Icon name="arrow-right" size={12} />

@@ -50,7 +50,7 @@ export function MessageInput({
   };
 
   return (
-    <div className="flex items-end gap-2 border-t border-border bg-background px-4 py-3">
+    <div className="flex items-end gap-2 border-t border-foreground/15 bg-background px-4 py-3">
       <Textarea
         ref={textareaRef}
         value={content}

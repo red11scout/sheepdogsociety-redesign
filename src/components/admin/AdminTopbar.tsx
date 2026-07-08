@@ -70,7 +70,7 @@ export function AdminTopbar({
     "?";
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center gap-4 border-b border-stone/15 bg-iron/85 px-4 backdrop-blur-md md:px-6">
+    <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center gap-4 border-b border-stone/15 bg-iron px-4 md:px-6">
       {/* Mobile menu button */}
       {onOpenMobileNav && (
         <button

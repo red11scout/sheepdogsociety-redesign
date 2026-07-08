@@ -31,7 +31,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6 pb-16 pt-12 md:px-10 md:pb-24 md:pt-20">
           <div className="flex items-center gap-4">
             <span className="folio">The front page</span>
-            <div className="hairline flex-1 text-ink" />
+            <div className="hairline flex-1 text-foreground" />
             <span className="folio">Every man needs a watch to stand</span>
           </div>
 
@@ -51,7 +51,7 @@ export default function HomePage() {
               <div className="mt-10 flex flex-wrap items-center gap-4">
                 <Link
                   href="/locations"
-                  className="lift group inline-flex h-12 items-center gap-3 bg-ink px-7 text-[0.95rem] font-medium text-bone transition-colors hover:bg-ink/90"
+                  className="lift group inline-flex h-12 items-center gap-3 bg-foreground px-7 text-[0.95rem] font-medium text-background transition-colors hover:bg-foreground/90"
                 >
                   <Icon name="map-pin" size={17} />
                   Find a group near you
@@ -72,7 +72,7 @@ export default function HomePage() {
             </div>
 
             {/* Right column — the standing notice, ruled off like a sidebar box */}
-            <aside className="border-t-2 border-ink/60 pt-6 lg:col-span-4 lg:border-l lg:border-t-0 lg:border-ink/15 lg:pl-10 lg:pt-2">
+            <aside className="border-t-2 border-foreground/60 pt-6 lg:col-span-4 lg:border-l lg:border-t-0 lg:border-foreground/15 lg:pl-10 lg:pt-2">
               <p className="section-mark">Standing orders</p>
               <ul className="mt-6 space-y-5">
                 <li className="flex gap-4">
@@ -129,7 +129,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6 pt-16 md:px-10 md:pt-24">
           <div className="flex items-center gap-4">
             <span className="section-mark">The outposts</span>
-            <div className="hairline flex-1 text-ink" />
+            <div className="hairline flex-1 text-foreground" />
             <Link href="/locations" className="link-editorial folio !text-brass">
               See every group
             </Link>
@@ -148,7 +148,7 @@ export default function HomePage() {
       {/* ============ The Letter — subscription notice ============ */}
       <section className="bg-background text-foreground">
         <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
-          <div className="rule-double text-ink/70" />
+          <div className="rule-double text-foreground/70" />
           <div className="grid gap-10 pt-12 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-7">
               <p className="section-mark">The Letter</p>
@@ -163,7 +163,7 @@ export default function HomePage() {
                 no funnel — six hundred words to steady your week.
               </p>
             </div>
-            <div className="flex flex-col justify-center border-t border-ink/15 pt-8 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
+            <div className="flex flex-col justify-center border-t border-foreground/15 pt-8 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
               <p className="folio">Subscribe · free, weekly, no noise</p>
               <div className="mt-5">
                 <NewsletterForm />

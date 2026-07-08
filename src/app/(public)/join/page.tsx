@@ -50,23 +50,24 @@ export default async function JoinPage({
   const preselectedGroupId = sp.group;
 
   return (
-    <section className="bg-bone">
-      <div className="mx-auto max-w-3xl px-6 py-24 md:px-12 md:py-32">
+    <section className="bg-background text-foreground">
+      <div className="mx-auto max-w-3xl px-6 pb-16 pt-12 md:px-10 md:pb-24 md:pt-20">
         <div className="flex items-center gap-4">
-          <span className="section-mark text-brass">§ Sit at the table</span>
-          <div className="hairline flex-1 text-iron/40" />
+          <span className="section-mark">Sit at the table</span>
+          <div className="hairline flex-1 text-foreground" />
         </div>
-        <h1 className="display-xl mt-10 text-[clamp(2.25rem,6vw,5rem)] text-iron">
+        <h1 className="display-xl mt-8 text-[clamp(2.2rem,6vw,4.5rem)] text-foreground">
           There is a chair.
           <br />
-          <span className="text-brass">Sit in it.</span>
+          <em className="text-oxblood">Sit in it.</em>
         </h1>
-        <p className="mt-8 max-w-2xl font-pullquote text-xl italic text-iron/70">
+        <p className="mt-7 max-w-2xl font-serif text-lg leading-relaxed text-foreground/80">
           You do not need to have your life cleaned up. Tell us where you are.
           We will help you find a table.
         </p>
 
-        <div className="mt-16">
+        <div className="rule-double mt-12 text-foreground/70" />
+        <div className="mt-10">
           <MemberSignup
             groups={groups}
             preselectedGroupId={preselectedGroupId}

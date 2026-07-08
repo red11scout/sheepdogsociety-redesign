@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Icon } from "@/components/icons/Icon";
-import { Magnetic } from "@/components/motion/Magnetic";
 
 const TOPICS = [
   { value: "general", label: "General question" },
@@ -47,108 +46,112 @@ export default function ContactPage() {
         content="Get in touch with Sheepdog Society. We read every note."
       />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-bone text-ink">
-        <div className="aurora aurora--soft" aria-hidden />
-        <div className="dotted-grid absolute inset-0 opacity-50" aria-hidden />
-        <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-12 md:py-32">
+      {/* ============ Lead ============ */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-3xl px-6 pb-12 pt-12 md:px-10 md:pb-16 md:pt-20">
           <div className="flex items-center gap-4">
-            <span className="section-mark">§ Contact</span>
-            <div className="hairline flex-1" />
+            <span className="folio">Correspondence</span>
+            <div className="hairline flex-1 text-foreground" />
+            <span className="folio">We read every note</span>
           </div>
-          <h1 className="display-xl mt-10 max-w-4xl text-[clamp(2.5rem,7vw,6rem)]">
+          <h1 className="display-xl mt-8 max-w-4xl text-[clamp(2.2rem,6vw,4.5rem)] text-foreground">
             Send a note.
             <br />
-            <span className="text-brass">We read every one.</span>
+            <em className="text-oxblood">We read every one.</em>
           </h1>
         </div>
       </section>
 
-      {/* Form */}
+      {/* ============ Form ============ */}
       <section className="bg-background text-foreground">
-        <div className="mx-auto max-w-3xl px-6 py-20 md:px-12 md:py-32">
+        <div className="mx-auto max-w-3xl px-6 pb-16 md:px-10 md:pb-24">
           {submitted ? (
-            <div className="border border-brass/40 bg-background/40 p-12 text-center">
+            <div className="paper-card p-10 text-center md:p-12">
               <Icon
                 name="check"
-                size={48}
+                size={44}
                 strokeWidth={2.25}
                 className="mx-auto text-brass"
               />
-              <h2 className="display-xl mt-8 text-3xl text-foreground md:text-4xl">
+              <h2 className="display-soft mt-8 text-3xl text-foreground md:text-4xl">
                 Message received.
               </h2>
-              <p className="mx-auto mt-4 max-w-md font-pullquote text-lg italic text-stone">
+              <p className="mx-auto mt-4 max-w-md font-serif text-lg italic leading-relaxed text-foreground/80">
                 Thank you, brother. We will get back to you soon.
               </p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="grid gap-8">
-              <div className="flex items-center gap-4">
-                <span className="section-mark text-brass">§ Your message</span>
-                <div className="hairline flex-1" />
-              </div>
+              <fieldset className="grid gap-8 border-t border-foreground/15 pt-8">
+                <legend className="section-mark pr-4">Your message</legend>
 
-              <div className="grid gap-6 md:grid-cols-2">
-                <Field
-                  label="Name"
-                  required
-                  value={form.name}
-                  onChange={(v) => setForm((f) => ({ ...f, name: v }))}
-                />
-                <Field
-                  label="Email"
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={(v) => setForm((f) => ({ ...f, email: v }))}
-                />
-              </div>
+                <div className="grid gap-6 md:grid-cols-2">
+                  <Field
+                    label="Name"
+                    required
+                    value={form.name}
+                    onChange={(v) => setForm((f) => ({ ...f, name: v }))}
+                  />
+                  <Field
+                    label="Email"
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={(v) => setForm((f) => ({ ...f, email: v }))}
+                  />
+                </div>
+
+                <label className="block">
+                  <span className="section-mark">Topic</span>
+                  <select
+                    value={form.topic}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, topic: e.target.value }))
+                    }
+                    className="mt-3 block h-11 w-full border border-foreground/25 bg-transparent px-4 text-base text-foreground focus:border-brass focus:outline-none"
+                  >
+                    {TOPICS.map((t) => (
+                      <option
+                        key={t.value}
+                        value={t.value}
+                        className="bg-background text-foreground"
+                      >
+                        {t.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <label className="block">
+                  <span className="section-mark">
+                    Message
+                    <span className="ml-1 text-oxblood">*</span>
+                  </span>
+                  <textarea
+                    required
+                    rows={6}
+                    value={form.message}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, message: e.target.value }))
+                    }
+                    className="mt-3 block w-full border border-foreground/25 bg-transparent px-4 py-3 text-base leading-relaxed text-foreground placeholder:text-muted-foreground/50 focus:border-brass focus:outline-none"
+                  />
+                </label>
+              </fieldset>
 
               <div>
-                <label className="section-mark text-stone/60">Topic</label>
-                <select
-                  value={form.topic}
-                  onChange={(e) =>
-                    setForm((f) => ({ ...f, topic: e.target.value }))
-                  }
-                  className="mt-3 h-11 w-full border border-stone/25 bg-transparent px-4 text-sm text-foreground focus:border-brass focus:outline-none"
-                >
-                  {TOPICS.map((t) => (
-                    <option
-                      key={t.value}
-                      value={t.value}
-                      className="bg-background text-foreground"
-                    >
-                      {t.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="section-mark text-stone/60">Message</label>
-                <textarea
-                  required
-                  rows={6}
-                  value={form.message}
-                  onChange={(e) =>
-                    setForm((f) => ({ ...f, message: e.target.value }))
-                  }
-                  className="mt-3 w-full border border-stone/25 bg-transparent px-4 py-3 text-base leading-relaxed text-foreground placeholder:text-stone/40 focus:border-brass focus:outline-none"
-                />
-              </div>
-
-              <Magnetic strength={0.18}>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="lift inline-flex h-12 items-center gap-2 border border-bone bg-bone px-8 text-sm font-medium uppercase tracking-wider text-ink transition-colors hover:bg-stone disabled:cursor-not-allowed disabled:opacity-60"
+                  className="lift inline-flex h-12 items-center gap-3 bg-foreground px-7 text-sm font-medium uppercase tracking-[0.18em] text-background transition-colors hover:bg-foreground/90 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {submitting ? "Sending..." : "Send message"}
                   {!submitting && <Icon name="arrow-right" size={16} />}
                 </button>
-              </Magnetic>
+                <p className="folio mt-4">
+                  A brother reads every note. No newsletters unless you ask.
+                </p>
+              </div>
             </form>
           )}
         </div>
@@ -171,18 +174,18 @@ function Field({
   onChange: (v: string) => void;
 }) {
   return (
-    <div>
-      <label className="section-mark text-stone/60">
+    <label className="block">
+      <span className="section-mark">
         {label}
-        {required && <span className="ml-1 text-brass">*</span>}
-      </label>
+        {required && <span className="ml-1 text-oxblood">*</span>}
+      </span>
       <input
         type={type}
         required={required}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-3 h-11 w-full border border-stone/25 bg-transparent px-4 text-base text-foreground placeholder:text-stone/40 focus:border-brass focus:outline-none"
+        className="mt-3 block h-11 w-full border border-foreground/25 bg-transparent px-4 text-base text-foreground placeholder:text-muted-foreground/50 focus:border-brass focus:outline-none"
       />
-    </div>
+    </label>
   );
 }

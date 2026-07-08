@@ -166,10 +166,10 @@ export function SeriesComposer({ voices }: ComposerProps) {
           <span className="section-mark text-brass">§ Schedule a series</span>
           <div className="hairline flex-1" />
         </div>
-        <h1 className="display-xl mt-6 text-3xl text-bone md:text-5xl">
+        <h1 className="display-soft mt-6 text-3xl text-bone md:text-4xl">
           One theme.
           <br />
-          <span className="text-brass">Many letters.</span>
+          <em className="not-italic text-oxblood">Many letters.</em>
         </h1>
         <p className="mt-4 max-w-2xl font-pullquote text-base italic leading-relaxed text-stone/80">
           Pick a theme, a voice, a cadence. Claude drafts every letter in the arc. You review them all together, then they publish on schedule.
@@ -213,8 +213,7 @@ export function SeriesComposer({ voices }: ComposerProps) {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Steady men in shaky times"
-              className="block w-full border border-stone/15 bg-transparent px-4 py-3 text-2xl text-bone placeholder:text-stone/35 focus:border-brass focus:outline-none"
-              style={{ fontFamily: "var(--font-display)" }}
+              className="display-soft block w-full border border-stone/15 bg-transparent px-4 py-3 text-2xl text-bone placeholder:text-stone/35 focus:border-brass focus:outline-none"
               autoFocus
             />
           </Field>
@@ -286,7 +285,7 @@ export function SeriesComposer({ voices }: ComposerProps) {
                       )}
                     >
                       <div className="flex items-center justify-between">
-                        <h3 className="display-xl text-base text-bone md:text-lg">
+                        <h3 className="display-soft text-base text-bone md:text-lg">
                           {v.name}
                         </h3>
                         {active && <span className="section-mark text-brass">Picked</span>}
@@ -409,7 +408,7 @@ export function SeriesComposer({ voices }: ComposerProps) {
           {!letters && !planning && !planError && (
             <div className="border border-dashed border-stone/20 bg-iron/30 p-10 text-center">
               <Icon name="sparkles" size={36} className="mx-auto text-brass" />
-              <h2 className="display-xl mt-6 text-xl text-bone md:text-2xl">
+              <h2 className="display-soft mt-6 text-xl text-bone md:text-2xl">
                 Ready to draft {totalCount} letters.
               </h2>
               <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-stone/75">
@@ -418,7 +417,7 @@ export function SeriesComposer({ voices }: ComposerProps) {
               <button
                 type="button"
                 onClick={runPlan}
-                className="lift mt-8 inline-flex h-11 items-center gap-2 bg-brass px-6 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-gold"
+                className="lift mt-8 inline-flex h-11 items-center gap-2 bg-bone px-6 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85"
               >
                 <Icon name="sparkles" size={14} />
                 Draft the series
@@ -439,7 +438,7 @@ export function SeriesComposer({ voices }: ComposerProps) {
 
           {planError && (
             <div className="border border-oxblood/40 bg-oxblood/15 p-5">
-              <p className="display-xl text-base text-bone">Series draft failed.</p>
+              <p className="display-soft text-base text-bone">Series draft failed.</p>
               <p className="mt-2 text-sm text-stone/85">{planError}</p>
               <button
                 type="button"
@@ -462,7 +461,7 @@ export function SeriesComposer({ voices }: ComposerProps) {
                       Scheduled
                     </span>
                   </div>
-                  <h3 className="display-xl mt-3 text-xl text-bone md:text-2xl">
+                  <h3 className="display-soft mt-3 text-xl text-bone md:text-2xl">
                     {l.title}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-bone/85 whitespace-pre-line">
@@ -472,7 +471,7 @@ export function SeriesComposer({ voices }: ComposerProps) {
                     <ul className="mt-4 space-y-1">
                       {l.scriptures.map((s, i) => (
                         <li key={i} className="border-l-2 border-brass/40 pl-3">
-                          <p className="text-xs font-medium text-bone" style={{ fontFamily: "var(--font-jetbrains-mono)" }}>
+                          <p className="font-serif text-xs font-medium text-bone">
                             {s.ref}
                           </p>
                           <p className="text-[0.6875rem] text-stone/65">{s.note}</p>
@@ -502,7 +501,7 @@ export function SeriesComposer({ voices }: ComposerProps) {
                   type="button"
                   onClick={commit}
                   disabled={saving}
-                  className="lift inline-flex h-10 items-center gap-2 bg-brass px-5 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-gold disabled:opacity-60"
+                  className="lift inline-flex h-10 items-center gap-2 bg-bone px-5 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85 disabled:opacity-60"
                 >
                   {saving ? "Scheduling..." : `Schedule all ${letters.length}`}
                   <Icon name="arrow-right" size={12} />
@@ -581,7 +580,7 @@ function FooterNav({
           type="button"
           onClick={onNext}
           disabled={nextDisabled}
-          className="lift inline-flex h-10 items-center gap-2 bg-brass px-5 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-gold disabled:cursor-not-allowed disabled:bg-stone/30 disabled:text-stone/55"
+          className="lift inline-flex h-10 items-center gap-2 bg-bone px-5 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85 disabled:cursor-not-allowed disabled:bg-stone/30 disabled:text-stone/55"
         >
           {nextLabel}
           <Icon name="arrow-right" size={12} />

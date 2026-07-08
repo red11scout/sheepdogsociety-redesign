@@ -45,7 +45,7 @@ export function PastEventsManager({ initial }: { initial: PastEvent[] }) {
         </div>
         <div className="mt-6 flex flex-wrap items-end justify-between gap-6">
           <div>
-            <h1 className="display-xl text-3xl text-bone md:text-5xl">
+            <h1 className="display-soft text-3xl text-bone md:text-4xl">
               The retreat archive.
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-stone/80">
@@ -91,7 +91,7 @@ export function PastEventsManager({ initial }: { initial: PastEvent[] }) {
                     )}
                   />
                   <div className="min-w-0 flex-1">
-                    <p className="truncate display-xl text-base text-bone md:text-lg">
+                    <p className="truncate display-soft text-base text-bone md:text-lg">
                       {ev.title}
                     </p>
                     <p className="mt-1 flex flex-wrap items-center gap-2 text-[0.6875rem] text-stone/55">
@@ -324,7 +324,7 @@ function RecapEditor({
                   <button
                     type="button"
                     onClick={() => removePhoto(i)}
-                    className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center bg-iron/85 text-bone opacity-0 backdrop-blur-sm transition-opacity hover:bg-oxblood group-hover/photo:opacity-100"
+                    className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center bg-iron text-bone opacity-0 transition-opacity hover:bg-oxblood group-hover/photo:opacity-100"
                     aria-label="Remove photo"
                     title="Remove photo"
                   >

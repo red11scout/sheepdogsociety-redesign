@@ -62,7 +62,7 @@ export default async function AdminAuditPage({
             <span className="section-mark text-brass">§ Audit</span>
             <div className="hairline w-32" />
           </div>
-          <h1 className="display-xl mt-4 text-3xl text-bone md:text-5xl">
+          <h1 className="display-soft mt-4 text-3xl text-bone md:text-4xl">
             Every change. Every actor.
           </h1>
           <p className="mt-2 font-pullquote text-base italic text-stone">
@@ -73,9 +73,9 @@ export default async function AdminAuditPage({
       </header>
 
       {rows.length === 0 ? (
-        <div className="mt-16 border border-dashed border-stone/30 bg-iron/40 p-16 text-center">
+        <div className="mt-16 border border-dashed border-stone/30 bg-transparent p-16 text-center">
           <Icon name="clipboard" size={48} className="mx-auto text-brass" />
-          <h2 className="mt-6 font-display text-2xl text-bone md:text-3xl">
+          <h2 className="display-soft mt-6 text-2xl text-bone md:text-3xl">
             No audit entries yet.
           </h2>
           <p className="mt-3 max-w-prose mx-auto text-sm leading-relaxed text-stone">
@@ -84,7 +84,7 @@ export default async function AdminAuditPage({
           </p>
         </div>
       ) : (
-        <section className="mt-12 border border-stone/15 bg-iron/40">
+        <section className="paper-card mt-12">
           <div className="hidden grid-cols-[160px_120px_1fr_1.4fr_140px] gap-4 border-b border-stone/15 px-6 py-3 section-mark text-stone/60 md:grid">
             <span>When</span>
             <span>Action</span>
@@ -119,7 +119,7 @@ export default async function AdminAuditPage({
                       </div>
                       <div className="text-sm text-bone">
                         <span className="text-brass">{r.entityType}</span>
-                        <span className="ml-2 font-mono text-xs text-stone/60">
+                        <span className="ml-2 text-xs tracking-wide text-stone/60">
                           {String(r.entityId).slice(0, 12)}…
                         </span>
                       </div>

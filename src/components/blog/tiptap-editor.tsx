@@ -59,7 +59,7 @@ export function TipTapEditor({
     editorProps: {
       attributes: {
         class:
-          "prose prose-invert max-w-none min-h-[300px] p-4 focus:outline-none",
+          "prose dark:prose-invert font-serif max-w-none min-h-[300px] p-4 focus:outline-none",
       },
     },
   });
@@ -91,7 +91,7 @@ export function TipTapEditor({
   }
 
   return (
-    <div className="rounded-md border border-border">
+    <div className="border border-border">
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-0.5 border-b border-border p-1">
         <ToolbarButton

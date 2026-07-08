@@ -34,9 +34,6 @@ export default async function SignInPage({
 
   return (
     <div className="admin-shell relative isolate min-h-screen overflow-hidden bg-iron text-bone">
-      <div className="aurora aurora--soft" aria-hidden />
-      <div className="dotted-grid absolute inset-0 opacity-[0.04]" aria-hidden />
-
       <div className="relative mx-auto flex min-h-screen max-w-md flex-col justify-center px-6 py-16">
         {/* Brand */}
         <div className="flex flex-col items-center gap-4 text-center">
@@ -51,7 +48,7 @@ export default async function SignInPage({
         {/* Form */}
         <form
           action={signInAction}
-          className="mt-12 space-y-5 border border-stone/20 bg-iron/40 p-8 text-bone backdrop-blur"
+          className="mt-12 space-y-5 border border-stone/20 bg-iron/40 p-8 text-bone"
         >
           <label className="block">
             <span className="block section-mark text-stone">Email</span>

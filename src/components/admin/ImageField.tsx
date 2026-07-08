@@ -107,7 +107,7 @@ export function ImageField({
           <button
             type="button"
             onClick={() => onChange("", "")}
-            className="absolute right-3 top-3 inline-flex h-8 items-center gap-1.5 border border-bone/40 bg-iron/80 px-2.5 text-[0.625rem] font-medium uppercase tracking-wider text-bone backdrop-blur transition-colors hover:bg-iron"
+            className="absolute right-3 top-3 inline-flex h-8 items-center gap-1.5 border border-bone/40 bg-iron px-2.5 text-[0.625rem] font-medium uppercase tracking-wider text-bone transition-colors hover:border-bone"
           >
             <Icon name="trash" size={12} />
             Remove
@@ -124,7 +124,7 @@ export function ImageField({
               type="button"
               onClick={() => fileRef.current?.click()}
               disabled={busy !== "none"}
-              className="lift inline-flex h-9 items-center gap-2 border border-bone bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-stone disabled:opacity-60"
+              className="lift inline-flex h-9 items-center gap-2 bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85 disabled:opacity-60"
             >
               <Icon name="download" size={12} className="rotate-180" />
               {busy === "uploading" ? "Uploading..." : "Upload"}
@@ -212,7 +212,7 @@ export function ImageField({
               type="button"
               onClick={handleGenerate}
               disabled={!prompt.trim() || busy === "generating"}
-              className="lift inline-flex h-9 items-center gap-2 bg-brass px-4 text-xs font-medium uppercase tracking-wider text-ink transition-colors hover:bg-gold disabled:opacity-60"
+              className="lift inline-flex h-9 items-center gap-2 bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85 disabled:opacity-60"
             >
               {busy === "generating" ? "Generating..." : "Generate"}
               {busy !== "generating" && <Icon name="sparkles" size={12} />}

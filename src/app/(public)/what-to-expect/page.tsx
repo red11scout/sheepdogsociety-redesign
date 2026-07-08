@@ -74,58 +74,58 @@ const FAQ = [
 export default function WhatToExpectPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-background text-foreground">
-        <div className="aurora aurora--soft" aria-hidden />
-        <div className="dotted-grid absolute inset-0 opacity-[0.04]" aria-hidden />
-        <div className="relative mx-auto max-w-5xl px-6 py-24 md:px-12 md:py-40">
+      {/* ============ Lead ============ */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-5xl px-6 pb-16 pt-12 md:px-10 md:pb-20 md:pt-20">
           <div className="flex items-center gap-4">
-            <span className="section-mark">§ Before you come</span>
-            <div className="hairline flex-1" />
+            <span className="folio">Before you come</span>
+            <div className="hairline flex-1 text-foreground" />
+            <span className="folio">No stage · no show</span>
           </div>
-          <h1 className="display-xl mt-10 text-[clamp(2.5rem,7vw,6rem)] text-foreground">
+          <h1 className="display-xl mt-8 text-[clamp(2.2rem,6vw,4.5rem)] text-foreground">
             Come hungry.
             <br />
-            <span className="text-brass">Bring nothing else.</span>
+            <em className="text-oxblood">Bring nothing else.</em>
           </h1>
-          <p className="mt-10 max-w-2xl font-pullquote text-xl italic text-foreground/80 md:text-2xl">
+          <p className="dropcap mt-8 max-w-2xl font-serif text-lg leading-[1.75] text-foreground/85 md:text-xl">
             You do not need to have your life in order. You do not need to know
             what to say. Come sit down. Listen. Open the Word with us.
           </p>
         </div>
       </section>
 
-      {/* The rhythm of a table */}
-      <section className="bg-bone">
-        <div className="mx-auto max-w-5xl px-6 py-24 md:px-12 md:py-32">
-          <div className="flex items-center gap-4">
-            <span className="section-mark text-brass">§ The rhythm</span>
-            <div className="hairline flex-1 text-iron/40" />
+      {/* ============ The rhythm of a table ============ */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-5xl px-6 py-16 md:px-10 md:py-24">
+          <div className="rule-double text-foreground/70" />
+          <div className="mt-10 flex items-center gap-4">
+            <span className="section-mark">The rhythm</span>
+            <div className="hairline flex-1 text-foreground" />
           </div>
-          <h2 className="display-xl mt-10 text-[clamp(2rem,5vw,3.5rem)] text-iron">
+          <h2 className="display-xl mt-8 text-[clamp(2rem,4.5vw,3.5rem)] text-foreground">
             Five things happen at a table.
           </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-iron/75">
+          <p className="mt-6 max-w-2xl font-serif text-lg leading-relaxed text-foreground/80">
             Most groups follow this rhythm, in this order. It is simple on
             purpose. A man should be able to walk in the door and know what is
             coming.
           </p>
 
-          <div className="mt-16 space-y-12 md:space-y-16">
+          <div className="mt-14 space-y-12 md:space-y-14">
             {TABLE_RHYTHM.map((step) => (
               <article
                 key={step.eyebrow}
-                className="grid gap-6 md:grid-cols-[200px_1fr] md:gap-12"
+                className="grid gap-5 md:grid-cols-[200px_1fr] md:gap-12"
               >
                 <div>
-                  <span className="section-mark text-brass">{step.eyebrow}</span>
-                  <div className="hairline mt-3 text-iron/40" />
+                  <span className="section-mark">{step.eyebrow}</span>
+                  <div className="hairline mt-3 text-foreground" />
                 </div>
-                <div>
-                  <h3 className="font-display text-2xl font-semibold text-iron md:text-3xl">
+                <div className="md:border-l md:border-foreground/15 md:pl-10">
+                  <h3 className="display-soft text-2xl text-foreground md:text-3xl">
                     {step.title}
                   </h3>
-                  <p className="mt-4 text-lg leading-relaxed text-iron/75">
+                  <p className="mt-4 font-serif text-lg leading-relaxed text-foreground/80">
                     {step.body}
                   </p>
                 </div>
@@ -135,42 +135,38 @@ export default function WhatToExpectPage() {
         </div>
       </section>
 
-      {/* Verse plate */}
-      <section className="bg-background text-foreground">
-        <div className="mx-auto max-w-4xl px-6 py-24 md:px-12 md:py-32">
-          <div className="flex items-center gap-4">
-            <span className="section-mark">§ The Charge</span>
-            <div className="hairline flex-1" />
-          </div>
-          <blockquote className="mt-12 border-l-2 border-brass pl-8 font-pullquote text-2xl italic leading-relaxed text-foreground md:text-3xl">
-            Pay careful attention to yourselves and to all the flock, in which
-            the Holy Spirit has made you overseers, to care for the church of
-            God, which he obtained with his own blood.
-          </blockquote>
-          <p className="mt-6 pl-8 section-mark text-brass">
-            Acts 20:28 · ESV
+      {/* ============ Ember band — the charge ============ */}
+      <section className="ember-band">
+        <div className="mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
+          <p className="section-mark">The charge · Acts 20:28</p>
+          <p className="mt-8 font-pullquote text-2xl italic leading-snug md:text-3xl">
+            &ldquo;Pay careful attention to yourselves and to all the flock, in
+            which the Holy Spirit has made you overseers, to care for the church
+            of God, which he obtained with his own blood.&rdquo;
           </p>
+          <div className="mx-auto mt-10 h-px w-24 bg-[#c9834a]/60" />
+          <p className="folio mt-6 !text-[#b7a68b]">Acts 20:28 · ESV</p>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="bg-bone">
-        <div className="mx-auto max-w-3xl px-6 py-24 md:px-12 md:py-32">
+      {/* ============ FAQ ============ */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-3xl px-6 py-16 md:px-10 md:py-24">
           <div className="flex items-center gap-4">
-            <span className="section-mark text-brass">§ Plain answers</span>
-            <div className="hairline flex-1 text-iron/40" />
+            <span className="section-mark">Plain answers</span>
+            <div className="hairline flex-1 text-foreground" />
           </div>
-          <h2 className="display-xl mt-10 text-[clamp(2rem,5vw,3.5rem)] text-iron">
+          <h2 className="display-xl mt-8 text-[clamp(2rem,4.5vw,3.5rem)] text-foreground">
             What men ask.
           </h2>
 
-          <dl className="mt-16 divide-y divide-iron/10 border-y border-iron/10">
+          <dl className="mt-12 divide-y divide-foreground/10 border-y border-foreground/15">
             {FAQ.map((item) => (
               <div key={item.q} className="py-8">
-                <dt className="font-display text-xl font-semibold text-iron md:text-2xl">
+                <dt className="display-soft text-xl text-foreground md:text-2xl">
                   {item.q}
                 </dt>
-                <dd className="mt-3 text-lg leading-relaxed text-iron/75">
+                <dd className="mt-3 font-serif text-lg leading-relaxed text-foreground/80">
                   {item.a}
                 </dd>
               </div>
@@ -179,29 +175,30 @@ export default function WhatToExpectPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ============ Next step ============ */}
       <section className="bg-background text-foreground">
-        <div className="mx-auto max-w-4xl px-6 py-24 md:px-12 md:py-32">
-          <div className="flex items-center gap-4">
-            <span className="section-mark">§ Next step</span>
-            <div className="hairline flex-1" />
+        <div className="mx-auto max-w-4xl px-6 pb-16 md:px-10 md:pb-24">
+          <div className="rule-double text-foreground/70" />
+          <div className="mt-10 flex items-center gap-4">
+            <span className="section-mark">Next step</span>
+            <div className="hairline flex-1 text-foreground" />
           </div>
-          <h2 className="display-xl mt-10 text-[clamp(2.25rem,6vw,4.5rem)] text-foreground">
+          <h2 className="display-xl mt-8 text-[clamp(2.2rem,5vw,4rem)] text-foreground">
             There is a chair.
             <br />
-            <span className="text-brass">Sit in it.</span>
+            <em className="text-oxblood">Sit in it.</em>
           </h2>
-          <div className="mt-12 flex flex-col gap-4 sm:flex-row">
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link
               href="/locations"
-              className="lift inline-flex h-12 items-center gap-3 bg-brass px-6 text-sm font-medium uppercase tracking-[0.18em] text-ink transition-colors hover:bg-gold"
+              className="lift inline-flex h-12 items-center justify-center gap-3 bg-foreground px-7 text-[0.95rem] font-medium text-background transition-colors hover:bg-foreground/90"
             >
               Find a group near me
               <Icon name="arrow-right" size={16} />
             </Link>
             <Link
               href="/locations/request"
-              className="lift inline-flex h-12 items-center gap-3 border border-bone/30 px-6 text-sm font-medium uppercase tracking-[0.18em] text-foreground transition-colors hover:border-brass hover:text-brass"
+              className="section-mark lift inline-flex h-12 items-center justify-center gap-3 border border-foreground/70 px-7 !text-foreground transition-colors hover:border-brass hover:!text-brass"
             >
               Plant a group
               <Icon name="arrow-up-right" size={16} />

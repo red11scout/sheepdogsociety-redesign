@@ -3,7 +3,6 @@
 import { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Icon, type IconName } from "@/components/icons/Icon";
-import { Magnetic } from "@/components/motion/Magnetic";
 import { HintTooltip } from "@/components/admin/HintTooltip";
 import {
   createSection,
@@ -175,7 +174,7 @@ export function ResourcesAdmin({
     return (
       <div className="mx-auto max-w-3xl px-6 py-10">
         <div className="border border-oxblood/40 bg-oxblood/15 p-6 text-sm text-bone">
-          <p className="display-xl text-base">The Resources page can&rsquo;t load.</p>
+          <p className="display-soft text-base">The Resources page can&rsquo;t load.</p>
 
           <p className="mt-3 text-xs uppercase tracking-wider text-stone/55">
             Raw error from Neon
@@ -225,10 +224,10 @@ NEON_DATABASE_URL='paste-the-prod-url-here' \\
           <span className="section-mark text-brass">§ Resources</span>
           <div className="hairline flex-1" />
         </div>
-        <h1 className="display-xl mt-6 text-3xl text-bone md:text-5xl">
+        <h1 className="display-soft mt-6 text-3xl text-bone md:text-4xl">
           Build the library.
           <br />
-          <span className="text-brass">Section by section.</span>
+          <em className="not-italic text-oxblood">Section by section.</em>
         </h1>
         <p className="mt-6 max-w-2xl font-pullquote text-base italic leading-relaxed text-stone/80">
           Sections are how the public site groups your library. Bible Studies, Leader Guides, Workout Plans, anything you need. Add files (uploaded to Vercel Blob), AI-generated PDFs/images, or external links. Anything marked public shows on /resources for download.
@@ -305,7 +304,7 @@ NEON_DATABASE_URL='paste-the-prod-url-here' \\
                       size={24}
                       className="text-brass"
                     />
-                    <h2 className="display-xl text-2xl text-bone md:text-3xl">
+                    <h2 className="display-soft text-2xl text-bone md:text-3xl">
                       {activeSection.name}
                     </h2>
                     <HintTooltip hint="Click resources to edit. Toggle public/private with the eye icon. Public resources appear on /resources." />
@@ -336,16 +335,14 @@ NEON_DATABASE_URL='paste-the-prod-url-here' \\
                     <Icon name="trash" size={12} />
                     Delete section
                   </button>
-                  <Magnetic strength={0.18}>
-                    <button
-                      type="button"
-                      onClick={() => setShowNewResource(true)}
-                      className="lift inline-flex h-9 items-center gap-2 border border-bone bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-stone"
-                    >
-                      <Icon name="plus" size={12} />
-                      Add one
-                    </button>
-                  </Magnetic>
+                  <button
+                    type="button"
+                    onClick={() => setShowNewResource(true)}
+                    className="lift inline-flex h-9 items-center gap-2 bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85"
+                  >
+                    <Icon name="plus" size={12} />
+                    Add one
+                  </button>
                 </div>
               </div>
 
@@ -545,7 +542,7 @@ function NewSectionForm({
           type="button"
           onClick={() => onSubmit(name, description, icon)}
           disabled={!name.trim()}
-          className="lift inline-flex h-8 items-center gap-1.5 bg-brass px-3 text-[0.625rem] font-medium uppercase tracking-wider text-ink transition-colors hover:bg-gold disabled:opacity-60"
+          className="lift inline-flex h-8 items-center gap-1.5 bg-bone px-3 text-[0.625rem] font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85 disabled:opacity-60"
         >
           Create
         </button>
@@ -668,7 +665,7 @@ function NewResourceForm({
             })
           }
           disabled={!title.trim() || (!uploadedKey && !url.trim())}
-          className="lift inline-flex h-9 items-center gap-1.5 bg-brass px-4 text-xs font-medium uppercase tracking-wider text-ink transition-colors hover:bg-gold disabled:opacity-60"
+          className="lift inline-flex h-9 items-center gap-1.5 bg-bone px-4 text-xs font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85 disabled:opacity-60"
         >
           Create resource
         </button>
@@ -1084,7 +1081,7 @@ function EditSectionForm({
           type="button"
           onClick={() => onSubmit({ name, description, icon, sortOrder })}
           disabled={!name.trim()}
-          className="lift inline-flex h-8 items-center gap-1.5 bg-brass px-3 text-[0.625rem] font-medium uppercase tracking-wider text-ink transition-colors hover:bg-gold disabled:opacity-60"
+          className="lift inline-flex h-8 items-center gap-1.5 bg-bone px-3 text-[0.625rem] font-medium uppercase tracking-wider text-iron transition-colors hover:bg-bone/85 disabled:opacity-60"
         >
           Save changes
         </button>
