@@ -1,6 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "//": "SANDBOX: crons intentionally removed. The prod repo schedules purge / group-followup / publish-scheduled-letters; this read-only redesign sandbox must never run them against the production DB or text/email subscribers.",
   "functions": {
     "src/app/api/ai/**/route.ts": { "maxDuration": 60 },
     "src/app/api/admin/encouragements/**/route.ts": { "maxDuration": 120 },
