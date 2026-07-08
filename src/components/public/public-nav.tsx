@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/components/icons/Icon";
-import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 interface NavLink {
@@ -15,7 +14,7 @@ interface NavLink {
 
 const navLinks: NavLink[] = [
   { href: "/locations", label: "Groups" },
-  { href: "/encouragements", label: "Letter" },
+  { href: "/encouragements", label: "The Letter" },
   { href: "/events", label: "Events" },
   { href: "/gallery", label: "Gallery" },
   { href: "/resources", label: "Resources" },
@@ -28,15 +27,20 @@ const navLinks: NavLink[] = [
       { href: "/faq", label: "FAQ" },
     ],
   },
-  // { href: "/giving", label: "Give" }, // hidden — uncomment to restore
 ];
 
+/**
+ * Ridge & Bone masthead — a broadsheet front-page header, not an app bar.
+ * Tier 1: folio strip (verse + edition line + theme toggle).
+ * Tier 2: the wordmark set large in Fraunces, flanked by rules.
+ * Tier 3: small-caps nav rail under a double rule.
+ * Collapses to a compact single bar + drawer on mobile.
+ */
 export function PublicNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Close any open desktop dropdown on route change-y events
   useEffect(() => {
     const onEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpenMenu(null);
@@ -57,31 +61,79 @@ export function PublicNav() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-iron/10 bg-bone/90 backdrop-blur supports-[backdrop-filter]:bg-bone/75">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4 md:px-12">
-        <Link
-          href="/"
-          className="flex items-center gap-3 text-iron"
-          aria-label="Sheepdog Society home"
-        >
-          <Image
-            src="/logo.png"
-            alt=""
-            width={36}
-            height={36}
-            className="rounded-none"
-          />
-          <div className="leading-tight">
-            <div className="brand-wordmark text-lg text-iron">
-              Sheepdog Society
-            </div>
-            <div className="section-mark text-[0.625rem] text-brass">
-              Acts 20:28
-            </div>
+    <header className="sticky top-0 z-50 border-b border-ink/15 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85">
+      {/* Tier 1 — folio strip */}
+      <div className="hidden border-b border-ink/10 lg:block">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-1.5 md:px-10">
+          <span className="folio">Acts 20:28 · Keep watch over yourselves and all the flock</span>
+          <div className="flex items-center gap-4">
+            <Link href="/acts-20-28" className="folio transition-colors hover:text-brass">
+              The Verse
+            </Link>
+            <span className="folio text-ink/30">·</span>
+            <Link href="/what-to-expect" className="folio transition-colors hover:text-brass">
+              New here
+            </Link>
+            <ThemeToggle className="inline-flex h-7 w-7 items-center justify-center text-ink/50 transition-colors hover:text-ink" />
           </div>
-        </Link>
+        </div>
+      </div>
 
-        <div className="hidden items-center gap-1 lg:flex">
+      {/* Tier 2 — wordmark */}
+      <div className="hidden lg:block">
+        <div className="mx-auto flex max-w-7xl items-center justify-center gap-6 px-6 py-4 md:px-10">
+          <div className="hairline flex-1 text-ink" />
+          <Link
+            href="/"
+            className="flex items-center gap-4 text-ink"
+            aria-label="Sheepdog Society home"
+          >
+            <Image src="/logo.png" alt="" width={44} height={44} className="rounded-none" />
+            <div className="text-center leading-none">
+              <div className="brand-wordmark text-3xl tracking-tight text-foreground">
+                Sheepdog Society
+              </div>
+              <div className="folio mt-1.5">A brotherhood anchored in Acts 20:28</div>
+            </div>
+            <Image
+              src="/logo.png"
+              alt=""
+              width={44}
+              height={44}
+              className="rounded-none -scale-x-100"
+            />
+          </Link>
+          <div className="hairline flex-1 text-ink" />
+        </div>
+      </div>
+
+      {/* Tier 3 — nav rail */}
+      <nav className="mx-auto max-w-7xl px-6 md:px-10">
+        {/* Mobile compact bar */}
+        <div className="flex items-center justify-between py-3 lg:hidden">
+          <Link href="/" className="flex items-center gap-2.5" aria-label="Sheepdog Society home">
+            <Image src="/logo.png" alt="" width={32} height={32} className="rounded-none" />
+            <div className="leading-tight">
+              <div className="brand-wordmark text-lg text-foreground">Sheepdog Society</div>
+              <div className="folio text-[0.575rem]">Acts 20:28</div>
+            </div>
+          </Link>
+          <div className="flex items-center gap-1">
+            <ThemeToggle className="inline-flex h-9 w-9 items-center justify-center text-ink/60 transition-colors hover:text-ink" />
+            <button
+              type="button"
+              className="p-2 text-ink"
+              onClick={() => setMobileOpen((v) => !v)}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+            >
+              <Icon name={mobileOpen ? "close" : "menu"} size={22} />
+            </button>
+          </div>
+        </div>
+
+        {/* Desktop rail */}
+        <div className="hidden items-center justify-center gap-0.5 border-t border-ink/10 py-1 lg:flex">
           {navLinks.map((link) => {
             if (link.children) {
               const isOpen = openMenu === link.href;
@@ -97,7 +149,7 @@ export function PublicNav() {
                 >
                   <Link
                     href={link.href}
-                    className="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium text-iron/70 transition-colors hover:text-iron"
+                    className="section-mark inline-flex items-center gap-1 px-4 py-2.5 !text-foreground/65 transition-colors hover:!text-brass"
                     onFocus={() => setOpenMenu(link.href)}
                     aria-haspopup="true"
                     aria-expanded={isOpen}
@@ -105,13 +157,13 @@ export function PublicNav() {
                     {link.label}
                     <Icon
                       name="chevron-down"
-                      size={12}
+                      size={11}
                       className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
                     />
                   </Link>
                   {isOpen && (
                     <div
-                      className="absolute left-0 top-full mt-1 min-w-[180px] border border-iron/10 bg-bone shadow-lg"
+                      className="absolute left-1/2 top-full mt-0 min-w-[190px] -translate-x-1/2 border border-ink/15 bg-card shadow-[0_14px_40px_-18px_rgba(20,14,6,0.4)]"
                       onMouseEnter={cancelClose}
                       onMouseLeave={scheduleClose}
                     >
@@ -120,7 +172,7 @@ export function PublicNav() {
                           <li key={child.href}>
                             <Link
                               href={child.href}
-                              className="block px-4 py-2 text-sm text-iron/75 transition-colors hover:bg-iron/5 hover:text-iron"
+                              className="block px-4 py-2 text-sm text-foreground/75 transition-colors hover:bg-ink/5 hover:text-foreground"
                               onClick={() => setOpenMenu(null)}
                             >
                               {child.label}
@@ -137,62 +189,42 @@ export function PublicNav() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-3 py-2 text-sm font-medium text-iron/70 transition-colors hover:text-iron"
+                className="section-mark px-4 py-2.5 !text-foreground/65 transition-colors hover:!text-brass"
               >
                 {link.label}
               </Link>
             );
           })}
-        </div>
-
-        <div className="hidden items-center gap-3 lg:flex">
-          <ThemeToggle className="inline-flex h-9 w-9 items-center justify-center border border-iron/15 text-iron/70 transition-colors hover:border-iron hover:text-iron" />
-          <Button
-            asChild
-            size="sm"
-            className="lift h-10 rounded-none border border-iron bg-background px-5 text-sm text-foreground hover:bg-background/90"
+          <span className="mx-2 h-4 w-px bg-ink/15" aria-hidden />
+          <Link
+            href="/get-started"
+            className="section-mark border border-ink/70 px-4 py-2 !text-foreground transition-colors hover:border-brass hover:bg-brass/10 hover:!text-brass"
           >
-            <Link href="/get-started">
-              Join
-              <Icon name="arrow-right" size={14} className="ml-2" />
-            </Link>
-          </Button>
-        </div>
-
-        <div className="flex items-center gap-2 lg:hidden">
-          <ThemeToggle className="inline-flex h-9 w-9 items-center justify-center border border-iron/15 text-iron/70 transition-colors hover:border-iron hover:text-iron" />
-          <button
-            type="button"
-            className="rounded-none p-2 text-iron"
-            onClick={() => setMobileOpen((v) => !v)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-          >
-            <Icon name={mobileOpen ? "close" : "menu"} size={22} />
-          </button>
+            Join
+          </Link>
         </div>
       </nav>
 
       {mobileOpen && (
-        <div className="border-t border-iron/10 bg-bone px-6 pb-6 pt-2 lg:hidden">
+        <div className="border-t border-ink/10 bg-background px-6 pb-6 pt-2 lg:hidden">
           {navLinks.map((link) => (
-            <div key={link.href}>
+            <div key={link.href} className="border-b border-ink/8">
               <Link
                 href={link.href}
-                className="block py-3 text-sm font-medium text-iron/80"
+                className="block py-3.5 font-serif text-lg text-foreground/85"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
               </Link>
               {link.children && (
-                <div className="ml-4 border-l border-iron/10 pl-4">
+                <div className="mb-2 ml-4 border-l border-ink/10 pl-4">
                   {link.children
                     .filter((c) => c.href !== link.href)
                     .map((child) => (
                       <Link
                         key={child.href}
                         href={child.href}
-                        className="block py-2 text-sm text-iron/65"
+                        className="block py-2 text-sm text-foreground/60"
                         onClick={() => setMobileOpen(false)}
                       >
                         {child.label}
@@ -202,17 +234,15 @@ export function PublicNav() {
               )}
             </div>
           ))}
-          <div className="mt-4 border-t border-iron/10 pt-4">
-            <Button
-              asChild
-              size="sm"
-              className="lift h-11 w-full rounded-none border border-iron bg-background px-5 text-sm text-foreground hover:bg-background/90"
+          <div className="mt-5">
+            <Link
+              href="/get-started"
+              onClick={() => setMobileOpen(false)}
+              className="section-mark flex h-12 w-full items-center justify-center gap-2 border border-ink bg-ink !text-bone transition-colors hover:bg-ink/90"
             >
-              <Link href="/get-started" onClick={() => setMobileOpen(false)}>
-                Join the brotherhood
-                <Icon name="arrow-right" size={16} className="ml-2" />
-              </Link>
-            </Button>
+              Join the brotherhood
+              <Icon name="arrow-right" size={14} />
+            </Link>
           </div>
         </div>
       )}

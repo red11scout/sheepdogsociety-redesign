@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Icon } from "@/components/icons/Icon";
-import { Magnetic } from "@/components/motion/Magnetic";
 import { NewsletterForm } from "@/components/public/newsletter-form";
 import { LocationsPreview } from "@/components/LocationsPreview";
 
@@ -10,8 +9,7 @@ export const metadata = {
     "Find your brothers. A brotherhood of men anchored in Acts 20:28, who tell the truth and grow stronger in Christ together.",
   openGraph: {
     title: "Sheepdog Society — Find your brothers.",
-    description:
-      "Brothers who tell the truth and hear yours. Acts 20:28.",
+    description: "Brothers who tell the truth and hear yours. Acts 20:28.",
     images: [{ url: "/api/og/verse", width: 1200, height: 630 }],
   },
   twitter: {
@@ -20,124 +18,164 @@ export const metadata = {
   },
 };
 
+/**
+ * Ridge & Bone front page. The old dark aurora-poster homepage is retired;
+ * this is a printed broadsheet: paper ground, Fraunces headline, Newsreader
+ * deck, ruled columns, one ember band for the verse. Ink, not glow.
+ */
 export default function HomePage() {
   return (
     <>
-      {/* Hero — one immersive canvas */}
-      <section className="relative isolate overflow-hidden bg-background text-foreground">
-        {/* Aurora wash */}
-        <div className="aurora" aria-hidden />
-        {/* Breathing shield watermark */}
-        <div
-          className="pointer-events-none absolute -right-[8%] top-1/2 -translate-y-1/2 opacity-[0.045] mix-blend-screen"
-          aria-hidden
-        >
-          <Icon name="shield" size={920} className="text-brass breathe" />
-        </div>
-        {/* Faint dotted grid */}
-        <div className="dotted-grid absolute inset-0 opacity-[0.06]" aria-hidden />
-
-        <div className="relative mx-auto flex min-h-[100vh] max-w-5xl flex-col justify-center px-6 py-32 md:px-12">
+      {/* ============ Front-page lead ============ */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 pb-16 pt-12 md:px-10 md:pb-24 md:pt-20">
           <div className="flex items-center gap-4">
-            <span className="section-mark text-brass">
-              § Acts 20:28 &middot; The Watch
-            </span>
-            <div className="hairline flex-1" />
-            <Link
-              href="/acts-20-28"
-              className="section-mark text-stone/50 transition-colors hover:text-brass"
-            >
-              The Verse
-            </Link>
+            <span className="folio">The front page</span>
+            <div className="hairline flex-1 text-ink" />
+            <span className="folio">Every man needs a watch to stand</span>
           </div>
 
-          <h1 className="display-xl mt-12 max-w-3xl text-[clamp(3rem,9vw,9rem)] text-foreground">
-            Find your
-            <br />
-            <span className="text-brass">brothers.</span>
-          </h1>
+          <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-14">
+            <div className="lg:col-span-8">
+              <h1 className="display-xl text-[clamp(3.2rem,8.5vw,7.5rem)] text-foreground">
+                Find your <em className="text-oxblood">brothers.</em>
+              </h1>
 
-          <p className="mt-10 max-w-2xl font-pullquote text-xl leading-relaxed text-stone md:text-2xl">
-            You have walked alone a long time. There is honor in that, and a limit to it. Find brothers who will tell you the truth and hear yours, men who know the Word, who will stand watch beside you and grow stronger in Christ. That is the work. That is enough.
-          </p>
+              <p className="dropcap mt-9 max-w-2xl font-serif text-lg leading-[1.75] text-foreground/85 md:text-xl">
+                You have walked alone a long time. There is honor in that, and a
+                limit to it. Find brothers who will tell you the truth and hear
+                yours, men who know the Word, who will stand watch beside you
+                and grow stronger in Christ. That is the work. That is enough.
+              </p>
 
-          <div className="mt-14 flex flex-wrap items-center gap-4">
-            <Magnetic>
+              <div className="mt-10 flex flex-wrap items-center gap-4">
+                <Link
+                  href="/locations"
+                  className="lift group inline-flex h-12 items-center gap-3 bg-ink px-7 text-[0.95rem] font-medium text-bone transition-colors hover:bg-ink/90"
+                >
+                  <Icon name="map-pin" size={17} />
+                  Find a group near you
+                  <Icon
+                    name="arrow-right"
+                    size={15}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
+                </Link>
+                <Link
+                  href="/encouragements"
+                  className="link-editorial inline-flex items-center gap-2 font-serif text-[1.05rem] text-foreground/80"
+                >
+                  Read this week&rsquo;s Letter
+                  <Icon name="arrow-right" size={13} />
+                </Link>
+              </div>
+            </div>
+
+            {/* Right column — the standing notice, ruled off like a sidebar box */}
+            <aside className="border-t-2 border-ink/60 pt-6 lg:col-span-4 lg:border-l lg:border-t-0 lg:border-ink/15 lg:pl-10 lg:pt-2">
+              <p className="section-mark">Standing orders</p>
+              <ul className="mt-6 space-y-5">
+                <li className="flex gap-4">
+                  <span className="display-soft text-2xl leading-none text-brass">I.</span>
+                  <p className="font-serif text-[0.95rem] leading-relaxed text-foreground/80">
+                    We do not meet to perform. We meet to be honest with each
+                    other, anchored in Scripture.
+                  </p>
+                </li>
+                <li className="flex gap-4">
+                  <span className="display-soft text-2xl leading-none text-brass">II.</span>
+                  <p className="font-serif text-[0.95rem] leading-relaxed text-foreground/80">
+                    Diners, coffee shops, garages, gyms. Show up as you are;
+                    leave steadier than you came.
+                  </p>
+                </li>
+                <li className="flex gap-4">
+                  <span className="display-soft text-2xl leading-none text-brass">III.</span>
+                  <p className="font-serif text-[0.95rem] leading-relaxed text-foreground/80">
+                    One letter every Sunday morning. A scripture. A practice.
+                    Carried the rest of the week.
+                  </p>
+                </li>
+              </ul>
               <Link
-                href="/locations"
-                className="lift group inline-flex h-12 items-center gap-3 border border-bone bg-bone px-7 text-base font-medium text-iron transition-colors hover:bg-stone"
+                href="/how-we-gather"
+                className="link-editorial folio mt-7 inline-block !text-brass"
               >
-                <Icon name="map-pin" size={18} />
-                Find a group near you
-                <Icon
-                  name="arrow-right"
-                  size={16}
-                  className="transition-transform group-hover:translate-x-1"
-                />
+                How we gather
               </Link>
-            </Magnetic>
-            <Link
-              href="/encouragements"
-              className="inline-flex h-12 items-center gap-2 px-2 text-base text-foreground/80 transition-colors hover:text-brass"
-            >
-              Read this week&rsquo;s Letter
-              <Icon name="arrow-right" size={14} />
-            </Link>
-          </div>
-
-          <p className="mt-12 max-w-xl text-sm leading-relaxed text-stone">
-            We do not meet to perform. We do not meet to debate. We meet to be honest with each other, anchored in Scripture, and to send each other back into the week steadier than we came.
-          </p>
-        </div>
-
-        {/* Down indicator */}
-        <div
-          className="pointer-events-none absolute bottom-10 left-1/2 -translate-x-1/2"
-          aria-hidden
-        >
-          <div className="flex flex-col items-center gap-3">
-            <span className="section-mark text-stone/40">Outposts</span>
-            <div className="h-12 w-px animate-pulse bg-stone/30" />
+            </aside>
           </div>
         </div>
       </section>
 
-      {/* Map section */}
-      <LocationsPreview />
-
-      {/* The Letter (newsletter) */}
-      <section className="relative overflow-hidden bg-background text-foreground">
-        <div className="aurora aurora--soft" aria-hidden />
-        <div className="relative mx-auto max-w-5xl px-6 py-28 md:px-12 md:py-40">
-          <div className="flex items-center gap-4">
-            <span className="section-mark text-brass">
-              § The Letter
-            </span>
-            <div className="hairline flex-1" />
-          </div>
-          <h2 className="display-xl mt-10 max-w-3xl text-[clamp(2.5rem,6vw,5rem)] text-foreground">
-            Sunday morning,
-            <br />
-            <span className="text-brass">before the day starts.</span>
-          </h2>
-          <p className="mt-8 max-w-xl font-pullquote text-xl italic leading-relaxed text-stone md:text-2xl">
-            One letter a week. A scripture. A practice. Sent at sunrise. Read
-            in five minutes. Carry it the rest of the week.
+      {/* ============ Ember band — the verse ============ */}
+      <section className="ember-band">
+        <div className="mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
+          <p className="section-mark">The charge · Acts 20:28</p>
+          <p className="mt-8 font-pullquote text-2xl italic leading-snug md:text-4xl">
+            &ldquo;Keep watch over yourselves and all the flock of which the
+            Holy Spirit has made you overseers. Be shepherds of the church of
+            God, which he bought with his own blood.&rdquo;
           </p>
-          <div className="mt-10 max-w-xl">
-            <NewsletterForm />
+          <div className="mx-auto mt-10 h-px w-24 bg-[#c9834a]/60" />
+          <p className="folio mt-6 !text-[#b7a68b]">
+            Some men are sheep. Some are wolves. Some stand the watch.
+          </p>
+        </div>
+      </section>
+
+      {/* ============ Where men are gathering (map) ============ */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 pt-16 md:px-10 md:pt-24">
+          <div className="flex items-center gap-4">
+            <span className="section-mark">The outposts</span>
+            <div className="hairline flex-1 text-ink" />
+            <Link href="/locations" className="link-editorial folio !text-brass">
+              See every group
+            </Link>
           </div>
-          <div className="mt-16 flex items-center gap-4">
-            <div className="hairline flex-1" />
-            <Magnetic strength={0.18}>
+          <h2 className="display-xl mt-8 max-w-3xl text-[clamp(2.2rem,5vw,4rem)] text-foreground">
+            Where men are already gathering
+          </h2>
+          <p className="mt-6 max-w-2xl font-serif text-lg leading-relaxed text-foreground/80">
+            Sunday morning, before the day starts. Honest conversation over a
+            bad cup of coffee — no performance, no debate.
+          </p>
+        </div>
+        <LocationsPreview />
+      </section>
+
+      {/* ============ The Letter — subscription notice ============ */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
+          <div className="rule-double text-ink/70" />
+          <div className="grid gap-10 pt-12 lg:grid-cols-12 lg:gap-14">
+            <div className="lg:col-span-7">
+              <p className="section-mark">The Letter</p>
+              <h2 className="display-xl mt-6 text-[clamp(2.2rem,5vw,4.2rem)] text-foreground">
+                Sunday morning,
+                <br />
+                <em className="text-oxblood">before the day starts.</em>
+              </h2>
+              <p className="mt-7 max-w-xl font-serif text-lg leading-[1.75] text-foreground/85">
+                One letter a week. A scripture. A practice. Sent at sunrise,
+                read in five minutes, carried the rest of the week. No fluff,
+                no funnel — six hundred words to steady your week.
+              </p>
+            </div>
+            <div className="flex flex-col justify-center border-t border-ink/15 pt-8 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
+              <p className="folio">Subscribe · free, weekly, no noise</p>
+              <div className="mt-5">
+                <NewsletterForm />
+              </div>
               <Link
                 href="/get-started"
-                className="lift inline-flex h-11 items-center gap-2 border border-stone/30 bg-transparent px-6 text-sm font-medium text-foreground transition-colors hover:border-brass hover:text-brass"
+                className="link-editorial folio mt-6 inline-flex items-center gap-2 !text-brass"
               >
                 What to expect
-                <Icon name="arrow-right" size={16} />
+                <Icon name="arrow-right" size={12} />
               </Link>
-            </Magnetic>
+            </div>
           </div>
         </div>
       </section>

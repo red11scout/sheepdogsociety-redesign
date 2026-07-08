@@ -9,17 +9,19 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
-  --font-scripture: var(--font-merriweather);
-  --font-display: var(--font-barlow-condensed);
+  --font-scripture: var(--font-newsreader);
+  --font-display: var(--font-fraunces);
+  --font-serif: var(--font-newsreader);
   --font-pullquote: var(--font-cormorant);
+  --font-condensed: var(--font-barlow-condensed);
   --font-mark: var(--font-jetbrains-mono);
 
-  /* Pasture & Iron — canonical brand palette. Hex values per Brief #2.
-     Iron + bone default to constants on the public site (deep ink +
-     parchment). Inside .admin-shell they flip with the theme toggle so
-     a light-mode admin actually sees a light dashboard. All tokens are
-     `var(--c-*)` indirected so .admin-shell overrides reach them
-     (Tailwind v4 @theme inline would otherwise hard-bake the hex). */
+  /* Ridge & Bone — editorial broadsheet palette. The old Pasture & Iron
+     blue-hued iron (#0E1624) is retired; every neutral is now WARM
+     (brown-hued ink and paper), so light mode reads as a printed page and
+     dark mode reads as candlelit paper — never a blue "app dark mode".
+     Tokens stay `var(--c-*)` indirected so .admin-shell overrides reach
+     them (Tailwind v4 @theme inline would otherwise hard-bake the hex). */
   --color-iron: var(--c-iron);
   --color-bone: var(--c-bone);
   --color-cream: var(--c-cream);
@@ -71,126 +73,122 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
-/* Pasture & Iron — public site keeps iron/bone/cream/ink as CONSTANTS so
-   editorial cards stay editorial:
-     - bg-iron text-bone   = always-dark hero card (e.g. /letter hero)
-     - bg-bone text-iron   = always-light card with dark text (buttons, cards)
+/* Ridge & Bone — brand constants. Public surfaces keep iron/bone/cream/ink
+   as CONSTANTS so editorial cards stay editorial:
+     - bg-iron text-bone   = always-dark "ember band" (warm ink, not blue)
+     - bg-bone text-iron   = always-light paper card with warm ink text
      - bg-cream text-ink   = lightest paper with constant deep ink
-     - bg-brass text-ink   = brass amber CTA with constant ink (AA contrast)
-   The PAGE background still flips via shadcn's --background token below
-   (body bg + text-foreground), so light mode reads as a light page with
-   intentional dark editorial cards on it, dark mode reads as a deep ink
-   page with intentional light cards. Brass / navy / olive / oxblood /
-   stone are theme-aware to warm at low candlelight in dark mode. */
+     - bg-brass text-ink   = bronze CTA with constant ink (AA contrast)
+   Brass / gold / olive / oxblood / stone warm up in dark mode. */
 :root {
-  --c-iron: #0E1624;
-  --c-bone: #F2EBDD;
-  --c-cream: #F8F2E2;
-  --c-ink: #0E1624;
-  --c-navy: #1A2438;
-  --c-brass: #C8932A;
-  --c-gold: #DBAA48;
-  --c-olive: #5A6B3E;
-  --c-oxblood: #7A1E1E;
-  --c-stone: #8A8275;
+  --c-iron: #211a11;
+  --c-bone: #f4edde;
+  --c-cream: #faf5e8;
+  --c-ink: #211a11;
+  --c-navy: #22303f;
+  --c-brass: #96702a;
+  --c-gold: #b8913e;
+  --c-olive: #5f6b44;
+  --c-oxblood: #7c2a20;
+  --c-stone: #77705f;
 }
 .dark {
-  --c-navy: #0B111C;
-  --c-brass: #D9A53A;
-  --c-gold: #E5B856;
-  --c-olive: #7A8C56;
-  --c-oxblood: #A33333;
-  --c-stone: #C7BFAE;
+  --c-navy: #1b2634;
+  --c-brass: #c9a25a;
+  --c-gold: #ddba70;
+  --c-olive: #8c9468;
+  --c-oxblood: #b0563f;
+  --c-stone: #c4b9a4;
 }
 
 /* Admin chrome — inside .admin-shell, iron/bone/stone flip with the theme
-   toggle so a Saturday-morning admin in light mode actually sees a light
-   dashboard. Public surfaces keep their constants above. */
+   toggle so a light-mode admin sees a light dashboard. Warm hues only. */
 .admin-shell {
-  --c-iron: oklch(0.96 0.012 80);    /* light parchment background */
-  --c-bone: oklch(0.18 0.022 260);   /* deep iron-ink text */
-  --c-stone: oklch(0.45 0.025 60);   /* muted warm gray */
+  --c-iron: oklch(0.96 0.016 85);   /* light parchment background */
+  --c-bone: oklch(0.24 0.02 60);    /* warm ink text */
+  --c-stone: oklch(0.46 0.03 70);   /* muted warm gray */
 }
 .dark .admin-shell {
-  --c-iron: #0E1624;
-  --c-bone: #F2EBDD;
-  --c-stone: #C7BFAE;
+  --c-iron: #211a11;
+  --c-bone: #f4edde;
+  --c-stone: #c4b9a4;
 }
 
-/* Light mode — bone-tinted parchment. shadcn semantic tokens reroute
-   primary/ring/chart-1/sidebar-primary to brass. */
+/* Light mode — the printed page. Warm paper, warm ink, bronze accents.
+   Sharp 2px radius: editorial restraint, not app-store rounding. */
 :root {
-  --radius: 0.625rem;
-  --background: oklch(0.96 0.012 80);
-  --foreground: oklch(0.18 0.022 260);
-  --card: oklch(0.99 0.006 80);
-  --card-foreground: oklch(0.18 0.022 260);
-  --popover: oklch(0.99 0.006 80);
-  --popover-foreground: oklch(0.18 0.022 260);
-  --primary: oklch(0.66 0.13 75);
-  --primary-foreground: oklch(0.18 0.022 260);
-  --secondary: oklch(0.92 0.018 80);
-  --secondary-foreground: oklch(0.22 0.022 260);
-  --muted: oklch(0.92 0.018 80);
-  --muted-foreground: oklch(0.5 0.025 70);
-  --accent: oklch(0.66 0.13 75);
-  --accent-foreground: oklch(0.18 0.022 260);
-  --destructive: oklch(0.46 0.14 30);
-  --border: oklch(0.85 0.018 80);
-  --input: oklch(0.85 0.018 80);
-  --ring: oklch(0.66 0.13 75);
-  --bronze: oklch(0.66 0.13 75);
-  --bronze-foreground: oklch(0.18 0.022 260);
-  --chart-1: oklch(0.66 0.13 75);
-  --chart-2: oklch(0.5 0.1 130);
-  --chart-3: oklch(0.46 0.14 30);
-  --chart-4: oklch(0.4 0.06 260);
+  --radius: 0.125rem;
+  --background: oklch(0.963 0.016 85);
+  --foreground: oklch(0.235 0.022 60);
+  --card: oklch(0.985 0.01 88);
+  --card-foreground: oklch(0.235 0.022 60);
+  --popover: oklch(0.985 0.01 88);
+  --popover-foreground: oklch(0.235 0.022 60);
+  --primary: oklch(0.52 0.1 75);
+  --primary-foreground: oklch(0.985 0.01 88);
+  --secondary: oklch(0.92 0.02 85);
+  --secondary-foreground: oklch(0.28 0.022 60);
+  --muted: oklch(0.92 0.02 85);
+  --muted-foreground: oklch(0.46 0.028 70);
+  --accent: oklch(0.52 0.1 75);
+  --accent-foreground: oklch(0.985 0.01 88);
+  --destructive: oklch(0.44 0.13 28);
+  --border: oklch(0.86 0.022 82);
+  --input: oklch(0.86 0.022 82);
+  --ring: oklch(0.52 0.1 75);
+  --bronze: oklch(0.52 0.1 75);
+  --bronze-foreground: oklch(0.985 0.01 88);
+  --chart-1: oklch(0.52 0.1 75);
+  --chart-2: oklch(0.5 0.09 130);
+  --chart-3: oklch(0.44 0.13 28);
+  --chart-4: oklch(0.38 0.05 250);
   --chart-5: oklch(0.55 0.04 80);
-  --sidebar: oklch(0.94 0.014 80);
-  --sidebar-foreground: oklch(0.18 0.022 260);
-  --sidebar-primary: oklch(0.66 0.13 75);
-  --sidebar-primary-foreground: oklch(0.18 0.022 260);
-  --sidebar-accent: oklch(0.9 0.02 80);
-  --sidebar-accent-foreground: oklch(0.22 0.022 260);
-  --sidebar-border: oklch(0.85 0.018 80);
-  --sidebar-ring: oklch(0.66 0.13 75);
+  --sidebar: oklch(0.94 0.016 85);
+  --sidebar-foreground: oklch(0.235 0.022 60);
+  --sidebar-primary: oklch(0.52 0.1 75);
+  --sidebar-primary-foreground: oklch(0.985 0.01 88);
+  --sidebar-accent: oklch(0.9 0.02 85);
+  --sidebar-accent-foreground: oklch(0.28 0.022 60);
+  --sidebar-border: oklch(0.86 0.022 82);
+  --sidebar-ring: oklch(0.52 0.1 75);
 }
 
-/* Dark mode — iron canvas, warm brass accents. */
+/* Dark mode — candlelit paper. Warm brown-black (hue ~70, never blue),
+   warm ivory text, lifted brass. Test contrast independently of light. */
 .dark {
-  --background: oklch(0.18 0.022 260);
-  --foreground: oklch(0.93 0.025 80);
-  --card: oklch(0.22 0.022 260);
-  --card-foreground: oklch(0.93 0.025 80);
-  --popover: oklch(0.22 0.022 260);
-  --popover-foreground: oklch(0.93 0.025 80);
-  --primary: oklch(0.73 0.13 80);
-  --primary-foreground: oklch(0.18 0.022 260);
-  --secondary: oklch(0.27 0.022 260);
-  --secondary-foreground: oklch(0.93 0.025 80);
-  --muted: oklch(0.27 0.022 260);
-  --muted-foreground: oklch(0.7 0.025 75);
-  --accent: oklch(0.73 0.13 80);
-  --accent-foreground: oklch(0.18 0.022 260);
-  --destructive: oklch(0.6 0.18 30);
-  --border: oklch(0.32 0.022 260);
-  --input: oklch(0.3 0.022 260);
-  --ring: oklch(0.73 0.13 80);
-  --bronze: oklch(0.73 0.13 80);
-  --bronze-foreground: oklch(0.18 0.022 260);
-  --chart-1: oklch(0.73 0.13 80);
-  --chart-2: oklch(0.6 0.1 130);
-  --chart-3: oklch(0.6 0.18 30);
-  --chart-4: oklch(0.55 0.06 260);
+  --background: oklch(0.17 0.014 70);
+  --foreground: oklch(0.92 0.028 85);
+  --card: oklch(0.21 0.016 70);
+  --card-foreground: oklch(0.92 0.028 85);
+  --popover: oklch(0.21 0.016 70);
+  --popover-foreground: oklch(0.92 0.028 85);
+  --primary: oklch(0.76 0.11 82);
+  --primary-foreground: oklch(0.17 0.014 70);
+  --secondary: oklch(0.26 0.018 70);
+  --secondary-foreground: oklch(0.92 0.028 85);
+  --muted: oklch(0.26 0.018 70);
+  --muted-foreground: oklch(0.7 0.03 80);
+  --accent: oklch(0.76 0.11 82);
+  --accent-foreground: oklch(0.17 0.014 70);
+  --destructive: oklch(0.6 0.15 30);
+  --border: oklch(0.31 0.02 72);
+  --input: oklch(0.29 0.02 72);
+  --ring: oklch(0.76 0.11 82);
+  --bronze: oklch(0.76 0.11 82);
+  --bronze-foreground: oklch(0.17 0.014 70);
+  --chart-1: oklch(0.76 0.11 82);
+  --chart-2: oklch(0.62 0.09 130);
+  --chart-3: oklch(0.62 0.15 30);
+  --chart-4: oklch(0.56 0.05 250);
   --chart-5: oklch(0.7 0.04 80);
-  --sidebar: oklch(0.16 0.022 260);
-  --sidebar-foreground: oklch(0.93 0.025 80);
-  --sidebar-primary: oklch(0.73 0.13 80);
-  --sidebar-primary-foreground: oklch(0.18 0.022 260);
-  --sidebar-accent: oklch(0.24 0.022 260);
-  --sidebar-accent-foreground: oklch(0.93 0.025 80);
-  --sidebar-border: oklch(0.32 0.022 260);
-  --sidebar-ring: oklch(0.73 0.13 80);
+  --sidebar: oklch(0.15 0.014 70);
+  --sidebar-foreground: oklch(0.92 0.028 85);
+  --sidebar-primary: oklch(0.76 0.11 82);
+  --sidebar-primary-foreground: oklch(0.17 0.014 70);
+  --sidebar-accent: oklch(0.24 0.018 70);
+  --sidebar-accent-foreground: oklch(0.92 0.028 85);
+  --sidebar-border: oklch(0.31 0.02 72);
+  --sidebar-ring: oklch(0.76 0.11 82);
 }
 
 @layer base {
@@ -200,12 +198,62 @@
   body {
     @apply bg-background text-foreground;
   }
+  ::selection {
+    background: color-mix(in oklab, var(--color-brass) 30%, transparent);
+  }
 }
 
-/* Scripture typography */
-.font-scripture {
-  font-family: var(--font-merriweather), Georgia, 'Times New Roman', serif;
-  line-height: 1.8;
+/* ====================================================================
+   Ridge & Bone type system.
+   Fraunces (display, with its optical-size + wonk axes for character),
+   Newsreader (long-form body), Cormorant (scripture/pull-quote italic),
+   Inter (UI). Barlow Condensed survives only inside .ember-band folios.
+==================================================================== */
+
+/* Display headline — Fraunces at full optical size with the WONK axis on.
+   Warm, authoritative, unmistakably editorial. Replaces the Barlow
+   Condensed 900 poster style. */
+.display-xl {
+  font-family: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  font-weight: 560;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+  letter-spacing: -0.018em;
+  line-height: 1.0;
+  font-feature-settings: "kern", "liga";
+}
+.display-soft {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-weight: 500;
+  font-variation-settings: "opsz" 100, "SOFT" 60, "WONK" 0;
+  letter-spacing: -0.008em;
+  line-height: 1.06;
+}
+
+/* Brand wordmark — Fraunces small optical size, quietly confident. */
+.brand-wordmark {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-weight: 600;
+  font-variation-settings: "opsz" 40, "SOFT" 20, "WONK" 0;
+  letter-spacing: 0.005em;
+  line-height: 1.1;
+}
+
+/* Section mark — small-caps Inter eyebrow above a rule. (Retired the
+   JetBrains Mono ticker look.) */
+.section-mark {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-brass);
+}
+
+/* Body serif — Newsreader for long-form reading. */
+.font-scripture,
+.body-serif {
+  font-family: var(--font-newsreader), var(--font-merriweather), Georgia, serif;
+  line-height: 1.75;
 }
 
 /* Verse numbers */
@@ -213,67 +261,131 @@
   @apply text-xs text-muted-foreground align-super font-sans mr-0.5;
 }
 
-/* Breath — slow scale pulse for brand-mark watermarks. */
-.breathe {
-  animation: breathe 7s ease-in-out infinite;
-  transform-origin: center;
-}
-@keyframes breathe {
-  0%, 100% {
-    transform: scale(1) rotate(-2deg);
-  }
-  50% {
-    transform: scale(1.03) rotate(0deg);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .breathe {
-    animation: none;
-  }
+/* Drop cap — oxblood Fraunces initial for Letter/essay openings. */
+.dropcap::first-letter {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-weight: 600;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+  float: left;
+  font-size: 3.4em;
+  line-height: 0.82;
+  padding-right: 0.09em;
+  margin-top: 0.04em;
+  color: var(--color-oxblood);
 }
 
-/* Aurora — slow-pulsing radial wash. Add absolute-positioned inside dark sections. */
-.aurora {
+/* Hairline rule — 1px @ low opacity, paired with a section-mark. */
+.hairline {
+  height: 1px;
+  background: color-mix(in oklab, currentColor 16%, transparent);
+}
+
+/* Double rule — classic broadsheet divider: heavy over light. */
+.rule-double {
+  border-top: 2.5px solid color-mix(in oklab, currentColor 72%, transparent);
+  position: relative;
+  height: 5px;
+}
+.rule-double::after {
+  content: "";
   position: absolute;
-  inset: -20%;
-  pointer-events: none;
+  left: 0;
+  right: 0;
+  top: 3px;
+  border-top: 1px solid color-mix(in oklab, currentColor 45%, transparent);
+}
+
+/* Folio line — dateline/edition metadata under mastheads. */
+.folio {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+}
+
+/* Ember band — the one cinematic surface allowed: constant warm-ink
+   ground with ember/brass accents, both themes. Replaces aurora heroes. */
+.ember-band {
   background:
     radial-gradient(
-      55% 45% at 20% 30%,
-      color-mix(in oklab, var(--color-brass) 28%, transparent),
-      transparent 70%
+      120% 90% at 50% 118%,
+      color-mix(in oklab, #b0563f 16%, transparent),
+      transparent 62%
     ),
-    radial-gradient(
-      45% 35% at 80% 70%,
-      color-mix(in oklab, var(--color-oxblood) 20%, transparent),
-      transparent 70%
-    );
-  filter: blur(60px);
-  opacity: 0.65;
-  animation: auroraDrift 28s ease-in-out infinite alternate;
-  z-index: 0;
+    #1c1610;
+  color: #efe7d5;
 }
-.aurora--soft {
-  opacity: 0.32;
+.ember-band .section-mark {
+  color: #c9834a;
 }
-@keyframes auroraDrift {
-  0% {
-    transform: translate3d(-3%, -2%, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(2%, 3%, 0) scale(1.08);
-  }
-  100% {
-    transform: translate3d(-2%, 2%, 0) scale(1.04);
-  }
+
+/* Paper card — solid surface, hairline border, ink shadow on hover.
+   (.glass-card kept as an alias so existing markup upgrades in place —
+   the blur/translucency era is over.) */
+.paper-card,
+.glass-card {
+  background: var(--card);
+  border: 1px solid color-mix(in oklab, var(--color-stone) 32%, transparent);
+  backdrop-filter: none;
+  transition:
+    border-color 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.paper-card:hover,
+.glass-card:hover {
+  border-color: color-mix(in oklab, var(--color-brass) 65%, transparent);
+  box-shadow: 0 1px 0 color-mix(in oklab, var(--color-ink) 6%, transparent),
+    0 10px 30px -18px color-mix(in oklab, var(--color-ink) 45%, transparent);
+}
+
+/* Retired effects — kept as no-op hooks so legacy markup renders clean
+   paper instead of glow. Do not re-enable. */
+.aurora,
+.aurora--soft,
+.dotted-grid {
+  display: none;
+}
+.spotlight {
+  position: relative;
+}
+.spotlight::before {
+  content: none;
+}
+.breathe {
+  animation: none;
+}
+
+/* Engraved watermark — faint ink shield/ornament replaces the glowing
+   breathing watermark. Apply to a positioned icon wrapper. */
+.engraved {
+  opacity: 0.05;
+  filter: grayscale(1) contrast(1.15);
+}
+
+/* Scroll-driven fade-up — reveal on enter viewport via IntersectionObserver. */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 @media (prefers-reduced-motion: reduce) {
-  .aurora {
-    animation: none;
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
-/* Marquee ticker — used for the scripture refs at footer top. */
+/* Marquee ticker — legacy component support (member area). */
 .marquee {
   --marquee-duration: 60s;
 }
@@ -297,149 +409,35 @@
   }
 }
 
-/* Hero-scale headline kerning — Barlow Condensed responds well to tight
-   tracking at large sizes. (Replaced the Fraunces opsz/SOFT/WONK
-   variation tricks; Barlow Condensed is a static face.) */
-.display-xl {
-  font-feature-settings: "kern", "liga";
-}
-.display-soft {
-  font-feature-settings: "kern";
-  letter-spacing: -0.005em;
-}
-
-/* Glass card — semi-transparent on iron, hairline brass border, lift on hover. */
-.glass-card {
-  background: color-mix(in oklab, var(--color-bone) 4%, transparent);
-  border: 1px solid color-mix(in oklab, var(--color-stone) 22%, transparent);
-  backdrop-filter: blur(8px);
-  transition:
-    border-color 320ms cubic-bezier(0.16, 1, 0.3, 1),
-    background 320ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-.glass-card:hover {
-  border-color: color-mix(in oklab, var(--color-brass) 60%, transparent);
-  background: color-mix(in oklab, var(--color-bone) 6%, transparent);
-}
-
-/* Scroll-driven fade-up — reveal on enter viewport via IntersectionObserver. */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition:
-    opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-
-/* Faint dotted grid — Vercel-style background for hero/anchor sections. */
-.dotted-grid {
-  background-image: radial-gradient(
-    color-mix(in oklab, var(--color-stone) 30%, transparent) 1px,
-    transparent 1px
-  );
-  background-size: 24px 24px;
-}
-
-/* Section mark — mono small-caps label sitting above a hairline rule. */
-.section-mark {
-  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: color-mix(in oklab, var(--color-brass) 100%, transparent);
-}
-
-/* Hairline rule — 1px @ low opacity, paired with a section-mark above. */
-.hairline {
-  height: 1px;
-  background: color-mix(in oklab, currentColor 14%, transparent);
-}
-
-/* Display headline — Barlow Condensed Black, poster-tight tracking,
-   compressed line-height so multi-line hero copy reads as one block.
-   Headlines should feel commanding, not pretty. */
-.display-xl {
-  font-family: var(--font-barlow-condensed), "Helvetica Neue", Arial, sans-serif;
-  font-weight: 900;
-  letter-spacing: -0.015em;
-  line-height: 0.92;
-  text-transform: none;
-}
-
-/* Brand wordmark — softer than display-xl. Barlow Condensed at 600
-   (semibold, not black) with a touch more tracking so it reads as a
-   wordmark, not a billboard. Used wherever "Sheepdog Society" appears
-   as the brand lockup (nav, footer, admin sidebar, print letterhead).
-   The bolder display-xl was hard to read at small sizes — it
-   collapsed into a dense black blob next to the shield logo. */
-.brand-wordmark {
-  font-family: var(--font-barlow-condensed), "Helvetica Neue", Arial, sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  line-height: 1.1;
-  text-transform: none;
-}
-
-/* Cursor-tracked spotlight on dark cards. Pure CSS variables, no JS state. */
-.spotlight {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-.spotlight::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  background: radial-gradient(
-    420px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
-    color-mix(in oklab, var(--color-brass) 18%, transparent),
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 320ms cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-  z-index: 0;
-}
-.spotlight:hover::before {
-  opacity: 1;
-}
-.spotlight > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Magnetic CTA — 4-6px lift, no scale, no bounce. */
+/* Understated lift for CTAs — 2px, print-sober. */
 .lift {
   transition:
-    transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
 .lift:hover {
-  transform: translateY(-5px);
+  transform: translateY(-2px);
 }
-
 @media (prefers-reduced-motion: reduce) {
   .lift,
-  .lift:hover,
-  .spotlight::before {
+  .lift:hover {
     transform: none;
     transition: none;
-    opacity: 0 !important;
   }
+}
+
+/* Editorial link — ink underline that warms to brass. */
+.link-editorial {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+}
+.link-editorial:hover {
+  color: var(--color-brass);
+  text-decoration-color: var(--color-brass);
 }
 
 /* ====================================================================
@@ -447,9 +445,9 @@
    The sanitizer at upload strips inline styles; everything is restyled here.
 ==================================================================== */
 .resource-prose {
-  font-family: var(--font-merriweather), Georgia, serif;
-  color: var(--color-iron, #1a1a1a);
-  line-height: 1.7;
+  font-family: var(--font-newsreader), var(--font-merriweather), Georgia, serif;
+  color: var(--color-iron, #211a11);
+  line-height: 1.75;
   font-size: 1.0625rem;
 }
 .resource-prose p { margin: 0 0 1.1em; }
@@ -457,19 +455,20 @@
 .resource-prose h2,
 .resource-prose h3,
 .resource-prose h4 {
-  font-family: var(--font-barlow-condensed), "Helvetica Neue", Arial, sans-serif;
-  font-weight: 800;
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-weight: 600;
+  font-variation-settings: "opsz" 90, "WONK" 0;
   letter-spacing: -0.005em;
-  color: var(--color-iron, #1a1a1a);
+  color: var(--color-iron, #211a11);
   margin: 2em 0 0.5em;
-  line-height: 1.05;
+  line-height: 1.12;
 }
 .resource-prose h1 { font-size: 2rem; }
 .resource-prose h2 { font-size: 1.625rem; }
 .resource-prose h3 { font-size: 1.3rem; }
 .resource-prose h4 { font-size: 1.1rem; }
 .resource-prose blockquote {
-  border-left: 3px solid var(--color-brass, #b89668);
+  border-left: 3px solid var(--color-brass, #96702a);
   padding: 0.25em 0 0.25em 1em;
   margin: 1.6em 0;
   font-family: var(--font-cormorant), Georgia, serif;
@@ -477,7 +476,7 @@
   font-size: 1.2rem;
   color: rgba(0, 0, 0, 0.78);
 }
-.resource-prose blockquote.intense { border-left-color: var(--color-oxblood, #6e1f1f); }
+.resource-prose blockquote.intense { border-left-color: var(--color-oxblood, #7c2a20); }
 .resource-prose ul,
 .resource-prose ol { margin: 1em 0 1.4em 1.4em; }
 .resource-prose ul { list-style: disc outside; }
@@ -487,7 +486,7 @@
 .resource-prose strong { font-weight: 600; }
 .resource-prose em { font-style: italic; }
 .resource-prose a {
-  color: var(--color-brass, #b89668);
+  color: var(--color-brass, #96702a);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -510,7 +509,7 @@
   vertical-align: top;
 }
 .resource-prose th {
-  background: rgba(184, 150, 104, 0.08);
+  background: rgba(150, 112, 42, 0.08);
   font-weight: 600;
 }
 .resource-prose img {
@@ -555,21 +554,14 @@
     print-color-adjust: exact;
   }
 
-  /* Hide every element on the page — visibility cascades but is
-     overridable on descendants (display:none isn't). */
   body * { visibility: hidden !important; }
 
-  /* Re-show the resource doc and everything inside it. */
   .resource-doc,
   .resource-doc * { visibility: visible !important; }
 
-  /* Re-hide bits inside the doc that shouldn't print (action bar,
-     nav links, screen-only tag pills, etc.). */
   .resource-doc .no-print,
   .resource-doc .no-print * { visibility: hidden !important; }
 
-  /* Reveal print-only blocks (letterhead, footer). Both legacy and
-     new class names supported. */
   .resource-doc .print-only,
   .resource-doc .print-letterhead,
   .resource-doc .print-footer {
@@ -582,9 +574,6 @@
     visibility: visible !important;
   }
 
-  /* Float the doc to the page origin. The visibility-hidden ancestors
-     still occupy layout, but absolute positioning lifts the doc out
-     of that flow so it lands at the @page top-left. */
   .resource-doc {
     position: absolute !important;
     inset: 0 auto auto 0 !important;
@@ -621,7 +610,7 @@
 
   /* Flatten brand accents for print */
   .text-brass { color: #8b6f3f !important; }
-  .border-brass\/40 { border-color: #b89668 !important; }
+  .border-brass\/40 { border-color: #96702a !important; }
   .bg-brass\/10 { background: #f4ecdb !important; }
 
   /* Page break helper for content authors */

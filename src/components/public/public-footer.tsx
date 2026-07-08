@@ -1,134 +1,97 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Icon } from "@/components/icons/Icon";
 import { NewsletterForm } from "./newsletter-form";
-import { ScriptureMarquee } from "@/components/motion/ScriptureMarquee";
 
+/**
+ * Ridge & Bone colophon — the back page of the broadsheet. A set verse,
+ * ruled columns, and a folio line. (The scrolling scripture marquee is
+ * retired; scripture is set, not scrolled.)
+ */
 export function PublicFooter() {
   return (
-    <footer className="bg-background text-foreground">
-      <ScriptureMarquee />
-      <div className="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-28">
+    <footer className="border-t-2 border-ink/60 bg-background text-foreground">
+      {/* The verse, set like a colophon epigraph */}
+      <div className="border-b border-ink/10">
+        <div className="mx-auto max-w-3xl px-6 py-14 text-center md:py-20">
+          <Image
+            src="/logo.png"
+            alt=""
+            width={40}
+            height={40}
+            className="mx-auto mb-6 rounded-none opacity-80"
+          />
+          <p className="font-pullquote text-xl italic leading-relaxed text-foreground/85 md:text-2xl">
+            &ldquo;Keep watch over yourselves and all the flock of which the Holy
+            Spirit has made you overseers.&rdquo;
+          </p>
+          <p className="folio mt-5">Acts 20:28</p>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-6 py-14 md:px-10 md:py-20">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="space-y-5 md:col-span-4">
-            <Link
-              href="/"
-              className="flex items-center gap-3"
-              aria-label="Sheepdog Society home"
-            >
-              <Image
-                src="/logo.png"
-                alt=""
-                width={40}
-                height={40}
-                className="rounded-none"
-              />
-              <div className="leading-tight">
-                <div className="brand-wordmark text-lg text-foreground">
-                  Sheepdog Society
-                </div>
-                <div className="section-mark text-[0.625rem] text-brass">
-                  Acts 20:28
-                </div>
-              </div>
+            <Link href="/" aria-label="Sheepdog Society home">
+              <span className="brand-wordmark text-2xl text-foreground">
+                Sheepdog Society
+              </span>
             </Link>
-            <p className="max-w-sm text-sm leading-relaxed text-stone">
+            <p className="max-w-sm font-serif text-[0.95rem] leading-relaxed text-muted-foreground">
               Men of faith standing guard, protecting the flock, living with
-              purpose.
+              purpose. We meet to be honest with each other, anchored in
+              Scripture.
             </p>
-            <Link
-              href="/acts-20-28"
-              className="group inline-flex items-center gap-2 section-mark text-brass transition-opacity hover:opacity-70"
-            >
+            <Link href="/acts-20-28" className="link-editorial folio inline-block !text-brass">
               Read the verse
-              <Icon
-                name="arrow-up-right"
-                size={14}
-                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
             </Link>
           </div>
 
           <div className="md:col-span-2">
-            <h3 className="section-mark text-stone/60">Get involved</h3>
-            <ul className="mt-5 space-y-3 text-sm">
+            <h3 className="section-mark !text-foreground/50">Get involved</h3>
+            <ul className="mt-5 space-y-3 font-serif text-[0.95rem]">
               <li>
-                <Link
-                  href="/get-started"
-                  className="text-foreground/80 transition-colors hover:text-brass"
-                >
+                <Link href="/get-started" className="link-editorial text-foreground/80">
                   New here
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/locations"
-                  className="text-foreground/80 transition-colors hover:text-brass"
-                >
+                <Link href="/locations" className="link-editorial text-foreground/80">
                   Find a group
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/locations/request"
-                  className="text-foreground/80 transition-colors hover:text-brass"
-                >
+                <Link href="/locations/request" className="link-editorial text-foreground/80">
                   Start a group
                 </Link>
               </li>
-              {/* "Give" link hidden for now — uncomment when the giving flow is ready
-              <li>
-                <Link
-                  href="/giving"
-                  className="text-foreground/80 transition-colors hover:text-brass"
-                >
-                  Give
-                </Link>
-              </li>
-              */}
             </ul>
           </div>
 
           <div className="md:col-span-2">
-            <h3 className="section-mark text-stone/60">Resources</h3>
-            <ul className="mt-5 space-y-3 text-sm">
+            <h3 className="section-mark !text-foreground/50">The society</h3>
+            <ul className="mt-5 space-y-3 font-serif text-[0.95rem]">
               <li>
-                <Link
-                  href="/about"
-                  className="text-foreground/80 transition-colors hover:text-brass"
-                >
+                <Link href="/about" className="link-editorial text-foreground/80">
                   About
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/how-we-gather"
-                  className="text-foreground/80 transition-colors hover:text-brass"
-                >
+                <Link href="/how-we-gather" className="link-editorial text-foreground/80">
                   How we gather
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/stories"
-                  className="text-foreground/80 transition-colors hover:text-brass"
-                >
+                <Link href="/stories" className="link-editorial text-foreground/80">
                   Stories
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/faq"
-                  className="text-foreground/80 transition-colors hover:text-brass"
-                >
+                <Link href="/faq" className="link-editorial text-foreground/80">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/contact"
-                  className="text-foreground/80 transition-colors hover:text-brass"
-                >
+                <Link href="/contact" className="link-editorial text-foreground/80">
                   Contact
                 </Link>
               </li>
@@ -136,8 +99,8 @@ export function PublicFooter() {
           </div>
 
           <div className="md:col-span-4">
-            <h3 className="section-mark text-stone/60">The Letter</h3>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-stone">
+            <h3 className="section-mark !text-foreground/50">The Letter</h3>
+            <p className="mt-5 max-w-sm font-serif text-[0.95rem] leading-relaxed text-muted-foreground">
               A weekly word for men of faith. Delivered Sunday mornings before
               the day starts.
             </p>
@@ -147,13 +110,12 @@ export function PublicFooter() {
           </div>
         </div>
 
-        <div className="hairline mt-16 bg-stone/15" />
-        <div className="mt-8 flex flex-col-reverse items-start gap-3 text-xs text-stone/60 md:flex-row md:items-center md:justify-between">
-          <p>
-            &copy; {new Date().getFullYear()} Sheepdog Society. All rights
-            reserved.
+        <div className="rule-double mt-16 text-ink/70" />
+        <div className="mt-6 flex flex-col-reverse items-start gap-3 md:flex-row md:items-center md:justify-between">
+          <p className="folio">
+            &copy; {new Date().getFullYear()} Sheepdog Society · All rights reserved
           </p>
-          <p className="section-mark">Forth as sheepdogs &middot; Glory to God</p>
+          <p className="folio">Forth as sheepdogs · Glory to God</p>
         </div>
       </div>
     </footer>

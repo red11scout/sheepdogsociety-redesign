@@ -5,6 +5,8 @@ import {
   Barlow_Condensed,
   Cormorant_Garamond,
   JetBrains_Mono,
+  Fraunces,
+  Newsreader,
 } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -44,6 +46,26 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+// Ridge & Bone (Jul 2026) — Fraunces returns as the DISPLAY face, but with
+// the full optical-size + WONK axes this time (the Apr 2026 removal was of
+// a flat, soft cut that read decorative). At opsz 144 with WONK on it is
+// warm and authoritative — a broadsheet voice, not a wedding invitation.
+// Barlow Condensed stays loaded for the ember-band folio moments only.
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["opsz", "SOFT", "WONK"],
+});
+
+// Long-form body serif — the Letter, devotionals, essays.
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "500", "600"],
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.acts2028sheepdogsociety.com"
@@ -69,11 +91,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${merriweather.variable} ${barlowCondensed.variable} ${cormorant.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+        className={`${inter.variable} ${merriweather.variable} ${barlowCondensed.variable} ${cormorant.variable} ${jetbrainsMono.variable} ${fraunces.variable} ${newsreader.variable} font-sans antialiased`}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
