@@ -47,21 +47,21 @@ export function PublicFooter() {
           </div>
 
           <div className="md:col-span-2">
-            <h3 className="section-mark !text-foreground/50">Get involved</h3>
+            <h3 className="section-mark !text-foreground/50">Begin</h3>
             <ul className="mt-5 space-y-3 font-serif text-[0.95rem]">
               <li>
-                <Link href="/get-started" className="link-editorial text-foreground/80">
+                <Link href="/new-here" className="link-editorial text-foreground/80">
                   New here
                 </Link>
               </li>
               <li>
-                <Link href="/locations" className="link-editorial text-foreground/80">
-                  Find a group
+                <Link href="/join" className="link-editorial text-foreground/80">
+                  Join the brotherhood
                 </Link>
               </li>
               <li>
-                <Link href="/locations/request" className="link-editorial text-foreground/80">
-                  Start a group
+                <Link href="/acts-20-28" className="link-editorial text-foreground/80">
+                  The Verse
                 </Link>
               </li>
             </ul>
@@ -76,18 +76,18 @@ export function PublicFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/how-we-gather" className="link-editorial text-foreground/80">
-                  How we gather
-                </Link>
-              </li>
-              <li>
-                <Link href="/stories" className="link-editorial text-foreground/80">
+                <Link href="/about#stories" className="link-editorial text-foreground/80">
                   Stories
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="link-editorial text-foreground/80">
-                  FAQ
+                <Link href="/events" className="link-editorial text-foreground/80">
+                  Events
+                </Link>
+              </li>
+              <li>
+                <Link href="/support" className="link-editorial text-foreground/80">
+                  Support the work
                 </Link>
               </li>
               <li>

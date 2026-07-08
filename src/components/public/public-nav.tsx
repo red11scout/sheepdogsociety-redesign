@@ -2,70 +2,33 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Icon } from "@/components/icons/Icon";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-interface NavLink {
-  href: string;
-  label: string;
-  children?: { href: string; label: string }[];
-}
-
-const navLinks: NavLink[] = [
-  { href: "/locations", label: "Groups" },
-  { href: "/encouragements", label: "The Letter" },
+// Five Rooms — five literal destinations; Join is the one CTA and it goes
+// to the actual signup. One label = one destination, sitewide.
+const navLinks = [
+  { href: "/letter", label: "The Letter" },
+  { href: "/groups", label: "Groups" },
   { href: "/events", label: "Events" },
-  { href: "/gallery", label: "Gallery" },
   { href: "/resources", label: "Resources" },
-  { href: "/stories", label: "Stories" },
-  {
-    href: "/about",
-    label: "About",
-    children: [
-      { href: "/about", label: "About us" },
-      { href: "/faq", label: "FAQ" },
-    ],
-  },
-];
+  { href: "/about", label: "About" },
+] as const;
 
 /**
  * Ridge & Bone masthead — a broadsheet front-page header, not an app bar.
- * Tier 1: folio strip (verse + edition line + theme toggle).
+ * Tier 1: folio strip (verse + New here + theme toggle).
  * Tier 2: the wordmark set large in Fraunces, flanked by rules.
- * Tier 3: small-caps nav rail under a double rule.
- * Collapses to a compact single bar + drawer on mobile.
+ * Tier 3: small-caps nav rail — a sticky SIBLING of the header so
+ * position:sticky follows the reader for the whole page.
  */
 export function PublicNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    const onEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpenMenu(null);
-    };
-    window.addEventListener("keydown", onEsc);
-    return () => window.removeEventListener("keydown", onEsc);
-  }, []);
-
-  function scheduleClose() {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setOpenMenu(null), 120);
-  }
-  function cancelClose() {
-    if (closeTimer.current) {
-      clearTimeout(closeTimer.current);
-      closeTimer.current = null;
-    }
-  }
 
   return (
     <>
     <header className="z-40">
-      {/* Tiers 1–2 scroll away with the page (broadsheet masthead);
-          the tier-3 nav rail is a SIBLING below so position:sticky can
-          follow the reader for the whole page, not just the header. */}
       {/* Tier 1 — folio strip */}
       <div className="hidden border-b border-foreground/10 lg:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-1.5 md:px-10">
@@ -75,7 +38,7 @@ export function PublicNav() {
               The Verse
             </Link>
             <span className="folio text-foreground/30">·</span>
-            <Link href="/what-to-expect" className="folio transition-colors hover:text-brass">
+            <Link href="/new-here" className="folio transition-colors hover:text-brass">
               New here
             </Link>
             <ThemeToggle className="inline-flex h-7 w-7 items-center justify-center text-foreground/50 transition-colors hover:text-foreground" />
@@ -110,7 +73,6 @@ export function PublicNav() {
           <div className="hairline flex-1 text-foreground" />
         </div>
       </div>
-
     </header>
 
     {/* Tier 3 — sticky nav rail (the only part that follows the reader) */}
@@ -141,71 +103,19 @@ export function PublicNav() {
 
         {/* Desktop rail */}
         <div className="hidden items-center justify-center gap-0.5 border-t border-foreground/10 py-1 lg:flex">
-          {navLinks.map((link) => {
-            if (link.children) {
-              const isOpen = openMenu === link.href;
-              return (
-                <div
-                  key={link.href}
-                  className="relative"
-                  onMouseEnter={() => {
-                    cancelClose();
-                    setOpenMenu(link.href);
-                  }}
-                  onMouseLeave={scheduleClose}
-                >
-                  <Link
-                    href={link.href}
-                    className="section-mark inline-flex items-center gap-1 px-4 py-2.5 !text-foreground/65 transition-colors hover:!text-brass"
-                    onFocus={() => setOpenMenu(link.href)}
-                    aria-haspopup="true"
-                    aria-expanded={isOpen}
-                  >
-                    {link.label}
-                    <Icon
-                      name="chevron-down"
-                      size={11}
-                      className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
-                    />
-                  </Link>
-                  {isOpen && (
-                    <div
-                      className="absolute left-1/2 top-full mt-0 min-w-[190px] -translate-x-1/2 border border-foreground/15 bg-card shadow-[0_14px_40px_-18px_rgba(20,14,6,0.4)]"
-                      onMouseEnter={cancelClose}
-                      onMouseLeave={scheduleClose}
-                    >
-                      <ul className="py-2">
-                        {link.children.map((child) => (
-                          <li key={child.href}>
-                            <Link
-                              href={child.href}
-                              className="block px-4 py-2 text-sm text-foreground/75 transition-colors hover:bg-foreground/5 hover:text-foreground"
-                              onClick={() => setOpenMenu(null)}
-                            >
-                              {child.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              );
-            }
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="section-mark px-4 py-2.5 !text-foreground/65 transition-colors hover:!text-brass"
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="section-mark px-4 py-2.5 !text-foreground/65 transition-colors hover:!text-brass"
+            >
+              {link.label}
+            </Link>
+          ))}
           <span className="mx-2 h-4 w-px bg-foreground/15" aria-hidden />
           <Link
-            href="/get-started"
-            className="section-mark border border-ink/70 px-4 py-2 !text-foreground transition-colors hover:border-brass hover:bg-brass/10 hover:!text-brass"
+            href="/join"
+            className="section-mark border border-foreground/70 px-4 py-2 !text-foreground transition-colors hover:border-brass hover:bg-brass/10 hover:!text-brass"
           >
             Join
           </Link>
@@ -223,29 +133,22 @@ export function PublicNav() {
               >
                 {link.label}
               </Link>
-              {link.children && (
-                <div className="mb-2 ml-4 border-l border-foreground/10 pl-4">
-                  {link.children
-                    .filter((c) => c.href !== link.href)
-                    .map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        className="block py-2 text-sm text-foreground/60"
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                </div>
-              )}
             </div>
           ))}
+          <div className="border-b border-foreground/8">
+            <Link
+              href="/new-here"
+              className="block py-3.5 font-serif text-lg text-foreground/85"
+              onClick={() => setMobileOpen(false)}
+            >
+              New here
+            </Link>
+          </div>
           <div className="mt-5">
             <Link
-              href="/get-started"
+              href="/join"
               onClick={() => setMobileOpen(false)}
-              className="section-mark flex h-12 w-full items-center justify-center gap-2 border border-foreground bg-foreground !text-background transition-colors hover:bg-foreground/90"
+              className="section-mark flex h-12 w-full items-center justify-center gap-2 bg-foreground !text-background transition-colors hover:bg-foreground/90"
             >
               Join the brotherhood
               <Icon name="arrow-right" size={14} />
