@@ -27,18 +27,24 @@ export async function GET() {
   }
 
   try {
-    // Real 0-row write probe. Either the app guard throws SandboxWriteError
-    // before Postgres, or Postgres rejects it as a read-only transaction —
-    // both count as blocked. Affects no rows even in the impossible case it runs.
+    // Real 0-row write probe. The app guard throws SandboxWriteError before
+    // Postgres; drizzle wraps that in a DrizzleQueryError, so we walk the
+    // cause chain. Affects no rows even in the impossible case it ran.
     await db.execute(sql`update users set id = id where 1 = 0`);
     result.writeBlocked = false;
     result.note += "WRITE NOT BLOCKED — investigate; ";
   } catch (e) {
+    let guardHit = false;
+    let cur: unknown = e;
+    for (let i = 0; i < 6 && cur; i++) {
+      if (cur instanceof SandboxWriteError) { guardHit = true; break; }
+      cur = (cur as { cause?: unknown }).cause;
+    }
     const msg = e instanceof Error ? e.message : String(e);
     const dbReadOnly = /read-only transaction|cannot execute .* in a read-only/i.test(msg);
-    result.writeBlocked = e instanceof SandboxWriteError || dbReadOnly;
-    result.note += e instanceof SandboxWriteError
-      ? "write blocked by app guard; "
+    result.writeBlocked = guardHit || dbReadOnly;
+    result.note += guardHit
+      ? "write blocked by app guard (SandboxWriteError); "
       : dbReadOnly
         ? "write blocked by Postgres read-only; "
         : `write threw (unexpected): ${msg}; `;
