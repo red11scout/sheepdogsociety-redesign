@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Icon } from "@/components/icons/Icon";
 
 export function NewsletterForm() {
@@ -34,9 +35,17 @@ export function NewsletterForm() {
 
   if (status === "success") {
     return (
-      <p className="font-serif text-base italic leading-relaxed text-foreground/85">
-        Welcome, brother. Watch your inbox.
-      </p>
+      <div>
+        <p className="font-serif text-base italic leading-relaxed text-foreground/85">
+          Welcome, brother. Watch your inbox.
+        </p>
+        <p className="folio mt-3">
+          Want a seat at a table?{" "}
+          <Link href="/join" className="link-editorial !text-brass">
+            Join the brotherhood
+          </Link>
+        </p>
+      </div>
     );
   }
 
@@ -60,7 +69,7 @@ export function NewsletterForm() {
           disabled={status === "loading"}
           className="lift flex h-11 items-center gap-2 bg-foreground px-5 text-xs font-medium uppercase tracking-[0.18em] text-background transition-colors hover:bg-foreground/90 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {status === "loading" ? "..." : "Join"}
+          {status === "loading" ? "..." : "Subscribe"}
           {status !== "loading" && <Icon name="arrow-right" size={14} />}
         </button>
       </form>

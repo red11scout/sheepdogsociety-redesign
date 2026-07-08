@@ -23,6 +23,8 @@ interface MemberSignupProps {
   groups: GroupOption[];
   /** Pre-select a group id if the user came from /groups/[id]. */
   preselectedGroupId?: string;
+  /** Pre-select the intent segment (e.g. from /join?intent=start). */
+  initialIntent?: Intent;
   /** Where the visitor came from. Logged for admin source tracking. */
   source?: string;
   /** Compact = embedded modal; default = full-page. */
@@ -40,13 +42,14 @@ type SubmitResult = {
 export function MemberSignup({
   groups,
   preselectedGroupId,
+  initialIntent,
   source,
   variant = "default",
 }: MemberSignupProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [intent, setIntent] = useState<Intent>("join");
+  const [intent, setIntent] = useState<Intent>(initialIntent ?? "join");
   const [groupId, setGroupId] = useState<string>(preselectedGroupId ?? "");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");

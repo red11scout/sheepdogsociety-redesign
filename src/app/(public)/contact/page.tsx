@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Icon } from "@/components/icons/Icon";
 
+// Joining/starting intents route through /join now, not the contact form.
 const TOPICS = [
   { value: "general", label: "General question" },
-  { value: "joining", label: "Joining a group" },
-  { value: "starting", label: "Starting a group" },
   { value: "leadership", label: "Leadership" },
   { value: "partnership", label: "Partnership" },
   { value: "other", label: "Other" },
@@ -59,6 +59,12 @@ export default function ContactPage() {
             <br />
             <em className="text-oxblood">We read every one.</em>
           </h1>
+          <p className="folio mt-7">
+            Looking to join or start a group?{" "}
+            <Link href="/join" className="link-editorial !text-brass">
+              That path is here.
+            </Link>
+          </p>
         </div>
       </section>
 
