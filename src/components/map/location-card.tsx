@@ -13,7 +13,7 @@ export function LocationCard({ location }: { location: LocationPin }) {
 
   return (
     <Link
-      href={`/locations/${location.id}`}
+      href={`/groups/${location.id}`}
       className="paper-card group block p-5"
     >
       <div className="flex items-start justify-between gap-3">

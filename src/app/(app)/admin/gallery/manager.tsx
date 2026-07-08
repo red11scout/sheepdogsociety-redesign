@@ -156,7 +156,7 @@ export function GalleryManager({ initial }: ManagerProps) {
               Pick an event, drag in photos, write a caption. Public site
               renders the magical lightbox version at{" "}
               <a
-                href="/gallery"
+                href="/events"
                 target="_blank"
                 rel="noreferrer"
                 className="link-editorial text-brass"
@@ -655,7 +655,7 @@ function EventEditor({
       {/* Save indicator */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <a
-          href={`/gallery/${event.id}`}
+          href={`/events/${event.id}`}
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center gap-1.5 text-[0.6875rem] uppercase tracking-wider text-stone/65 hover:text-brass"

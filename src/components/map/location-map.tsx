@@ -146,7 +146,7 @@ export function LocationMap({
           <h3 style="font-family: var(--font-fraunces), 'Iowan Old Style', Georgia, serif; font-weight: 560; font-size: 20px; line-height: 1.05; margin: 8px 0 0; letter-spacing: -0.012em;">${loc.name}</h3>
           ${meta ? `<div style="font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: ${EMBER_BRASS}; margin-top: 12px;">${meta}</div>` : ""}
           ${loc.meetingPlace ? `<p style="font-family: var(--font-newsreader), Georgia, serif; font-size: 13px; opacity: 0.75; margin: 8px 0 0; line-height: 1.5;">${loc.meetingPlace}</p>` : ""}
-          <a href="/locations/${loc.id}" style="display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: ${EMBER_BRASS}; text-decoration: underline; text-underline-offset: 3px; margin-top: 14px; border-top: 1px solid rgba(244, 237, 222, 0.16); padding-top: 14px;">
+          <a href="/groups/${loc.id}" style="display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: ${EMBER_BRASS}; text-decoration: underline; text-underline-offset: 3px; margin-top: 14px; border-top: 1px solid rgba(244, 237, 222, 0.16); padding-top: 14px;">
             View details →
           </a>
         </div>

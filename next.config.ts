@@ -38,6 +38,8 @@ const nextConfig: NextConfig = {
       // Gallery content lives on event pages now
       { source: "/gallery", destination: "/events", permanent: true },
       { source: "/gallery/:id", destination: "/events", permanent: true },
+      // Stories live on the About page now
+      { source: "/stories", destination: "/about#stories", permanent: true },
     ];
   },
 };

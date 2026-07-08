@@ -199,7 +199,7 @@ export function AskTheWatch() {
           {status === "done" && (
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
-                href="/locations"
+                href="/groups"
                 className="lift group inline-flex h-12 items-center gap-2 bg-foreground px-6 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
               >
                 Find a brother near you

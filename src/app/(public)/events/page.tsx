@@ -169,7 +169,7 @@ export default async function EventsPage() {
               </p>
               <p className="mt-3 font-serif text-base text-muted-foreground">
                 Check back soon, or{" "}
-                <Link href="/locations" className="link-editorial text-foreground/80">
+                <Link href="/groups" className="link-editorial text-foreground/80">
                   find a weekly group
                 </Link>
                 .

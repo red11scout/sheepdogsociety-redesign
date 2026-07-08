@@ -1,4 +1,9 @@
+import Link from "next/link";
+import { format } from "date-fns";
 import { Icon } from "@/components/icons/Icon";
+import { db } from "@/db";
+import { testimonies, users } from "@/db/schema";
+import { desc, eq } from "drizzle-orm";
 
 export const metadata = {
   title: "About — Sheepdog Society",
@@ -6,7 +11,28 @@ export const metadata = {
     "A brotherhood of men rooted in honorable Christian values, driven to be prepared in every aspect of life.",
 };
 
-export default function AboutPage() {
+async function getStories() {
+  try {
+    return await db
+      .select({
+        id: testimonies.id,
+        title: testimonies.title,
+        content: testimonies.content,
+        createdAt: testimonies.createdAt,
+        authorFirstName: users.firstName,
+      })
+      .from(testimonies)
+      .leftJoin(users, eq(testimonies.userId, users.id))
+      .where(eq(testimonies.isApproved, true))
+      .orderBy(desc(testimonies.createdAt))
+      .limit(6);
+  } catch {
+    return [];
+  }
+}
+
+export default async function AboutPage() {
+  const stories = await getStories();
   return (
     <>
       {/* Lead */}
@@ -200,6 +226,80 @@ export default function AboutPage() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* ============ VI · Stories (moved from /stories) ============ */}
+      <section id="stories" className="scroll-mt-20 bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
+          <div className="flex items-center gap-4">
+            <span className="section-mark">VI &middot; Stories &middot; What God has done</span>
+            <div className="hairline flex-1 text-foreground" />
+            <Link href="/contact" className="link-editorial folio !text-brass">
+              Share your story
+            </Link>
+          </div>
+          <h2 className="display-xl mt-8 max-w-3xl text-[clamp(1.9rem,4.5vw,3.4rem)] text-foreground">
+            Wolves transformed.
+            <br />
+            <em className="text-oxblood">Sheepdogs sent.</em>
+          </h2>
+          {stories.length > 0 ? (
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {stories.map((story) => (
+                <article key={story.id} className="paper-card p-7">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <span className="section-mark">Testimony</span>
+                    <span className="folio">
+                      {format(new Date(story.createdAt), "MMM yyyy")}
+                    </span>
+                  </div>
+                  <h3 className="display-soft mt-5 text-xl text-foreground">
+                    {story.title}
+                  </h3>
+                  <p className="mt-3 line-clamp-4 font-serif text-[0.95rem] leading-relaxed text-foreground/75">
+                    {story.content.slice(0, 200)}
+                    {story.content.length > 200 ? "..." : ""}
+                  </p>
+                  <div className="mt-6 border-t border-foreground/15 pt-3">
+                    <span className="folio">— {story.authorFirstName || "A brother"}</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className="mt-10 font-serif text-lg italic text-muted-foreground">
+              Stories on the way. Brothers are writing them now.
+            </p>
+          )}
+        </div>
+      </section>
+
+      {/* ============ Closing — where to go from here ============ */}
+      <section className="bg-background text-foreground">
+        <div className="mx-auto max-w-7xl px-6 pb-16 md:px-10 md:pb-24">
+          <div className="rule-double text-foreground/70" />
+          <div className="mt-10 flex flex-col items-start gap-5 md:flex-row md:items-center md:justify-between">
+            <p className="max-w-lg font-serif text-lg leading-relaxed text-foreground/80">
+              That is who we are. If it sounds like where you belong, take the
+              next step.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/join"
+                className="lift inline-flex h-12 items-center gap-3 bg-foreground px-7 text-[0.95rem] font-medium text-background transition-colors hover:bg-foreground/90"
+              >
+                Join the brotherhood
+                <Icon name="arrow-right" size={15} />
+              </Link>
+              <Link
+                href="/new-here"
+                className="link-editorial inline-flex items-center gap-2 self-center font-serif text-[1.05rem] text-foreground/80"
+              >
+                New here? Start here
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </>
