@@ -35,6 +35,9 @@ const nextConfig: NextConfig = {
       // Support absorbs giving + partnerships (both were orphaned duplicates)
       { source: "/giving", destination: "/support", permanent: true },
       { source: "/partnerships", destination: "/support", permanent: true },
+      // Gallery content lives on event pages now
+      { source: "/gallery", destination: "/events", permanent: true },
+      { source: "/gallery/:id", destination: "/events", permanent: true },
     ];
   },
 };
