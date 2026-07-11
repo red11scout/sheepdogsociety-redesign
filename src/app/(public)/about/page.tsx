@@ -5,6 +5,10 @@ import { db } from "@/db";
 import { testimonies, users } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
 
+// Stories are DB-backed; revalidate so newly approved testimonies appear
+// without a rebuild (page was previously static and served stale).
+export const revalidate = 60;
+
 export const metadata = {
   title: "About — Sheepdog Society",
   description:

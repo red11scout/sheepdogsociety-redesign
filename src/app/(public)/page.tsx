@@ -10,6 +10,11 @@ import { db } from "@/db";
 import { events, testimonies } from "@/db/schema";
 import { and, asc, desc, eq, gte } from "drizzle-orm";
 
+// Revalidate hourly-fresh data (latest letter, next gathering, latest story).
+// Without this the page is statically built once and goes stale — e.g. a past
+// event kept showing as the "next gathering". Matches the events page (60s).
+export const revalidate = 60;
+
 export const metadata = {
   title: "Sheepdog Society — Acts 20:28",
   description:
