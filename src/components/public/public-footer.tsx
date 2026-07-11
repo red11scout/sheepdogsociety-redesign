@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { NewsletterForm } from "./newsletter-form";
 
 /**
  * Ridge & Bone colophon — the back page of the broadsheet. A set verse,
@@ -30,7 +29,7 @@ export function PublicFooter() {
 
       <div className="mx-auto max-w-7xl px-6 py-14 md:px-10 md:py-20">
         <div className="grid gap-12 md:grid-cols-12">
-          <div className="space-y-5 md:col-span-4">
+          <div className="space-y-5 md:col-span-6">
             <Link href="/" aria-label="Sheepdog Society home">
               <span className="brand-wordmark text-2xl text-foreground">
                 Sheepdog Society
@@ -46,7 +45,7 @@ export function PublicFooter() {
             </Link>
           </div>
 
-          <div className="md:col-span-2">
+          <div className="md:col-span-3">
             <h3 className="section-mark !text-foreground/50">Begin</h3>
             <ul className="mt-5 space-y-3 font-serif text-[0.95rem]">
               <li>
@@ -67,7 +66,7 @@ export function PublicFooter() {
             </ul>
           </div>
 
-          <div className="md:col-span-2">
+          <div className="md:col-span-3">
             <h3 className="section-mark !text-foreground/50">The society</h3>
             <ul className="mt-5 space-y-3 font-serif text-[0.95rem]">
               <li>
@@ -96,17 +95,6 @@ export function PublicFooter() {
                 </Link>
               </li>
             </ul>
-          </div>
-
-          <div className="md:col-span-4">
-            <h3 className="section-mark !text-foreground/50">The Letter</h3>
-            <p className="mt-5 max-w-sm font-serif text-[0.95rem] leading-relaxed text-muted-foreground">
-              A weekly word for men of faith. Delivered Sunday mornings before
-              the day starts.
-            </p>
-            <div className="mt-5">
-              <NewsletterForm />
-            </div>
           </div>
         </div>
 

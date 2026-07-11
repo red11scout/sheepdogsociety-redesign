@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { format } from "date-fns";
 import { Icon } from "@/components/icons/Icon";
-import { NewsletterForm } from "@/components/public/newsletter-form";
 import { LocationsPreview } from "@/components/LocationsPreview";
 import { LetterCover } from "@/components/letters/LetterCover";
 import { listPublishedEncouragements } from "@/server/encouragements";
@@ -190,72 +189,57 @@ export default async function HomePage() {
               Every letter
             </Link>
           </div>
-          <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-14">
-            <div className="lg:col-span-7">
-              <h2 className="display-xl text-[clamp(2.2rem,5vw,4.2rem)] text-foreground">
-                Sunday morning,
-                <br />
-                <em className="text-oxblood">before the day starts.</em>
-              </h2>
-              <p className="mt-7 max-w-xl font-serif text-lg leading-[1.75] text-foreground/85">
-                One letter a week. A scripture. A practice. Sent at sunrise,
-                read in five minutes, carried the rest of the week.
-              </p>
+          <div className="mt-10">
+            <h2 className="display-xl text-[clamp(2.2rem,5vw,4.2rem)] text-foreground">
+              Sunday morning,
+              <br />
+              <em className="text-oxblood">before the day starts.</em>
+            </h2>
+            <p className="mt-7 max-w-xl font-serif text-lg leading-[1.75] text-foreground/85">
+              One letter a week. A scripture. A practice. Sent at sunrise, read
+              in five minutes, carried the rest of the week.
+            </p>
 
-              {latestLetter && (
-                <Link
-                  href={`/letter/${latestLetter.slug}`}
-                  className="paper-card mt-8 flex items-center gap-5 p-5"
-                >
-                  <div className="w-24 shrink-0 md:w-28">
-                    {latestLetter.coverImageUrl ? (
-                      <Image
-                        src={latestLetter.coverImageUrl}
-                        alt={latestLetter.coverImageAlt ?? ""}
-                        width={112}
-                        height={84}
-                        className="h-auto w-full border border-foreground/10 object-cover"
-                      />
-                    ) : (
-                      <LetterCover
-                        id={latestLetter.id}
-                        title={latestLetter.title}
-                        theme={latestLetter.theme}
-                      />
-                    )}
-                  </div>
-                  <div className="min-w-0">
-                    <p className="folio">
-                      Latest · No. {latestLetter.issueNumber}
-                      {latestLetter.publishDate
-                        ? ` · ${format(latestLetter.publishDate, "MMMM d, yyyy")}`
-                        : ""}
-                    </p>
-                    <h3 className="display-soft mt-1.5 truncate text-xl text-foreground">
-                      {latestLetter.title}
-                    </h3>
-                    {latestLetter.intro && (
-                      <p className="mt-1.5 line-clamp-2 font-serif text-[0.92rem] leading-relaxed text-muted-foreground">
-                        {latestLetter.intro}
-                      </p>
-                    )}
-                  </div>
-                </Link>
-              )}
-            </div>
-            <div className="flex flex-col justify-center border-t border-foreground/15 pt-8 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
-              <p className="folio">Subscribe · free, weekly, no noise</p>
-              <div className="mt-5">
-                <NewsletterForm />
-              </div>
+            {latestLetter && (
               <Link
-                href="/new-here"
-                className="link-editorial folio mt-6 inline-flex items-center gap-2 !text-brass"
+                href={`/letter/${latestLetter.slug}`}
+                className="paper-card mt-8 flex max-w-2xl items-center gap-5 p-5"
               >
-                What to expect
-                <Icon name="arrow-right" size={12} />
+                <div className="w-24 shrink-0 md:w-28">
+                  {latestLetter.coverImageUrl ? (
+                    <Image
+                      src={latestLetter.coverImageUrl}
+                      alt={latestLetter.coverImageAlt ?? ""}
+                      width={112}
+                      height={84}
+                      className="h-auto w-full border border-foreground/10 object-cover"
+                    />
+                  ) : (
+                    <LetterCover
+                      id={latestLetter.id}
+                      title={latestLetter.title}
+                      theme={latestLetter.theme}
+                    />
+                  )}
+                </div>
+                <div className="min-w-0">
+                  <p className="folio">
+                    Latest · No. {latestLetter.issueNumber}
+                    {latestLetter.publishDate
+                      ? ` · ${format(latestLetter.publishDate, "MMMM d, yyyy")}`
+                      : ""}
+                  </p>
+                  <h3 className="display-soft mt-1.5 truncate text-xl text-foreground">
+                    {latestLetter.title}
+                  </h3>
+                  {latestLetter.intro && (
+                    <p className="mt-1.5 line-clamp-2 font-serif text-[0.92rem] leading-relaxed text-muted-foreground">
+                      {latestLetter.intro}
+                    </p>
+                  )}
+                </div>
               </Link>
-            </div>
+            )}
           </div>
         </div>
       </section>
