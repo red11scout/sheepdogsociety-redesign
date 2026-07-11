@@ -121,6 +121,7 @@ export default function LocationsPage() {
             />
             <input
               type="text"
+              aria-label="Search groups by city, state, or name"
               placeholder="City, state, or group name"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -131,6 +132,7 @@ export default function LocationsPage() {
             <select
               value={dayFilter}
               onChange={(e) => setDayFilter(e.target.value)}
+              aria-label="Filter groups by day of the week"
               className="h-11 border border-foreground/15 bg-transparent px-4 text-base text-foreground focus:border-brass focus:outline-none md:w-[160px]"
             >
               <option value="all">All days</option>

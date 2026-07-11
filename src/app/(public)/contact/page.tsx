@@ -21,19 +21,29 @@ export default function ContactPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitting(true);
+    setError(null);
     try {
       const res = await fetch("/api/public/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      if (res.ok) setSubmitted(true);
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError(
+          "Something went wrong sending your note. Please try again in a moment."
+        );
+      }
     } catch {
-      /* fail silently */
+      setError(
+        "We could not reach the server. Check your connection and try again."
+      );
     }
     setSubmitting(false);
   }
@@ -154,6 +164,14 @@ export default function ContactPage() {
                   {submitting ? "Sending..." : "Send message"}
                   {!submitting && <Icon name="arrow-right" size={16} />}
                 </button>
+                {error && (
+                  <p
+                    role="alert"
+                    className="mt-4 font-serif text-sm leading-relaxed text-oxblood"
+                  >
+                    {error}
+                  </p>
+                )}
                 <p className="folio mt-4">
                   A brother reads every note. No newsletters unless you ask.
                 </p>

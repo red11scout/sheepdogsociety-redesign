@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { Icon } from "@/components/icons/Icon";
@@ -40,6 +40,8 @@ export default function LocationDetailPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const messageFieldId = useId();
 
   useEffect(() => {
     fetch(`/api/public/locations/${params.id}`)
@@ -52,6 +54,7 @@ export default function LocationDetailPage() {
   async function handleInterest(e: React.FormEvent) {
     e.preventDefault();
     setSubmitting(true);
+    setError(null);
     try {
       const res = await fetch("/api/public/locations/interest", {
         method: "POST",
@@ -61,9 +64,17 @@ export default function LocationDetailPage() {
           ...interestForm,
         }),
       });
-      if (res.ok) setSubmitted(true);
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError(
+          "Something went wrong sending that. Please try again, or reach us on the contact page."
+        );
+      }
     } catch {
-      /* fail silently */
+      setError(
+        "We could not reach the server. Check your connection and try again."
+      );
     }
     setSubmitting(false);
   }
@@ -269,10 +280,11 @@ export default function LocationDetailPage() {
                   }
                 />
                 <div>
-                  <label className="folio">
+                  <label htmlFor={messageFieldId} className="folio">
                     Anything you want the leader to know
                   </label>
                   <textarea
+                    id={messageFieldId}
                     rows={4}
                     value={interestForm.message}
                     onChange={(e) =>
@@ -290,6 +302,14 @@ export default function LocationDetailPage() {
                     {submitting ? "Sending..." : "I'm interested"}
                     {!submitting && <Icon name="arrow-right" size={16} />}
                   </button>
+                  {error && (
+                    <p
+                      role="alert"
+                      className="mt-4 font-serif text-sm leading-relaxed text-oxblood"
+                    >
+                      {error}
+                    </p>
+                  )}
                 </div>
               </form>
             )}
@@ -335,13 +355,15 @@ function Field({
   value: string;
   onChange: (v: string) => void;
 }) {
+  const id = useId();
   return (
     <div>
-      <label className="folio">
+      <label htmlFor={id} className="folio">
         {label}
         {required && <span className="ml-1 text-brass">*</span>}
       </label>
       <input
+        id={id}
         type={type}
         required={required}
         value={value}
