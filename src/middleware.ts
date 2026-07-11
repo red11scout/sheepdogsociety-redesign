@@ -16,33 +16,18 @@ import NextAuth from "next-auth";
 import { authConfig } from "@/auth.config";
 import { NextResponse } from "next/server";
 
+// Five Rooms IA public surface. Retired routes (encouragements, locations,
+// get-started, devotionals, blog, subscribe, …) are NOT listed here — they
+// forward to a live room via next.config.ts redirects(), which run before auth.
 const PUBLIC_ROUTES = [
   /^\/$/,
   /^\/about(\/.*)?$/,
   /^\/contact(\/.*)?$/,
-  /^\/get-started(\/.*)?$/,
-  /^\/how-we-gather(\/.*)?$/,
-  /^\/faq(\/.*)?$/,
-  /^\/giving(\/.*)?$/,
-  /^\/partnerships(\/.*)?$/,
-  /^\/stories(\/.*)?$/,
-  /^\/scripture-reader(\/.*)?$/,
-  /^\/daily-scripture(\/.*)?$/,
-  /^\/locations(\/.*)?$/,
   /^\/letter(\/.*)?$/,
-  /^\/devotionals(\/.*)?$/,
   /^\/groups(\/.*)?$/,
   /^\/events(\/.*)?$/,
   /^\/resources(\/.*)?$/,
-  /^\/subscribe(\/.*)?$/,
-  /^\/merch(\/.*)?$/,
-  /^\/statement-of-faith(\/.*)?$/,
-  /^\/blog(\/.*)?$/,
   /^\/acts-20-28$/,
-  /^\/encouragements(\/.*)?$/,
-  // Phase D — new public surfaces (member signup + share + legal pages).
-  /^\/what-to-expect(\/.*)?$/,
-  // Five Rooms IA (2026-07) — merged explainer + support page.
   /^\/new-here(\/.*)?$/,
   /^\/support(\/.*)?$/,
   /^\/privacy(\/.*)?$/,
@@ -51,13 +36,10 @@ const PUBLIC_ROUTES = [
   // Auth pages and API routes
   /^\/admin\/sign-in(\/.*)?$/,
   /^\/admin\/check-email(\/.*)?$/,
-  /^\/sign-in(\/.*)?$/, // legacy Clerk routes — redirect handled in page
-  /^\/sign-up(\/.*)?$/,
-  /^\/pending(\/.*)?$/,
   /^\/api\/auth(\/.*)?$/,
   /^\/api\/public(\/.*)?$/,
-  /^\/api\/og(\/.*)?$/,           // Phase B/D — verse plate + covenant card
-  /^\/api\/members(\/.*)?$/,      // Phase D — public signup POST
+  /^\/api\/og(\/.*)?$/,           // verse plate + covenant card
+  /^\/api\/members(\/.*)?$/,      // public signup POST
   /^\/api\/webhooks(\/.*)?$/,
   /^\/api\/cron(\/.*)?$/,
   /^\/api\/sandbox-status$/, // read-only sandbox self-test (safe: booleans only)

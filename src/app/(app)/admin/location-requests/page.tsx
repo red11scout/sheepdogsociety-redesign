@@ -10,7 +10,7 @@ import { AdminPageIntro } from "@/components/admin/AdminPageIntro";
 
 export default async function AdminLocationRequestsPage() {
   const { userId } = await auth();
-  if (!userId) redirect("/sign-in");
+  if (!userId) redirect("/admin/sign-in");
 
   const [currentUser] = await db
     .select()

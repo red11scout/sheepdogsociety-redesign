@@ -39,6 +39,19 @@ const nextConfig: NextConfig = {
       { source: "/gallery/:id", destination: "/events", permanent: true },
       // Stories live on the About page now
       { source: "/stories", destination: "/about#stories", permanent: true },
+      // Pre-redesign routes fully retired (no destination page): forward each
+      // to its nearest live home so old inbound links never 404 or bounce to
+      // the admin sign-in. Kept here (not the middleware allowlist) so the
+      // redirect fires before auth.
+      { source: "/devotionals", destination: "/letter", permanent: true },
+      { source: "/devotionals/:slug", destination: "/letter", permanent: true },
+      { source: "/blog", destination: "/letter", permanent: true },
+      { source: "/blog/:slug", destination: "/letter", permanent: true },
+      { source: "/subscribe", destination: "/join?intent=letter", permanent: true },
+      { source: "/merch", destination: "/support", permanent: true },
+      { source: "/statement-of-faith", destination: "/about", permanent: true },
+      { source: "/scripture-reader", destination: "/acts-20-28", permanent: true },
+      { source: "/daily-scripture", destination: "/acts-20-28", permanent: true },
     ];
   },
 };
