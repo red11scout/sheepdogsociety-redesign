@@ -77,3 +77,29 @@ guessing. Common causes, in rough order:
    the Action.
 3. **Password rotated, Vercel still has the old URL.** Update the Vercel env,
    trigger a redeploy.
+
+---
+
+## Pending prod cleanup — dropped member-community table defs (2026-07-11)
+
+The debt-purge (`docs/superpowers/plans/2026-07-11-debt-purge-cut-member-area.md`)
+removed the orphaned member-community layer and, with it, the Drizzle table
+**definitions** for tables that no longer have any code reference:
+
+- `messages`, `reactions` (chat)
+- `notes`, `bible_bookmarks`, `bible_highlights` (Bible study)
+- `reading_plans`, `reading_progress` (reading plans)
+- `accountability_pairs`, `accountability_checkins` (accountability)
+
+**The physical tables still exist in the production Neon database.** They were
+NOT dropped, because this repo runs as a read-only sandbox on prod and must
+never issue DDL. To reclaim them, author a `DROP TABLE` migration by hand,
+have it reviewed, and apply it through the normal migration Action against
+prod — never `drizzle-kit push`, never from the sandbox. Mind FK order
+(drop `reactions` before `messages`, `reading_progress` before `reading_plans`,
+`accountability_checkins` before `accountability_pairs`).
+
+**Kept intentionally:** `channels` + `channel_members` still have live code —
+`api/groups/route.ts` provisions a chat channel when a group is created. That
+channel is now headless (the chat UI was removed), so a follow-up should decide
+whether to stop creating it; until then the tables stay.

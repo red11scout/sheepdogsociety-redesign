@@ -197,55 +197,6 @@ export const channelMembers = pgTable(
   ]
 );
 
-export const messages = pgTable(
-  "messages",
-  {
-    id: uuid("id").primaryKey().defaultRandom(),
-    channelId: uuid("channel_id")
-      .notNull()
-      .references(() => channels.id, { onDelete: "cascade" }),
-    userId: text("user_id")
-      .notNull()
-      .references(() => users.id),
-    content: text("content").notNull(),
-    parentMessageId: uuid("parent_message_id"),
-    isEdited: boolean("is_edited").notNull().default(false),
-    isDeleted: boolean("is_deleted").notNull().default(false),
-    isPinned: boolean("is_pinned").notNull().default(false),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (table) => [
-    index("messages_channel_idx").on(table.channelId),
-    index("messages_user_idx").on(table.userId),
-    index("messages_parent_idx").on(table.parentMessageId),
-    index("messages_created_idx").on(table.createdAt),
-  ]
-);
-
-export const reactions = pgTable(
-  "reactions",
-  {
-    id: uuid("id").primaryKey().defaultRandom(),
-    messageId: uuid("message_id")
-      .notNull()
-      .references(() => messages.id, { onDelete: "cascade" }),
-    userId: text("user_id")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-    emoji: text("emoji").notNull(),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-  },
-  (table) => [
-    uniqueIndex("reactions_unique").on(
-      table.messageId,
-      table.userId,
-      table.emoji
-    ),
-    index("reactions_message_idx").on(table.messageId),
-  ]
-);
-
 // ============================================================
 // Blog / Content
 // ============================================================
@@ -362,143 +313,6 @@ export const prayerRequestPrayers = pgTable(
       table.prayerRequestId,
       table.userId
     ),
-  ]
-);
-
-// ============================================================
-// Bible Study
-// ============================================================
-
-export const notes = pgTable(
-  "notes",
-  {
-    id: uuid("id").primaryKey().defaultRandom(),
-    userId: text("user_id")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-    reference: text("reference").notNull(), // e.g., "Genesis 1:1"
-    content: text("content").notNull(),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (table) => [index("notes_user_idx").on(table.userId)]
-);
-
-export const bibleBookmarks = pgTable(
-  "bible_bookmarks",
-  {
-    id: uuid("id").primaryKey().defaultRandom(),
-    userId: text("user_id")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-    reference: text("reference").notNull(),
-    label: text("label").default(""),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-  },
-  (table) => [index("bible_bookmarks_user_idx").on(table.userId)]
-);
-
-export const bibleHighlights = pgTable(
-  "bible_highlights",
-  {
-    id: uuid("id").primaryKey().defaultRandom(),
-    userId: text("user_id")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-    reference: text("reference").notNull(),
-    color: text("color").notNull().default("gold"), // gold, blue, green, red
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-  },
-  (table) => [index("bible_highlights_user_idx").on(table.userId)]
-);
-
-// ============================================================
-// Reading Plans
-// ============================================================
-
-export const readingPlans = pgTable("reading_plans", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  name: text("name").notNull(),
-  description: text("description").default(""),
-  totalDays: integer("total_days").notNull(),
-  readings: jsonb("readings").$type<
-    { day: number; readings: string[] }[]
-  >(),
-  isActive: boolean("is_active").notNull().default(true),
-  createdBy: text("created_by")
-    .notNull()
-    .references(() => users.id),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-});
-
-export const readingProgress = pgTable(
-  "reading_progress",
-  {
-    id: uuid("id").primaryKey().defaultRandom(),
-    userId: text("user_id")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-    readingPlanId: uuid("reading_plan_id")
-      .notNull()
-      .references(() => readingPlans.id, { onDelete: "cascade" }),
-    dayNumber: integer("day_number").notNull(),
-    completedAt: timestamp("completed_at").notNull().defaultNow(),
-  },
-  (table) => [
-    uniqueIndex("reading_progress_unique").on(
-      table.userId,
-      table.readingPlanId,
-      table.dayNumber
-    ),
-    index("reading_progress_user_idx").on(table.userId),
-  ]
-);
-
-// ============================================================
-// Accountability
-// ============================================================
-
-export const accountabilityPairs = pgTable(
-  "accountability_pairs",
-  {
-    id: uuid("id").primaryKey().defaultRandom(),
-    user1Id: text("user1_id")
-      .notNull()
-      .references(() => users.id),
-    user2Id: text("user2_id")
-      .notNull()
-      .references(() => users.id),
-    status: accountabilityStatusEnum("status")
-      .notNull()
-      .default("active"),
-    startedAt: timestamp("started_at").notNull().defaultNow(),
-    endedAt: timestamp("ended_at"),
-  },
-  (table) => [
-    index("accountability_pairs_user1_idx").on(table.user1Id),
-    index("accountability_pairs_user2_idx").on(table.user2Id),
-  ]
-);
-
-export const accountabilityCheckins = pgTable(
-  "accountability_checkins",
-  {
-    id: uuid("id").primaryKey().defaultRandom(),
-    pairId: uuid("pair_id")
-      .notNull()
-      .references(() => accountabilityPairs.id, { onDelete: "cascade" }),
-    userId: text("user_id")
-      .notNull()
-      .references(() => users.id),
-    mood: text("mood").default(""),
-    highlights: text("highlights").default(""),
-    struggles: text("struggles").default(""),
-    prayerNeeds: text("prayer_needs").default(""),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-  },
-  (table) => [
-    index("accountability_checkins_pair_idx").on(table.pairId),
-    index("accountability_checkins_user_idx").on(table.userId),
   ]
 );
 
@@ -686,11 +500,7 @@ export const testimonies = pgTable(
 
 export const usersRelations = relations(users, ({ many }) => ({
   groupMemberships: many(groupMembers),
-  messages: many(messages),
   prayerRequests: many(prayerRequests),
-  notes: many(notes),
-  bookmarks: many(bibleBookmarks),
-  highlights: many(bibleHighlights),
 }));
 
 export const groupsRelations = relations(groups, ({ one, many }) => ({
@@ -720,7 +530,6 @@ export const channelsRelations = relations(channels, ({ one, many }) => ({
     references: [groups.id],
   }),
   members: many(channelMembers),
-  messages: many(messages),
 }));
 
 export const channelMembersRelations = relations(
@@ -736,35 +545,6 @@ export const channelMembersRelations = relations(
     }),
   })
 );
-
-export const messagesRelations = relations(messages, ({ one, many }) => ({
-  channel: one(channels, {
-    fields: [messages.channelId],
-    references: [channels.id],
-  }),
-  author: one(users, {
-    fields: [messages.userId],
-    references: [users.id],
-  }),
-  parentMessage: one(messages, {
-    fields: [messages.parentMessageId],
-    references: [messages.id],
-    relationName: "thread",
-  }),
-  replies: many(messages, { relationName: "thread" }),
-  reactions: many(reactions),
-}));
-
-export const reactionsRelations = relations(reactions, ({ one }) => ({
-  message: one(messages, {
-    fields: [reactions.messageId],
-    references: [messages.id],
-  }),
-  user: one(users, {
-    fields: [reactions.userId],
-    references: [users.id],
-  }),
-}));
 
 export const blogPostsRelations = relations(blogPosts, ({ one }) => ({
   author: one(users, {

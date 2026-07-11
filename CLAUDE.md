@@ -1,7 +1,7 @@
 # Acts 2028 Sheepdog Society
 
 ## Overview
-A weekly editorial newsletter for Christian men, anchored in Acts 20:28. Brief at `/Users/drewgodwin/Downloads/compass_artifact_wf-145eb503-8b48-455b-b02c-82c124aca57a_text_markdown.md`. Public site (Letter, Devotionals, Groups, Resources, Subscribe) plus a member community (chat, prayer, accountability, channels, reading plans) preserved from the original build. Admin-only auth via magic-link.
+A weekly editorial newsletter for Christian men, anchored in Acts 20:28. Brief at `/Users/drewgodwin/Downloads/compass_artifact_wf-145eb503-8b48-455b-b02c-82c124aca57a_text_markdown.md`. Public site (Letter, Groups, Events, Resources, About, Join) plus an admin CMS. Admin-only auth via magic-link. The member community (chat, prayer, accountability, channels, reading plans) was **removed on 2026-07-11** — it was orphaned with no member sign-in path; the only surviving routes under `(app)` are `/admin/**`. Its unused Drizzle table defs were dropped from `schema.ts`; the physical tables remain in prod pending a human-reviewed DROP migration (see `docs/MIGRATIONS.md`).
 
 ## Stack
 - **Framework**: Next.js 16 (App Router, Turbopack) + TypeScript strict
@@ -9,11 +9,11 @@ A weekly editorial newsletter for Christian men, anchored in Acts 20:28. Brief a
 - **Brand**: Pasture & Iron palette (bone, iron, navy, brass, olive, oxblood, stone) + Fraunces (display) + Cormorant Garamond (pull-quotes/scripture) + Inter (UI/body) + Merriweather (legacy scripture class)
 - **Auth**: Auth.js v5 (NextAuth) + Resend magic-link + Drizzle adapter (allowlist via `ADMIN_EMAILS`)
 - **Database**: Neon Postgres in production (`DATABASE_URL` = pooled endpoint, host suffix `-pooler`; `DATABASE_URL_UNPOOLED` available for migrations). Wired into Vercel via the Marketplace integration so env vars sync automatically. Previous Supabase install was retired 2026-05-08.
-- **ORM**: Drizzle ORM (`src/db/schema.ts`, 38 tables)
+- **ORM**: Drizzle ORM (`src/db/schema.ts`, 29 tables — the 9 member-community tables were dropped from the schema on 2026-07-11)
 - **AI**: Vercel AI SDK (`ai` + `@ai-sdk/anthropic`) streaming via `claude-sonnet-4-5`. NEVER LangChain.
 - **Email**: Resend (transactional + Broadcasts) + React Email templates (`src/emails/`)
 - **Editor**: Tiptap v3 (StarterKit + Underline + Link + Image + Placeholder + BubbleMenu via `@tiptap/react/menus`)
-- **Maps**: Mapbox GL + react-map-gl (Phase E geocoder/draggable-pin admin not yet built; existing `LocationMap` component covers reads)
+- **Maps**: Mapbox GL + react-map-gl (geocoder IS built in the admin groups table; the draggable-pin picker is not yet built; `LocationMap` covers public reads)
 - **Storage**: Vercel Blob (`@vercel/blob`)
 - **Theme**: next-themes (default LIGHT for public site; members can toggle)
 
@@ -40,9 +40,9 @@ NEVER `drizzle-kit push` to prod. Migrations apply via `scripts/apply-neon-migra
 Pastoral, warm, direct, masculine without macho. Short Anglo-Saxon sentences. Imperative + invitation, never command. Tender and tough. NEVER: delve, leverage, navigate, robust, tapestry, journey (n.), rise, reclaim, real men, alpha, based, toxic masculinity. NEVER em-dashes when commas work. NEVER political/culture-war framing.
 
 ## Active Routes
-**Public (`(public)`):** `/`, `/letter`, `/letter/[slug]`, `/letter/archive`, `/devotionals`, `/devotionals/[slug]`, `/groups`, `/groups/[slug]`, `/groups/start`, `/events`, `/events/[slug]`, `/resources`, `/resources/[slug]`, `/subscribe`, `/merch`, `/statement-of-faith`, `/about`, `/contact`, `/get-started`, `/giving`, `/how-we-gather`, `/faq`, `/locations` (legacy alias for /groups), `/scripture-reader`, `/daily-scripture`, `/stories`, `/partnerships`
+**Public (`(public)`):** `/`, `/letter`, `/letter/[slug]`, `/groups`, `/groups/[id]`, `/events`, `/events/[slug]`, `/resources`, `/resources/[slug]`, `/about`, `/join`, `/new-here`, `/support`, `/contact`, `/acts-20-28`, `/privacy`, `/sms-terms`. Retired URLs (`/encouragements*`, `/locations*`, `/devotionals*`, `/blog*`, `/subscribe`, `/merch`, `/statement-of-faith`, `/get-started`, `/how-we-gather`, `/faq`, `/giving`, `/partnerships`, `/stories`, `/gallery`, `/scripture-reader`, `/daily-scripture`) permanently redirect to a live room via `next.config.ts`.
 **Auth (`(auth)`):** `/admin/sign-in`, `/admin/check-email`
-**Admin (`(app)/admin`):** `/admin/dashboard`, `/admin/letters`, `/admin/letters/[id]`, `/admin/blog`, `/admin/contacts`, `/admin/devotionals`, `/admin/events`, `/admin/groups`, `/admin/locations`, `/admin/location-requests`, `/admin/newsletter`, `/admin/prayer`, `/admin/reading-plans`, `/admin/resources`, `/admin/scripture`, `/admin/testimonies`, `/admin/users`
+**Admin (`(app)/admin`):** `/admin/dashboard`, `/admin/letters`, `/admin/letters/[id]`, `/admin/encouragements`, `/admin/contacts`, `/admin/events`, `/admin/events/past`, `/admin/gallery`, `/admin/groups`, `/admin/location-requests`, `/admin/newsletter`, `/admin/prayer`, `/admin/resources`, `/admin/testimonies`, `/admin/members`, `/admin/users`, `/admin/audit`, `/admin/settings` (`/admin/locations` redirects to `/admin/groups`)
 **SEO:** `/sitemap.xml`, `/robots.txt`, `/feed.xml`
 **API:** `/api/auth/[...nextauth]`, `/api/ai/draft`, `/api/ai/improve`, `/api/ai/blog-draft`, `/api/ai/devotional`, `/api/ai/scripture-of-day`, `/api/ai/reading-plan`, `/api/webhooks/resend`, plus existing CRUD under `/api/admin/*` and public reads under `/api/public/*`
 
