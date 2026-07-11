@@ -1,15 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Skip type checking during build (handled in CI)
+  // Type errors fail the build (not skipped).
   typescript: {
     ignoreBuildErrors: false,
   },
-  // Allow Clerk/Supabase images
+  // Letter cover images are uploaded to Vercel Blob and rendered via next/image.
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "img.clerk.com" },
-      { protocol: "https", hostname: "**.supabase.co" },
+      { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
     ],
   },
   // Five Rooms IA — every retired URL forwards DIRECTLY to its final home.
