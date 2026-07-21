@@ -23,7 +23,11 @@ export async function POST(request: Request) {
         email: parsed.data.email,
         firstName: parsed.data.firstName ?? "",
       })
-      .onConflictDoNothing();
+      // Re-subscribing an email that previously unsubscribed re-activates it.
+      .onConflictDoUpdate({
+        target: newsletterSubscribers.email,
+        set: { isActive: true },
+      });
 
     return NextResponse.json({ success: true });
   } catch {
