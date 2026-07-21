@@ -17,6 +17,7 @@ type LocationRequest = {
   proposedMeetingDetails: string | null;
   reason: string | null;
   status: string;
+  reviewedGroupId: string | null;
   createdAt: Date;
 };
 
@@ -142,6 +143,14 @@ export function AdminLocationRequests({
                     {req.proposedCity}, {req.proposedState} —{" "}
                     {req.requesterName}
                   </span>
+                  {req.status === "approved" && req.reviewedGroupId && (
+                    <a
+                      href={`/admin/groups?focus=${req.reviewedGroupId}`}
+                      className="ml-auto text-sm font-medium text-primary hover:underline"
+                    >
+                      View group →
+                    </a>
+                  )}
                 </CardContent>
               </Card>
             ))}
