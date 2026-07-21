@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth-compat";
 import { db } from "@/db";
 import { users, locationRequests } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { approvePlantRequest } from "@/server/approve-plant-request";
 
 async function requireAdmin() {
   const { userId } = await auth();
@@ -35,6 +36,16 @@ export async function PATCH(request: Request) {
   const { id, status, notes } = await request.json();
   if (!id || !["approved", "declined"].includes(status)) {
     return NextResponse.json({ error: "Invalid input" }, { status: 400 });
+  }
+
+  if (status === "approved") {
+    // Approving creates a prefilled draft group and links it to the request.
+    const { groupId } = await approvePlantRequest(id, notes);
+    await db
+      .update(locationRequests)
+      .set({ reviewedBy: admin.id, reviewedAt: new Date() })
+      .where(eq(locationRequests.id, id));
+    return NextResponse.json({ success: true, groupId });
   }
 
   await db
