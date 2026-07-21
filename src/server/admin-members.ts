@@ -1,8 +1,9 @@
 "use server";
 
+import { randomBytes } from "node:crypto";
 import { auth } from "@/lib/auth-compat";
 import { db } from "@/db";
-import { members } from "@/db/schema-members";
+import { members, memberNotificationPrefs } from "@/db/schema-members";
 import { groups, locations, users } from "@/db/schema";
 import { eq, isNull, desc, and, inArray } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
@@ -22,6 +23,8 @@ export interface AdminMemberRow {
   shortId: string;
   approvalStatus: string;
   isActive: boolean;
+  /** member_notification_prefs.wants_newsletter — the "Subscribe" flag. */
+  wantsNewsletter: boolean;
   role: string;
   firstName: string | null;
   lastName: string | null;
@@ -50,6 +53,7 @@ export async function listAdminMembers(): Promise<AdminMemberRow[]> {
       id: members.id,
       approvalStatus: members.approvalStatus,
       isActive: members.isActive,
+      wantsNewsletter: memberNotificationPrefs.wantsNewsletter,
       role: members.role,
       firstName: members.firstName,
       lastName: members.lastName,
@@ -76,6 +80,10 @@ export async function listAdminMembers(): Promise<AdminMemberRow[]> {
     .from(members)
     .leftJoin(groups, eq(members.groupId, groups.id))
     .leftJoin(locations, eq(members.locationId, locations.id))
+    .leftJoin(
+      memberNotificationPrefs,
+      eq(memberNotificationPrefs.memberId, members.id)
+    )
     .where(isNull(members.deletedAt))
     .orderBy(desc(members.createdAt))
     .limit(1000);
@@ -94,6 +102,7 @@ export async function listAdminMembers(): Promise<AdminMemberRow[]> {
       shortId: r.id.slice(0, 8),
       approvalStatus: r.approvalStatus,
       isActive: r.isActive,
+      wantsNewsletter: r.wantsNewsletter ?? true,
       role: r.role,
       firstName,
       lastName,
@@ -138,6 +147,8 @@ export interface UpdateMemberInput {
   id: string;
   approvalStatus?: "pending" | "approved" | "rejected";
   isActive?: boolean;
+  /** "Subscribe" — writes member_notification_prefs.wants_newsletter. */
+  wantsNewsletter?: boolean;
   role?: string;
   firstName?: string;
   lastName?: string;
@@ -197,6 +208,28 @@ export async function updateMember(input: UpdateMemberInput) {
     patch.locationId = null;
   }
   await db.update(members).set(patch).where(eq(members.id, input.id));
+
+  // Subscribe flag lives on member_notification_prefs (separate table).
+  if (input.wantsNewsletter !== undefined) {
+    const [prefs] = await db
+      .select({ id: memberNotificationPrefs.id })
+      .from(memberNotificationPrefs)
+      .where(eq(memberNotificationPrefs.memberId, input.id))
+      .limit(1);
+    if (prefs) {
+      await db
+        .update(memberNotificationPrefs)
+        .set({ wantsNewsletter: input.wantsNewsletter, updatedAt: new Date() })
+        .where(eq(memberNotificationPrefs.id, prefs.id));
+    } else {
+      await db.insert(memberNotificationPrefs).values({
+        memberId: input.id,
+        wantsNewsletter: input.wantsNewsletter,
+        emailUnsubscribeToken: randomBytes(32).toString("hex"),
+      });
+    }
+  }
+
   revalidatePath("/admin/members");
 }
 
