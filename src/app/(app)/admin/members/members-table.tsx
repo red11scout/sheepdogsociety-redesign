@@ -148,6 +148,18 @@ export function MembersTable({ initialRows, groupOptions, dbError }: Props) {
     });
   }
 
+  async function handleSubscribe(id: string, wantsNewsletter: boolean) {
+    setErrorMsg("");
+    startTransition(async () => {
+      try {
+        await updateMember({ id, wantsNewsletter });
+        await patchRow(id, { wantsNewsletter });
+      } catch (e) {
+        setErrorMsg(e instanceof Error ? e.message : "Update failed");
+      }
+    });
+  }
+
   async function handleGroup(id: string, groupId: string | null) {
     setErrorMsg("");
     startTransition(async () => {
@@ -388,6 +400,7 @@ export function MembersTable({ initialRows, groupOptions, dbError }: Props) {
               <SortableTh label="ID" k="email" sortKey={sortKey} sortDir={sortDir} onClick={() => toggleSort("email")} />
               <SortableTh label="Approval" k="approvalStatus" sortKey={sortKey} sortDir={sortDir} onClick={() => toggleSort("approvalStatus")} />
               <SortableTh label="Active" k="isActive" sortKey={sortKey} sortDir={sortDir} onClick={() => toggleSort("isActive")} />
+              <th className="px-3 py-2 text-left">Subscribe</th>
               <SortableTh label="Role" k="role" sortKey={sortKey} sortDir={sortDir} onClick={() => toggleSort("role")} />
               <SortableTh label="First" k="firstName" sortKey={sortKey} sortDir={sortDir} onClick={() => toggleSort("firstName")} />
               <SortableTh label="Last" k="lastName" sortKey={sortKey} sortDir={sortDir} onClick={() => toggleSort("lastName")} />
@@ -404,7 +417,7 @@ export function MembersTable({ initialRows, groupOptions, dbError }: Props) {
           <tbody className="divide-y divide-stone/10">
             {filtered.length === 0 ? (
               <tr>
-                <td colSpan={15} className="px-6 py-12 text-center text-stone/60">
+                <td colSpan={16} className="px-6 py-12 text-center text-stone/60">
                   No members match. Adjust filters or wait for the first signup.
                 </td>
               </tr>
@@ -418,6 +431,7 @@ export function MembersTable({ initialRows, groupOptions, dbError }: Props) {
                   onToggleSelect={() => toggleSelect(r.id)}
                   onApprove={(s) => handleApproval(r.id, s)}
                   onActive={(a) => handleActive(r.id, a)}
+                  onSubscribe={(w) => handleSubscribe(r.id, w)}
                   onGroup={(g) => handleGroup(r.id, g)}
                   onDelete={() => handleDelete(r.id)}
                   editing={editing === r.id}
@@ -477,6 +491,7 @@ function MemberRow({
   onToggleSelect,
   onApprove,
   onActive,
+  onSubscribe,
   onGroup,
   onDelete,
   editing,
@@ -488,6 +503,7 @@ function MemberRow({
   onToggleSelect: () => void;
   onApprove: (s: "pending" | "approved" | "rejected") => void;
   onActive: (a: boolean) => void;
+  onSubscribe: (w: boolean) => void;
   onGroup: (g: string | null) => void;
   onDelete: () => void;
   editing: boolean;
@@ -534,6 +550,25 @@ function MemberRow({
           )}
         >
           {row.isActive ? "Active" : "Inactive"}
+        </button>
+      </td>
+      <td className="px-3 py-2">
+        <button
+          type="button"
+          onClick={() => onSubscribe(!row.wantsNewsletter)}
+          title={
+            row.wantsNewsletter
+              ? "Subscribed to the Letter — click to unsubscribe"
+              : "Unsubscribed — click to subscribe"
+          }
+          className={cn(
+            "h-6 border px-2 text-[0.6875rem] uppercase tracking-wider transition-colors",
+            row.wantsNewsletter
+              ? "border-brass/40 bg-brass/10 text-brass hover:bg-brass/20"
+              : "border-stone/30 bg-stone/10 text-stone/65 hover:bg-stone/20"
+          )}
+        >
+          {row.wantsNewsletter ? "Yes" : "No"}
         </button>
       </td>
       <td className="px-3 py-2 text-stone/85">{row.role}</td>

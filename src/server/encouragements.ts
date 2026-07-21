@@ -10,8 +10,8 @@ import { users } from "@/db/schema";
 import { eq, and, isNull, desc, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { render } from "@react-email/render";
-import { resend, FROM_NEWSLETTER } from "@/lib/email";
 import { EncouragementEmail } from "@/emails/encouragement";
+import { getLetterRecipients, sendToRecipients } from "@/server/audience";
 
 async function requireAdmin(): Promise<string> {
   const { userId } = await auth();
@@ -237,12 +237,8 @@ export async function broadcastEncouragement(
   if (row.broadcastId) {
     return { sent: false, broadcastId: row.broadcastId, reason: "already sent" };
   }
-  if (!process.env.RESEND_AUDIENCE_ID || !process.env.RESEND_API_KEY) {
-    return {
-      sent: false,
-      reason:
-        "RESEND_AUDIENCE_ID and RESEND_API_KEY must both be set on the server",
-    };
+  if (!process.env.RESEND_API_KEY && !process.env.AUTH_RESEND_KEY) {
+    return { sent: false, reason: "RESEND_API_KEY is not set on the server" };
   }
   if (row.status !== "published") {
     return { sent: false, reason: "letter is not published yet" };
@@ -268,7 +264,7 @@ export async function broadcastEncouragement(
         guidance: row.guidance,
         notes: row.notes,
         publicUrl,
-        unsubscribeUrl: "{{{RESEND_UNSUBSCRIBE_URL}}}",
+        unsubscribeUrl: "{{UNSUBSCRIBE_URL}}",
       })
     );
   } catch (err) {
@@ -295,6 +291,8 @@ export async function broadcastEncouragement(
     row.notes ?? "",
     "",
     `Read on the site: ${publicUrl}`,
+    "",
+    `Unsubscribe: {{UNSUBSCRIBE_URL}}`,
   ]
     .filter((l) => l !== null)
     .join("\n");
@@ -302,37 +300,41 @@ export async function broadcastEncouragement(
   const subject = row.title;
 
   try {
-    const broadcast = await resend().broadcasts.create({
-      audienceId: process.env.RESEND_AUDIENCE_ID,
-      from: FROM_NEWSLETTER,
+    // Send to the combined audience (members who want the newsletter +
+    // active non-member subscribers), deduped, from shepherd@. Retires the
+    // old Resend Broadcast/Audience path.
+    const recipients = await getLetterRecipients();
+    if (recipients.length === 0) {
+      return { sent: false, reason: "no active recipients" };
+    }
+    const { sent, failed } = await sendToRecipients(recipients, {
       subject,
-      replyTo: process.env.RESEND_FROM_AUTH ?? FROM_NEWSLETTER,
       html,
       text,
     });
-    if (!broadcast.data?.id) {
-      return {
-        sent: false,
-        reason: `resend broadcasts.create returned no id: ${
-          broadcast.error ? JSON.stringify(broadcast.error).slice(0, 200) : "(unknown)"
-        }`,
-      };
-    }
-    const broadcastId = broadcast.data.id;
-    await resend().broadcasts.send(broadcastId);
+    // Mark as sent so the idempotency guard above (broadcastId) skips re-sends.
+    const marker = `direct:${new Date().toISOString()}`;
     await db
       .update(weeklyEncouragements)
-      .set({ broadcastId, broadcastAt: new Date(), updatedAt: new Date() })
+      .set({
+        broadcastId: marker,
+        broadcastAt: new Date(),
+        updatedAt: new Date(),
+      })
       .where(eq(weeklyEncouragements.id, id));
-    return { sent: true, broadcastId };
+    return {
+      sent: failed === 0,
+      broadcastId: marker,
+      reason: `sent ${sent}, failed ${failed} of ${recipients.length}`,
+    };
   } catch (err) {
-    console.error("Resend broadcast failed:", err);
+    console.error("Letter send failed:", err);
     return {
       sent: false,
       reason:
         err instanceof Error
-          ? `resend send failed: ${err.message.slice(0, 200)}`
-          : "resend send failed",
+          ? `letter send failed: ${err.message.slice(0, 200)}`
+          : "letter send failed",
     };
   }
 }

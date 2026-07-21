@@ -47,7 +47,6 @@ const nextConfig: NextConfig = {
       { source: "/devotionals/:slug", destination: "/letter", permanent: true },
       { source: "/blog", destination: "/letter", permanent: true },
       { source: "/blog/:slug", destination: "/letter", permanent: true },
-      { source: "/subscribe", destination: "/join?intent=letter", permanent: true },
       { source: "/merch", destination: "/support", permanent: true },
       { source: "/statement-of-faith", destination: "/about", permanent: true },
       { source: "/scripture-reader", destination: "/acts-20-28", permanent: true },

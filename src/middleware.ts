@@ -33,6 +33,7 @@ const PUBLIC_ROUTES = [
   /^\/privacy(\/.*)?$/,
   /^\/sms-terms(\/.*)?$/,
   /^\/join(\/.*)?$/,
+  /^\/subscribe(\/.*)?$/,
   // Auth pages and API routes
   /^\/admin\/sign-in(\/.*)?$/,
   /^\/admin\/check-email(\/.*)?$/,
