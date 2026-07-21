@@ -33,14 +33,14 @@ export function verifySubscriberToken(email: string, sig: string): boolean {
 }
 
 export function subscriberUnsubscribeUrl(email: string): string {
-  return `${BASE}/unsubscribe?e=${encodeURIComponent(email)}&s=${signSubscriberToken(
+  return `${BASE}/api/public/unsubscribe?e=${encodeURIComponent(
     email
-  )}`;
+  )}&s=${signSubscriberToken(email)}`;
 }
 
 /** Members carry a stored token in member_notification_prefs. */
 export function memberUnsubscribeUrl(token: string): string {
-  return `${BASE}/unsubscribe?m=${encodeURIComponent(token)}`;
+  return `${BASE}/api/public/unsubscribe?m=${encodeURIComponent(token)}`;
 }
 
 /** Merge recipient lists, deduping by lowercased email. Earlier lists win — so
