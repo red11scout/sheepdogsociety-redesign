@@ -1062,4 +1062,5 @@ const notDeletedPredicate = sql`deleted_at IS NULL`;
 // New tables live in their own files for cleaner diffs and rollback.
 // ============================================================
 export * from "./schema-members";
+export * from "./schema-email";
 export * from "./schema-pages";
