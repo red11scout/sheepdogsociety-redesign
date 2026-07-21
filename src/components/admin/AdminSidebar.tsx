@@ -61,6 +61,12 @@ export function AdminSidebar({
           hint: "Your weekly word to the brotherhood. Single letters or a scheduled series. Theme, image, voice, AI draft, then publish.",
         },
         {
+          href: "/admin/email",
+          label: "Email",
+          icon: "mail",
+          hint: "Send an email from shepherd@ to leaders, selected groups, or everyone. Unsubscribed people are skipped; every send includes an unsubscribe link.",
+        },
+        {
           href: "/admin/testimonies",
           label: "Stories",
           icon: "flame",
