@@ -680,6 +680,11 @@ export const locationRequests = pgTable("location_requests", {
   reviewedBy: text("reviewed_by"),
   reviewedAt: timestamp("reviewed_at"),
   notes: text("notes").default(""),
+  /** Set when an admin approves the request and a draft group is created from
+   *  it. Links the request to its group (idempotency + "View group" link). */
+  reviewedGroupId: uuid("reviewed_group_id").references(() => groups.id, {
+    onDelete: "set null",
+  }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
